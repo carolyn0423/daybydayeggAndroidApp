@@ -15,6 +15,10 @@ public class ProductConfAmout {
         this.price = price;
     }
 
+    public void setQty(String sQty) {
+        this.qty = sQty;
+    }
+
     public String getsIDList() {
         return sIDList;
     }

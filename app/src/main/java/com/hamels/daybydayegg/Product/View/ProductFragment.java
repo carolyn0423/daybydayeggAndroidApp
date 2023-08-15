@@ -82,7 +82,6 @@ public class ProductFragment extends BaseFragment implements ProductContract.Vie
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
@@ -106,9 +105,11 @@ public class ProductFragment extends BaseFragment implements ProductContract.Vie
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         if(isETicket.equals("Y")){
+            ((MainActivity) getActivity()).setAppTitle(R.string.tab_ticket);
             productETicketListAdapter = new ProductETicketListAdapter(productPresenter);
             recyclerView.setAdapter(productETicketListAdapter);
         }else{
+            ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
             productListAdapter = new ProductListAdapter(productPresenter);
             recyclerView.setAdapter(productListAdapter);
         }

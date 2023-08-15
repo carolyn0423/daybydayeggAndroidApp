@@ -547,11 +547,11 @@ public class MemberRepository extends ApiRepository {
         retrofit.create(MemberApiService.class).postAboutData(requestBody).enqueue(callback);
     }
 
-    public void getFaqData(final String customer_id,final String faq_id, final AbsApiCallback callback) {
+    public void getFaqData(final String customer_id,final String faq_type_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("isApp", "true");
         map.put("customer_id", customer_id);
-        map.put("faq_id", faq_id);
+        map.put("faq_type_id", faq_type_id);
 
         Log.e(TAG, "API getFaqData : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));

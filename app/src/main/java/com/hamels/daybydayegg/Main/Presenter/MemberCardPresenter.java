@@ -18,6 +18,11 @@ public class MemberCardPresenter extends BasePresenter<MemberCardContract.View> 
         repositoryManager.callGetMemberInfoApi(repositoryManager.getUserID(),new BaseContract.ValueCallback<User>() {
             @Override
             public void onValueCallback(int task, User user) {
+
+                repositoryManager.saveVerifyCode(user.getVerifyCode());
+                repositoryManager.saveInvitationCode(user.getInvitationCode());
+                repositoryManager.saveUserName(user.getName());
+
                 view.setUerInfo(user);
 //                view.setMemberCardInfo(user.getMembershipCode(), user.getMembershipSrc());
                 view.setMemberCardInfo(user.getMembershipCode());
