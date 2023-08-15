@@ -38,22 +38,25 @@ public class ProductETicketHolder extends RecyclerView.ViewHolder {
         layout.setTag(R.id.layout_constraint, product.getId());
         tv_product_name.setText(product.getProduct_name());
 
+        String sTicketSalePrice = mDecimalFormat.format((double) (product.getticket_sales_price() * product.getLimitQuantity()));
+        String sPrice = mDecimalFormat.format((double) (product.getPrice() * product.getLimitQuantity()));
+
         if (1 < product.getspec_cnt()) {
-            tv_sale_price.setText("NT$" + mDecimalFormat.format((double) product.getticket_sales_price()) + " 起");
+            tv_sale_price.setText("NT$" + sTicketSalePrice + " 起");
 
             if (product.getticket_sales_price() != product.getPrice()) {
                 tv_price.setVisibility(View.VISIBLE);
-                tv_price.setText("NT$" + mDecimalFormat.format((double) product.getPrice()));
+                tv_price.setText("NT$" + sPrice);
                 tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             } else {
                 tv_price.setVisibility(View.GONE);
             }
         } else {
-            tv_sale_price.setText("NT$" + mDecimalFormat.format((double) product.getticket_sales_price()));
+            tv_sale_price.setText("NT$" + sTicketSalePrice);
 
             if (product.getticket_sales_price() != product.getPrice()) {
                 tv_price.setVisibility(View.VISIBLE);
-                tv_price.setText("NT$" + mDecimalFormat.format((double) product.getPrice()));
+                tv_price.setText("NT$" + sPrice);
                 tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             } else {
                 tv_price.setVisibility(View.GONE);

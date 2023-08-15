@@ -70,8 +70,6 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).setAppTitle(R.string.main_type_name);
-
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
@@ -95,6 +93,12 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
 
         location_id = sLocationID.equals("") ? 0 : Integer.parseInt(sLocationID);
         isETicket = productMainTypePresenter.getFragmentMainType("ISETICKET");
+
+        if(isETicket.equals("N")){
+            ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
+        }else{
+            ((MainActivity) getActivity()).setAppTitle(R.string.tab_ticket);
+        }
 
         recyclerView = view.findViewById(R.id.product_recycler_view);
         img_go_top = view.findViewById(R.id.img_go_top);

@@ -133,7 +133,7 @@
 
     <!-- lot -->
     <string name="hint_cif_code">請輸入身分證字號</string>
-    <string name="main_type_name">產品專區</string>
+    <string name="main_type_name">商成</string>
     <string name="lot_prod_name">商品名稱</string>
     <string name="lot_spec_name">規格名稱</string>
     <string name="lot_prod_id">商品編號</string>

@@ -49,7 +49,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
     private RecyclerView recyclerView;
     private DonateCartAdapter donateCartAdapter;
     private TabLayout tabLayout;
-    private Button btn_alldonate, btn_submit;
+    private Button btn_alldonate;
     private TextView tv_product_cnt;
 
     private String type_id = "0";
@@ -99,7 +99,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
         tabLayout = view.findViewById(R.id.tab_layout);
         recyclerView = view.findViewById(R.id.donate_recycler_view);
         btn_alldonate = view.findViewById(R.id.btn_alldonate);
-        btn_submit = view.findViewById(R.id.btn_submit);
+        //btn_submit = view.findViewById(R.id.btn_submit);
         tv_product_cnt = view.findViewById(R.id.tv_product_cnt);
 
         btn_alldonate.setOnClickListener(new View.OnClickListener() {
@@ -109,48 +109,48 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
             }
         });
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("確定要一次兌換" + tv_product_cnt.getText() + "個商品嗎？")
-                        .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                String cart_ticket_code = UUID.randomUUID().toString();
-                                donateCartPresenter.updateTicketCartCode(cart_ticket_code);
-
-                                View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_qrcode, null);
-
-                                popupWindow = new PopupWindow(view);
-                                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                                popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-
-                                dialog_img_qrcode = view.findViewById(R.id.dialog_img_qrcode);
-
-                                Log.e(TAG, "----------" + cart_ticket_code + "----------");
-                                createBarcodeImage(cart_ticket_code);
-
-                                Button dialog_btn_close = view.findViewById(R.id.dialog_btn_close);
-                                dialog_btn_close.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        popupWindow.dismiss();
-                                        changeAppBrightness(brightnessNow);
-                                    }
-                                });
-
-                                popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL, 0, 0);
-
-                            }
-                        })
-                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // User cancelled the dialog
-                            }
-                        }).show();
-            }
-        });
+//        btn_submit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("確定要一次兌換" + tv_product_cnt.getText() + "個商品嗎？")
+//                        .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                                String cart_ticket_code = UUID.randomUUID().toString();
+//                                donateCartPresenter.updateTicketCartCode(cart_ticket_code);
+//
+//                                View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_qrcode, null);
+//
+//                                popupWindow = new PopupWindow(view);
+//                                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+//                                popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+//
+//                                dialog_img_qrcode = view.findViewById(R.id.dialog_img_qrcode);
+//
+//                                Log.e(TAG, "----------" + cart_ticket_code + "----------");
+//                                createBarcodeImage(cart_ticket_code);
+//
+//                                Button dialog_btn_close = view.findViewById(R.id.dialog_btn_close);
+//                                dialog_btn_close.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View view) {
+//                                        popupWindow.dismiss();
+//                                        changeAppBrightness(brightnessNow);
+//                                    }
+//                                });
+//
+//                                popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL, 0, 0);
+//
+//                            }
+//                        })
+//                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                // User cancelled the dialog
+//                            }
+//                        }).show();
+//            }
+//        });
     }
 
     private void initData(View view) {
@@ -220,13 +220,13 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
         if (0 >= donateCartAdapter.getItemCount()) {
             btn_alldonate.setEnabled(false);
             btn_alldonate.setAlpha(.5f);
-            btn_submit.setEnabled(false);
-            btn_submit.setAlpha(.5f);
+            //btn_submit.setEnabled(false);
+            //btn_submit.setAlpha(.5f);
         }
         else {
             btn_alldonate.setEnabled(true);
             btn_alldonate.setAlpha(1f);
-            btn_submit.setEnabled(true);
+            //btn_submit.setEnabled(true);
             btn_alldonate.setAlpha(1f);
         }
     }

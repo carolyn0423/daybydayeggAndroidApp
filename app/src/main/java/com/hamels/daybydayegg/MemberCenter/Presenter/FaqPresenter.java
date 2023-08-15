@@ -14,8 +14,8 @@ public class FaqPresenter extends BasePresenter<FaqContract.View> implements Faq
     }
 
     @Override
-    public void getFaqData(String faq_id) {
-        repositoryManager.callFaqDataApi(faq_id , new BaseContract.ValueCallback<Faq>() {
+    public void getFaqData(String faq_type_id) {
+        repositoryManager.callFaqDataApi(faq_type_id , new BaseContract.ValueCallback<Faq>() {
             @Override
             public void onValueCallback(int task, Faq faq) {
                 view.setFaqData(faq);

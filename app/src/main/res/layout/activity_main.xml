@@ -251,8 +251,8 @@
                         android:gravity="center">
                         <ImageView
                             android:id="@+id/img_home"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
                             android:duplicateParentState="true"
                             android:src="@drawable/home_fill" />
                         <TextView
@@ -278,8 +278,8 @@
 
                         <ImageView
                             android:id="@+id/img_order"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
                             app:layout_constraintStart_toEndOf="@+id/imageView"
                             app:layout_constraintTop_toTopOf="parent"
                             android:duplicateParentState="true"
@@ -315,8 +315,8 @@
 
                         <ImageView
                             android:id="@+id/img_purchase"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
                             app:layout_constraintStart_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:duplicateParentState="true"
@@ -344,8 +344,8 @@
 
                         <ImageView
                             android:id="@+id/img_member"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
                             app:layout_constraintStart_toEndOf="@+id/imageView"
                             app:layout_constraintTop_toTopOf="parent"
                             android:duplicateParentState="true"
@@ -406,11 +406,12 @@
             app:layout_constraintVertical_bias="0.19999999" />
 
         <TextView
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/tv_shopping_cart"
             android:layout_width="20dp"
             android:layout_marginBottom="10dp"
             android:layout_height="20dp"
+            android:layout_marginLeft="2dp"
             android:background="@drawable/icon_circle_orange"
             android:backgroundTint="@color/redHint"
             android:fontFamily="@font/rcb"
@@ -423,11 +424,12 @@
             app:layout_constraintVertical_bias="0.19999999" />
 
         <TextView
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/tv_shopping_cart_e_ticket"
             android:layout_width="20dp"
             android:layout_marginBottom="10dp"
             android:layout_height="20dp"
+            android:layout_marginRight="2dp"
             android:background="@drawable/icon_circle_orange"
             android:backgroundTint="@color/redHint"
             android:fontFamily="@font/rcb"
