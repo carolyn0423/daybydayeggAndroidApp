@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hamels.daybydayegg">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <!--for Samsung-->
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
+
+    <!--for htc-->
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
+
+    <!--for sony-->
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"/>
+
+    <!--for apex-->
+    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
+
+    <!--for solid-->
+    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
+
+    <!--for huawei-->
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS"/>
+
+    <!--for ZUK-->
+    <uses-permission android:name="android.permission.READ_APP_BADGE"/>
+
+    <!--for OPPO-->
+    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
+
+    <!--for EvMe-->
+    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ"/>
+    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE"/>
+
+    <!--for 通訊錄-->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <application
+        android:name="com.hamels.daybydayegg.EOrderApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/eorder_app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false"
+        tools:replace="android:icon, android:label, android:theme">
+        <activity
+            android:name="com.hamels.daybydayegg.Init.SplashActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Test for URL scheme -->
+            <intent-filter android:autoVerify="true">
+
+                <!-- 協議部分，隨便設定 -->
+                <data
+                    android:host="com.hamels.daybydayegg"
+                    android:scheme="maverickfood" />
+                <!-- 下面這幾行也必須得設定 -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+                <action   android:name="emms.intent.action.check_authorization"/>
+                <category android:name="emms.intent.category.authorization"/>
+            </intent-filter>
+            <!-- End Test for URL scheme -->
+        </activity>
+        <activity
+            android:name="com.hamels.daybydayegg.Init.NotificationControlActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+        <activity
+            android:name="com.hamels.daybydayegg.Login.VIew.CustomerActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+        <activity
+            android:name="com.hamels.daybydayegg.Login.VIew.LoginActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+        <activity
+            android:name="com.hamels.daybydayegg.Login.VIew.TermsOfUseActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+        <activity
+            android:name="com.hamels.daybydayegg.Main.View.MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="NOTIFY_EXTRA" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.hamels.daybydayegg.Base.WebViewActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"/>
+        <activity
+            android:name="com.hamels.daybydayegg.Login.VIew.ForgetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+        <activity
+            android:name="com.hamels.daybydayegg.Login.VIew.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+        <activity
+            android:name="com.hamels.daybydayegg.Login.VIew.VerifyCodeActivity"
+            android:screenOrientation="portrait" />
+
+        <service android:name="com.hamels.daybydayegg.Service.FcmService" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_fcm_logo" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorYunlinhn" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+    </application>
+
+
+
+</manifest>

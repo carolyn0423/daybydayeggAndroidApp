@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyBackground"
+    android:overScrollMode="never">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/layout_info"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@color/colorYunlinhn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="16sp"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/btn_member_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        app:srcCompat="@drawable/editor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_phone"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:textSize="16sp"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textSize="55sp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/controlcenter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_info">
+
+            <LinearLayout
+                style="@style/user_function_form">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/greyLine"
+                    android:layout_marginVertical="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    style="@style/user_function_formcontent">
+
+                    <LinearLayout
+                        android:id="@+id/btn_trans_record"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/transactionrecord2" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="交易紀錄" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_point"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/point2" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="點數歷程" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_coupon"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/ticket2" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="優惠票券" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_change_password"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/password2" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="修改密碼" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="5dp"
+                    android:background="@color/greyLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    style="@style/user_function_formcontent">
+
+                    <LinearLayout
+                        android:id="@+id/btn_customerservice"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/service2" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="客服中心" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_contact_us"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/contact2" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="聯絡我們" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_privacy"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/information2" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="紅利/規範" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_terms"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/proclamation2" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="隱私條款" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="5dp"
+                    android:background="@color/greyLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    style="@style/user_function_formcontent">
+
+                    <LinearLayout
+                        android:id="@+id/btn_member_gift"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/gift" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="邀請好友" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_002"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                 />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_003"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_004"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                 />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="5dp"
+                    android:background="@color/greyLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+<!--            <TextView-->
+<!--                android:id="@+id/btn_logout"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:drawableStart="@drawable/logout"-->
+<!--                android:textSize="25sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_logout"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rec_stroke_green2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/controlcenter">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@null"
+                android:drawableStart="@drawable/logout2"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="@string/logout"
+                android:textSize="12sp"
+                android:textColor="@color/colorYunlinhn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

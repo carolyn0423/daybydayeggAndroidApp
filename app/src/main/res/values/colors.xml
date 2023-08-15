@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="colorYunlinhn">#709868</color>
+    
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!-- orange -->
+    <color name="gradientOrangeLight">#feab36</color>
+    <color name="gradientOrangeDark">#ee7800</color>
+    <color name="orangeText">#ff9000</color>
+    <color name="greenText">#1aa400</color>
+
+    <!-- grey -->
+    <color name="greyLotList">#777777</color>
+    <color name="greyNormal">#817f7f</color>
+    <color name="greyText">#5f5e5e</color>
+    <color name="greyLine">#e9e9e9</color>
+    <color name="darkGreyLine">#B3B3B3</color>
+    <color name="greyLot">#999999</color>
+    <color name="greyHint">#c7c7c7</color>
+    <color name="greyDoubleDark">#333333</color>
+    <color name="greyDoubleHint">#F2F2F2</color>
+    <color name="greyDark">#8d8d8d</color>
+    <color name="greyLineUnSelect">#bababa</color>
+    <color name="greyBar">#c0c0c0</color>
+    <color name="greyBackground">#f5f5f5</color>
+    <color name="greyMessage">#cccccc</color>
+    <color name="greyMenu">#555555</color>
+    <color name="Black">#010101</color>
+    <color name="White">#FFFFFF</color>
+    <color name="gray">#CFCFCF</color>
+
+    <color name="blue">#0048FF</color>
+
+    <!-- red -->
+    <color name="redHint">#db4f4f</color>
+    <color name="redProductPrice">#bf1637</color>
+
+    <!-- white -->
+    <color name="white">#FFFFFF</color>
+
+    <color name="main">#2cb511</color>
+
+
+<!--    product-->
+    <color name="product_green">#3aad37</color>
+
+    <color name="price_Purple">#9966ff</color>
+
+    <color name="dark_blue">#FF3B4BA6</color>
+
+    <color name="darkgrey">#A9A9A9</color>
+
+</resources>

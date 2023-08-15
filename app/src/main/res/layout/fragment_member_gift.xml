@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="50dp">
+
+        <ImageView
+            android:id="@+id/giftImageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/gift2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/inviteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邀請新朋友，盡享優惠獎勵"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/giftImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/invitation_codeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邀請碼"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/inviteText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/invitation_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AAA111"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/invitation_codeText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/shareInfoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="複製並分享邀請碼給朋友，推薦對象和您將獲得推薦禮卷"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/invitation_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="25dp" />
+
+        <TextView
+            android:id="@+id/shareInfoText2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="1. 好友完成註冊，將可獲得新會員獎勵: xxx 優惠卷"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/shareInfoText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/shareInfoText3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="2. 好友首次消費，消費金額達 xxx 元，您將可獲得推薦人獎勵: yyyy優惠卷"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/shareInfoText2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/shareInfoText4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="3. 折抵卷不與其他優惠併用"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/shareInfoText3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/shareInfoText5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="4. 活動期限: 2023-06-01 ~ 06-30"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/shareInfoText4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/shareInfoText6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="本公司保有活動內容變更及終止權"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/shareInfoText5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            style="@style/fontBoldTw.White"
+            android:id="@+id/shareButton"
+            android:layout_width="126dp"
+            android:layout_height="36dp"
+            android:background="@drawable/rec_solid_green_button"
+            android:text="點擊分享"
+            app:layout_constraintTop_toBottomOf="@+id/shareInfoText6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="50dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

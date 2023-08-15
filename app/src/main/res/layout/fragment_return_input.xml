@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="never">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_hint"
+            style="@style/fontBoldTw.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/exchange_info_input"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/fontBoldTw.Grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/name_must"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hint" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:theme="@style/EditTextBlack"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name">
+
+            <EditText
+                android:id="@+id/et_name"
+                style="@style/fontDefaultEn.Black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selec_et_line"
+                android:hint="@string/exchange_name_hint"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:paddingTop="12dp"
+                android:paddingBottom="10dp"
+                android:textColorHint="@color/greyHint"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_address"
+            style="@style/fontBoldTw.Grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/address_must"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/layout_name" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:theme="@style/EditTextBlack"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_address">
+
+            <EditText
+                android:id="@+id/et_address"
+                style="@style/fontDefaultEn.Black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selec_et_line"
+                android:hint="@string/exchange_address_hint"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:paddingTop="12dp"
+                android:paddingBottom="10dp"
+                android:textColorHint="@color/greyHint"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/fontBoldTw.Grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/cellphone_must"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/layout_address" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:theme="@style/EditTextBlack"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_phone">
+
+            <EditText
+                android:id="@+id/et_phone"
+                style="@style/fontDefaultEn.Black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selec_et_line"
+                android:hint="@string/exchange_cellphone_hint"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:paddingTop="12dp"
+                android:paddingBottom="10dp"
+                android:textColorHint="@color/greyHint"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_mail"
+            style="@style/fontBoldTw.Grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/email_must"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/layout_phone" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_mail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:theme="@style/EditTextBlack"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_mail">
+
+            <EditText
+                android:id="@+id/et_mail"
+                style="@style/fontDefaultEn.Black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selec_et_line"
+                android:hint="@string/exchange_email_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
+                android:paddingTop="12dp"
+                android:paddingBottom="10dp"
+                android:textColorHint="@color/greyHint"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            style="@style/fontDefaultTw.White"
+            android:layout_width="126dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/orangeText"
+            android:gravity="center"
+            android:text="@string/exchange_confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_mail" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

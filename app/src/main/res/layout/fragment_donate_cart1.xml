@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyBackground">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:tabBackground="@drawable/selec_tab_green"
+        app:tabGravity="fill"
+
+        app:tabIndicatorColor="@color/main"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorHeight="0dp"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextAppearance="@style/TabLayoutTextSizeStyle"
+        app:tabTextColor="@color/main"
+        android:background="@color/white"
+        tools:layout_editor_absoluteY="15dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="UNUSED"
+            android:text="未使用" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="HISTORY"
+            android:text="使用歷程" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <View
+        android:id="@+id/view_tab_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/darkGreyLine"
+        android:layout_below="@+id/tab_layout" />
+
+    <ScrollView
+        android:id="@+id/ScrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="90dp"
+        android:overScrollMode="never"
+        android:layout_below="@+id/view_tab_line">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/donate_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:weightSum="1.0"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:background="@color/greyBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center|right">
+
+            <TextView
+                android:id="@+id/tv_product_cnt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="合計商品數量：" />
+
+            <TextView
+                android:id="@+id/tv_product_cnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="0"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:weightSum="1.0"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_alldonate"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:background="@color/colorYunlinhn"
+                android:text="全數轉贈"
+                android:textColor="#FFF"
+                android:textSize="16dp" />
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_alldonate"-->
+<!--                android:layout_weight=".5"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="45dp"-->
+<!--                android:background="@color/main"-->
+<!--                android:text="全數轉贈"-->
+<!--                android:textColor="#FFF"-->
+<!--                android:textSize="16dp" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_submit"-->
+<!--                android:layout_weight=".5"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="45dp"-->
+<!--                android:background="@color/orangeText"-->
+<!--                android:text="一次兌換"-->
+<!--                android:textColor="#FFF"-->
+<!--                android:textSize="16dp" />-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

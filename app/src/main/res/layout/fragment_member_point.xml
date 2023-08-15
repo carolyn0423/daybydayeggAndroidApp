@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2"
+    android:overScrollMode="never">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <ImageView
+            android:id="@+id/img_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pcircle"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_card"
+            app:layout_constraintStart_toStartOf="@+id/bg_card"
+            app:layout_constraintEnd_toEndOf="@+id/bg_card"
+            app:layout_constraintTop_toTopOf="@+id/bg_card" />
+
+        <ImageView
+            android:id="@+id/bg_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_point_card"
+            android:layout_margin="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_point2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/smilepoint"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="@+id/guide_point"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_total_point"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/rcb"
+            android:textColor="@color/colorYunlinhn"
+            android:textSize="93sp"
+            android:text="50"
+            app:layout_constraintBottom_toBottomOf="@+id/img_point"
+            app:layout_constraintEnd_toEndOf="@+id/img_point"
+            app:layout_constraintStart_toStartOf="@+id/img_point"
+            app:layout_constraintTop_toTopOf="@+id/img_point" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_mid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bg_expire_point"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+
+            <TextView
+                android:id="@+id/tv_no_histort"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本月無點數紀錄"
+                android:textSize="13sp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/recyclerview"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerview"
+                app:layout_constraintStart_toStartOf="@+id/recyclerview"
+                app:layout_constraintTop_toTopOf="@+id/recyclerview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bg_card">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <ImageButton
+                android:id="@+id/btn_left_arrow"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/arrow_left"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/btn_right_arrow"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:background="@drawable/arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_left_arrow"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="@+id/guideline18"
+                app:layout_constraintTop_toTopOf="@+id/btn_left_arrow" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_marginHorizontal="2dp"
+                android:gravity="center"
+                android:fontFamily="@font/rcr"
+                android:textSize="16sp"
+                android:text="2023年05月"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_left_arrow"
+                app:layout_constraintEnd_toStartOf="@+id/btn_right_arrow"
+                app:layout_constraintStart_toEndOf="@+id/btn_left_arrow"
+                app:layout_constraintTop_toTopOf="@+id/btn_left_arrow" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_left_arrow"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16"
+                app:layout_constraintStart_toStartOf="@+id/btn_left_arrow"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_right_arrow"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btn_right_arrow"
+                app:layout_constraintStart_toStartOf="@+id/guideline18"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_expire_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="60dp"
+            android:gravity="center"
+            android:text="@string/expire_date"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_card"
+            app:layout_constraintEnd_toEndOf="@+id/bg_card"
+            app:layout_constraintStart_toStartOf="@+id/bg_card"
+            app:layout_constraintTop_toBottomOf="@+id/img_point" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

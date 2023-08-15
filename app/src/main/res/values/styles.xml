@@ -1,0 +1,370 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:actionMenuTextColor">@color/greyDoubleDark</item>
+    </style>
+
+    <style name="DatePickerTheme" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="fontDefaultTw.TabTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="EditTextBlack">
+        <item name="colorAccent">@android:color/black</item>
+    </style>
+
+    <style name="fontDefaultTw">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/noto_sans_tc_light</item>
+    </style>
+    <style name="fontRegularTw">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/noto_sans_tc_regular</item>
+    </style>
+    <style name="fontBoldTw">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/noto_sans_tc_medium</item>
+    </style>
+
+    <style name="fontDefaultEn">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/roboto_condensed_light</item>
+    </style>
+
+    <style name="fontBoldEn">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+    </style>
+
+    <style name="fontRobotoLight">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
+    <style name="fontRobotoRegular">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="fontRobotoMedium">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="fontRobotoBold">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="prodDetailfontBigBold">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/rcb</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="prodDetailfontBigGeneral">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/rcr</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="prodDetailfontSmallGeneral">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/rcr</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="LotListfontSmallGeneral">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/noto_sans_tc_regular</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="prodDetailfontSmallGeneralSelect">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="TabLayoutTextSizeStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/noto_sans_tc_regular</item>
+    </style>
+
+    <style name="fontDefaultTw.Black">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="fontBoldTw.Black">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="fontDefaultEn.Black">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="fontBoldEn.Black">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="fontDefaultTw.White">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="fontBoldTw.White">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="fontDefaultEn.White">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="fontBoldEn.White">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="fontDefaultTw.Grey">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+    <style name="fontRegularTw.Grey">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+    <style name="fontRegularTw.greyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+    <style name="fontRegularTw.White">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="fontBoldTw.Grey">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+    <style name="fontBoldTw.GreyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+    <style name="fontBoldTw.ProductGreen">
+        <item name="android:textColor">@color/product_green</item>
+    </style>
+    <style name="fontDefaultEn.Grey">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+
+    <style name="fontBoldEn.Grey">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+
+    <style name="fontRegularTw.GreyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+    <style name="fontRegularTw.GreyHint">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+    <style name="fontRegularTw.GreyDark">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+    <style name="fontRegularTw.Black">
+        <item name="android:textColor">@color/Black</item>
+    </style>
+    <style name="fontRegularTw.greyLotList">
+        <item name="android:textColor">@color/greyLotList</item>
+    </style>
+    <style name="fontRegularTw.greyMenu">
+        <item name="android:textColor">@color/greyMenu</item>
+    </style>
+    <style name="fontDefaultTw.GreyHint">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+
+    <style name="fontBoldTw.GreyHint">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+
+    <style name="fontDefaultEn.GreyHint">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+
+    <style name="fontBoldEn.GreyHint">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+
+    <style name="fontDefaultTw.Orange">
+        <item name="android:textColor">@color/orangeText</item>
+    </style>
+
+    <style name="fontRegularTw.Orange">
+        <item name="android:textColor">@color/orangeText</item>
+    </style>
+
+    <style name="fontBoldTw.Orange">
+        <item name="android:textColor">@color/orangeText</item>
+    </style>
+
+    <style name="fontBoldTw.Green">
+        <item name="android:textColor">@color/greenText</item>
+    </style>
+
+    <style name="fontDefaultEn.Orange">
+        <item name="android:textColor">@color/orangeText</item>
+    </style>
+
+    <style name="fontBoldEn.Orange">
+        <item name="android:textColor">@color/orangeText</item>
+    </style>
+
+    <style name="fontRobotoRegular.GreyHint">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+
+    <style name="fontRobotoRegular.GreyDark">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+
+    <style name="fontRobotoRegular.Black">
+        <item name="android:textColor">@color/Black</item>
+    </style>
+
+    <style name="fontRobotoRegular.GreyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+
+    <style name="fontRobotoRegular.Green">
+        <item name="android:textColor">@color/main</item>
+    </style>
+
+    <style name="fontRobotoRegular.Purple">
+        <item name="android:textColor">@color/price_Purple</item>
+    </style>
+
+    <style name="fontRobotoRegular.Orange">
+        <item name="android:textColor">@color/orangeText</item>
+    </style>
+
+    <style name="fontRobotoBold.Black">
+        <item name="android:textColor">@color/Black</item>
+    </style>
+
+    <style name="fontRobotoMedium.GreyHint">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+
+    <style name="fontRobotoMedium.GreyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+
+    <style name="fontRobotoBold.GreyHint">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+
+    <style name="fontRobotoBold.GreyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+
+    <style name="prodDetailfontBigGeneral.Grey">
+        <item name="android:textColor">@color/greyHint</item>
+    </style>
+
+    <style name="prodDetailfontBigGeneral.GreyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+
+    <style name="prodDetailfontBigBold.GreyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+
+    <style name="prodDetailfontSmallGeneral.GreyDoubleDark">
+        <item name="android:textColor">@color/greyDoubleDark</item>
+    </style>
+
+    <style name="prodDetailfontSmallGeneral.GreyDark">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+
+    <style name="prodDetailfontSmallGeneralSelect.GreyDark">
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+
+    <!-- user -->
+    <style name="user_function_form">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:translationZ">10dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="user_function_formtitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+<!--        <item name="android:background">@drawable/user_bg_function_title_0</item>-->
+    </style>
+
+<!--    <style name="user_function_formtitle_img">-->
+<!--        <item name="android:layout_width">25dp</item>-->
+<!--        <item name="android:layout_height">25dp</item>-->
+<!--    </style>-->
+
+    <style name="user_function_formtitle_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/Black</item>
+    </style>
+
+    <style name="user_function_formcontent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="user_function_formcontent_col">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="user_function_img">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="imgtext_0">
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="imgtext_text_0">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/greyDark</item>
+    </style>
+
+    <!--  spinner含箭頭，背景灰色  -->
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/bg_spinner</item>
+    </style>
+</resources>

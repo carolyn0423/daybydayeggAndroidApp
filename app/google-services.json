@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "262480730294",
+    "project_id": "daybydayegg-aeead",
+    "storage_bucket": "daybydayegg-aeead.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262480730294:android:0b04ad3bcf21d5d412ae17",
+        "android_client_info": {
+          "package_name": "com.hamels.daybydayegg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262480730294-h4st6gcbe067flphe4sdim1lh5m7k76k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEir6J0IErBJbZpXyofh0iVTYfPmr5WHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262480730294-h4st6gcbe067flphe4sdim1lh5m7k76k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "262480730294-er100ail8uk63aevcm6mn860h0ge95ii.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hamels.daybydayegg"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

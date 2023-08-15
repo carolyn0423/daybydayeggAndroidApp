@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.VIew.VerifyCodeActivity">
+
+    <com.hamels.daybydayegg.Widget.AppToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/fontBoldTw.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/verify_title"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_hint"
+        style="@style/fontBoldTw.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/redHint"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_otp"
+        style="@style/fontBoldEn.Orange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/otp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_hint" />
+
+    <EditText
+        android:id="@+id/et_first"
+        style="@style/fontDefaultEn.Black"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/selec_et_line"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textColorHint="@color/greyHint"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/et_second"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_otp" />
+
+    <EditText
+        android:id="@+id/et_second"
+        style="@style/fontDefaultEn.Black"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selec_et_line"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textColorHint="@color/greyHint"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/et_third"
+        app:layout_constraintStart_toEndOf="@id/et_first"
+        app:layout_constraintTop_toTopOf="@id/et_first" />
+
+    <EditText
+        android:id="@+id/et_third"
+        style="@style/fontDefaultEn.Black"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selec_et_line"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textColorHint="@color/greyHint"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/et_fourth"
+        app:layout_constraintStart_toEndOf="@id/et_second"
+        app:layout_constraintTop_toTopOf="@id/et_first" />
+
+    <EditText
+        android:id="@+id/et_fourth"
+        style="@style/fontDefaultEn.Black"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/selec_et_line"
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="1"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textColorHint="@color/greyHint"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/et_third"
+        app:layout_constraintTop_toTopOf="@id/et_first" />
+
+    <TextView
+        android:id="@+id/tv_not_get_verify_code"
+        style="@style/fontDefaultTw.Grey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/not_get_verify_code"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_first" />
+
+    <TextView
+        android:id="@+id/tv_resend"
+        style="@style/fontBoldTw.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/resend"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_not_get_verify_code" />
+
+    <ImageButton
+        android:id="@+id/btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/oval_white"
+        android:padding="12dp"
+        android:src="@drawable/ic_arrow_right_orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_resend" />
+</androidx.constraintlayout.widget.ConstraintLayout>

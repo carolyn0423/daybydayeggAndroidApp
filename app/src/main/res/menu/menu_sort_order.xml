@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:textSize="16sp"
+        android:id="@+id/item_order_status_all"
+        android:icon="@drawable/location"
+        android:title="全部" />
+    <item
+        android:textSize="16sp"
+        android:id="@+id/item_order_status_1"
+        android:icon="@drawable/shopping_cart"
+        android:title="待付款" />
+    <item
+        android:textSize="16sp"
+        android:id="@+id/item_order_status_2"
+        android:icon="@drawable/product"
+        android:title="待取貨" />
+    <item
+        android:textSize="16sp"
+        android:id="@+id/item_order_status_3"
+        android:icon="@drawable/product"
+        android:title="結單" />
+    <item
+        android:textSize="16sp"
+        android:id="@+id/item_order_status_4"
+        android:icon="@drawable/product"
+        android:title="取消訂單" />
+
+</menu>

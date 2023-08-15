@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_self"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_self_message_time"
+            style="@style/fontRobotoRegular.GreyHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/greyMessage"
+            android:textSize="13sp"
+            android:text="2021/05/19 12:10"
+            android:layout_margin="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <RelativeLayout
+            android:id="@+id/layout_self_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_self_message_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/triangle_gray"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/triangle_message_green"
+                android:scaleType="fitXY" />
+
+            <TextView
+                style="@style/fontRegularTw"
+                android:id="@+id/tv_self_message"
+                android:text="留言留言留言留言留言留言留言留言留言留言留言留言留言"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toStartOf="@+id/triangle_gray"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:background="@drawable/rec_solid_green_button"/>
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_store_name"
+            style="@style/fontRobotoRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/greyMenu"
+            android:textSize="13sp"
+            android:text="管理員"
+            android:layout_margin="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_store_message_time"
+            style="@style/fontRobotoRegular.GreyHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/greyMessage"
+            android:textSize="13sp"
+            android:text="2021/05/19 12:10"
+            android:layout_margin="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_store_name"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_store_name">
+
+            <ImageView
+                android:id="@+id/triangle_green"
+                android:layout_marginTop="5dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:scaleType="fitXY"
+                android:background="@drawable/triangle_message_gray"/>
+
+            <TextView
+                android:id="@+id/tv_store_message"
+                style="@style/fontRegularTw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@+id/triangle_green"
+                android:padding="15dp"
+                android:text="留言"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:background="@drawable/rec_solid_gray_button"
+                />
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

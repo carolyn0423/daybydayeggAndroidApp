@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <ImageView
+        android:id="@+id/bg_shadow_corner"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_shadow_corner" />
+
+    <Button
+        android:id="@+id/dialog_btn_close"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@id/bg_shadow_corner"
+        android:layout_alignTop="@id/bg_shadow_corner"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/circle2"
+        android:text="╳"
+        android:textColor="#000" />
+
+    <ImageView
+        android:id="@+id/dialog_img_qrcode"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp" />
+
+    <TextView
+        android:id="@+id/text_invite_code_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_img_qrcode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:textStyle="bold"
+        android:text="邀請碼"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text_invite_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_invite_code_label"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="xxxxxx"
+        android:textSize="32sp" />
+
+    <TextView
+        android:id="@+id/text_invite_code_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_invite_code"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:text="長按邀請碼可複製分享給好友"
+        android:textSize="14sp" />
+
+</RelativeLayout>

@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/donate_constraintLayout_right"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/donate_bg_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_donate_right"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_giveflag_right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:textSize="8dp"
+            android:text="受贈"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:background="@drawable/donate_flagbg_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_product_name_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="15dp"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#231815"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:text="商品名稱"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_donate_right" />
+
+        <TextView
+            android:id="@+id/tv_spec_name2_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#231815"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:text="規格"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_name_right" />
+
+        <TextView
+            android:id="@+id/tv_eticket_due_date_right_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="兌換期限 : "
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spec_name2_right" />
+
+        <TextView
+            android:id="@+id/tv_eticket_due_date_right"
+            style="@style/fontRegularTw.greyDoubleDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_donate_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_eticket_due_date_right_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_eticket_due_date_right_title" />
+
+        <TextView
+            android:id="@+id/tv_type_name_right_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="品項 : "
+            android:textColor="#595757"
+            android:textSize="10dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/tv_product_name_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_eticket_due_date_right" />
+
+        <TextView
+            android:id="@+id/tv_type_name_right"
+            style="@style/fontRegularTw.greyDoubleDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/tv_product_name_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_type_name_right_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_type_name_right_title" />
+
+        <TextView
+            android:id="@+id/tv_spec_name_right_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="規格 : "
+            android:textColor="#595757"
+            android:textSize="10dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/tv_product_name_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_type_name_right" />
+
+        <TextView
+            android:id="@+id/tv_spec_name_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/tv_product_name_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_spec_name_right_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_spec_name_right_title" />
+
+        <TextView
+            android:id="@+id/tv_buy_quantity_right_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="購買數量 : "
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spec_name_right" />
+
+        <TextView
+            android:id="@+id/tv_buy_quantity_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_donate_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_buy_quantity_right_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_buy_quantity_right_title" />
+
+        <TextView
+            android:id="@+id/tv_give_quantity_right_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="受贈數量 : "
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_buy_quantity_right" />
+
+        <TextView
+            android:id="@+id/tv_give_quantity_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_donate_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_give_quantity_right_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_give_quantity_right_title" />
+
+        <TextView
+            android:id="@+id/tv_left_number_right_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="剩餘數量 : "
+            android:textColor="#3AAD37"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_give_quantity_right" />
+
+        <TextView
+            android:id="@+id/tv_left_number_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:paddingBottom="8dp"
+            android:singleLine="false"
+            android:textColor="#3AAD37"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_donate_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_left_number_right_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_left_number_right_title" />
+
+        <ImageView
+            android:id="@+id/tv_cart_right"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:padding="2dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/sga"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/donate_constraintLayout_left"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/donate_bg_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_donate_left"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_giveflag_left"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:textSize="8dp"
+            android:text="受贈"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:background="@drawable/donate_flagbg_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_product_name_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="15dp"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#231815"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:text="商品名稱"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_donate_left" />
+
+        <TextView
+            android:id="@+id/tv_spec_name2_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#231815"
+            android:textSize="10dp"
+            android:gravity="bottom"
+            android:textStyle="bold"
+            android:text="規格"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_name_left" />
+
+        <TextView
+            android:id="@+id/tv_eticket_due_date_left_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="兌換期限 : "
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spec_name2_left" />
+
+        <TextView
+            android:id="@+id/tv_eticket_due_date_left"
+            style="@style/fontRegularTw.greyDoubleDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_donate_left"
+            app:layout_constraintStart_toEndOf="@+id/tv_eticket_due_date_left_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_eticket_due_date_left_title" />
+
+        <TextView
+            android:id="@+id/tv_type_name_left_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="品項 : "
+            android:textColor="#595757"
+            android:textSize="10dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_eticket_due_date_left" />
+
+        <TextView
+            android:id="@+id/tv_type_name_left"
+            style="@style/fontRegularTw.greyDoubleDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_type_name_left_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_type_name_left_title" />
+
+        <TextView
+            android:id="@+id/tv_spec_name_left_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="規格 : "
+            android:textColor="#595757"
+            android:textSize="10dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_type_name_left" />
+
+        <TextView
+            android:id="@+id/tv_spec_name_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_spec_name_left_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_spec_name_left_title" />
+
+        <TextView
+            android:id="@+id/tv_buy_quantity_left_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="購買數量 : "
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spec_name_left" />
+
+        <TextView
+            android:id="@+id/tv_buy_quantity_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_donate_left"
+            app:layout_constraintStart_toEndOf="@+id/tv_buy_quantity_left_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_buy_quantity_left_title" />
+
+        <TextView
+            android:id="@+id/tv_give_quantity_left_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="受贈數量 : "
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_buy_quantity_left" />
+
+        <TextView
+            android:id="@+id/tv_give_quantity_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_donate_left"
+            app:layout_constraintStart_toEndOf="@+id/tv_give_quantity_left_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_give_quantity_left_title" />
+
+        <TextView
+            android:id="@+id/tv_left_number_left_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="剩餘數量 : "
+            android:textColor="#3AAD37"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_give_quantity_left" />
+
+        <TextView
+            android:id="@+id/tv_left_number_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:paddingBottom="8dp"
+            android:singleLine="false"
+            android:textColor="#3AAD37"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_donate_left"
+            app:layout_constraintStart_toEndOf="@+id/tv_left_number_left_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_left_number_left_title" />
+
+        <ImageView
+            android:id="@+id/tv_cart_left"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:padding="2dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/sga"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

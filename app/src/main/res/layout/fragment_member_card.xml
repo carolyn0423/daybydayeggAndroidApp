@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="never">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_card_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/bg_member_card_front"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,14:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="136dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/bg_member_card_front"
+                app:layout_constraintEnd_toEndOf="@id/bg_member_card_front"
+                app:layout_constraintStart_toStartOf="@id/bg_member_card_front"
+                app:layout_constraintTop_toTopOf="@id/bg_member_card_front"
+                app:srcCompat="@drawable/ic_logo" />
+
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/btn_to_back"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@null"-->
+            <!--                android:padding="16dp"-->
+            <!--                android:src="@drawable/ic_to_back"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent" />-->
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/tv_member_type"-->
+            <!--                style="@style/fontDefaultTw.White"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginEnd="16dp"-->
+            <!--                android:text="橘卡會員"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/btn_to_back"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/btn_to_back" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_card_front"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/bg_member_card_back"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,14:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_barcode"
+                android:layout_width="300dp"
+                android:layout_height="56dp"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/tv_barcode_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tv_barcode_number"
+                style="@style/fontDefaultEn.White"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/img_barcode"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@id/img_barcode"
+                app:layout_constraintTop_toBottomOf="@+id/img_barcode" />
+
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/btn_to_front"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@null"-->
+            <!--                android:padding="16dp"-->
+            <!--                android:src="@drawable/ic_to_front"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        <android.support.constraint.ConstraintLayout-->
+        <!--            android:id="@+id/layout_info"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:background="@drawable/bg_shadow_corner"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/layout_card_front">-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/img_user"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="20dp"-->
+        <!--                android:layout_marginTop="24dp"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent"-->
+        <!--                app:srcCompat="@drawable/ic_user" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_name_const"-->
+        <!--                style="@style/fontBoldTw.Black"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="16dp"-->
+        <!--                android:text="@string/name"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_user"-->
+        <!--                app:layout_constraintStart_toEndOf="@id/img_user"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_user" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_name"-->
+        <!--                style="@style/fontDefaultTw.Black"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="8dp"-->
+        <!--                android:layout_marginEnd="16dp"-->
+        <!--                android:textColor="@color/greyText"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_user"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toEndOf="@id/tv_name_const"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_user" />-->
+
+        <!--            <View-->
+        <!--                android:id="@+id/view_line_name"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="1dp"-->
+        <!--                android:layout_marginTop="12dp"-->
+        <!--                android:background="@color/greyLine"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_name_const"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/tv_name" />-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/img_birth"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="24dp"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/img_user"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/img_user"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/view_line_name"-->
+        <!--                app:srcCompat="@drawable/ic_birthday" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_birth_const"-->
+        <!--                style="@style/fontBoldTw.Black"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/birth"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_birth"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_name_const"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_birth" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_birth"-->
+        <!--                style="@style/fontDefaultTw.Black"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:textColor="@color/greyText"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_birth"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_name"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_birth" />-->
+
+        <!--            <View-->
+        <!--                android:id="@+id/view_line_birth"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="1dp"-->
+        <!--                android:layout_marginTop="12dp"-->
+        <!--                android:background="@color/greyLine"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_name_const"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/tv_birth" />-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/img_point"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="24dp"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/img_user"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/img_user"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/view_line_birth"-->
+        <!--                app:srcCompat="@drawable/ic_mypoint" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_point_const"-->
+        <!--                style="@style/fontBoldTw.Black"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/point"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_point"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_name_const"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_point" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_point"-->
+        <!--                style="@style/fontDefaultTw.Black"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:textColor="@color/greyText"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_point"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_name"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_point" />-->
+
+        <!--            <View-->
+        <!--                android:id="@+id/view_line_point"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="1dp"-->
+        <!--                android:layout_marginTop="12dp"-->
+        <!--                android:background="@color/greyLine"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_point_const"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/tv_point" />-->
+
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/img_prepaid_amount"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="24dp"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/img_user"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/img_user"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/view_line_point"-->
+        <!--                app:srcCompat="@drawable/ic_point" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_prepaid_amount_const"-->
+        <!--                style="@style/fontBoldTw.Black"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/prepaid_amount"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_prepaid_amount"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_name_const"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_prepaid_amount" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_prepaid_amount"-->
+        <!--                style="@style/fontDefaultTw.Black"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="8dp"-->
+        <!--                android:textColor="@color/greyText"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_prepaid_amount"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toEndOf="@id/tv_prepaid_amount_const"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_prepaid_amount" />-->
+
+        <!--            <View-->
+        <!--                android:id="@+id/view_line_prepaid_amount"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="1dp"-->
+        <!--                android:layout_marginTop="12dp"-->
+        <!--                android:background="@color/greyLine"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_point_const"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/tv_prepaid_amount" />-->
+
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/img_cellphone"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="24dp"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/img_user"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/img_user"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/view_line_prepaid_amount"-->
+        <!--                app:srcCompat="@drawable/ic_phone" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_cellphone_const"-->
+        <!--                style="@style/fontBoldTw.Black"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/cellphone"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_cellphone"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_name_const"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_cellphone" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tv_cellphone"-->
+        <!--                style="@style/fontDefaultTw.Black"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="8dp"-->
+        <!--                android:textColor="@color/greyText"-->
+        <!--                android:textSize="14sp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="@id/img_cellphone"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toEndOf="@id/tv_cellphone_const"-->
+        <!--                app:layout_constraintTop_toTopOf="@id/img_cellphone" />-->
+
+        <!--            <View-->
+        <!--                android:id="@+id/view_line_cellphone"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="1dp"-->
+        <!--                android:layout_marginTop="12dp"-->
+        <!--                android:layout_marginBottom="30dp"-->
+        <!--                android:background="@color/greyLine"-->
+        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+        <!--                app:layout_constraintStart_toStartOf="@id/tv_prepaid_amount_const"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/tv_cellphone" />-->
+        <!--        </android.support.constraint.ConstraintLayout>-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_shadow_corner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_card_front">
+
+            <ImageView
+                android:id="@+id/img_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_user" />
+
+            <TextView
+                android:id="@+id/tv_name_const"
+                style="@style/fontRegularTw.GreyDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/name"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_user"
+                app:layout_constraintStart_toEndOf="@id/img_user"
+                app:layout_constraintTop_toTopOf="@id/img_user" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_name_const"
+                app:layout_constraintTop_toTopOf="@id/img_user" />
+
+            <View
+                android:id="@+id/view_line_name"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/greyLine"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name_const"
+                app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+            <ImageView
+                android:id="@+id/img_birth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="@id/img_user"
+                app:layout_constraintStart_toStartOf="@id/img_user"
+                app:layout_constraintTop_toBottomOf="@id/view_line_name"
+                app:srcCompat="@drawable/ic_birthday" />
+
+            <TextView
+                android:id="@+id/tv_birth_const"
+                style="@style/fontRegularTw.GreyDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/birth"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_birth"
+                app:layout_constraintStart_toStartOf="@id/tv_name_const"
+                app:layout_constraintTop_toTopOf="@id/img_birth" />
+
+            <TextView
+                android:id="@+id/tv_birth"
+                style="@style/fontRobotoRegular.GreyDoubleDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_birth"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toTopOf="@id/img_birth" />
+
+            <View
+                android:id="@+id/view_line_birth"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/greyLine"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name_const"
+                app:layout_constraintTop_toBottomOf="@id/tv_birth" />
+
+            <ImageView
+                android:id="@+id/img_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="@id/img_user"
+                app:layout_constraintStart_toStartOf="@id/img_user"
+                app:layout_constraintTop_toBottomOf="@id/view_line_birth"
+                app:srcCompat="@drawable/ic_mypoint" />
+
+            <TextView
+                android:id="@+id/tv_point_const"
+                style="@style/fontRegularTw.GreyDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/point"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_point"
+                app:layout_constraintStart_toStartOf="@id/tv_name_const"
+                app:layout_constraintTop_toTopOf="@id/img_point" />
+
+            <TextView
+                android:id="@+id/tv_point"
+                style="@style/fontRobotoRegular.GreyDoubleDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_point"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toTopOf="@id/img_point" />
+
+            <View
+                android:id="@+id/view_line_point"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/greyLine"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_point_const"
+                app:layout_constraintTop_toBottomOf="@id/tv_point" />
+
+
+
+
+
+
+
+
+
+
+
+            <ImageView
+                android:id="@+id/img_cellphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="@id/img_user"
+                app:layout_constraintStart_toStartOf="@id/img_user"
+                app:layout_constraintTop_toBottomOf="@id/view_line_point"
+                app:srcCompat="@drawable/ic_phone" />
+
+            <TextView
+                android:id="@+id/tv_cellphone_const"
+                style="@style/fontRegularTw.GreyDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cellphone"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_cellphone"
+                app:layout_constraintStart_toStartOf="@id/tv_name_const"
+                app:layout_constraintTop_toTopOf="@id/img_cellphone" />
+
+            <TextView
+                android:id="@+id/tv_cellphone"
+                style="@style/fontRobotoRegular.GreyDoubleDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/img_cellphone"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toEndOf="@id/tv_cellphone_const"
+                app:layout_constraintTop_toTopOf="@id/img_cellphone" />
+
+            <View
+                android:id="@+id/view_line_cellphone"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/greyLine"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_point_const"
+                app:layout_constraintTop_toBottomOf="@id/tv_cellphone" />
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/img_cellphone"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="24dp"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/img_user"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/img_user"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/view_line_prepaid_amount"-->
+            <!--                app:srcCompat="@drawable/ic_phone" />-->
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/tv_cellphone_const"-->
+            <!--                style="@style/fontBoldTw.Black"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="@string/cellphone"-->
+            <!--                android:textSize="14sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/img_cellphone"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tv_name_const"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/img_cellphone" />-->
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/tv_cellphone"-->
+            <!--                style="@style/fontDefaultTw.Black"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="8dp"-->
+            <!--                android:textColor="@color/greyText"-->
+            <!--                android:textSize="14sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/img_cellphone"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/tv_cellphone_const"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/img_cellphone" />-->
+
+            <!--            <View-->
+            <!--                android:id="@+id/view_line_cellphone"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="1dp"-->
+            <!--                android:layout_marginTop="12dp"-->
+            <!--                android:layout_marginBottom="30dp"-->
+            <!--                android:background="@color/greyLine"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/tv_prepaid_amount_const"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tv_cellphone" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

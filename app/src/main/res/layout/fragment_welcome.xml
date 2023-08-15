@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login.VIew.WelcomeActivity">
+
+    <com.hamels.daybydayegg.Widget.AppToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_eorder"
+        style="@style/fontBoldTw.GreyDoubleDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/welcome_back"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_title_hint"
+        style="@style/fontRegularTw.greyDoubleDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/login_title_hint"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_eorder" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_search_customer"
+        style="@style/fontBoldTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="8sp"
+        android:textColor="#FFF"
+        android:text="商家"
+        android:paddingBottom="5dp"
+        android:gravity="center_horizontal|bottom"
+        android:background="@drawable/customer"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_hint"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_hint" />
+
+    <TextView
+        android:id="@+id/tv_scan"
+        style="@style/fontBoldTw.White"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:textSize="8sp"
+        android:textColor="#FFF"
+        android:text="掃碼"
+        android:paddingBottom="5dp"
+        android:gravity="center_horizontal|bottom"
+        android:background="@drawable/scan"
+        app:layout_constraintStart_toEndOf="@+id/tv_title_hint"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_hint" />
+
+    <TextView
+        android:id="@+id/tv_walk_around"
+        style="@style/fontBoldTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="9dp"
+        android:paddingBottom="9dp"
+        android:background="@drawable/rec_stroke_green_button"
+        android:gravity="center"
+        android:text="逛逛"
+        android:textSize="13sp"
+        android:textColor="@color/main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_scan" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

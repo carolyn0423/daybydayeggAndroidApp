@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyBackground"
+    android:overScrollMode="never">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/layout_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_infobg"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/card"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="24dp"
+                android:drawableStart="@drawable/logout"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="20sp"
+                android:text="會員中心"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/img_infobg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="50dp"
+                android:paddingBottom="15dp"
+                android:paddingHorizontal="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/img_qrcode"
+                        android:layout_width="350px"
+                        android:layout_height="350px" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/user" />
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="20dp"
+                            android:textSize="20sp"
+                            android:textColor="#3AAD37" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/point" />
+
+                        <TextView
+                            android:id="@+id/tv_point"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="20dp"
+                            android:textSize="20sp"
+                            android:textColor="#3AAD37" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/mainfunction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_info">
+
+            <LinearLayout
+                android:id="@+id/btn_member_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/user_bg_function_1"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/editor" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="編輯會員資料"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/user_bg_function_1"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingTop="2dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="2dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/password" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="修改密碼"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/controlcenter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainfunction">
+
+            <LinearLayout
+                style="@style/user_function_form">
+
+                <LinearLayout
+                    style="@style/user_function_formtitle">
+
+                    <TextView
+                        style="@style/user_function_formtitle_text"
+                        android:text="管理中心" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/user_function_formcontent">
+
+                    <LinearLayout
+                        android:id="@+id/btn_trans_record"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/transaction_record" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="交易紀錄" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_point"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/point_l" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="我的點數" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_coupon"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/ticket" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="優惠票券" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/otherinfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/controlcenter">
+
+            <LinearLayout
+                style="@style/user_function_form">
+
+                <LinearLayout
+                    style="@style/user_function_formtitle">
+
+                    <TextView
+                        style="@style/user_function_formtitle_text"
+                        android:text="其他資訊" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/user_function_formcontent">
+
+                    <LinearLayout
+                        android:id="@+id/btn_contact_us"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/call" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="聯絡我們" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_privacy"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/information" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="紅利與規範" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_terms"
+                        style="@style/user_function_formcontent_col">
+
+                        <LinearLayout
+                            style="@style/imgtext_0">
+
+                            <ImageView
+                                style="@style/user_function_img"
+                                app:srcCompat="@drawable/proclamation" />
+
+                            <TextView
+                                style="@style/imgtext_text_0"
+                                android:text="隱私權條款" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_member_setting"-->
+<!--            style="@style/fontRegularTw.GreyDark"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="@string/member_setting"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_name" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_member_info"-->
+<!--            style="@style/fontRegularTw.greyDoubleDark"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:drawableStart="@drawable/ic_member"-->
+<!--            android:drawableEnd="@drawable/ic_arrow_right_grey"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:text="@string/modify_member_info"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/mainfunction" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_change_password"-->
+<!--            style="@style/fontRegularTw.greyDoubleDark"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:drawableStart="@drawable/ic_key"-->
+<!--            android:drawableEnd="@drawable/ic_arrow_right_grey"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:text="@string/change_password"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_member_info" />-->
+
+
+
+
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@color/greyBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/mainfunction"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@id/mainfunction" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_account_info"-->
+<!--            style="@style/fontRegularTw.GreyDark"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="@string/account_info"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/mainfunction" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_trans_record"-->
+<!--            style="@style/fontRegularTw.greyDoubleDark"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:drawableStart="@drawable/ic_payhistroy"-->
+<!--            android:drawableEnd="@drawable/ic_arrow_right_grey"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:text="@string/trans_record"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_account_info" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_point"-->
+<!--            style="@style/fontRegularTw.greyDoubleDark"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:drawableStart="@drawable/ic_mypoint"-->
+<!--            android:drawableEnd="@drawable/ic_arrow_right_grey"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:text="@string/my_point"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_trans_record" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_coupon"-->
+<!--            style="@style/fontRegularTw.greyDoubleDark"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:drawableStart="@drawable/ic_mcoupon"-->
+<!--            android:drawableEnd="@drawable/ic_arrow_right_grey"-->
+<!--            android:drawablePadding="12dp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:text="@string/coupon"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_point" />-->
+
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@color/greyBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/tv_coupon"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_point" />-->
+
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@color/greyBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/tv_point"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_trans_record" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_customer_center"-->
+<!--            style="@style/fontRegularTw.GreyDark"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="14dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="@string/customer_center"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_coupon" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_contact_us"-->
+<!--            style="@style/fontRegularTw.greyDoubleDark"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:drawableStart="@drawable/ic_callphone"-->
+<!--            android:drawableEnd="@drawable/ic_arrow_right_grey"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:text="@string/contact_us"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_customer_center" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_privacy"-->
+<!--            style="@style/fontRegularTw.greyDoubleDark"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:drawableStart="@drawable/ic_service"-->
+<!--            android:drawableEnd="@drawable/ic_arrow_right_grey"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:text="@string/terms_of_use"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_contact_us" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_terms"-->
+<!--            style="@style/fontRegularTw.greyDoubleDark"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:drawableStart="@drawable/ic_paper"-->
+<!--            android:drawableEnd="@drawable/ic_arrow_right_grey"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:text="@string/privacy_policy"-->
+<!--            android:textSize="13sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_privacy" />-->
+
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@color/greyBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/tv_privacy"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_contact_us" />-->
+
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@color/greyBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/tv_terms"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_privacy" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

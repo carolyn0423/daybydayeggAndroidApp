@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:overScrollMode="never"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_shadow_corner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_name_hint"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/name"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/fontRegularTw.GreyDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_hint" />
+
+            <!-- 手機號 Start -->
+            <TextView
+                android:id="@+id/tv_phone_hint"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/cellphone"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/fontRobotoRegular.GreyDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@id/tv_phone_hint" />
+            <!-- 手機號 End -->
+
+            <!-- 性別 Start -->
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_gender_hint"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/gender"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/tv_birth" />
+
+            <RadioGroup
+                android:visibility="gone"
+                android:id="@+id/group_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_gender_hint">
+
+                <RadioButton
+                    android:id="@+id/radio_male"
+                    style="@style/fontRegularTw.greyDoubleDark"
+                    android:layout_width="100dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/selec_radio_rec_orange"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/male"
+                    android:textColor="@color/selec_orange_grey_hint"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/radio_female"
+                    style="@style/fontRegularTw.greyDoubleDark"
+                    android:layout_width="100dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/selec_radio_rec_orange"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/female"
+                    android:textColor="@color/selec_orange_grey_hint"
+                    android:textSize="13sp" />
+            </RadioGroup>
+
+            <!-- 性別 End -->
+
+            <!-- 生日 Start -->
+            <TextView
+                android:id="@+id/tv_birth_hint"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/birth"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
+
+            <TextView
+                android:id="@+id/tv_birth"
+                style="@style/fontRobotoRegular.GreyDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="13sp"
+                android:textColorHint="@color/greyHint"
+                android:hint="@string/hint_birthday"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@id/tv_birth_hint" />
+            <!-- 生日 End -->
+
+<!--            <android.support.design.widget.TextInputLayout-->
+<!--                android:visibility="gone"-->
+<!--                android:id="@+id/layout_birth"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="24dp"-->
+<!--                android:theme="@style/EditTextBlack"-->
+<!--                app:hintEnabled="false"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/tv_name"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tv_name_hint"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_birth_hint">-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/et_birth"-->
+<!--                    style="@style/fontRegularTw.GreyDark"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/selec_et_line"-->
+<!--                    android:hint="@string/hint_birthday"-->
+<!--                    android:textColorHint="@color/greyHint"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:inputType="text"-->
+<!--                    android:paddingTop="12dp"-->
+<!--                    android:paddingBottom="10dp"-->
+<!--                    android:textSize="13sp" />-->
+<!--            </android.support.design.widget.TextInputLayout>-->
+
+            <!-- 地址 Start -->
+            <TextView
+                android:id="@+id/tv_receiveaddress_hint"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/receiveaddress"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/group_gender" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/layout_mail"
+                app:layout_constraintStart_toStartOf="@+id/tv_receiveaddress_hint"
+                app:layout_constraintTop_toBottomOf="@+id/tv_receiveaddress_hint">
+
+
+                <Spinner
+                    android:id="@+id/spinner_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/selec_et_line"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.9" />
+
+                <Spinner
+                    android:id="@+id/spinner_area"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/selec_et_line"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="184dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextBlack"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                <EditText
+                    android:id="@+id/et_address"
+                    style="@style/fontRegularTw.GreyDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selec_et_line"
+                    android:hint="@string/hint_address"
+                    android:textColorHint="@color/greyHint"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="13sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- 信箱 End -->
+
+            <!-- 信箱 Start -->
+            <TextView
+                android:id="@+id/tv_email_hint"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/mail"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/layout_address" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_mail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextBlack"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_email_hint">
+
+                <EditText
+                    android:id="@+id/et_mail"
+                    style="@style/fontRegularTw.GreyDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selec_et_line"
+                    android:hint="@string/hint_email"
+                    android:textColorHint="@color/greyHint"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="13sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- 信箱 End -->
+
+            <!-- 手機載具 Start -->
+            <TextView
+                android:id="@+id/tv_carrier_no_hint"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/carrier_no"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/layout_mail" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_carrier_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextBlack"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_carrier_no_hint">
+
+                <EditText
+                    android:id="@+id/et_carrier_no"
+                    style="@style/fontRegularTw.GreyDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selec_et_line"
+                    android:hint="@string/hint_carrier_no"
+                    android:textColorHint="@color/greyHint"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="13sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- 手機載具 End -->
+
+            <!-- 邀請碼 Start -->
+            <TextView
+                android:id="@+id/tv_invitation_code_hint"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/invitation_code"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_name_hint"
+                app:layout_constraintTop_toBottomOf="@+id/layout_carrier_no" />
+
+            <TextView
+                android:id="@+id/tv_invitation_code"
+                style="@style/fontRegularTw.GreyDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_invitation_code_hint"
+                app:layout_constraintTop_toBottomOf="@id/tv_invitation_code_hint" />
+            <!-- 邀請碼 End -->
+
+            <!-- 推薦人 Start -->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_recommend_member_hint"-->
+<!--                style="@style/fontRegularTw.greyDoubleDark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/recommend_member"-->
+<!--                android:textSize="13sp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tv_name_hint"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/tv_invitation_code" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_recommend_member"-->
+<!--                style="@style/fontRegularTw.GreyDark"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="12dp"-->
+<!--                android:paddingTop="8dp"-->
+<!--                android:paddingBottom="8dp"-->
+<!--                android:textSize="13sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tv_recommend_member_hint"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_recommend_member_hint" />-->
+            <!-- 推薦人 End -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_send"
+            style="@style/fontBoldTw"
+            android:background="@drawable/rec_stroke_green_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="@string/send"
+            android:textSize="13sp"
+            android:textColor="@color/colorYunlinhn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_info" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
