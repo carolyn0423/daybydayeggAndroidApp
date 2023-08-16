@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Group;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.Base.BaseFragment;
@@ -40,18 +42,20 @@ import java.util.List;
 import static com.hamels.daybydayegg.Main.Presenter.LocationListPresenter.FUNCTIONNAME_1;
 import static com.hamels.daybydayegg.Main.Presenter.LocationListPresenter.FUNCTIONNAME_2;
 import static com.hamels.daybydayegg.Main.Presenter.LocationListPresenter.FUNCTIONNAME_3;
+import static com.hamels.daybydayegg.Main.Presenter.LocationListPresenter.FUNCTIONNAME_4;
 
 public class LocationFragment extends BaseFragment implements LocationListContract.View {
     public static final String TAG = LocationFragment.class.getSimpleName();
 
     private static LocationFragment fragment;
-    private TextView btn_functionname_1, btn_functionname_2, btn_functionname_3;
+    private TextView btn_functionname_1, btn_functionname_2, btn_functionname_3, btn_functionname_4;
     private RecyclerView recyclerView;
     private Group noLocationGroup;
     private TextView tvGoHome;
 
+    private Guideline glGuidelineCenter;
     private LocationListAdapter locationListAdapter;
-    private LocationListContract.Presenter storeListPresenter;
+    private LocationListContract.Presenter locationListPresenter;
 
     private String location_id = "";
     private int location_count = 0;
@@ -66,7 +70,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_store, container, false);
+        View view = inflater.inflate(R.layout.fragment_location, container, false);
         initView(view);
 
         return view;
@@ -93,16 +97,16 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         ApiRepository.getInstance();
         MemberRepository.getInstance();
 
-        storeListPresenter = new LocationListPresenter(this, getRepositoryManager(getContext()));
-        locationListAdapter = new LocationListAdapter(this, storeListPresenter);
+        locationListPresenter = new LocationListPresenter(this, getRepositoryManager(getContext()));
+        locationListAdapter = new LocationListAdapter(this, locationListPresenter);
 
-        location_id = storeListPresenter.getFragmentLocation();
+        location_id = locationListPresenter.getFragmentLocation();
 
         btn_functionname_1 = view.findViewById(R.id.btn_functionname_1);
         btn_functionname_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
+                locationListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
             }
         });
 
@@ -110,7 +114,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         btn_functionname_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeListPresenter.setFunctionname(FUNCTIONNAME_2, location_id);
+                locationListPresenter.setFunctionname(FUNCTIONNAME_2, location_id);
             }
         });
 
@@ -118,7 +122,15 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         btn_functionname_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
+                locationListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
+            }
+        });
+
+        btn_functionname_4 = view.findViewById(R.id.btn_functionname_4);
+        btn_functionname_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "敬請期待", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -136,11 +148,16 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(locationListAdapter);
 
+        ConstraintLayout.LayoutParams clFunctionname_1 = (ConstraintLayout.LayoutParams) btn_functionname_1.getLayoutParams();
         ConstraintLayout.LayoutParams clFunctionname_2 = (ConstraintLayout.LayoutParams) btn_functionname_2.getLayoutParams();
         ConstraintLayout.LayoutParams clFunctionname_3 = (ConstraintLayout.LayoutParams) btn_functionname_3.getLayoutParams();
+        ConstraintLayout.LayoutParams clFunctionname_4 = (ConstraintLayout.LayoutParams) btn_functionname_4.getLayoutParams();
 
-        if(!storeListPresenter.getUserLogin()){
-            String sSourceActive = storeListPresenter.getSourceActive();
+        glGuidelineCenter = view.findViewById(R.id.guideline_center);
+
+        if(!locationListPresenter.getUserLogin()){
+            //  未登入
+            String sSourceActive = locationListPresenter.getSourceActive();
             switch (sSourceActive){
                 case "PRODUCT_WELCOME":
                     ((MainActivity) getActivity()).setAppTitle(R.string.tab_shop);
@@ -150,32 +167,49 @@ public class LocationFragment extends BaseFragment implements LocationListContra
                     break;
             }
 
-            btn_functionname_1.setVisibility(view.GONE);
+            // 更新 Guideline 的布局参数
+            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) glGuidelineCenter.getLayoutParams();
+            layoutParams.guidePercent = 0.3f; // 设置新的百分比值
+            glGuidelineCenter.setLayoutParams(layoutParams);
 
-            clFunctionname_2.endToStart = R.id.guideline_mid;
-            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
+            btn_functionname_1.setVisibility(getView().GONE);
 
-            clFunctionname_3.startToEnd = R.id.guideline_mid;
-            clFunctionname_3.endToEnd = R.id.fragment_store;
-            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics());
+            clFunctionname_2.endToStart = R.id.guideline_center;
+            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+
+            clFunctionname_3.startToEnd = R.id.guideline_center;
+            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+
+            clFunctionname_4.endToEnd = R.id.fragment_location;
+            clFunctionname_4.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
         }else{
             ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
+            // 更新 Guideline 的布局参数
+            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) glGuidelineCenter.getLayoutParams();
+            layoutParams.guidePercent = 0.5f; // 设置新的百分比值
+            glGuidelineCenter.setLayoutParams(layoutParams);
 
-            btn_functionname_1.setVisibility(view.GONE);
-            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
-            clFunctionname_2.endToStart = clFunctionname_2.UNSET;
+            btn_functionname_1.setVisibility(getView().VISIBLE);
 
-            clFunctionname_3.startToEnd = R.id.btn_functionname_2;
-            clFunctionname_3.endToEnd = clFunctionname_3.UNSET;
-            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 110, getResources().getDisplayMetrics());
+            clFunctionname_1.endToStart = R.id.btn_functionname_2;
+            clFunctionname_1.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics());
+
+            clFunctionname_2.endToStart = R.id.guideline_center;
+            clFunctionname_2.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics());
+
+            clFunctionname_3.startToEnd = R.id.guideline_center;
+            clFunctionname_3.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics());
+
+            clFunctionname_4.endToEnd = R.id.fragment_location;
+            clFunctionname_4.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics());
         }
 
-        storeListPresenter.saveSourceActive("");
+        locationListPresenter.saveSourceActive("");
 
-        if(storeListPresenter.getUserLogin()) {
-            storeListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
+        if(locationListPresenter.getUserLogin()) {
+            locationListPresenter.setFunctionname(FUNCTIONNAME_1, location_id);
         }else{
-            storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
+            locationListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
         }
     }
 
@@ -190,6 +224,9 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         btn_functionname_3.setBackgroundResource(functionname == FUNCTIONNAME_3 ? R.drawable.bg_bluegreen_gradient_bar : R.drawable.bg_bluegreen_gradient_borderbar);
         btn_functionname_3.setTextColor(functionname == FUNCTIONNAME_3 ? Color.parseColor("#ffffff") : Color.parseColor("#808080"));
+
+        btn_functionname_4.setBackgroundResource(functionname == FUNCTIONNAME_4 ? R.drawable.bg_bluegreen_gradient_bar : R.drawable.bg_bluegreen_gradient_borderbar);
+        btn_functionname_4.setTextColor(functionname == FUNCTIONNAME_4 ? Color.parseColor("#ffffff") : Color.parseColor("#808080"));
     }
 
     @Override
@@ -200,26 +237,20 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         if(location_count == 1){
             //  門市僅有一個，直接Go
-            storeListPresenter.saveFragmentMainType(location_id, "N");
+            locationListPresenter.saveFragmentMainType(location_id, "N");
             ((MainActivity) getActivity()).addFragment(ProductMainTypeFragment.getInstance());
         }else if(location_count > 1 && stores.size() == 0){
             // 若門市有多個, 但無常用門市時，頁籤default 在全部門市
             ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-            storeListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
-            btn_functionname_1.setVisibility(getView().VISIBLE);
-            btn_functionname_2.setVisibility(getView().VISIBLE);
-            btn_functionname_3.setVisibility(getView().VISIBLE);
+            locationListPresenter.setFunctionname(FUNCTIONNAME_3, location_id);
         }else {
             ((MainActivity) getActivity()).setAppToolbarVisibility(true);
             locationListAdapter.setData(stores);
-            btn_functionname_1.setVisibility(getView().VISIBLE);
-            btn_functionname_2.setVisibility(getView().VISIBLE);
-            btn_functionname_3.setVisibility(getView().VISIBLE);
         }
     }
 
     public void goProductMainType(String sLocationID) {
-        storeListPresenter.saveFragmentMainType(sLocationID, "N");
+        locationListPresenter.saveFragmentMainType(sLocationID, "N");
         ((MainActivity) getActivity()).addFragment(ProductMainTypeFragment.getInstance());
     }
     @Override
@@ -237,11 +268,11 @@ public class LocationFragment extends BaseFragment implements LocationListContra
         location_count = stores.size();
         location_id = stores.get(0).getLocationID();
 
-        if(isFlag) {
-            noLocationGroup.setVisibility(getView().GONE);
-        }else{
-            noLocationGroup.setVisibility(getView().VISIBLE);
-        }
+//        if(isFlag) {
+//            noLocationGroup.setVisibility(getView().GONE);
+//        }else{
+//            noLocationGroup.setVisibility(getView().VISIBLE);
+//        }
     }
 
     public void requestUserLocation() {

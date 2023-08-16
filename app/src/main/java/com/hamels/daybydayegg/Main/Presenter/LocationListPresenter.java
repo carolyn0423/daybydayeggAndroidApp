@@ -14,6 +14,7 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
     public static final String FUNCTIONNAME_1 = "AppLocation1";
     public static final String FUNCTIONNAME_2 = "AppLocation2";
     public static final String FUNCTIONNAME_3 = "AppLocation3";
+    public static final String FUNCTIONNAME_4 = "AppLocation4";
 
     private String functionname, location_id;
 

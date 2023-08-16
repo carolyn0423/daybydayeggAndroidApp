@@ -525,7 +525,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }else{
                     mainPresenter.saveSourceActive("LOCATION_WELCOME");
                     //initSelectCustomer("isSetLove");
-                    changeTabFragment(CustomerFragment.getInstance());
+                    //changeTabFragment(CustomerFragment.getInstance());
+                    addFragment(LocationFragment.getInstance());
                 }
             }else if (id == R.id.donate){
                 setMainIndexMessageUnreadVisibility(false);
