@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.text.Html;
+import android.text.Spannable;
 import android.widget.TextView;
 
 import com.hamels.daybydayegg.Base.BaseActivity;
@@ -13,6 +14,7 @@ import com.hamels.daybydayegg.MemberCenter.Contract.FaqContract;
 import com.hamels.daybydayegg.MemberCenter.Presenter.FaqPresenter;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Faq;
+import com.hamels.daybydayegg.Utils.PicassoImageGetter;
 
 public class TermsOfUseActivity extends BaseActivity implements FaqContract.View{
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -48,7 +50,17 @@ public class TermsOfUseActivity extends BaseActivity implements FaqContract.View
 
     @Override
     public void setFaqData(Faq faq) {
-        tv_faq_data.setText(Html.fromHtml(faq.getAnswer()));
+        PicassoImageGetter imageGetter = new PicassoImageGetter(this, tv_faq_data);
+        Spannable html;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            html = (Spannable) Html.fromHtml(faq.getAnswer(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+        } else {
+            html = (Spannable) Html.fromHtml(faq.getAnswer(), imageGetter, null);
+        }
+
+        tv_faq_data.setText(html);
+
+        //tv_faq_data.setText(Html.fromHtml(faq.getAnswer()));
 
         Resources res = this.getResources();
         drawable = res.getDrawable(R.drawable.bg_shadow_corner);

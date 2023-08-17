@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.text.Html;
+import android.text.Spannable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.hamels.daybydayegg.MemberCenter.Contract.FaqContract;
 import com.hamels.daybydayegg.MemberCenter.Presenter.FaqPresenter;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Faq;
+import com.hamels.daybydayegg.Utils.PicassoImageGetter;
 
 public class FaqFragment extends BaseFragment implements FaqContract.View{
     public static final String TAG = FaqFragment.class.getSimpleName();
@@ -76,6 +78,16 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
 
     @Override
     public void setFaqData(Faq faq) {
-        tv_faq_data.setText(Html.fromHtml(faq.getAnswer()));
+        PicassoImageGetter imageGetter = new PicassoImageGetter(getContext(), tv_faq_data);
+        Spannable html;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            html = (Spannable) Html.fromHtml(faq.getAnswer(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+        } else {
+            html = (Spannable) Html.fromHtml(faq.getAnswer(), imageGetter, null);
+        }
+
+        tv_faq_data.setText(html);
+
+        //tv_faq_data.setText(Html.fromHtml(faq.getAnswer()));
     }
 }

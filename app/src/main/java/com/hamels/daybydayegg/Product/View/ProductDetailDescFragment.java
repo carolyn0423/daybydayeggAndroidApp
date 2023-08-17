@@ -21,11 +21,14 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
+import com.bumptech.glide.Glide;
 import com.hamels.daybydayegg.Base.BaseFragment;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.MemberMessage;
 import com.hamels.daybydayegg.Repository.Model.Product;
+import com.hamels.daybydayegg.Utils.PicassoImageGetter;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -67,7 +70,15 @@ public class ProductDetailDescFragment extends BaseFragment {
 
         if (product != null) {
             tvTitle.setText(product.getProduct_name());
-            //tvContent.setText(Html.fromHtml(product.getDesc()));
+            PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tvContent);
+            Spannable html;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                html = (Spannable) Html.fromHtml(product.getDesc(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+            } else {
+                html = (Spannable) Html.fromHtml(product.getDesc(), imageGetter, null);
+            }
+
+            tvContent.setText(html);
         }
     }
 
@@ -84,105 +95,5 @@ public class ProductDetailDescFragment extends BaseFragment {
 
         tvTitle = view.findViewById(R.id.tv_product_title);
         tvContent = view.findViewById(R.id.tv_product_content);
-
-        if (product != null) {
-            tvTitle.setText(product.getProduct_name());
-
-            final Drawable placeholder = ContextCompat.getDrawable(getActivity(), R.drawable.gift);
-            placeholder.setBounds(0, 0, placeholder.getIntrinsicWidth(), placeholder.getIntrinsicHeight());
-
-            Html.ImageGetter imageGetter = new Html.ImageGetter() {
-                @Override
-                public Drawable getDrawable(String source) {
-                    // 使用 Picasso 加载网络图片
-                    Target target = new Target() {
-                        @Override
-                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                            Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-                            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-
-                            // 创建一个 ImageSpan 来显示图片
-                            ImageSpan imageSpan = new ImageSpan(drawable, ImageSpan.ALIGN_BASELINE);
-
-                            // 替换 <img> 标签为 ImageSpan
-                            SpannableStringBuilder builder = new SpannableStringBuilder(tvContent.getText());
-                            builder.append(" "); // 这里不需要加空格
-                            builder.setSpan(imageSpan, builder.length() - 1, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-                            // 处理其他文本内容，例如使用 MyTagHandler 处理 <strong> 和 <b> 标签
-                            // 这里省略其他处理代码，请确保在 builder 内部处理其他文本
-                            // ...
-
-                            tvContent.setText(builder);
-                        }
-
-                        @Override
-                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-                        }
-
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        }
-                    };
-
-                    Picasso.get().load(source).into(target);
-
-                    // 返回一个占位符 Drawable，稍后会被替换
-                    Drawable placeholder = ContextCompat.getDrawable(getActivity(), R.drawable.white_background);
-                    placeholder.setBounds(0, 0, placeholder.getIntrinsicWidth(), placeholder.getIntrinsicHeight());
-                    return placeholder;
-                }
-            };
-
-            MyTagHandler tagHandler = new MyTagHandler();
-
-            Spannable spannable = (Spannable) HtmlCompat.fromHtml(product.getDesc(), HtmlCompat.FROM_HTML_MODE_LEGACY, imageGetter, tagHandler);
-
-            // 设置 Spannable 到 TextView
-            tvContent.setText(spannable);
-        }
-    }
-
-    private class MyTagHandler implements Html.TagHandler {
-        @Override
-        public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
-            // Handle custom HTML tags or styles here
-            // For example, you can apply styles to <strong> and <em> tags
-            // You can also handle <a> tags to make them clickable
-            if (tag.equalsIgnoreCase("strong") || tag.equalsIgnoreCase("b")) {
-                processStrongTag(opening, output);
-            }
-        }
-
-        private void processStrongTag(boolean opening, Editable output) {
-            int len = output.length();
-            if (opening) {
-                output.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), len, len, Spannable.SPAN_MARK_MARK);
-            } else {
-                Object obj = getLast(output, android.text.style.StyleSpan.class);
-                int where = output.getSpanStart(obj);
-
-                output.removeSpan(obj);
-
-                if (where != len) {
-                    output.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), where, len, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                }
-            }
-        }
-
-        private Object getLast(Editable text, Class kind) {
-            Object[] objs = text.getSpans(0, text.length(), kind);
-
-            if (objs.length == 0) {
-                return null;
-            } else {
-                for (int i = objs.length; i > 0; i--) {
-                    if (text.getSpanFlags(objs[i - 1]) == Spannable.SPAN_MARK_MARK) {
-                        return objs[i - 1];
-                    }
-                }
-                return null;
-            }
-        }
     }
 }
