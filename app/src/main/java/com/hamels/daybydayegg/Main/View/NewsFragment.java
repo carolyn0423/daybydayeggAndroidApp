@@ -73,9 +73,11 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         tv_news_title.setText(carousel.getTitle());
         //tv_news_content.setText(Html.fromHtml(carousel.getContent()));
 
-        //Html.fromHtml(content, new PicassoImageGetter(carousel.getContent(),picasso, tv_news_content), null);
+        //Html.fromHtml(carousel.getContent(), new PicassoImageGetter(this.getContext(),null, tv_news_content), null);
 
-        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),null,tv_news_content);
+
+        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),tv_news_content);
+        //PicassoImageGetter imageGetter = new PicassoImageGetter(tv_news_content);
         Spannable html;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             html = (Spannable) Html.fromHtml(carousel.getContent(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
@@ -83,6 +85,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
             html = (Spannable) Html.fromHtml(carousel.getContent(), imageGetter, null);
         }
 
-
+        tv_news_content.setText(html);
     }
 }
