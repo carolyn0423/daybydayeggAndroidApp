@@ -18,7 +18,7 @@ public class LocationListHolder extends RecyclerView.ViewHolder {
 
     public LocationListHolder(@NonNull View itemView) {
         super(itemView);
-        clItemStoreList = itemView.findViewById(R.id.item_store_list);
+        clItemStoreList = itemView.findViewById(R.id.item_location_list);
         tvName = itemView.findViewById(R.id.tv_storename);
         //ViewUtils.addUnderLine(tvName);
         tvPhone = itemView.findViewById(R.id.tv_phone);

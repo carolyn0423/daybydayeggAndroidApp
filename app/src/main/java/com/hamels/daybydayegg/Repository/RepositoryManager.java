@@ -724,10 +724,10 @@ public class RepositoryManager {
         });
     }
 
-    public void callFaqDataApi(final String faq_id, final BaseContract.ValueCallback<Faq> valueCallback) {
+    public void callFaqDataApi(final String faq_type_id, final BaseContract.ValueCallback<Faq> valueCallback) {
         basePresenter.startCallApi();
         String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
-        MemberRepository.getInstance().getFaqData(customer_id,faq_id, new ApiCallback<BaseModel<Faq>>(basePresenter) {
+        MemberRepository.getInstance().getFaqData(customer_id, faq_type_id, new ApiCallback<BaseModel<Faq>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<Faq> response) {
                 super.onApiSuccess(response);

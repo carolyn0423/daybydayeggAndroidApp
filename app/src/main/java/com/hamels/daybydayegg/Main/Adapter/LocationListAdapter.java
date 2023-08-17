@@ -31,7 +31,7 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
     @NonNull
     @Override
     public LocationListHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_store_list, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_location_list, viewGroup, false);
         return new LocationListHolder(view);
     }
 
@@ -46,8 +46,8 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
                 storeListHolder.tv_storefavorite.setImageResource(R.drawable.favoritesgr);
             }
 
-            storeListHolder.btn_storemap.setVisibility(View.VISIBLE);
-            storeListHolder.btn_storecall.setVisibility(View.VISIBLE);
+            storeListHolder.btn_storemap.setVisibility(View.GONE);
+            storeListHolder.btn_storecall.setVisibility(View.GONE);
             storeListHolder.tv_storefavorite.setVisibility(View.VISIBLE);
         }else{
             storeListHolder.tv_storefavorite.setVisibility(View.GONE);
@@ -81,15 +81,13 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
         storeListHolder.tv_storefavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String location_id = "";
+                String location_id = stores.get(position).getLocationID();;
                 String uid = "";
 
                 if (stores.get(position).getIsOften().equals("1")) {
                     uid = stores.get(position).getOften_uid();
                 }
-                else {
-                    location_id = stores.get(position).getLocationID();
-                }
+
                 presenter.setStoreOften(location_id, uid);
             }
         });

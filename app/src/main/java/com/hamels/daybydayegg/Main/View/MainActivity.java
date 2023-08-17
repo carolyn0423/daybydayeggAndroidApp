@@ -120,8 +120,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     // qrcode
     private PopupWindow popupWindow;
     private ImageView dialog_img_qrcode;
-    private int barcodeWidth = 300;
-    private int barcodeHeight = 300;
+    private int barcodeWidth = 100;
+    private int barcodeHeight = 100;
     private int brightnessNow = 0;
     private TextView text_invite_code;
 
@@ -525,7 +525,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }else{
                     mainPresenter.saveSourceActive("LOCATION_WELCOME");
                     //initSelectCustomer("isSetLove");
-                    changeTabFragment(CustomerFragment.getInstance());
+                    //changeTabFragment(CustomerFragment.getInstance());
+                    addFragment(LocationFragment.getInstance());
                 }
             }else if (id == R.id.donate){
                 setMainIndexMessageUnreadVisibility(false);
@@ -789,6 +790,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             // 创建一个ClipData对象，将文本复制到剪贴板
             ClipData clip = ClipData.newPlainText("Copied Text", copiedText);
             clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "已複製", Toast.LENGTH_SHORT).show();
         }
 
         // 打开分享对话框

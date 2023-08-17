@@ -9,6 +9,6 @@ public interface FaqContract {
     }
 
     interface Presenter extends BaseContract.Presenter {
-        void getFaqData(String faq_id);
+        void getFaqData(String faq_type_id);
     }
 }

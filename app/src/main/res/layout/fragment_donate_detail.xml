@@ -156,10 +156,10 @@
                         android:gravity="center"
                         android:maxLines="2"
                         android:singleLine="false"
-                        android:textColor="@color/price_Purple"
+                        android:textColor="@color/Black"
                         android:textSize="19dp"
                         android:textStyle="bold"
-                        android:text="xxxx"
+                        android:text=""
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_barcode_number" />

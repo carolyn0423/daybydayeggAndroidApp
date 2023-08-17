@@ -154,9 +154,9 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         final ArrayList<String> CityArrayList = new ArrayList<>();
         ArrayList<String> AreaArrayList = new ArrayList<>();
 
-        CityArrayList.add("請選擇城市");
-        AreaArrayList.add("請選擇地區");
-        mList.put("請選擇城市", AreaArrayList);
+        CityArrayList.add("請選擇");
+        AreaArrayList.add("請選擇");
+        mList.put("請選擇", AreaArrayList);
         AreaArrayList = new ArrayList<>();
 
         int iCity = 1;

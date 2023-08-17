@@ -87,6 +87,6 @@ public class MemberGiftFragment extends BaseFragment implements MemberGiftContra
 
         tvShareInfoText2.setText("1. 好友完成註冊，將可獲得新會員獎勵: " + ShareInfoText2);
         tvShareInfoText3.setText("2. 好友首次消費，消費金額達 " + coupon.getLowerLimitRM() + " 元，您將可獲得推薦人獎勵: " + ShareInfoText3);
-        tvShareInfoText5.setText("4. 優惠期限: " + ShareInfoText5);
+        tvShareInfoText5.setText("4. 活動期限: " + ShareInfoText5);
     }
 }

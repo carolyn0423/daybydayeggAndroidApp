@@ -152,7 +152,7 @@ public class DonateHistoryDetailFragment extends BaseFragment implements DonateC
             case "BU": //自購自用
             case "RU": //接收贈送兌換
                 if(productDetail.get(0).getWriteoff_order_id().equals("")){ //線下店鋪核銷
-                    tv_ref_content.setText("門市核銷");
+                    tv_ref_content.setText("據點核銷");
                 }else{ //線上APP訂單核銷
                     tv_ref_content.setText("訂單編號："+ productDetail.get(0).getWriteoff_order_id());
                 }

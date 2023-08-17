@@ -23,9 +23,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Donate.Presenter.DonateDetailPresenter;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
@@ -39,7 +42,10 @@ import com.hamels.daybydayegg.Repository.Model.Donate;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 public class DonateDetailFragment extends BaseFragment implements DonateDetailContract.View {
     public static final String TAG = DonateDetailFragment.class.getSimpleName();
@@ -173,30 +179,8 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
 
         if (ticket_code != null && !ticket_code.equals("")) {
             img_donate.setBackgroundColor(Color.WHITE);
-            try {
-                BitMatrix bitMatrix = new MultiFormatWriter().encode(ticket_code, BarcodeFormat.QR_CODE, 800, 800);
 
-                int newWidth = 800;
-                int newHeight = 800;
-
-                Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-                float scaleX = (float) newWidth / 800;
-                float scaleY = (float) newHeight / 800;
-                for (int x = 0; x < 800; x++) {
-                    for (int y = 0; y < 800; y++) {
-                        if (bitMatrix.get(x, y)) {
-                            for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
-                                for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
-                                    bitmap.setPixel(scaledX, scaledY, Color.BLACK);
-                                }
-                            }
-                        }
-                    }
-                }
-                img_donate.setImageBitmap(bitmap);
-            } catch (WriterException e) {
-                e.printStackTrace();
-            }
+            generateQRCode(ticket_code);
         }
 
 //        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -267,6 +251,33 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
             lp.screenBrightness = (brightness <= 0 ? 1 : brightness) / 255f;
         }
         window.setAttributes(lp);
+    }
+
+    private void generateQRCode(String content) {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H); // 设置纠错级别为最高
+        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+
+        try {
+            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 100, 100, hints);
+
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+
+            Bitmap qrBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    qrBitmap.setPixel(x, y, bitMatrix.get(x, y) ? getResources().getColor(R.color.Black) : getResources().getColor(R.color.white));
+                }
+            }
+
+            img_donate.setImageBitmap(qrBitmap);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 }
 
