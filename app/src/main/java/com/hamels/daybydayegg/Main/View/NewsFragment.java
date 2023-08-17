@@ -71,13 +71,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
 
         Glide.with(getActivity()).load(EOrderApplication.sApiUrl + carousel.getPicture_url2()).into(imageView);
         tv_news_title.setText(carousel.getTitle());
-        //tv_news_content.setText(Html.fromHtml(carousel.getContent()));
-
-        //Html.fromHtml(carousel.getContent(), new PicassoImageGetter(this.getContext(),null, tv_news_content), null);
-
-
         PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),tv_news_content);
-        //PicassoImageGetter imageGetter = new PicassoImageGetter(tv_news_content);
         Spannable html;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             html = (Spannable) Html.fromHtml(carousel.getContent(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
