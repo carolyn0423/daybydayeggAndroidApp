@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.text.Html;
+import android.text.Spannable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Contract.NewsContract;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Carousel;
+import com.hamels.daybydayegg.Utils.PicassoImageGetter;
+
 public class NewsFragment extends BaseFragment implements NewsContract.View {
     public static final String TAG = NewsFragment.class.getSimpleName();
 
@@ -67,7 +70,19 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         super.onViewCreated(view, savedInstanceState);
 
         Glide.with(getActivity()).load(EOrderApplication.sApiUrl + carousel.getPicture_url2()).into(imageView);
-        tv_news_content.setText(Html.fromHtml(carousel.getContent()));
         tv_news_title.setText(carousel.getTitle());
+        //tv_news_content.setText(Html.fromHtml(carousel.getContent()));
+
+        //Html.fromHtml(content, new PicassoImageGetter(carousel.getContent(),picasso, tv_news_content), null);
+
+        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),null,tv_news_content);
+        Spannable html;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            html = (Spannable) Html.fromHtml(carousel.getContent(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
+        } else {
+            html = (Spannable) Html.fromHtml(carousel.getContent(), imageGetter, null);
+        }
+
+
     }
 }
