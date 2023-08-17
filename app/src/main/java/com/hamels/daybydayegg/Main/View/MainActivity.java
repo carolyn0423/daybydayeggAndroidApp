@@ -519,15 +519,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
                 mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
             }else if (id == R.id.store){
-                if(mainPresenter.getUserLogin()){
-                    mainPresenter.saveFragmentLocation("");
-                    addFragment(LocationFragment.getInstance());
-                }else{
-                    mainPresenter.saveSourceActive("LOCATION_WELCOME");
-                    //initSelectCustomer("isSetLove");
-                    //changeTabFragment(CustomerFragment.getInstance());
-                    addFragment(LocationFragment.getInstance());
-                }
+                addFragment(MachineFragment.getInstance());
+//                if(mainPresenter.getUserLogin()){
+//                    mainPresenter.saveFragmentLocation("");
+//                    addFragment(LocationFragment.getInstance());
+//                }else{
+//                    mainPresenter.saveSourceActive("LOCATION_WELCOME");
+//                    addFragment(LocationFragment.getInstance());
+//                }
             }else if (id == R.id.donate){
                 setMainIndexMessageUnreadVisibility(false);
                 mainPresenter.checkLoginForDonate();

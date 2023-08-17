@@ -2,6 +2,7 @@ package com.hamels.daybydayegg.Repository.ApiService;
 
 import com.hamels.daybydayegg.Repository.Model.BaseModel;
 import com.hamels.daybydayegg.Repository.Model.Customer;
+import com.hamels.daybydayegg.Repository.Model.Machine;
 import com.hamels.daybydayegg.Repository.Model.Store;
 
 import java.util.List;
@@ -23,9 +24,15 @@ public interface BaseApiService {
     @POST("Location/GetList")
     Call<BaseModel<List<Store>>> postGetLocationList(@Body RequestBody body);
 
+    @POST("Machine/GetMachineList")
+    Call<BaseModel<List<Machine>>> postGetMachineList(@Body RequestBody body);
+
     @Headers("Authorization: Basic ZG91Ymxlc2VydmljZTp2T2x1TjN4T3Nt")
     @POST("Location/SaveDetail")
     Call<BaseModel> postSetStoreOften(@Body RequestBody body);
+
+    @POST("Machine/SaveDetail")
+    Call<BaseModel> postSetMachineStoreOften(@Body RequestBody body);
 
     @POST("Customer/GetList")
     Call<BaseModel<List<Customer>>> GetCustomerList(@Body RequestBody body);

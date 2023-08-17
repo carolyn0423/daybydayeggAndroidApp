@@ -125,6 +125,52 @@ public class ApiRepository {
 //        retrofit.create(BaseApiService.class).GetCustomerDetail(requestBody).enqueue(apiCallback);
 //    }
 
+    public void getMachineList(String functionname, String customer_id, String member_id, String sKilometer, String sHeadLocationFlag, AbsApiCallback apiCallback) {
+        Map<String, String> map = new HashMap<>();
+        switch (functionname){
+            case "AppLocation1":
+                functionname = "AppOftenLocation";
+                break;
+            case "AppLocation2":
+                functionname = "AppLocation";
+                break;
+            case "AppLocation3":
+                functionname = "AppLocation";
+                break;
+        }
+
+        map.put("isApp", "true");
+        map.put("functionname", functionname);
+        map.put("customer_id", customer_id);
+        map.put("member_id", member_id);
+        map.put("kilometer", sKilometer);
+        map.put("head_location_flag", sHeadLocationFlag);
+        map.put("lon", Double.toString(EOrderApplication.lon));
+        map.put("lat", Double.toString(EOrderApplication.lat));
+
+        Log.e(TAG, "API getMachineList : " + map);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(BaseApiService.class).postGetMachineList(requestBody).enqueue(apiCallback);
+    }
+
+    public void setMachineOften(String member_id, String uid, String machine_id, final AbsApiCallback apiCallback) {
+        Map<String, String> map = new HashMap<>();
+
+        map.put("isApp", "true");
+        map.put("functionname", "MachineOften");
+
+        map.put("machine_id", machine_id);
+        map.put("member_id", member_id);
+        map.put("uid", uid);
+        map.put("modified_user", member_id);
+
+        Log.e(TAG, "API setMachineOften : " + map);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(BaseApiService.class).postSetMachineStoreOften(requestBody).enqueue(apiCallback);
+    }
+
     public void getLocationList(String functionname, String customer_id, String member_id, String location_id, String sKilometer, String sHeadLocationFlag, AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
         switch (functionname){
