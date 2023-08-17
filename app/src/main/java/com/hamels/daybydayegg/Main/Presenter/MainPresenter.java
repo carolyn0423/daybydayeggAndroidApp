@@ -3,6 +3,7 @@ package com.hamels.daybydayegg.Main.Presenter;
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BasePresenter;
 import com.hamels.daybydayegg.Business.View.BusinessFragment;
+import com.hamels.daybydayegg.Constant.ApiConstant;
 import com.hamels.daybydayegg.Donate.View.DonateFragment;
 import com.hamels.daybydayegg.DrawLots.View.DrawLotsFragment;
 import com.hamels.daybydayegg.Main.Contract.MainContract;
@@ -80,9 +81,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         repositoryManager.saveCustomerName(EOrderApplication.CUSTOMER_NAME);
         repositoryManager.saveApiUrl(EOrderApplication.sApiUrl);
 
-        if(EOrderApplication.sApiUrl.equals("")){
-            checkCustomerNo(EOrderApplication.sPecialCustomerNo);
-        }
+        checkCustomerNo(EOrderApplication.sPecialCustomerNo);
     }
 
     @Override
@@ -233,6 +232,10 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         return repositoryManager.getUserName();
     }
 
+    public String getUserAccount() { return repositoryManager.getUserAccount(); }
+
+    public String getUserPw() { return repositoryManager.getUserPassword(); }
+
     public void saveSourceActive(String sSourceActive) { repositoryManager.saveSourceActive(sSourceActive); }
 
     public void saveFragmentMainType(String sLocationID, String IsETicket) { repositoryManager.saveFragmentMainType(sLocationID, IsETicket); }
@@ -245,6 +248,12 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
             @Override
             public void onValueCallback(int task, String type) {
                 checkLoginForMemberCenter();
+
+                repositoryManager.saveAccountInfo("", "");
+                repositoryManager.saveUserID("");
+                repositoryManager.saveVerifyCode("");
+                repositoryManager.saveInvitationCode("");
+                repositoryManager.saveUserName("");
                 view.setAllBadge("0_0_");
             }
         });
@@ -274,7 +283,34 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         repositoryManager.saveCustomerName(customers.getCustomerName());
                         repositoryManager.saveApiUrl(customers.getApiUrl());
 
-                        getCustomer();
+                        //  自動重新登入
+                        if(!getUserAccount().equals("") && !getUserPw().equals("")) {
+                            repositoryManager.callLoginApi(customers.getCustomerID(), getUserAccount(), getUserPw(), new BaseContract.ValueCallback<User>() {
+                                @Override
+                                public void onValueCallback(int task, User user) {
+                                    repositoryManager.saveCustomerID(Integer.toString(user.getCustomer()));
+                                    repositoryManager.saveAccountInfo(getUserAccount(), getUserPw());
+                                    repositoryManager.saveUserID(Integer.toString(user.getMember()));
+                                    repositoryManager.saveVerifyCode(user.getVerifyCode());
+                                    repositoryManager.saveInvitationCode(user.getInvitationCode());
+                                    repositoryManager.saveUserName(user.getName());
+                                    repositoryManager.saveApiUrl(customers.getApiUrl());
+                                }
+                            }, new BaseContract.ValueCallback<String>() {
+                                @Override
+                                public void onValueCallback(int task, String message) {
+                                    logout();
+                                }
+                            });
+                        }else{
+                            repositoryManager.saveAccountInfo("", "");
+                            repositoryManager.saveUserID("");
+                            repositoryManager.saveVerifyCode("");
+                            repositoryManager.saveInvitationCode("");
+                            repositoryManager.saveUserName("");
+
+                            getCustomer();
+                        }
                     }
                 }
             });

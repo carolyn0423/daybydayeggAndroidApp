@@ -1,0 +1,8 @@
+<!-- unselec_tab_green.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" /> <!-- 底色为 @color/white -->
+    <stroke
+        android:color="@color/colorYunlinhn"
+        android:width="2dp" /> <!-- 边框为 @color/colorYunlinhn，宽度为 2dp -->
+    <corners android:radius="20dp" /> <!-- 可选：设置圆角半径 -->
+</shape>

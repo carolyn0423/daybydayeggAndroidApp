@@ -19,6 +19,7 @@ import com.hamels.daybydayegg.Repository.Model.Donate;
 import com.hamels.daybydayegg.Repository.Model.DonateCart;
 import com.hamels.daybydayegg.Repository.Model.DrawLots;
 import com.hamels.daybydayegg.Repository.Model.Faq;
+import com.hamels.daybydayegg.Repository.Model.Machine;
 import com.hamels.daybydayegg.Repository.Model.MemberMessage;
 import com.hamels.daybydayegg.Repository.Model.Merchant;
 import com.hamels.daybydayegg.Repository.Model.Message;
@@ -59,6 +60,10 @@ public class RepositoryManager {
 
         if(SharedUtils.getInstance().getUser(context) != null && !EOrderApplication.sApiUrl.equals("")){
             isLogin = true;
+        }
+
+        if(SharedUtils.getInstance().getUserID(context) == null || SharedUtils.getInstance().getUserID(context).equals("")){
+            isLogin = false;
         }
 
 //        return (SharedUtils.getInstance().getUser(context) != null && SharedUtils.getInstance().getVerifyCode(context).equals("Y"));
@@ -916,6 +921,38 @@ public class RepositoryManager {
         });
     }
 
+    public void callGetMachineApi(String functionname, String sCustomerID, String sHeadLocationFlag, final BaseContract.ValueCallback<List<Machine>> valueCallback) {
+        basePresenter.startCallApi();
+        String member_id = getUserLogin() ? context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "") : "";
+        ApiRepository.getInstance().getMachineList(functionname, sCustomerID, member_id, sHeadLocationFlag, new ApiCallback<BaseModel<List<Machine>>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<List<Machine>> response) {
+                super.onApiSuccess(response);
+
+                Log.e(TAG, "onApiSuccess : " + response);
+                valueCallback.onValueCallback(TASK_POST_GET_LOCATION_LIST, response.getItems());
+            }
+
+//            @Override
+//            public void onApiFail(int errorCode, BaseModel failBaseModel) {
+//                super.onApiFail(errorCode, failBaseModel);
+//                valueCallback.onValueCallback(TASK_FAIL, failBaseModel.getMessage());
+//            }
+        });
+    }
+    public void callSetMachineOftenApi(String machine_id, String uid, final BaseContract.ValueCallback<Boolean> valueCallback) {
+        basePresenter.startCallApi();
+        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+        ApiRepository.getInstance().setMachineOften(member_id, uid, machine_id, new ApiCallback<BaseModel>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel response) {
+                super.onApiSuccess(response);
+
+                Log.e(TAG, "onApiSuccess : " + response);
+                valueCallback.onValueCallback(TASK_POST_GET_LOCATION_LIST, response.getSuccess());
+            }
+        });
+    }
     public void callSetLocationOftenApi(String location_id, String uid, final BaseContract.ValueCallback<Boolean> valueCallback) {
         basePresenter.startCallApi();
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");

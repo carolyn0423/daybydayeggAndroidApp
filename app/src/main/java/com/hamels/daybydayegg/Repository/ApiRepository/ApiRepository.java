@@ -2,10 +2,17 @@ package com.hamels.daybydayegg.Repository.ApiRepository;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.hamels.daybydayegg.Base.BaseContract;
+import com.hamels.daybydayegg.Init.SplashActivity;
 import com.hamels.daybydayegg.Repository.AbsApiCallback;
 import com.hamels.daybydayegg.Repository.ApiService.BaseApiService;
 import com.hamels.daybydayegg.Repository.ApiService.MemberApiService;
@@ -85,12 +92,15 @@ public class ApiRepository {
 
     public void login(final String customer_id, final String account, final String password, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+
+        String sFirebaseToken = SharedUtils.getInstance().getFirebaseToken(EOrderApplication.getInstance());
+
         map.put("customer_id", customer_id);
         map.put("accountno", account);
         map.put("password", password);
         map.put("isApp", "true");
         map.put("machine_type", "android"); //原生自行寫死，安卓傳”android”，蘋果傳”iOS”
-        map.put("firebase_token", SharedUtils.getInstance().getFirebaseToken(EOrderApplication.getInstance()));
+        map.put("firebase_token", sFirebaseToken);
 
         Log.e(TAG, "API login DOMAIN : " + sDOMAIN + " parma : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
@@ -124,6 +134,51 @@ public class ApiRepository {
 //        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
 //        retrofit.create(BaseApiService.class).GetCustomerDetail(requestBody).enqueue(apiCallback);
 //    }
+
+    public void getMachineList(String functionname, String customer_id, String member_id, String sHeadLocationFlag, AbsApiCallback apiCallback) {
+        Map<String, String> map = new HashMap<>();
+        switch (functionname){
+            case "AppLocation1":
+                functionname = "AppOften";
+                break;
+            case "AppLocation2":
+                functionname = "AppDistance";
+                break;
+            case "AppLocation3":
+                functionname = "All";
+                break;
+        }
+
+        map.put("isApp", "true");
+        map.put("functionname", functionname);
+        map.put("customer_id", customer_id);
+        map.put("member_id", member_id);
+        map.put("head_location_flag", sHeadLocationFlag);
+        map.put("lon", Double.toString(EOrderApplication.lon));
+        map.put("lat", Double.toString(EOrderApplication.lat));
+
+        Log.e(TAG, "API getMachineList : " + map);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(BaseApiService.class).postGetMachineList(requestBody).enqueue(apiCallback);
+    }
+
+    public void setMachineOften(String member_id, String uid, String machine_id, final AbsApiCallback apiCallback) {
+        Map<String, String> map = new HashMap<>();
+
+        map.put("isApp", "true");
+        map.put("functionname", "MachineOften");
+
+        map.put("machine_id", machine_id);
+        map.put("member_id", member_id);
+        map.put("uid", uid);
+        map.put("modified_user", member_id);
+
+        Log.e(TAG, "API setMachineOften : " + map);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(BaseApiService.class).postSetMachineStoreOften(requestBody).enqueue(apiCallback);
+    }
 
     public void getLocationList(String functionname, String customer_id, String member_id, String location_id, String sKilometer, String sHeadLocationFlag, AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();

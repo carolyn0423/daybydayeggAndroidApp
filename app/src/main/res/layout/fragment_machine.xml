@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_machine"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2">
+
+    <View
+        android:id="@+id/view_01"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/greyLineUnSelect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_machine_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:tabIndicatorHeight="0dp"
+        app:tabGravity="center"
+        app:tabMaxWidth="100000dp"
+        app:tabMinWidth="90dp"
+        app:tabIndicatorFullWidth="true"
+        app:tabTextAppearance="@style/TabLayoutTextSizeStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_01"
+        app:tabIndicatorColor="@color/colorYunlinhn"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/Black"
+        app:tabBackground="@drawable/selec_tab_green">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="常用據點" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="最近五公里" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="據點清單" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="城市探索" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <View
+        android:id="@+id/view_black"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#E3E3E3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_machine_layout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/product_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_black" />
+
+    <ImageView
+        android:id="@+id/img_no_online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/tv_no_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/icon_bag" />
+
+    <TextView
+        android:id="@+id/tv_no_location"
+        style="@style/fontDefaultTw.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/empty_location"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tv_go_home"
+        app:layout_constraintEnd_toEndOf="@id/img_no_online"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/img_no_online"
+        app:layout_constraintTop_toBottomOf="@+id/img_no_online" />
+
+    <TextView
+        android:id="@+id/tv_go_home"
+        style="@style/fontBoldTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="9dp"
+        android:paddingBottom="9dp"
+        android:background="@drawable/rec_stroke_green_button"
+        android:gravity="center"
+        android:text="@string/go_home"
+        android:textSize="13sp"
+        android:textColor="@color/main"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/img_no_online"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/img_no_online"
+        app:layout_constraintTop_toBottomOf="@+id/tv_no_location" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/no_location_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="img_no_online,tv_no_location,tv_go_home" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
