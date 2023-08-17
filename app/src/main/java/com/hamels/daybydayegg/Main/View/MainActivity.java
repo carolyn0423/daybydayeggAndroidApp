@@ -1234,15 +1234,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     // 商店清單: 當商店數量小於一時，直接顯示商品清單
     public void checkMerchantCount(final String type, final String isETicket) {
 
-        if (isETicket.equals("Y")) {
-            //  買提貨卷
-            mainPresenter.saveFragmentMainType("", isETicket);
-            changeTabFragment(ProductMainTypeFragment.getInstance());
-        } else {
-            //  外帶外送
-            mainPresenter.saveFragmentLocation("");
-            addFragment(LocationFragment.getInstance());
-        }
+        mainPresenter.saveFragmentMainType("", isETicket);
+        changeTabFragment(ProductMainTypeFragment.getInstance());
+
+//        if (isETicket.equals("Y")) {
+//            //  買提貨卷
+//            mainPresenter.saveFragmentMainType("", isETicket);
+//            changeTabFragment(ProductMainTypeFragment.getInstance());
+//        } else {
+//            //  外帶外送
+//            mainPresenter.saveFragmentLocation("");
+//            addFragment(LocationFragment.getInstance());
+//        }
 
 
 //        BasePresenter basePresenter = new BasePresenter(this, getRepositoryManager(this));
@@ -1287,8 +1290,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 try {
                     BitMatrix bitMatrix = new MultiFormatWriter().encode(qrcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
 
-                    int newWidth = 800;
-                    int newHeight = 800;
+                    int newWidth = 300;
+                    int newHeight = 300;
 
                     Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
                     float scaleX = (float) newWidth / barcodeWidth;

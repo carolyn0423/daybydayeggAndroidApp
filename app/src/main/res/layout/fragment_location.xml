@@ -40,7 +40,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="5dp"
         android:paddingBottom="8dp"
-        android:text="最近五公里"
+        android:text="五公里內"
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/guideline_center"
         app:layout_constraintTop_toTopOf="parent" />
