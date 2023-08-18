@@ -10,7 +10,7 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        app:tabBackground="@drawable/selec_tab_green"
+        app:tabBackground="@drawable/selec_tab_green2"
         app:tabGravity="fill"
 
         app:tabIndicatorColor="@color/main"
