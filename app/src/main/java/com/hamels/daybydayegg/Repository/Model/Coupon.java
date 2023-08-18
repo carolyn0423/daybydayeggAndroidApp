@@ -15,8 +15,8 @@ public class Coupon {
     private String Title;
     @SerializedName("content")
     private String Content;
-    @SerializedName("validity_check")
-    private String ValidityCheck;
+    @SerializedName("permanent_flag")
+    private String PermanentFlag;
     @SerializedName("validity_startdate")
     private String ValidityStartdate;
     @SerializedName("validity_enddate")
@@ -68,8 +68,8 @@ public class Coupon {
         return Content;
     }
 
-    public String getValidityCheck() {
-        return ValidityCheck;
+    public String getPermanentFlag() {
+        return PermanentFlag;
     }
 
     public String getValidityStartdate() {

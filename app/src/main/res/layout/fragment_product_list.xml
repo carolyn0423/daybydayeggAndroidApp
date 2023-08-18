@@ -42,7 +42,7 @@
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/white"
         app:tabTextColor="@color/colorYunlinhn"
-        app:tabBackground="@drawable/selec_tab_green"/>
+        app:tabBackground="@drawable/selec_tab_green2"/>
 
     <View
         android:visibility="gone"
