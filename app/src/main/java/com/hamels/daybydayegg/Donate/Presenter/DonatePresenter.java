@@ -42,7 +42,7 @@ public class DonatePresenter extends BasePresenter<DonateContract.View> implemen
 
     @Override
     public void goPageDonateCart(String product_id, String spec_id, String give_date) {
-        updateTicket("add", product_id, spec_id, give_date);
+        updateTicket("get", product_id, spec_id, give_date);
     }
 
     @Override

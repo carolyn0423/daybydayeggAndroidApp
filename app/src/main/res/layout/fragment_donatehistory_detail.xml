@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.0"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:tabBackground="@drawable/selec_tab_green"
+        app:tabBackground="@drawable/selec_tab_green2"
         app:tabGravity="fill"
 
         app:tabIndicatorColor="@color/main"
