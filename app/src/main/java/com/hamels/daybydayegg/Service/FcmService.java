@@ -24,7 +24,9 @@ public class FcmService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getData().size() > 0) {
             showNotification(remoteMessage.getData().get("title"),remoteMessage.getData().get("message"));
-            Log.d("onMessageReceived",remoteMessage.getData().get("message"));
+            if(remoteMessage.getData().get("message") != null) {
+                Log.d("onMessageReceived", remoteMessage.getData().get("message"));
+            }
             //uiRefresh();
         }
     }
