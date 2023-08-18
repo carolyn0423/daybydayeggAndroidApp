@@ -494,6 +494,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     User user = getUser();
                     createQRcodeImage(user.getMembershipCode(), dialog_img_qrcode);
                     text_invite_code.setText(mainPresenter.getInvitationCode());
+
+
                     Button dialog_btn_close = view.findViewById(R.id.dialog_btn_close);
                     dialog_btn_close.setOnClickListener(new View.OnClickListener() {
                         @Override
