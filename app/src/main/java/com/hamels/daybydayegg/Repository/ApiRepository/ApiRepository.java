@@ -125,26 +125,12 @@ public class ApiRepository {
 //        retrofit.create(BaseApiService.class).GetCustomerDetail(requestBody).enqueue(apiCallback);
 //    }
 
-    public void getMachineList(String functionname, String customer_id, String member_id, String sKilometer, String sHeadLocationFlag, AbsApiCallback apiCallback) {
+    public void getMachineList(String functionname, String customer_id, String member_id, AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
-        switch (functionname){
-            case "AppLocation1":
-                functionname = "AppOftenLocation";
-                break;
-            case "AppLocation2":
-                functionname = "AppLocation";
-                break;
-            case "AppLocation3":
-                functionname = "AppLocation";
-                break;
-        }
-
         map.put("isApp", "true");
         map.put("functionname", functionname);
         map.put("customer_id", customer_id);
         map.put("member_id", member_id);
-        map.put("kilometer", sKilometer);
-        map.put("head_location_flag", sHeadLocationFlag);
         map.put("lon", Double.toString(EOrderApplication.lon));
         map.put("lat", Double.toString(EOrderApplication.lat));
 

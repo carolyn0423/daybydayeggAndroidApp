@@ -299,7 +299,13 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                             }, new BaseContract.ValueCallback<String>() {
                                 @Override
                                 public void onValueCallback(int task, String message) {
-                                    logout();
+                                    repositoryManager.saveAccountInfo("", "");
+                                    repositoryManager.saveUserID("");
+                                    repositoryManager.saveVerifyCode("");
+                                    repositoryManager.saveInvitationCode("");
+                                    repositoryManager.saveUserName("");
+
+                                    getCustomer();
                                 }
                             });
                         }else{

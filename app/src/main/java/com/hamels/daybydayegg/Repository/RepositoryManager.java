@@ -921,10 +921,10 @@ public class RepositoryManager {
         });
     }
 
-    public void callGetMachineApi(String functionname, String sCustomerID, String sHeadLocationFlag, final BaseContract.ValueCallback<List<Machine>> valueCallback) {
+    public void callGetMachineApi(String functionname, String sCustomerID, final BaseContract.ValueCallback<List<Machine>> valueCallback) {
         basePresenter.startCallApi();
         String member_id = getUserLogin() ? context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "") : "";
-        ApiRepository.getInstance().getMachineList(functionname, sCustomerID, member_id, sHeadLocationFlag, new ApiCallback<BaseModel<List<Machine>>>(basePresenter) {
+        ApiRepository.getInstance().getMachineList(functionname, sCustomerID, member_id, new ApiCallback<BaseModel<List<Machine>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<Machine>> response) {
                 super.onApiSuccess(response);

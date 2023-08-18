@@ -24,10 +24,10 @@ public class MachinePresenter extends BasePresenter<MachineContract.View> implem
     private void getMachineList() {
         String sCustomerID = repositoryManager.getCustomerID();
         //  先取得該商家的全門市清單
-        repositoryManager.callGetMachineApi("All", sCustomerID, "", new BaseContract.ValueCallback<List<Machine>>() {
+        repositoryManager.callGetMachineApi("All", sCustomerID, new BaseContract.ValueCallback<List<Machine>>() {
             @Override
             public void onValueCallback(int task, List<Machine> type) {
-                repositoryManager.callGetMachineApi(sFunctionname, sCustomerID, "", new BaseContract.ValueCallback<List<Machine>>() {
+                repositoryManager.callGetMachineApi(sFunctionname, sCustomerID, new BaseContract.ValueCallback<List<Machine>>() {
                     @Override
                     public void onValueCallback(int task, List<Machine> type) {
                         view.setMachineList(type);

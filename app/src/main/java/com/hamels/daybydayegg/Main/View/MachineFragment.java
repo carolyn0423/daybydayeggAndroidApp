@@ -75,7 +75,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
     private void initView(View view) {
         ((MainActivity) getActivity()).refreshBadge();
-
+        ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
 //        ((MainActivity) getActivity()).setMailButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
