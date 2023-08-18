@@ -3,13 +3,9 @@ package com.hamels.daybydayegg.Init;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.R;
@@ -23,20 +19,32 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.e(TAG, "getInstanceId failed", task.getException());
-                            startInitApp();
-                            return;
-                        }
-                        String token = task.getResult().getToken();
-                        SharedUtils.getInstance().setFirebaseToken(SplashActivity.this, token);
-                        startInitApp();
-                    }
-                });
+//        FirebaseInstanceId.getInstance().getInstanceId()
+//                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//                        if (!task.isSuccessful()) {
+//                            Log.e(TAG, "getInstanceId failed", task.getException());
+//                            startInitApp();
+//                            return;
+//                        }
+//                        String token = task.getResult().getToken();
+//                        SharedUtils.getInstance().setFirebaseToken(SplashActivity.this, token);
+//                        startInitApp();
+//                    }
+//                });
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e(TAG, "getInstanceId failed", task.getException());
+                startInitApp();
+                return;
+            }
+            String token = task.getResult();
+            Log.e(TAG, "token : " + token);
+            SharedUtils.getInstance().setFirebaseToken(SplashActivity.this, token);
+            startInitApp();
+        });
 
         // 避免从桌面启动程序后，会重新实例化入口类的activity
         if (!this.isTaskRoot()) {

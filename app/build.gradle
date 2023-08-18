@@ -40,10 +40,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.firebase:firebase-messaging:17.6.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
+    //firebase
+    //implementation 'com.google.firebase:firebase-messaging:21.0.0'
+    //implementation(platform("com.google.firebase:firebase-bom:26.1.1"))
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+    implementation(platform("com.google.firebase:firebase-bom:28.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    // implementation 'com.google.firebase:firebase-messaging-directboot:20.2.0'
 
     // scan qrcode
     implementation 'com.google.zxing:core:3.2.1'
@@ -52,18 +59,23 @@ dependencies {
     // gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
     //bottomNavigationViewEx
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
     implementation 'com.google.android.material:material:1.0.0'
 
     //barcode
     implementation('com.journeyapps:zxing-android-embedded:3.6.0')
+
     //permission
     implementation 'com.github.hotchemi:permissionsdispatcher:3.3.1'
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.3.1"
 
     //swipe recyclerView
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+
+    //Work Manager dependency
+    implementation 'androidx.work:work-runtime:2.7.1'
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'

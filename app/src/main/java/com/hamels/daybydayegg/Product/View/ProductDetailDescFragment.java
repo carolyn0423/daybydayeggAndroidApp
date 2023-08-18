@@ -1,16 +1,8 @@
 package com.hamels.daybydayegg.Product.View;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableWrapper;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.text.HtmlCompat;
 
-import com.bumptech.glide.Glide;
 import com.hamels.daybydayegg.Base.BaseFragment;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.R;
-import com.hamels.daybydayegg.Repository.Model.MemberMessage;
 import com.hamels.daybydayegg.Repository.Model.Product;
 import com.hamels.daybydayegg.Utils.PicassoImageGetter;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import org.xml.sax.XMLReader;
 
 public class ProductDetailDescFragment extends BaseFragment {
     public static final String TAG = ProductDetailDescFragment.class.getSimpleName();
