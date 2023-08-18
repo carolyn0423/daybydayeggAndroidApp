@@ -35,7 +35,7 @@
         app:tabIndicatorColor="@color/colorYunlinhn"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/Black"
+        app:tabTextColor="@color/colorYunlinhn"
         app:tabBackground="@drawable/selec_tab_green">
 
         <com.google.android.material.tabs.TabItem
