@@ -29,7 +29,8 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        android:layout_alignTop="@id/bg_shadow_corner"
+        android:layout_marginTop="40dp" />
 
     <TextView
         android:id="@+id/text_invite_code_label"
@@ -37,7 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/dialog_img_qrcode"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
         android:textStyle="bold"
         android:text="邀請碼"
         android:textSize="18sp" />
@@ -48,9 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_invite_code_label"
         android:layout_centerHorizontal="true"
-        android:textStyle="bold"
         android:text="xxxxxx"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/text_invite_code_hint"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_invite_code"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="5dp"
         android:text="長按邀請碼可複製分享給好友"
         android:textSize="14sp" />
 
