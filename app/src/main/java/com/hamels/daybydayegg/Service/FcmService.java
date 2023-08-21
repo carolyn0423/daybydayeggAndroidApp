@@ -22,13 +22,19 @@ public class FcmService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
+        Log.e(TAG, "onMessageReceived" );
+        // Check if message contains a notification payload.
+        if (remoteMessage.getNotification() != null) {
+
+            showNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+        }
+
+        // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            showNotification(remoteMessage.getData().get("title"),remoteMessage.getData().get("message"));
-            if(remoteMessage.getData().get("message") != null) {
-                Log.d("onMessageReceived", remoteMessage.getData().get("message"));
-            }
+            //remoteMessage.getData().get("badge");
             //uiRefresh();
         }
+
     }
     private void showNotification(String title,String message){
         String channelId = getResources().getString(R.string.default_notification_channel_id);
@@ -36,7 +42,10 @@ public class FcmService extends FirebaseMessagingService {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("NOTIFY_EXTRA", "NOTIFY");
 //        Intent intent=new Intent("NOTIFY_EXTRA");
-        PendingIntent pi = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        //PendingIntent pi = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
