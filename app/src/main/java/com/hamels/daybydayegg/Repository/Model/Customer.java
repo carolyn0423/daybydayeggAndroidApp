@@ -29,6 +29,8 @@ public class Customer {
     private String OnlineEnabled;
     @SerializedName("appstore_version")
     private String AppstoreVersion;
+    @SerializedName("db_connect_name")
+    private String dbConnectName;
 
     public String getCustomerID() {
         return customer_id;
@@ -108,5 +110,9 @@ public class Customer {
 
     public String getAppstoreVersion() {
         return AppstoreVersion;
+    }
+
+    public String getdbConnectName() {
+        return dbConnectName;
     }
 }

@@ -63,6 +63,7 @@ public class ApiRepository {
 
     protected void getMemberToken(String action, final BaseContract.ValueCallback<String> tokenCallback, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("client_id", CLIENT_ID);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(BaseApiService.class).postGetMemberToken(action, requestBody).enqueue(new Callback<BaseModel<Map<String, String>>>() {
@@ -85,6 +86,7 @@ public class ApiRepository {
 
     public void login(final String customer_id, final String account, final String password, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", customer_id);
         map.put("accountno", account);
         map.put("password", password);
@@ -127,6 +129,7 @@ public class ApiRepository {
 
     public void getMachineList(String functionname, String customer_id, String member_id, AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("functionname", functionname);
         map.put("customer_id", customer_id);
@@ -142,7 +145,7 @@ public class ApiRepository {
 
     public void setMachineOften(String member_id, String uid, String machine_id, final AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
-
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("functionname", "MachineOften");
 
@@ -159,6 +162,7 @@ public class ApiRepository {
 
     public void getLocationList(String functionname, String customer_id, String member_id, String location_id, String sKilometer, String sHeadLocationFlag, AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         switch (functionname){
             case "AppLocation1":
                 functionname = "AppOftenLocation";
@@ -192,7 +196,7 @@ public class ApiRepository {
 
     public void setLocationOften(String member_id, String location_id, String uid, final AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
-
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("functionname", "AppOftenLocation");
 

@@ -278,6 +278,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         EOrderApplication.CUSTOMER_ID = customers.getCustomerID();
                         EOrderApplication.CUSTOMER_NAME = customers.getCustomerName();
                         EOrderApplication.sApiUrl = customers.getApiUrl();
+                        EOrderApplication.dbConnectName = customers.getdbConnectName();
 
                         repositoryManager.saveCustomerID(customers.getCustomerID());
                         repositoryManager.saveCustomerName(customers.getCustomerName());

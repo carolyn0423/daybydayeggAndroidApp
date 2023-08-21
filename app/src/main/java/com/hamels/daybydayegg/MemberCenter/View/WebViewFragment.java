@@ -17,6 +17,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.R;
 
@@ -132,6 +133,10 @@ public class WebViewFragment extends BaseFragment {
             return sData;
         }
 
+        @JavascriptInterface
+        public String jsCall_getConnectName() {
+            return EOrderApplication.dbConnectName;
+        }
 //        @JavascriptInterface
 //        public void jsCall_goLoginPage(String page, String function) {
 //            Log.e(TAG, "JsCallgoPage");

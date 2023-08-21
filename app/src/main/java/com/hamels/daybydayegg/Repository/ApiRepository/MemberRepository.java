@@ -38,8 +38,8 @@ public class MemberRepository extends ApiRepository {
     }
 
     public void register(final User user, final String password, String InvitationCode, final AbsApiCallback callback) {
-
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", EOrderApplication.CUSTOMER_ID);
         map.put("accountno", user.getAccount());
         map.put("password", password);
@@ -57,8 +57,8 @@ public class MemberRepository extends ApiRepository {
     }
 
     public void logout(final String member_id, final AbsApiCallback callback) {
-        Log.e(TAG, "logout");
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("member_id", member_id);
         map.put("isApp", "true");
         Log.e(TAG, "API logout : " + map);
@@ -68,6 +68,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getNewsDetailApi(final String news_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("news_id", news_id);
         map.put("isApp", "true");
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
@@ -76,6 +77,7 @@ public class MemberRepository extends ApiRepository {
 
     public void checkAccount(final String customer_id, final String account, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", customer_id);
         map.put("accountno", account);
         map.put("isApp", "true");
@@ -86,6 +88,7 @@ public class MemberRepository extends ApiRepository {
 
     public void resendSms(final String customer_id,final String account, final String code, final String function_name, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", customer_id);
         map.put("accountno", account);
         map.put("smsverifycode", code);
@@ -98,6 +101,7 @@ public class MemberRepository extends ApiRepository {
 
     public void verifySms(final String customer_id,final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("customer_id", customer_id);
         map.put("member_id", member_id);
@@ -118,6 +122,7 @@ public class MemberRepository extends ApiRepository {
 
     public void verifyForgetPassword(String customer_id, final String cellphone, final String password, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", customer_id);
         map.put("accountno", cellphone);
         map.put("password", password);
@@ -129,6 +134,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getMemberInfo(String customer_id,String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("member_id", member_id);
         //map.put("functionname", "membercard_normal");
@@ -142,6 +148,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getDeleteMember(String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("member_id", member_id);
         //map.put("functionname", "membercard_normal");
@@ -153,6 +160,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getPropertyData(final String sMebmer_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", sMebmer_id);
         map.put("isApp", "true");
         map.put("functionname", "fulladdress");
@@ -163,6 +171,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getCarouselList(final String sCustomer_id,final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("customer_id", sCustomer_id);
         //map.put("category_name", keyword);
@@ -173,6 +182,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getMerchantList(final String sCustomer_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         //map.put("business_sale_id", business_sale_id);
         map.put("isApp", "true");
         map.put("customer_id", sCustomer_id);
@@ -184,7 +194,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getProductMainTypeList(final String location_id, final String customer_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
-
+        map.put("connection_name", EOrderApplication.dbConnectName);
         String sLocationID = location_id.equals("0") ? "" : location_id;
 
         map.put("isApp", "true");
@@ -199,6 +209,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getProductTypeList(final int product_type_main_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("product_type_main_id", Integer.toString(product_type_main_id));
         //map.put("product_type_main_id", Integer.toString(product_type_main_id));
@@ -209,6 +220,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getLotList(final String mebmer_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("modified_user", mebmer_id);
         map.put("mebmer_id", mebmer_id);
@@ -228,7 +240,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getProductList(final String customer_id,final String location_id,final String business_sale_id, final String sort, final String product_type_main_id, final String product_type_id, final String product_name, final String e_ticket, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
-
+        map.put("connection_name", EOrderApplication.dbConnectName);
         String sLocationID = location_id.equals("0") ? "" : location_id;
 
         map.put("isApp", "true");
@@ -249,6 +261,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getProductDetail(final String business_sale_id, final String member_id, final String product_id, final String e_ticket, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("product_id", product_id);
         map.put("isApp", "true");
         map.put("functionname", "productdetail");
@@ -262,6 +275,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getDonateList(final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("member_id", member_id);
         Log.e(TAG, "API getDonateList : " + map);
@@ -271,6 +285,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getTicketCart(final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("member_id", member_id);
         Log.e(TAG, "API getTicketCart : " + map);
@@ -280,6 +295,7 @@ public class MemberRepository extends ApiRepository {
 
     public void writeOffTicketByCart(final String member_id, String cart_ticket_code, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("member_id", member_id);
         map.put("cart_ticket_code", cart_ticket_code);
@@ -290,6 +306,7 @@ public class MemberRepository extends ApiRepository {
 
     public void updateTicketCart(final String member_id, final String action, final String product_id, final String spec_id, final String give_date, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("member_id", member_id);
         map.put("modified_user", member_id);
@@ -306,6 +323,7 @@ public class MemberRepository extends ApiRepository {
 
     public void updateTicketCartCode(final String member_id, final String cart_ticket_code, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("member_id", member_id);
         map.put("modified_user", member_id);
@@ -319,6 +337,7 @@ public class MemberRepository extends ApiRepository {
     }
     public void GetTicketUsedHistory(final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("member_id", member_id);
 
@@ -329,6 +348,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getDonateDetail(final String member_id, final String uid, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("member_id", member_id);
         map.put("uid", uid);
@@ -340,6 +360,7 @@ public class MemberRepository extends ApiRepository {
 
     public void GetAppDetail(final String member_id, final String writeoff_order_id, final String eticket_due_date, final String modified_date, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("member_id", member_id);
         map.put("writeoff_order_id", writeoff_order_id);
@@ -353,6 +374,7 @@ public class MemberRepository extends ApiRepository {
 
     public void ChkPhoneExist(final String customer_id,final String mobile, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", customer_id);
         map.put("mobile", mobile);
         map.put("functionname", "assignmember");
@@ -364,6 +386,7 @@ public class MemberRepository extends ApiRepository {
 
     public void SaveTicketData(final String customer_id,final String member_id, final String uid, final String mobile, final String quantity, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("modified_user", member_id);
         map.put("uid", uid);
@@ -380,6 +403,7 @@ public class MemberRepository extends ApiRepository {
 
     public void GiveTicketGiftByCart(final String customer_id,final String member_id, final String mobile, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("customer_id", customer_id);
         map.put("member_id", member_id);
@@ -392,6 +416,7 @@ public class MemberRepository extends ApiRepository {
 
     public void SavePush(final String member_id, final String sendmember_id, final String title, final String content, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("push_id", "");
         map.put("push_type", "G");
         map.put("title", title);
@@ -409,6 +434,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getMemberInfoAssignmember(String customer_id,String member_id, String keyword, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("keyworld", keyword);
         map.put("functionname", "assignmember");
@@ -422,6 +448,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getLotDetail(final int lot_id, final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("member_id", member_id);
         map.put("isApp", "true");
@@ -435,6 +462,7 @@ public class MemberRepository extends ApiRepository {
 
     public void joinDrawLots(final int lot_id, final String cif_code, final String prod_id, final String spec_name, final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("member_id", member_id);
         map.put("isApp", "true");
@@ -450,6 +478,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getBusinessCode(final String sale_password, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("sale_password", sale_password);
         map.put("isApp", "true");
 
@@ -460,7 +489,7 @@ public class MemberRepository extends ApiRepository {
 
     public void addShoppingCart(final String customer_id,final String business_sale_id, final String sale_type, final String member_id, final String product_id, final String spec_id, final String location_id, final String quantity, final String order_type, final String conf_list, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
-        Log.e(TAG, "addShoppingCart");
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", customer_id);
         map.put("member_id", member_id);
         map.put("product_id", product_id);
@@ -481,6 +510,7 @@ public class MemberRepository extends ApiRepository {
 
     public void updatePassword(final String customer_id,final String member_id, final String oldPassword, final String newPassword, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("customer_id", customer_id);
         map.put("member_id", member_id);
@@ -494,6 +524,7 @@ public class MemberRepository extends ApiRepository {
 
     public void updateMemberInfo(String customer_id, final String sMebmer_id, final String city_code, final String area_code, final String address, final String email, final String birth, String carrier_no, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", customer_id);
         map.put("modified_user", sMebmer_id);
         map.put("member_id", sMebmer_id);
@@ -513,6 +544,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getMemberPointHistory(final String date, final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("member_id", member_id);
         map.put("modified_date_y", date);
@@ -525,6 +557,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getMemberMessage(final String customer_id,final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("functionname", "apppushlist");
         map.put("customer_id", customer_id);
@@ -539,6 +572,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getAboutData(final String customer_id,final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("customer_id", customer_id);
 
@@ -549,6 +583,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getFaqData(final String customer_id,final String faq_type_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("customer_id", customer_id);
         map.put("faq_type_id", faq_type_id);
@@ -563,6 +598,7 @@ public class MemberRepository extends ApiRepository {
             @Override
             public void onValueCallback(int task, String code) {
                 Map<String, String> map = new HashMap<>();
+                map.put("connection_name", EOrderApplication.dbConnectName);
                 map.put("code", code);
 
                 RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
@@ -573,6 +609,7 @@ public class MemberRepository extends ApiRepository {
 
     public void updateMessageStatus(final String mebmer_id, final int messageId, final String status, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", mebmer_id);
         map.put("member_id", mebmer_id);
         map.put("isApp", "true");
@@ -589,6 +626,7 @@ public class MemberRepository extends ApiRepository {
             @Override
             public void onValueCallback(int task, String code) {
                 Map<String, String> map = new HashMap<>();
+                map.put("connection_name", EOrderApplication.dbConnectName);
                 map.put("code", code);
 
                 RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
@@ -599,6 +637,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getMailBadge(final String mebmer_id , final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user",mebmer_id);
         map.put("member_id",mebmer_id);
         map.put("isApp","true");
@@ -609,6 +648,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getMessageBadge(final String mebmer_id , final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user",mebmer_id);
         map.put("member_id",mebmer_id);
         map.put("isApp","true");
@@ -619,6 +659,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getBadgeNumber(final String customer_id,final String mebmer_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", mebmer_id);
         map.put("customer_id", customer_id);
         map.put("member_id", mebmer_id);
@@ -635,6 +676,7 @@ public class MemberRepository extends ApiRepository {
             @Override
             public void onValueCallback(int task, String code) {
                 Map<String, String> map = new HashMap<>();
+                map.put("connection_name", EOrderApplication.dbConnectName);
                 map.put("code", code);
                 map.put("oid", products.get(0).getOrderId());
                 map.put("name", name);
@@ -657,6 +699,7 @@ public class MemberRepository extends ApiRepository {
 
     public void getMessageList(final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("isApp", "true");
         map.put("member_id", member_id);
@@ -668,6 +711,7 @@ public class MemberRepository extends ApiRepository {
 
     public void addMemberContact(final String customer_id,final String member_id, final String message, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("isApp", "true");
         map.put("customer_id", customer_id);
@@ -681,6 +725,7 @@ public class MemberRepository extends ApiRepository {
 
     public void updateReadMessage(final String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("isApp", "true");
         map.put("member_id", member_id);
@@ -692,6 +737,7 @@ public class MemberRepository extends ApiRepository {
 
     public void GetRegisterCoupon(String member_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("modified_user", member_id);
         map.put("functionname", "MemberRegisterCoupon");
         map.put("customer_id", EOrderApplication.CUSTOMER_ID);

@@ -5,7 +5,7 @@ import android.app.Application;
 public class EOrderApplication extends Application {
     public static final String TAG = EOrderApplication.class.getSimpleName();
 
-    public static final boolean isPrd = false;
+    public static final boolean isPrd = true;
 
     //public static final String DOMAIN_SIT = "https://eorder.hamels.com.tw:9903/";
     //public static final String DOMAIN_UAT = "https://eorder.hamels.com.tw:9920/";
@@ -22,6 +22,7 @@ public class EOrderApplication extends Application {
     public static String CUSTOMER_NAME = "日日好蛋";
     public static String sApiUrl = "";
     public static boolean isLogin = false;
+    public static String dbConnectName = "";
 
     public static String WEBVIEW_COUPONS_URL = "/coupon.html";
     public static String WEBVIEW_TERMS_URL = "/faq.html?id=1";

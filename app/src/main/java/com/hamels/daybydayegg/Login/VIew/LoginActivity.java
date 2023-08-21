@@ -246,6 +246,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
             EOrderApplication.CUSTOMER_ID = customers.get(0).getCustomerID();
             EOrderApplication.CUSTOMER_NAME = customers.get(0).getCustomerName();
             EOrderApplication.sApiUrl = customers.get(0).getApiUrl();
+            EOrderApplication.dbConnectName = customers.get(0).getdbConnectName();
 
             ApiRepository.repository = null;
             MemberRepository.memberRepository = null;

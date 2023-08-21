@@ -1008,6 +1008,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
 
         @JavascriptInterface
+        public String jsCall_getConnectName() {
+            return EOrderApplication.dbConnectName;
+        }
+
+        @JavascriptInterface
         public void jsCall_goLoginPage(String page, String function) {
             goPage();
         }
