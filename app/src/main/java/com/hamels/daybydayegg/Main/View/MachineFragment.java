@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Adapter.MachineAdapter;
@@ -35,6 +36,7 @@ import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.ApiRepository.ApiRepository;
 import com.hamels.daybydayegg.Repository.ApiRepository.MemberRepository;
 import com.hamels.daybydayegg.Repository.Model.Machine;
+import com.hamels.daybydayegg.Utils.IntentUtils;
 
 import java.util.List;
 
@@ -152,6 +154,11 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         machineAdapter.setData(machines);
+    }
+
+    @Override
+    public void intentToGoogleMap(String address) {
+        IntentUtils.intentToGoogleMap((BaseActivity) getActivity(), address);
     }
 
     public void requestUserLocation() {

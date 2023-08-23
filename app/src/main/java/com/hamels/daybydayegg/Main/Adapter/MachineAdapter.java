@@ -65,6 +65,13 @@ public class MachineAdapter extends BaseAdapter<MachineHolder> {
                 presenter.setStoreOften(machine_id, uid);
             }
         });
+
+        machineHolder.tv_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.intentToGoogleMap(machines.get(position).getAddress());
+            }
+        });
     }
 
     @Override
