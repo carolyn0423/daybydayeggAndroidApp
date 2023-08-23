@@ -9,6 +9,8 @@ import java.util.List;
 public interface MachineContract {
     interface View extends BaseContract.View {
         void setMachineList(List<Machine> type);
+
+        void intentToGoogleMap(String address);
     }
 
     interface Presenter extends BaseContract.Presenter {

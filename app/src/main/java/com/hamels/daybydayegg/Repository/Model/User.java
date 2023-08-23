@@ -66,6 +66,9 @@ public class User {
     @SerializedName("recommend_member_name")
     private String RecommendMemberName;
 
+    @SerializedName("connection_name")
+    private String ConnectionName;
+
     private List<String> topic;
 
     public int getCustomer() {
@@ -304,6 +307,7 @@ public class User {
             jsonObject.put("invitation_code", InvitationCode);
             jsonObject.put("carrier_no", CarrierNo);
             jsonObject.put("recommend_member_name", RecommendMemberName);
+            jsonObject.put("connection_name", ConnectionName);
         } catch (JSONException e) {
             e.printStackTrace();
         }

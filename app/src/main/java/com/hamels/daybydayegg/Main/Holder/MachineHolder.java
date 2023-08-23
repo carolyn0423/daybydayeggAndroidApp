@@ -1,5 +1,6 @@
 package com.hamels.daybydayegg.Main.Holder;
 
+import android.graphics.Paint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +31,10 @@ public class MachineHolder extends RecyclerView.ViewHolder {
     public void setStore(Machine machine) {
         tv_title.setText(machine.getTitle());
         tv_distance.setText("" + machine.getDistance());
-        tv_address.setText(machine.getAddress());
+        tv_address.setText(machine.getOnline().equals("N") ? machine.getAddress() + "_暫停營業" : machine.getAddress());
+
+        // 添加底线
+        tv_address.setPaintFlags(tv_address.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         if(machine.getMachineStatus().equals("N") || machine.getOnline().equals("N")){
             clItemStoreList.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.gray));
