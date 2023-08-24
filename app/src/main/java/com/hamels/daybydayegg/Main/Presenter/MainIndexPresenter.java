@@ -115,13 +115,7 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
                         repositoryManager.saveCustomerName(customers.getCustomerName());
                         repositoryManager.saveApiUrl(customers.getApiUrl());
 
-                        repositoryManager.callGetCarouselListApi(customers.getCustomerID(), new BaseContract.ValueCallback<List<Carousel>>() {
-                            @Override
-                            public void onValueCallback(int task, List<Carousel> type) {
-                                view.setCarouselList(type);
-
-                            }
-                        });
+                        getCarouselList(customers.getCustomerID());
                     }
                 }
             });

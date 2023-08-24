@@ -148,8 +148,6 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
     @Override
     public void onResume() {
         super.onResume();
-
-        mainindexPresenter.checkMemberData();
         mainindexPresenter.getCarouselList(CUSTOMER_ID);
     }
 
@@ -195,6 +193,8 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 //                ((MainActivity) getActivity()).goNewsDetail(((CustomViewsInfo)model).getXBannerTitle());
             }
         });
+
+        mainindexPresenter.checkMemberData();
 
         Activity activity = getActivity();
         if (activity instanceof MainActivity) {
