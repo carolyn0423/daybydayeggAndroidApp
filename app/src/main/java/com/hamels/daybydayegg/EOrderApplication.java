@@ -5,12 +5,12 @@ import android.app.Application;
 public class EOrderApplication extends Application {
     public static final String TAG = EOrderApplication.class.getSimpleName();
 
-    public static final boolean isPrd = false;
+    public static final boolean isPrd = true;
 
     //public static final String DOMAIN_SIT = "https://eorder.hamels.com.tw:9903/";
     //public static final String DOMAIN_UAT = "https://eorder.hamels.com.tw:9920/";
     //public static final String DOMAIN_PRD = "https://eorder.hamels.com.tw:9920/";
-    public static final String sPecialCustomerNo = "139D8";
+    public static final String sPecialCustomerNo = "JCINN";
 
     public static final String DOMAIN_ADMIN_PRO = "https://management.maverick.com.tw";
     public static final String DOMAIN_ADMIN_UAT = "https://www.hamels.com.tw:9941/";
@@ -18,7 +18,7 @@ public class EOrderApplication extends Application {
 
     public static String ADMIN_DOMAIN = isPrd ? DOMAIN_ADMIN_UAT : DOMAIN_ADMIN_SIT;
 
-    public static String CUSTOMER_ID = "116";
+    public static String CUSTOMER_ID = "111";
     public static String CUSTOMER_NAME = "日日好蛋";
     public static String sApiUrl = "";
     public static boolean isLogin = false;

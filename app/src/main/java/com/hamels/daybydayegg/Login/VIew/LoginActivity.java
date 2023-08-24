@@ -403,6 +403,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     @Override
     public void setResultOkFinishActivity() {
+        //  防止登入後自動跳轉到交易明細頁
+        getRepositoryManager(this).savePaySchemeOrderData("");
         IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,true);
         setResult(RESULT_OK);
         finish();
