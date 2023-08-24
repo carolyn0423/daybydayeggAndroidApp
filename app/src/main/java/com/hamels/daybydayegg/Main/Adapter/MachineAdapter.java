@@ -55,11 +55,10 @@ public class MachineAdapter extends BaseAdapter<MachineHolder> {
             @Override
             public void onClick(View v) {
                 String uid = "";
-                String machine_id = "";
+                String machine_id = machines.get(position).getMachineID();
 
-                if (machines.get(position).geOftenID().equals("")) {
+                if (!machines.get(position).geOftenID().equals("")) {
                     uid = machines.get(position).geOftenID();
-                    machine_id = machines.get(position).getMachineID();
                 }
 
                 presenter.setStoreOften(machine_id, uid);
