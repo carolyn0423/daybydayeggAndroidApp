@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Main.View.MainActivity;
@@ -28,6 +29,7 @@ public class MailFileFragment extends BaseFragment implements MailFileContract.V
 
     private RecyclerView recyclerView;
     private MailFileAdapter mailFileAdapter;
+    private TextView no_results_text;
 
     private MailFileContract.Presenter mailPresenter;
 
@@ -70,6 +72,8 @@ public class MailFileFragment extends BaseFragment implements MailFileContract.V
 
         mailFileAdapter = new MailFileAdapter(mailPresenter);
         recyclerView.setAdapter(mailFileAdapter);
+
+        no_results_text = view.findViewById(R.id.no_results_text);
     }
 
     @Override
@@ -80,6 +84,13 @@ public class MailFileFragment extends BaseFragment implements MailFileContract.V
     @Override
     public void setMessageList(List<MemberMessage> memberMessages) {
         Map<Integer, Boolean> isReadMap = new HashMap<>();
+
+        if(memberMessages.size() == 0){
+            no_results_text.setVisibility(View.VISIBLE);
+        }else{
+            no_results_text.setVisibility(View.GONE);
+        }
+
         for(MemberMessage memberMessage : memberMessages){
             Log.e(TAG,memberMessage.getTitle());
             Log.e(TAG,memberMessage.getContent());
