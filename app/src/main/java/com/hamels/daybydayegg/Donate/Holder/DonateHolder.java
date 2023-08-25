@@ -50,8 +50,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
 
         tv_product_name_left = itemView.findViewById(R.id.tv_product_name_left);
         tv_product_name_right = itemView.findViewById(R.id.tv_product_name_right);
-        tv_spec_name2_left = itemView.findViewById(R.id.tv_spec_name2_left);
-        tv_spec_name2_right = itemView.findViewById(R.id.tv_spec_name2_right);
+        //tv_spec_name2_left = itemView.findViewById(R.id.tv_spec_name2_left);
+        //tv_spec_name2_right = itemView.findViewById(R.id.tv_spec_name2_right);
         tv_eticket_due_date_left = itemView.findViewById(R.id.tv_eticket_due_date_left);
         tv_eticket_due_date_right = itemView.findViewById(R.id.tv_eticket_due_date_right);
         tv_type_name_left_title = itemView.findViewById(R.id.tv_type_name_left_title);
@@ -120,8 +120,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         tv_product_name_left.setText(productleft.getProductName());
         tv_product_name_right.setText(productright.getProductName());
 
-        tv_spec_name2_left.setText(" (" + productleft.getTypeName() + "-" + productleft.getSpecName() + ")");
-        tv_spec_name2_right.setText(" (" + productright.getTypeName() + "-" + productright.getSpecName() + ")");
+        //tv_spec_name2_left.setText(" (" + productleft.getTypeName() + "-" + productleft.getSpecName() + ")");
+        //tv_spec_name2_right.setText(" (" + productright.getTypeName() + "-" + productright.getSpecName() + ")");
 
         if (productleft.getTicketStatus().equals("B")) {
             tv_give_quantity_left_title.setVisibility(View.GONE);
@@ -181,7 +181,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         tv_product_name_left.setText(productleft.getProductName());
         tv_product_name_right.setVisibility(View.INVISIBLE);
 
-        tv_spec_name2_left.setText(" (" + productleft.getTypeName() + "-" + productleft.getSpecName() + ")");
+        //tv_spec_name2_left.setText(" (" + productleft.getTypeName() + "-" + productleft.getSpecName() + ")");
 
         tv_eticket_due_date_left.setText(productleft.getEticketDueDate());
         tv_eticket_due_date_right.setVisibility(View.INVISIBLE);
@@ -341,7 +341,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     }
 
     public void sethistorydetail2(Donate history) {
-        tv_product_name.setText(history.getProductName() + " (" + history.getTypeName() + "-" + history.getSpecName() + ")");
+        tv_product_name.setText(history.getProductName());
+        //tv_product_name.setText(history.getProductName() + " (" + history.getTypeName() + "-" + history.getSpecName() + ")");
         //tv_spec_name.setText(" (" + history.getTypeName() + "-" + history.getSpecName() + ")");
         tv_tickets_count.setText(history.getquantity());
     }
