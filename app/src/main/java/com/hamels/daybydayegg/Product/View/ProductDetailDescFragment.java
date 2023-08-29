@@ -1,5 +1,7 @@
 package com.hamels.daybydayegg.Product.View;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spannable;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Main.View.MainActivity;
@@ -22,8 +25,9 @@ public class ProductDetailDescFragment extends BaseFragment {
 
     private static ProductDetailDescFragment fragment;
     private Product product;
-
-    private TextView tvTitle, tvContent;
+    private ConstraintLayout layoutContent;
+    private TextView tvContent;
+    Drawable drawable;
 
     public static ProductDetailDescFragment getInstance(Product product) {
         if (fragment == null) {
@@ -52,7 +56,8 @@ public class ProductDetailDescFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (product != null) {
-            tvTitle.setText(product.getProduct_name());
+            ((MainActivity) getActivity()).setAppTitleString(product.getProduct_name());
+
             PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(), tvContent);
             Spannable html;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -62,11 +67,14 @@ public class ProductDetailDescFragment extends BaseFragment {
             }
 
             tvContent.setText(html);
+
+            Resources res = this.getResources();
+            drawable = res.getDrawable(R.drawable.bg_shadow_corner);
+            layoutContent.setBackground(drawable);
         }
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).setAppTitle(R.string.product_desc);
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
@@ -76,7 +84,7 @@ public class ProductDetailDescFragment extends BaseFragment {
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
 
-        tvTitle = view.findViewById(R.id.tv_product_title);
         tvContent = view.findViewById(R.id.tv_product_content);
+        layoutContent = view.findViewById(R.id.layout_content);
     }
 }

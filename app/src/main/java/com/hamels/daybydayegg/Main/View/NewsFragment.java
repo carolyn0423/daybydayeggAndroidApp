@@ -54,13 +54,13 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     private void initView(View view) {
 //        webView = view.findViewById(R.id.web_view);
         setAppTitle(R.string.tab_news);
-        setBackButtonVisibility(true);
-        setMailButtonVisibility(true);
-        setMessageButtonVisibility(true);
+        setBackButtonVisibility(false);
+        setMailButtonVisibility(false);
+        setMessageButtonVisibility(false);
         setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-        setAppToolbarVisibility(true);
+        setAppToolbarVisibility(false);
         imageView = view.findViewById(R.id.imageView);
         tv_news_content = view.findViewById(R.id.tv_news_content);
         tv_news_title = view.findViewById(R.id.tv_news_title);

@@ -44,7 +44,7 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailContract.
                         new BaseContract.ValueCallback<String>() {
                             @Override
                             public void onValueCallback(int task, String type) {
-                                view.showAddCartSuccess("加入購物車成功");
+                                view.showAddCartSuccess(type);
                             }
                         });
             }

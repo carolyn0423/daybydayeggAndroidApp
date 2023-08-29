@@ -84,7 +84,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
 
         ((MainActivity) getActivity()).setTopBarVisibility(false);
-        ((MainActivity) getActivity()).setAppToolbarVisibility(false);
+        ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
 
         //  清除API 暫存, 重新取得URL
@@ -152,8 +152,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
         for (Machine machine : machines) {
             Log.e(TAG, machine.getTitle());
         }
-
-        ((MainActivity) getActivity()).setAppToolbarVisibility(true);
+        
         machineAdapter.setData(machines);
     }
 

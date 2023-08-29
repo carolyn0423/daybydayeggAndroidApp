@@ -742,12 +742,16 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     }
 
     public void showAddCartSuccess(String message){
+        String[] Message = message.split("\\|");
+        message = Message[0].equals("1X003") || Message[0].equals("1X002") ? "加入購物車成功" : Message[1];
         new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage(message)
                 .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((MainActivity) getActivity()).refreshBadge();
-                        ((MainActivity) getActivity()).addFragment(ProductFragment.getInstance(location_id, Integer.parseInt(product_type_main_id), isETicket));
+                        if(Message[0].equals("1X003") || Message[0].equals("1X002")) {
+                            ((MainActivity) getActivity()).refreshBadge();
+                            ((MainActivity) getActivity()).addFragment(ProductFragment.getInstance(location_id, Integer.parseInt(product_type_main_id), isETicket));
+                        }
                     }
                 }).show();
     }
