@@ -183,4 +183,7 @@ public interface MemberApiService {
 
     @POST("Coupon/GetDetail")
     Call<BaseModel<Coupon>> getCouponDetail(@Body RequestBody body);
+
+    @POST("Shopping/GetShopCartLocationQuantity")
+    Call<BaseModel<String>> GetShopCartLocationQuantity(@Body RequestBody body);
 }

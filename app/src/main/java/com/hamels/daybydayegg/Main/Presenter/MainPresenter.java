@@ -363,4 +363,13 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 //            }
 //        });
     }
+
+    public void GetShopCartLocationQuantity() {
+        repositoryManager.GetShopCartLocationQuantity(new BaseContract.ValueCallback<String>() {
+            @Override
+            public void onValueCallback(int task, String type) {
+                view.ShoppingBackPage(type);
+            }
+        });
+    }
 }

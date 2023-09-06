@@ -1046,6 +1046,18 @@ public class RepositoryManager {
         });
     }
 
+    public void GetShopCartLocationQuantity(final BaseContract.ValueCallback<String> valueCallback) {
+        basePresenter.startCallApi();
+        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+        MemberRepository.getInstance().GetShopCartLocationQuantity(member_id, new ApiCallback<BaseModel<String>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<String> response) {
+                super.onApiSuccess(response);
+                valueCallback.onValueCallback(TASK_POST_GET_SHOPCARTLOCATIONQUANTITY, response.getItems());
+            }
+        });
+    }
+
     public void saveAccountInfo(String account, String password) { SharedUtils.getInstance().saveAccountInfo(context, ApiUtils.encryption(account), ApiUtils.encryption(password)); }
 
     public void saveUserID(String member_id) { SharedUtils.getInstance().saveUserID(context, member_id); }

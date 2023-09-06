@@ -746,4 +746,16 @@ public class MemberRepository extends ApiRepository {
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).getCouponDetail(requestBody).enqueue(callback);
     }
+
+    public void GetShopCartLocationQuantity(final String sMemberID, final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
+        map.put("customer_id", EOrderApplication.CUSTOMER_ID);
+        map.put("isApp", "true");
+        map.put("member_id", sMemberID);
+
+        Log.e(TAG, "API GetShopCartLocationQuantity : " + map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).GetShopCartLocationQuantity(requestBody).enqueue(callback);
+    }
 }
