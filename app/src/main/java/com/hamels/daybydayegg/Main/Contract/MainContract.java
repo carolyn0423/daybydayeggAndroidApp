@@ -26,6 +26,8 @@ public interface MainContract {
         void setCustomer(Customer customers, String sCustomerID, String sCustomerName, String sApiUrl);
 
         void getVersion(String sOnlineVision);
+
+        void ShoppingBackPage(String type);
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -86,5 +88,7 @@ public interface MainContract {
         String getInvitationCode();
 
         String getUserName();
+
+        void GetShopCartLocationQuantity();
     }
 }

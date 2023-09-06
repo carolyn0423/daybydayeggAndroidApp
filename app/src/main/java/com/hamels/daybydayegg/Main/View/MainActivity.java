@@ -1120,8 +1120,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             } else if(currentPage.indexOf("ebook.html") > 0){
                 changeTabFragment(MainIndexFragment.getInstance());
             } else if(currentPage.indexOf("shoppingcart_list_product.html") > 0){
-                changeTabFragment(ShoppingCartFragment.getInstance());
-            } else if(currentPage.indexOf("ecpay.com.tw") > 0){
+                mainPresenter.GetShopCartLocationQuantity();
+            } else if(currentPage.indexOf("AioCheckOut") > 0){
                 webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_PAY_COMPLETE_URL + "?isSuccess=false" + "");
             } else {
                 webView.goBack();
@@ -1188,6 +1188,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }
                 }
             }
+        }
+    }
+
+    public void ShoppingBackPage(String LocationQuantity){
+        int iLocationQuantity = Integer.parseInt(LocationQuantity);
+        if(iLocationQuantity < 2){
+            changeTabFragment(MainIndexFragment.getInstance());
+        }else{
+            changeTabFragment(ShoppingCartFragment.getInstance());
         }
     }
 

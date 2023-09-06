@@ -68,6 +68,7 @@ public class ApiConstant {
     public static final int TASK_POST_DELETE_MEMBER = 44;
     public static final int TASK_POST_GET_WEB_CONFIG = 45;
     public static final int TASK_POST_GET_CUSTOMER_ID_LIST = 46;
+    public static final int TASK_POST_GET_SHOPCARTLOCATIONQUANTITY = 47;
 
     public static final int RESPONSE_CODE_LOGIN_VERIFIED_ERROR = 209;
     public static final int TOTAL_ERROR_CODE = 500;
