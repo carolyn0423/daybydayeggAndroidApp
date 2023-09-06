@@ -999,8 +999,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         public String jsCall_getVariable(String Info) {
             String sData = "";
             try {
-                JSONObject oMemberData = new JSONObject(getUser().toString());
-                sData = oMemberData.getString(Info);
+                switch (Info){
+                    case "customer_id":
+                        sData = EOrderApplication.CUSTOMER_ID;
+                        break;
+                    case "connection_name":
+                        sData = EOrderApplication.dbConnectName;
+                        break;
+                    default:
+                        JSONObject oMemberData = new JSONObject(getUser().toString());
+                        sData = oMemberData.getString(Info);
+                        break;
+                }
             } catch (Exception e) {
 //                e.printStackTrace();
             }
@@ -1100,11 +1110,19 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 currentPage = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex()).getUrl();
                 goBackPage = mWebBackForwardList.getItemAtIndex(mWebBackForwardList.getCurrentIndex() - 1).getUrl();
             }
-            if (currentPage.indexOf("orderDetail.html") > 0 && goBackPage.indexOf("order.html") > 0) {
+            if (currentPage.indexOf("orderDetail.html") > 0
+                    || goBackPage.indexOf("order.html") > 0
+                    || currentPage.indexOf("pay_complete.html") > 0) {
                 webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDER_URL + "?orderType=" + "");
             } else if (currentPage.indexOf("order.html") > 0) {
                 changeTabFragment(MemberCenterFragment.getInstance());
                 webView = null;
+            } else if(currentPage.indexOf("ebook.html") > 0){
+                changeTabFragment(MainIndexFragment.getInstance());
+            } else if(currentPage.indexOf("shoppingcart_list_product.html") > 0){
+                changeTabFragment(ShoppingCartFragment.getInstance());
+            } else if(currentPage.indexOf("ecpay.com.tw") > 0){
+                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_PAY_COMPLETE_URL + "?isSuccess=false" + "");
             } else {
                 webView.goBack();
             }
