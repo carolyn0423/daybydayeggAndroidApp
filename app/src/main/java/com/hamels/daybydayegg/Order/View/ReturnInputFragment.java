@@ -75,6 +75,7 @@ public class ReturnInputFragment extends BaseFragment implements ReturnInputCont
         }
 
         ((MainActivity) Objects.requireNonNull(getActivity())).setAppTitle(status == STATUS_RETURN ? R.string.return_apply_title : R.string.exchange_apply_title);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvName = view.findViewById(R.id.tv_name);
         addSpanColor(tvName);

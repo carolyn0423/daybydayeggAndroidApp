@@ -51,6 +51,7 @@ public class MemberGiftFragment extends BaseFragment implements MemberGiftContra
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvInvitationCode = view.findViewById(R.id.invitation_code);
         tvShareInfoText2 = view.findViewById(R.id.shareInfoText2);

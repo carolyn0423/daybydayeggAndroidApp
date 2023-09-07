@@ -283,6 +283,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         donate.setOnClickListener(onClickListener);
 
         setAppToolbar(R.id.toolbar);
+        setCartBadge(R.id.tv_shopping_cart, R.id.tv_shopping_cart_e_ticket);
+
         appToolbar.getBtnMail().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -827,12 +829,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         // 購物車商品數量
         if (array.length == 4) {
+            EOrderApplication.cartBadgeCount = array[3];
             if (array[3].equals("0")) {
                 tvShoppingCart.setVisibility(View.GONE);
             } else {
                 tvShoppingCart.setVisibility(View.VISIBLE);
                 tvShoppingCart.setText(array[3]);
             }
+            EOrderApplication.cartTicketBadgeCount = array[2];
             if (array[2].equals("0")) {
                 tvShoppingCartETicket.setVisibility(View.GONE);
             } else {

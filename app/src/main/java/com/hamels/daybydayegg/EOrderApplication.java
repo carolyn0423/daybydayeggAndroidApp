@@ -23,7 +23,8 @@ public class EOrderApplication extends Application {
     public static String sApiUrl = "";
     public static boolean isLogin = false;
     public static String dbConnectName = "";
-
+    public static String cartBadgeCount = "0";
+    public static String cartTicketBadgeCount = "0";
     public static String WEBVIEW_COUPONS_URL = "/coupon.html";
     public static String WEBVIEW_TERMS_URL = "/faq.html?id=1";
     public static String WEBVIEW_LOCATION_URL = "/location.html";

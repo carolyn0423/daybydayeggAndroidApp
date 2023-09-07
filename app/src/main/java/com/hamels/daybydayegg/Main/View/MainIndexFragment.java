@@ -68,7 +68,8 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         ((MainActivity) getActivity()).setTopBarVisibility(true);
         ((MainActivity) getActivity()).setAppToolbarVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(true);
-
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         mXBanner = view.findViewById(R.id.xbanner);
 
         // 獲取屏幕高度

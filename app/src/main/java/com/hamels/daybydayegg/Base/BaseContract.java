@@ -12,11 +12,15 @@ public interface BaseContract {
 
         void setAppToolbar(@IdRes int appToolbarId);
 
+        void setCartBadge(@IdRes int CartBadgeID, @IdRes int CartBadgeTicketID);
+
         void setAppTitle(@StringRes int resString);
 
         void setAppBadge();
 
         void setAppToolbarVisibility(boolean isVisible);
+
+        void setCartBadgeVisibility(boolean isVisible);
 
         void setBackButtonVisibility(boolean isVisible);
 

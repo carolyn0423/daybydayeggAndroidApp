@@ -24,6 +24,11 @@ public class BaseFragment extends Fragment implements BaseContract.View {
         ((BaseActivity) Objects.requireNonNull(getActivity())).setAppTitle(resString);
     }
 
+    @Override
+    public void setCartBadge(int CartBadgeID, int CartBadgeTicketID) {
+        ((BaseActivity) Objects.requireNonNull(getActivity())).setCartBadge(CartBadgeID, CartBadgeTicketID);
+    }
+
     public void setAppTitleString(String sAppTitle) {
         ((BaseActivity) Objects.requireNonNull(getActivity())).setAppTitleString(sAppTitle);
     }
@@ -36,6 +41,11 @@ public class BaseFragment extends Fragment implements BaseContract.View {
     @Override
     public void setAppToolbarVisibility(boolean isVisible) {
         ((BaseActivity) Objects.requireNonNull(getActivity())).setAppToolbarVisibility(isVisible);
+    }
+
+    @Override
+    public void setCartBadgeVisibility(boolean isVisible) {
+        ((BaseActivity) Objects.requireNonNull(getActivity())).setCartBadgeVisibility(isVisible);
     }
 
     @Override

@@ -84,7 +84,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         ((MainActivity) getActivity()).setMessageButtonVisibility(false);
         ((MainActivity) getActivity()).setMailButtonVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         sv_scrollview = view.findViewById(R.id.ScrollView1);
 
         img_donate = view.findViewById(R.id.img_donate);

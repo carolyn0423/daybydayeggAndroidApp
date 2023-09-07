@@ -22,7 +22,7 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
     @Override
     public void getCarouselList(final String sCustomer_id) {
 
-        if(EOrderApplication.sApiUrl.equals("")){
+        if(EOrderApplication.sApiUrl.equals("") || EOrderApplication.dbConnectName.equals("")){
             checkCustomerNo(EOrderApplication.sPecialCustomerNo);
         }else {
             if (sCustomer_id.equals("")) {

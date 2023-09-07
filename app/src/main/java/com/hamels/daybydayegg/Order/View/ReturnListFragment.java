@@ -66,6 +66,7 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
         }
 
         ((MainActivity) Objects.requireNonNull(getActivity())).setAppTitle(status == STATUS_RETURN ? R.string.return_title : R.string.exchange_title);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvOrderNo = view.findViewById(R.id.tv_order_no);
         tvOrderTime = view.findViewById(R.id.tv_order_time);

@@ -61,6 +61,7 @@ public class TransRecordFragment extends BaseFragment implements TransRecordCont
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tabLayout = view.findViewById(R.id.layout_tab);
         viewPager = view.findViewById(R.id.view_pager);

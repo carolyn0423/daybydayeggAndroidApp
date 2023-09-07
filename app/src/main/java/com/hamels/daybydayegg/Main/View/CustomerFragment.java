@@ -80,6 +80,7 @@ public class CustomerFragment extends BaseFragment implements CustomerContract.V
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         layoutCustomer = view.findViewById(R.id.layout_customer);
         spSpinnerCity = view.findViewById(R.id.spinner_city);

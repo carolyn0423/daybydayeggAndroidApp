@@ -47,6 +47,7 @@ public class BusinessFragment extends BaseFragment implements BusinessContract.V
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         tv_check = view.findViewById(R.id.tv_check);
         tv_back = view.findViewById(R.id.tv_back);
         et_bussiness_code = view.findViewById(R.id.et_business_code);

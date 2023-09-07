@@ -96,7 +96,7 @@ public class DonateHistoryDetailFragment extends BaseFragment implements DonateC
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         tabLayout = view.findViewById(R.id.tab_layout);
 
         if (type_id.equals("1")) {
