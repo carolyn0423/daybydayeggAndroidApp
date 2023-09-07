@@ -111,8 +111,11 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     public void setImg_product_two(Donate productleft, Donate productright) {
         img_donate_left.setTag(R.id.img_donate_left, productleft.getUid());
         img_donate_right.setTag(R.id.img_donate_right, productright.getUid());
-        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPictureUrl()).into(img_donate_left);
-        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + productright.getPictureUrl()).into(img_donate_right);
+        String sLeftPictureUrl = productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
+        String sRightPictureUrl = productright.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPictureUrl();
+
+        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_donate_left);
+        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).into(img_donate_right);
 
         tv_eticket_due_date_left.setText(productleft.getEticketDueDate());
         tv_eticket_due_date_right.setText(productright.getEticketDueDate());
@@ -176,7 +179,9 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     public void setImg_product_one(Donate productleft) {
         img_donate_right.setVisibility(View.INVISIBLE);
         img_donate_left.setTag(R.id.img_donate_left, productleft.getUid());
-        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPictureUrl()).into(img_donate_left);
+        String sLeftPictureUrl = productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
+
+        Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_donate_left);
 
         tv_product_name_left.setText(productleft.getProductName());
         tv_product_name_right.setVisibility(View.INVISIBLE);
@@ -373,52 +378,54 @@ public class DonateHolder extends RecyclerView.ViewHolder {
                         if(!sShowName.equals("")) {
 
                             BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
-                            Bitmap bitmap = drawable.getBitmap();
+                            if(drawable != null) {
+                                Bitmap bitmap = drawable.getBitmap();
 
-                            // 縮小圖像為原來的1/2
-                            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 2, bitmap.getHeight() / 2, false);
+                                // 縮小圖像為原來的1/2
+                                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 2, bitmap.getHeight() / 2, false);
 
-                            // 複製縮小後的圖像，以便在其上繪製浮水印
-                            Bitmap mutableBitmap = scaledBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                                // 複製縮小後的圖像，以便在其上繪製浮水印
+                                Bitmap mutableBitmap = scaledBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
-                            Canvas canvas = new Canvas(mutableBitmap);
+                                Canvas canvas = new Canvas(mutableBitmap);
 
-                            // 設置浮水印的圓形形狀，透明度為50%
-                            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                            paint.setColor(Color.parseColor("#80000000")); // 設置透明深灰色底色
-                            paint.setAlpha(128);
-                            float diameter = Math.min(scaledBitmap.getWidth(), scaledBitmap.getHeight()) / 4f; // 直徑縮小為原來的一半
-                            float centerX = scaledBitmap.getWidth() / 2f;
-                            float centerY = scaledBitmap.getHeight() / 2f;
-                            RectF rect = new RectF(centerX - diameter, centerY - diameter, centerX + diameter, centerY + diameter);
-                            canvas.drawOval(rect, paint);
+                                // 設置浮水印的圓形形狀，透明度為50%
+                                Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                                paint.setColor(Color.parseColor("#80000000")); // 設置透明深灰色底色
+                                paint.setAlpha(128);
+                                float diameter = Math.min(scaledBitmap.getWidth(), scaledBitmap.getHeight()) / 4f; // 直徑縮小為原來的一半
+                                float centerX = scaledBitmap.getWidth() / 2f;
+                                float centerY = scaledBitmap.getHeight() / 2f;
+                                RectF rect = new RectF(centerX - diameter, centerY - diameter, centerX + diameter, centerY + diameter);
+                                canvas.drawOval(rect, paint);
 
-                            // 設置浮水印的文字內容和格式
-                            String watermarkText = sShowName;
-                            Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                            textPaint.setColor(Color.WHITE); // 設置白色字體
-                            textPaint.setTextSize(36);
+                                // 設置浮水印的文字內容和格式
+                                String watermarkText = sShowName;
+                                Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                                textPaint.setColor(Color.WHITE); // 設置白色字體
+                                textPaint.setTextSize(36);
 
-                            // 計算文字內容的寬度和高度
-                            float textWidth = textPaint.measureText(watermarkText);
-                            float textHeight = textPaint.getFontMetrics().bottom - textPaint.getFontMetrics().top;
+                                // 計算文字內容的寬度和高度
+                                float textWidth = textPaint.measureText(watermarkText);
+                                float textHeight = textPaint.getFontMetrics().bottom - textPaint.getFontMetrics().top;
 
-                            // 計算浮水印的位置，使其置中於圖像中央
-                            float textX = centerX - textWidth / 2f;
-                            float textY = centerY + textHeight / 2f;
+                                // 計算浮水印的位置，使其置中於圖像中央
+                                float textX = centerX - textWidth / 2f;
+                                float textY = centerY + textHeight / 2f;
 
-                            // 在圖像上繪製浮水印
-                            canvas.drawText(watermarkText, textX, textY, textPaint);
+                                // 在圖像上繪製浮水印
+                                canvas.drawText(watermarkText, textX, textY, textPaint);
 
-                            // 將包含浮水印的Bitmap對象設置為ImageView的圖像
-                            imageView.setImageBitmap(mutableBitmap);
+                                // 將包含浮水印的Bitmap對象設置為ImageView的圖像
+                                imageView.setImageBitmap(mutableBitmap);
 
-                            //移除viewTreeObserver，避免重複調用
-                            ViewTreeObserver viewTreeObserver = imageView.getViewTreeObserver();
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                viewTreeObserver.removeOnGlobalLayoutListener(this);
-                            } else {
-                                viewTreeObserver.removeGlobalOnLayoutListener(this);
+                                //移除viewTreeObserver，避免重複調用
+                                ViewTreeObserver viewTreeObserver = imageView.getViewTreeObserver();
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                    viewTreeObserver.removeOnGlobalLayoutListener(this);
+                                } else {
+                                    viewTreeObserver.removeGlobalOnLayoutListener(this);
+                                }
                             }
                         }else{
                             // 從ImageView中獲取Drawable對象

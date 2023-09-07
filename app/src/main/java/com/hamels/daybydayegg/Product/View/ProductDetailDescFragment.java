@@ -83,6 +83,7 @@ public class ProductDetailDescFragment extends BaseFragment {
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvContent = view.findViewById(R.id.tv_product_content);
         layoutContent = view.findViewById(R.id.layout_content);

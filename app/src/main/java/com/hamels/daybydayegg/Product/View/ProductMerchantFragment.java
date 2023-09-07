@@ -101,6 +101,7 @@ public class ProductMerchantFragment extends BaseFragment implements ProductMerc
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         edit_keyword = view.findViewById(R.id.edit_keyword);
         recyclerView = view.findViewById(R.id.product_recycler_view);

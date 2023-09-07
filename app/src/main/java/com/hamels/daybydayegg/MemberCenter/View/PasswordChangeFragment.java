@@ -53,6 +53,7 @@ public class PasswordChangeFragment extends BaseFragment implements PasswordChan
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvErrorMessage = view.findViewById(R.id.tv_error_message);
         tvErrorMessage.setVisibility(View.GONE);

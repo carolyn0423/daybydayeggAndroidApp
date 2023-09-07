@@ -72,6 +72,7 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tv_faq_data = view.findViewById(R.id.tv_faq_data);
     }

@@ -61,13 +61,13 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         scrollView = findViewById(R.id.scrollview);
         tvErrorMessage = findViewById(R.id.tv_error_message);
         etName = findViewById(R.id.et_name);
-        tvBirth = findViewById(R.id.tv_birthday);
-        tvBirth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
-        });
+//        tvBirth = findViewById(R.id.tv_birthday);
+//        tvBirth.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDatePickerDialog();
+//            }
+//        });
         etPhone = findViewById(R.id.et_phone);
         etPassword = findViewById(R.id.et_password);
         etRePassword = findViewById(R.id.et_repassword);
@@ -79,7 +79,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             public void onClick(View v) {
                 registerPresenter.checkInputValue(etName.getText().toString()
                         , radioGender.getCheckedRadioButtonId()
-                        , tvBirth.getText().toString()
+                        , ""
                         , etPhone.getText().toString()
                         , etPassword.getText().toString()
                         , etRePassword.getText().toString()

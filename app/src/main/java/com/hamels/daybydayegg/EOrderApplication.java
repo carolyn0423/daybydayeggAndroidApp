@@ -5,7 +5,7 @@ import android.app.Application;
 public class EOrderApplication extends Application {
     public static final String TAG = EOrderApplication.class.getSimpleName();
 
-    public static final boolean isPrd = true;
+    public static final boolean isPrd = false;
 
     //public static final String DOMAIN_SIT = "https://eorder.hamels.com.tw:9903/";
     //public static final String DOMAIN_UAT = "https://eorder.hamels.com.tw:9920/";
@@ -23,7 +23,8 @@ public class EOrderApplication extends Application {
     public static String sApiUrl = "";
     public static boolean isLogin = false;
     public static String dbConnectName = "";
-
+    public static String cartBadgeCount = "0";
+    public static String cartTicketBadgeCount = "0";
     public static String WEBVIEW_COUPONS_URL = "/coupon.html";
     public static String WEBVIEW_TERMS_URL = "/faq.html?id=1";
     public static String WEBVIEW_LOCATION_URL = "/location.html";
@@ -37,6 +38,7 @@ public class EOrderApplication extends Application {
     public static String WEBVIEW_ORDER_URL = "/order.html";
     public static String WEBVIEW_ORDERDETAIL_URL = "/orderDetail.html";
     public static String WEBVIEW_PAY_COMPLETE_URL = "/pay_complete.html";
+    public static String DEFAULT_PICTURE_URL = "/UploadImages/Product/default.png";
 
     public static double lat = 0, lon = 0;
 

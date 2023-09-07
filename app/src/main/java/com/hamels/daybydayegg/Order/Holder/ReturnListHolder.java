@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hamels.daybydayegg.Base.BaseContract;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.OrderProduct;
 
@@ -40,7 +41,8 @@ public class ReturnListHolder extends RecyclerView.ViewHolder implements View.On
     public void setProduct(OrderProduct orderProduct) {
         this.orderProduct = orderProduct;
 
-        Glide.with(itemView).load(orderProduct.getProduct().getImageSrc()).into(imgItem);
+        String sPictureUrl = orderProduct.getProduct().getImageSrc().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : orderProduct.getProduct().getImageSrc();
+        Glide.with(itemView).load(sPictureUrl).into(imgItem);
         tvItemNo.setText(String.format(itemView.getContext().getString(R.string.item_no), orderProduct.getProductId()));
         tvItemName.setText(orderProduct.getProductColor().getName());
         tvItemStyle.setText("");

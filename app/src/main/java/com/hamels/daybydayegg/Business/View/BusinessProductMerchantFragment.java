@@ -85,7 +85,7 @@ public class BusinessProductMerchantFragment extends BaseFragment implements Bus
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         Log.e(TAG,business_sale_id);
 
         edit_keyword = view.findViewById(R.id.edit_keyword);

@@ -98,7 +98,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         ((MainActivity) getActivity()).setMessageButtonVisibility(false);
         ((MainActivity) getActivity()).setMailButtonVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         // 亮度
         brightnessNow = getSystemBrightness();
         changeAppBrightness(255);

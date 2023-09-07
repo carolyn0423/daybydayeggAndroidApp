@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Constant.Constant;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.Order.Adapter.ReturnListAdapter;
 import com.hamels.daybydayegg.R;
@@ -66,6 +67,7 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
         }
 
         ((MainActivity) Objects.requireNonNull(getActivity())).setAppTitle(status == STATUS_RETURN ? R.string.return_title : R.string.exchange_title);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvOrderNo = view.findViewById(R.id.tv_order_no);
         tvOrderTime = view.findViewById(R.id.tv_order_time);
@@ -95,7 +97,8 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
     }
 
     private void setOrders(Order order) {
-        Glide.with(this).load(order.getPreviewImageUrl()).into(imgOrder);
+        String sPictureUrl = order.getPreviewImageUrl().equals("") ? EOrderApplication.sApiUrl + EOrderApplication.DEFAULT_PICTURE_URL : order.getPreviewImageUrl();
+        Glide.with(this).load(sPictureUrl).into(imgOrder);
 
         tvOrderNo.setText(String.format(getContext().getString(R.string.order_no), order.getId()));
         tvOrderTime.setText(String.format(getContext().getString(R.string.order_time), order.getOrderTime()));

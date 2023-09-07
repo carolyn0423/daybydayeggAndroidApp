@@ -33,7 +33,8 @@ public class ProductETicketHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImg_product(Product product) {
-        Glide.with(ProductFragment.getInstance()).load(EOrderApplication.sApiUrl + product.getPicture_url()).into(img_product);
+        String sPictureUrl = product.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : product.getPicture_url();
+        Glide.with(ProductFragment.getInstance()).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_product);
         img_product.setTag(R.id.img_product, product.getId());
         layout.setTag(R.id.layout_constraint, product.getId());
         tv_product_name.setText(product.getProduct_name());

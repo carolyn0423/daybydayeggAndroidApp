@@ -77,7 +77,7 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         noLocationGroup = view.findViewById(R.id.no_location_group);
 
         //  清除API 暫存

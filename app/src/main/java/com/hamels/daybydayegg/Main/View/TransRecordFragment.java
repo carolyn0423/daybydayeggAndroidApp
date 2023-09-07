@@ -79,7 +79,7 @@ public class TransRecordFragment extends BaseFragment {
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).bindWebView(webView);
-//
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         //setCookies();
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDER_URL + "?orderType=" + mOrderType + "&order_id=" + sOrderID + "&meal_no=" + sMealNo);
     }

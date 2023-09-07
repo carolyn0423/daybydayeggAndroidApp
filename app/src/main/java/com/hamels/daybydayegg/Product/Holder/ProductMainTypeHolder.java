@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Product.View.ProductMainTypeFragment;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.ProductMainType;
@@ -50,7 +51,8 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
         RequestOptions requestOptions_left = new RequestOptions()
                 .transform(new RoundedCorners(20));
 
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTypeleft.getPicture_url()).apply(requestOptions_left).into(img_productMainType_left);
+        String sPictureUrl = mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
+        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
 
         img_productMainType_left.setTag(R.id.img_productMainType_left,mainTypeleft.getId());
         constraintLayout_left.setTag(R.id.constraintLayout_left,mainTypeleft.getId());
@@ -69,8 +71,11 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
         RequestOptions requestOptions_right = new RequestOptions()
                 .transform(new RoundedCorners(20));
 
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTypeleft.getPicture_url()).apply(requestOptions_left).into(img_productMainType_left);
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + mainTyperight.getPicture_url()).apply(requestOptions_right).into(img_productMainType_right);
+        String sLeftPictureUrl = mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
+        String sRightPictureUrl = mainTyperight.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTyperight.getPicture_url();
+
+        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sLeftPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
+        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sRightPictureUrl).apply(requestOptions_right).into(img_productMainType_right);
 
         img_productMainType_left.setTag(R.id.img_productMainType_left, mainTypeleft.getId());
         img_productMainType_right.setTag(R.id.img_productMainType_right, mainTyperight.getId());

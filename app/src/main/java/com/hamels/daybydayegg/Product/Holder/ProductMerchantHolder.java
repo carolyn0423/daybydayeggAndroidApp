@@ -114,8 +114,11 @@ public class ProductMerchantHolder extends RecyclerView.ViewHolder {
         RequestOptions requestOptions_right = new RequestOptions()
                 .transform(new RoundedCorners(20));
 
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).apply(requestOptions_left).into(img_product_left);
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productright.getPicture_url()).apply(requestOptions_right).into(img_product_right);
+        String sLeftPictureUrl = productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
+        String sRightPictureUrl = productright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPicture_url();
+
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).apply(requestOptions_left).into(img_product_left);
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).apply(requestOptions_right).into(img_product_right);
 
         tv_price_left.setText("NT$"+mDecimalFormat.format((double)productleft.getPrice()));
         tv_product_name_left.setText(productleft.getProduct_name());
@@ -144,7 +147,8 @@ public class ProductMerchantHolder extends RecyclerView.ViewHolder {
         // 应用圆角转换的 RequestOptions
         RequestOptions requestOptions_left = new RequestOptions()
                 .transform(new RoundedCorners(20));
-        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + productleft.getPicture_url()).apply(requestOptions_left).into(img_product_left);
+        String sLeftPictureUrl = productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
+        Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).apply(requestOptions_left).into(img_product_left);
 
         img_product_left.setTag(R.id.img_product_left,productleft.getId());
         tv_price_left.setText("NT$"+mDecimalFormat.format((double)productleft.getPrice()));

@@ -26,9 +26,9 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
 //        else if (selectRadioId == -1) {
 //            view.showErrorMessage(R.string.gender_empty);
 //        }
-        else if (birth.isEmpty()) {
-            view.showErrorMessage(R.string.birth_empty);
-        } else if (phone.isEmpty() || !FormatUtils.isCellphoneFormat(phone)) {
+//        else if (birth.isEmpty()) {
+//            view.showErrorMessage(R.string.birth_empty);
+          else if (phone.isEmpty() || !FormatUtils.isCellphoneFormat(phone)) {
             view.showErrorMessage(R.string.phone_format_error);
         } else if (password.isEmpty() || !FormatUtils.isPasswordFormat(password)) {
             view.showErrorMessage(R.string.password_format_error);

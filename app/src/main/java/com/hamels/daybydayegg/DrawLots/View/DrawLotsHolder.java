@@ -41,7 +41,8 @@ public class DrawLotsHolder extends RecyclerView.ViewHolder {
             tv_vip.setVisibility(View.VISIBLE);
         }
         Log.e(TAG, EOrderApplication.sApiUrl + drawLots.getLot_picture_url());
-        Glide.with(DrawLotsFragment.getInstance()).load(EOrderApplication.sApiUrl + drawLots.getLot_picture_url()).into(img_lot);
+        String sPictureUrl = drawLots.getLot_picture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : drawLots.getLot_picture_url();
+        Glide.with(DrawLotsFragment.getInstance()).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_lot);
         Log.e(TAG,drawLots.getLot_picture_url());
 
         layout_lot.setTag(R.id.layout_lot,drawLots.getId());

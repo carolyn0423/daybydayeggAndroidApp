@@ -116,7 +116,9 @@ public class DonateListAdapter extends BaseAdapter<DonateHolder> {
                 presenter.getDonateDetailByID(Integer.parseInt(v.getTag(v.getId()).toString()));
             } else {
                 //  已下架
-                presenter.showContactMessage("此提貨券商品已下架，請連繫客服人員進行退貨事宜，謝謝您。聯絡電話 : " + donate.getContactPhone());
+                presenter.showContactMessage("此提貨券已下架，請連繫客服人員進行退貨事宜，謝謝您。\n" +
+                        "\n" +
+                        "聯絡電話 : " + donate.getContactPhone());
             }
         }else{
             presenter.showContactMessage("此提貨券已過期。");

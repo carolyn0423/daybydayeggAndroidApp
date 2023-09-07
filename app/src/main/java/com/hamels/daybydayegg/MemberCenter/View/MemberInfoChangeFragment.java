@@ -77,7 +77,7 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
-
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         spinner_city = view.findViewById(R.id.spinner_city);
         spinner_area = view.findViewById(R.id.spinner_area);
@@ -110,13 +110,11 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
     public void setUser(User user) {
         tvName.setText(user.getName());
 
-        if(user.getBirthday()!=null){
-            if(user.getBirthday().equals("")){
-                tvBirth.setOnClickListener(this);
-                tvBirth.setBackgroundResource(R.drawable.selec_et_line);
-            }else{
-                tvBirth.setText(user.getBirthday());
-            }
+        if(user.getBirthday() != null && user.getBirthday().equals("")){
+            tvBirth.setOnClickListener(this);
+            tvBirth.setBackgroundResource(R.drawable.selec_et_line);
+        }else{
+            tvBirth.setText(user.getBirthday());
         }
 
         tvPhone.setText(user.getMobile());

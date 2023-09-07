@@ -89,6 +89,7 @@ public class WebViewFragment extends BaseFragment {
         setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override

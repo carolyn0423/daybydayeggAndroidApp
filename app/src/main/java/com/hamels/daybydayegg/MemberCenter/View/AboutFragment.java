@@ -60,6 +60,7 @@ public class AboutFragment extends BaseFragment implements AboutContract.View{
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tv_office = view.findViewById(R.id.tv_office);
         tv_office_address = view.findViewById(R.id.tv_office_address);

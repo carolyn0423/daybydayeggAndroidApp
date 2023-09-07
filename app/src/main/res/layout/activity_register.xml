@@ -171,45 +171,45 @@
                     android:textSize="13sp" />
             </RadioGroup>
 
-            <TextView
-                android:id="@+id/tv_birthday_hint"
-                style="@style/fontRegularTw.greyDoubleDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/birth"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintTop_toBottomOf="@id/group_gender" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_birthday_hint"-->
+<!--                style="@style/fontRegularTw.greyDoubleDark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:text="@string/birth"-->
+<!--                android:textSize="13sp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tv_name"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/group_gender" />-->
 
-            <TextView
-                android:id="@+id/tv_birthday_hint_required"
-                style="@style/fontRegularTw.greyDoubleDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="1dp"
-                android:text="*"
-                android:textSize="13sp"
-                android:textColor="@color/redHint"
-                app:layout_constraintStart_toEndOf="@+id/tv_birthday_hint"
-                app:layout_constraintTop_toTopOf="@+id/tv_birthday_hint" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_birthday_hint_required"-->
+<!--                style="@style/fontRegularTw.greyDoubleDark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="1dp"-->
+<!--                android:text="*"-->
+<!--                android:textSize="13sp"-->
+<!--                android:textColor="@color/redHint"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/tv_birthday_hint"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/tv_birthday_hint" />-->
 
-            <TextView
-                android:id="@+id/tv_birthday"
-                style="@style/fontRobotoRegular.GreyDark"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/selec_et_line"
-                android:hint="@string/hint_birthday"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text=""
-                android:textColorHint="@color/greyHint"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_birthday_hint" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_birthday"-->
+<!--                style="@style/fontRobotoRegular.GreyDark"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:background="@drawable/selec_et_line"-->
+<!--                android:hint="@string/hint_birthday"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp"-->
+<!--                android:text=""-->
+<!--                android:textColorHint="@color/greyHint"-->
+<!--                android:textSize="13sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tv_name"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_birthday_hint" />-->
 
             <TextView
                 android:id="@+id/tv_phone"
@@ -220,7 +220,7 @@
                 android:text="@string/cellphone"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_birthday"  />
+                app:layout_constraintTop_toBottomOf="@id/group_gender"  />
 
             <TextView
                 android:id="@+id/tv_phone_required"

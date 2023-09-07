@@ -69,7 +69,8 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Glide.with(getActivity()).load(EOrderApplication.sApiUrl + carousel.getPicture_url2()).into(imageView);
+        String sPictureUrl = carousel.getPicture_url2().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : carousel.getPicture_url2();
+        Glide.with(getActivity()).load(EOrderApplication.sApiUrl + sPictureUrl).into(imageView);
         tv_news_title.setText(carousel.getTitle());
         PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),tv_news_content);
         Spannable html;
