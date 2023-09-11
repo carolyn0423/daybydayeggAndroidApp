@@ -111,8 +111,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     public void setImg_product_two(Donate productleft, Donate productright) {
         img_donate_left.setTag(R.id.img_donate_left, productleft.getUid());
         img_donate_right.setTag(R.id.img_donate_right, productright.getUid());
-        String sLeftPictureUrl = productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
-        String sRightPictureUrl = productright.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPictureUrl();
+        String sLeftPictureUrl = productleft.getPictureUrl() == null || productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
+        String sRightPictureUrl = productright.getPictureUrl() == null || productright.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPictureUrl();
 
         Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_donate_left);
         Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).into(img_donate_right);
@@ -179,7 +179,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     public void setImg_product_one(Donate productleft) {
         img_donate_right.setVisibility(View.INVISIBLE);
         img_donate_left.setTag(R.id.img_donate_left, productleft.getUid());
-        String sLeftPictureUrl = productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
+        String sLeftPictureUrl = productleft.getPictureUrl() == null || productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
 
         Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_donate_left);
 

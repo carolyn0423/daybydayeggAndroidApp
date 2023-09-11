@@ -41,7 +41,7 @@ public class ReturnListHolder extends RecyclerView.ViewHolder implements View.On
     public void setProduct(OrderProduct orderProduct) {
         this.orderProduct = orderProduct;
 
-        String sPictureUrl = orderProduct.getProduct().getImageSrc().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : orderProduct.getProduct().getImageSrc();
+        String sPictureUrl = orderProduct.getProduct() == null || orderProduct.getProduct().getImageSrc().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : orderProduct.getProduct().getImageSrc();
         Glide.with(itemView).load(sPictureUrl).into(imgItem);
         tvItemNo.setText(String.format(itemView.getContext().getString(R.string.item_no), orderProduct.getProductId()));
         tvItemName.setText(orderProduct.getProductColor().getName());

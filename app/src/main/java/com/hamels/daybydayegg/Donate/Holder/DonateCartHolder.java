@@ -42,7 +42,7 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImg_donatecart1(DonateCart history) {
-        String sPictureUrl = history.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : history.getPictureUrl();
+        String sPictureUrl = history.getPictureUrl() == null || history.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : history.getPictureUrl();
         Glide.with(DonateCartFragment.getInstance()).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_picture_url);
         tv_product_name.setText(history.getProductName());
         //tv_type_name_spec_name.setText(" ( " + history.getTypeName() + " - " + history.getspec_name() + " ) ");
@@ -76,7 +76,7 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImg_donatecart2(DonateCart history) {
-        String sPictureUrl = history.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : history.getPictureUrl();
+        String sPictureUrl = history.getPictureUrl() == null || history.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : history.getPictureUrl();
         Glide.with(DonateCart2Fragment.getInstance()).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_picture_url);
         tv_product_name.setText(history.getProductName());
         //tv_type_name_spec_name.setText(" ( " + history.getTypeName() + " - " + history.getspec_name() + " ) ");

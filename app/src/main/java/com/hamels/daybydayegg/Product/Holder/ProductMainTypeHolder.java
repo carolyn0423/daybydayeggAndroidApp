@@ -51,7 +51,7 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
         RequestOptions requestOptions_left = new RequestOptions()
                 .transform(new RoundedCorners(20));
 
-        String sPictureUrl = mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
+        String sPictureUrl = mainTypeleft.getPicture_url() == null || mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
         Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
 
         img_productMainType_left.setTag(R.id.img_productMainType_left,mainTypeleft.getId());
@@ -71,8 +71,8 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
         RequestOptions requestOptions_right = new RequestOptions()
                 .transform(new RoundedCorners(20));
 
-        String sLeftPictureUrl = mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
-        String sRightPictureUrl = mainTyperight.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTyperight.getPicture_url();
+        String sLeftPictureUrl = mainTypeleft.getPicture_url() == null || mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
+        String sRightPictureUrl = mainTyperight.getPicture_url() == null || mainTyperight.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTyperight.getPicture_url();
 
         Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sLeftPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
         Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sRightPictureUrl).apply(requestOptions_right).into(img_productMainType_right);

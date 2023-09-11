@@ -45,8 +45,8 @@ public class BusinessProductHolder extends RecyclerView.ViewHolder {
         tv_sale_price_right.setVisibility(View.VISIBLE);
         tv_product_name_right.setVisibility(View.VISIBLE);
         layout_right.setVisibility(View.VISIBLE);
-        String sLeftPictureUrl = productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
-        String sRightPictureUrl = productright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPicture_url();
+        String sLeftPictureUrl = productleft.getPicture_url() == null || productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
+        String sRightPictureUrl = productright.getPicture_url() == null || productright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPicture_url();
 
         Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_product_left);
         Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).into(img_product_right);        Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + productright.getPicture_url()).into(img_product_right);
@@ -70,7 +70,7 @@ public class BusinessProductHolder extends RecyclerView.ViewHolder {
         tv_price_right.setVisibility(View.INVISIBLE);
         tv_sale_price_right.setVisibility(View.INVISIBLE);
         tv_product_name_right.setVisibility(View.INVISIBLE);
-        String sLeftPictureUrl = productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
+        String sLeftPictureUrl = productleft.getPicture_url() == null || productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
 
         Glide.with(BusinessProductFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_product_left);
         img_product_left.setTag(R.id.img_product_left,productleft.getId());
