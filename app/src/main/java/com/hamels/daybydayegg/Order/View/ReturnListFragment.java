@@ -97,7 +97,7 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
     }
 
     private void setOrders(Order order) {
-        String sPictureUrl = order.getPreviewImageUrl().equals("") ? EOrderApplication.sApiUrl + EOrderApplication.DEFAULT_PICTURE_URL : order.getPreviewImageUrl();
+        String sPictureUrl = order.getPreviewImageUrl() == null || order.getPreviewImageUrl().equals("") ? EOrderApplication.sApiUrl + EOrderApplication.DEFAULT_PICTURE_URL : order.getPreviewImageUrl();
         Glide.with(this).load(sPictureUrl).into(imgOrder);
 
         tvOrderNo.setText(String.format(getContext().getString(R.string.order_no), order.getId()));

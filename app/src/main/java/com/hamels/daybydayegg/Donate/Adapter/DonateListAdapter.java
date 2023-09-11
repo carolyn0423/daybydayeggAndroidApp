@@ -57,41 +57,43 @@ public class DonateListAdapter extends BaseAdapter<DonateHolder> {
         productHolder.img_donate_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chkEnabled(v, productleft.get(position));
+                chkEnabled(v, productleft.get(position), "Detail");
             }
         });
 
         productHolder.img_donate_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chkEnabled(v, productright.get(position));
+                chkEnabled(v, productright.get(position), "Detail");
             }
         });
 
         productHolder.layout_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chkEnabled(v, productleft.get(position));
+                chkEnabled(v, productleft.get(position), "Detail");
             }
         });
 
         productHolder.layout_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chkEnabled(v, productright.get(position));
+                chkEnabled(v, productright.get(position), "Detail");
             }
         });
 
         productHolder.tv_cart_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.goPageDonateCart(productleft.get(position).getproduct_id(), productleft.get(position).getspec_id(), productleft.get(position).getgive_date());
+                chkEnabled(v, productleft.get(position), "Cart");
+                //  presenter.goPageDonateCart(productleft.get(position).getproduct_id(), productleft.get(position).getspec_id(), productleft.get(position).getgive_date());
             }
         });
         productHolder.tv_cart_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.goPageDonateCart(productright.get(position).getproduct_id(), productright.get(position).getspec_id(), productright.get(position).getgive_date());
+                chkEnabled(v, productright.get(position), "Cart");
+                //  presenter.goPageDonateCart(productright.get(position).getproduct_id(), productright.get(position).getspec_id(), productright.get(position).getgive_date());
             }
         });
     }
@@ -107,13 +109,17 @@ public class DonateListAdapter extends BaseAdapter<DonateHolder> {
         notifyDataSetChanged();
     }
 
-    private void chkEnabled(View v, Donate donate){
+    private void chkEnabled(View v, Donate donate, String sMode){
 
         if(donate.getTicketDue().equals("N")) {
             //  未過期
             if (donate.getTicketEnabled().equals("Y")) {
                 //  尚未下架
-                presenter.getDonateDetailByID(Integer.parseInt(v.getTag(v.getId()).toString()));
+                if(sMode.equals("Detail")){
+                    presenter.getDonateDetailByID(Integer.parseInt(v.getTag(v.getId()).toString()));
+                }else{
+                    presenter.goPageDonateCart(donate.getproduct_id(), donate.getspec_id(), donate.getgive_date());
+                }
             } else {
                 //  已下架
                 presenter.showContactMessage("此提貨券已下架，請連繫客服人員進行退貨事宜，謝謝您。\n" +

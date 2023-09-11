@@ -69,7 +69,7 @@ public class OrderListHolder extends RecyclerView.ViewHolder implements View.OnC
     private void setOrderInfo(Order order, int status) {
         setButtonVisible(status == ORDER_STATUS_TRANS_FINISH && order.canReturn());
         isDetailShow(order.showDetail);
-        String sPictureUrl = order.getPreviewImageUrl().equals("") ? EOrderApplication.sApiUrl + EOrderApplication.DEFAULT_PICTURE_URL : order.getPreviewImageUrl();
+        String sPictureUrl = order.getPreviewImageUrl() == null || order.getPreviewImageUrl().equals("") ? EOrderApplication.sApiUrl + EOrderApplication.DEFAULT_PICTURE_URL : order.getPreviewImageUrl();
         Glide.with(itemView).load(sPictureUrl).into(imgItem);
         tvOrderNo.setText(String.format(itemView.getContext().getString(R.string.order_no), order.getId()));
         tvOrderTime.setText(String.format(itemView.getContext().getString(R.string.order_time), order.getOrderTime()));

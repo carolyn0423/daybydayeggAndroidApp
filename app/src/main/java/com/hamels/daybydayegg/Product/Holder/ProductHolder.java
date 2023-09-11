@@ -43,7 +43,7 @@ public class ProductHolder extends RecyclerView.ViewHolder {
         RequestOptions requestOptions = new RequestOptions()
                 .transform(new RoundedCorners(20));
 
-        String sPictureUrl = product.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : product.getPicture_url();
+        String sPictureUrl = product.getPicture_url() == null || product.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : product.getPicture_url();
         Glide.with(ProductFragment.getInstance()).load(EOrderApplication.sApiUrl + sPictureUrl).apply(requestOptions).into(img_product);
 
         if (product.getSoldoutToday().equals("Y")){

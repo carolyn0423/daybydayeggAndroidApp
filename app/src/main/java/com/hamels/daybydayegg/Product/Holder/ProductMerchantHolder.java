@@ -114,8 +114,8 @@ public class ProductMerchantHolder extends RecyclerView.ViewHolder {
         RequestOptions requestOptions_right = new RequestOptions()
                 .transform(new RoundedCorners(20));
 
-        String sLeftPictureUrl = productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
-        String sRightPictureUrl = productright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPicture_url();
+        String sLeftPictureUrl = productleft.getPicture_url() == null || productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
+        String sRightPictureUrl = productright.getPicture_url() == null || productright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPicture_url();
 
         Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).apply(requestOptions_left).into(img_product_left);
         Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).apply(requestOptions_right).into(img_product_right);
@@ -147,7 +147,7 @@ public class ProductMerchantHolder extends RecyclerView.ViewHolder {
         // 应用圆角转换的 RequestOptions
         RequestOptions requestOptions_left = new RequestOptions()
                 .transform(new RoundedCorners(20));
-        String sLeftPictureUrl = productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
+        String sLeftPictureUrl = productleft.getPicture_url() == null || productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
         Glide.with(ProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).apply(requestOptions_left).into(img_product_left);
 
         img_product_left.setTag(R.id.img_product_left,productleft.getId());

@@ -53,8 +53,8 @@ public class BusinessProductMerchantHolder extends RecyclerView.ViewHolder {
         img_merchant_right.setVisibility(View.VISIBLE);
         img_product_right.setVisibility(View.INVISIBLE);
         img_product_left.setVisibility(View.INVISIBLE);
-        String sLeftPictureUrl = merchantleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : merchantleft.getPicture_url();
-        String sRightPictureUrl = merchantright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : merchantright.getPicture_url();
+        String sLeftPictureUrl = merchantleft.getPicture_url() == null || merchantleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : merchantleft.getPicture_url();
+        String sRightPictureUrl = merchantright.getPicture_url() == null || merchantright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : merchantright.getPicture_url();
 
         Glide.with(BusinessProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_merchant_left);
         Glide.with(BusinessProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).into(img_merchant_right);
@@ -75,7 +75,7 @@ public class BusinessProductMerchantHolder extends RecyclerView.ViewHolder {
         img_merchant_right.setVisibility(View.INVISIBLE);
 
         layout_right.setVisibility(View.INVISIBLE);
-        String sLeftPictureUrl = merchantleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : merchantleft.getPicture_url();
+        String sLeftPictureUrl = merchantleft.getPicture_url() == null || merchantleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : merchantleft.getPicture_url();
 
         Glide.with(BusinessProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_merchant_left);
         img_merchant_left.setTag(R.id.img_merchant_left,merchantleft.getId());
@@ -102,8 +102,8 @@ public class BusinessProductMerchantHolder extends RecyclerView.ViewHolder {
         tv_product_name_left.setVisibility(View.VISIBLE);
         img_merchant_left.setVisibility(View.INVISIBLE);
         img_merchant_right.setVisibility(View.INVISIBLE);
-        String sLeftPictureUrl = productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
-        String sRightPictureUrl = productright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPicture_url();
+        String sLeftPictureUrl = productleft.getPicture_url() == null || productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
+        String sRightPictureUrl = productright.getPicture_url() == null || productright.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productright.getPicture_url();
 
         Glide.with(BusinessProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_product_left);
         Glide.with(BusinessProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).into(img_product_right);
@@ -130,7 +130,7 @@ public class BusinessProductMerchantHolder extends RecyclerView.ViewHolder {
         tv_price_right.setVisibility(View.INVISIBLE);
         tv_sale_price_right.setVisibility(View.INVISIBLE);
         tv_product_name_right.setVisibility(View.INVISIBLE);
-        String sLeftPictureUrl = productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
+        String sLeftPictureUrl = productleft.getPicture_url() == null || productleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPicture_url();
 
         Glide.with(BusinessProductMerchantFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_product_left);
         img_product_left.setTag(R.id.img_product_left,productleft.getId());

@@ -31,7 +31,7 @@ public class ProductDetailHolder extends RecyclerView.ViewHolder {
     }
 
     public void setProduct(OrderProduct orderProduct) {
-        String sPictureUrl = orderProduct.getProduct().getImageSrc().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : orderProduct.getProduct().getImageSrc();
+        String sPictureUrl = orderProduct.getProduct() == null || orderProduct.getProduct().getImageSrc().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : orderProduct.getProduct().getImageSrc();
         Glide.with(itemView).load(sPictureUrl).into(imgItem);
         tvItemNo.setText(String.format(itemView.getContext().getString(R.string.item_no), orderProduct.getProductId()));
         tvItemCount.setText("x " + orderProduct.getAmount());
