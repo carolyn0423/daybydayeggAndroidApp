@@ -105,17 +105,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private BottomNavigationViewEx bottomNavigationViewEx;
     private MainContract.Presenter mainPresenter;
     private WebView webView;
-    private static TextView tvShoppingCart, tvShoppingCartETicket, tvMessageUnread;
+    //private static TextView tvShoppingCart, tvShoppingCartETicket, tvMessageUnread;
+    private static TextView  tvBadgeShoppingCartETicket, tvMessageUnread;
 
     // toolbar
     private ConstraintLayout constClose, constBackground, constBase;
     private LinearLayout llOpen, llItemButton;
 
     // navigation
-    private FloatingActionButton btnShopping;
-    private LinearLayout layoutHome, layoutOrder, layoutPurchase, layoutMember;
-    private ImageView imgHome, imgOrder, imgPurchase, imgMember;
-    private TextView txtHome, txtOrder, txtPurchase, txtMember;
+    //private FloatingActionButton btnShopping;
+    private LinearLayout layoutHome, layoutShoppingCart, layoutPurchase, layoutMember;
+    private ImageView imgHome, imgShoppingCart, imgPurchase, imgMember;
+    private TextView txtHome, txtShoppingCart, txtPurchase, txtMember;
 
     // qrcode
     private PopupWindow popupWindow;
@@ -247,29 +248,29 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         constBackground = findViewById(R.id.const_background);
         constBase = findViewById(R.id.const_base);
 
-        tvShoppingCart = findViewById(R.id.tv_shopping_cart);
-        tvShoppingCartETicket = findViewById(R.id.tv_shopping_cart_e_ticket);
+        //tvShoppingCart = findViewById(R.id.tv_shopping_cart);
+        tvBadgeShoppingCartETicket = findViewById(R.id.tv_shopping_cart_e_ticket);
         tvMessageUnread = findViewById(R.id.tv_message_unread);
 
         // floating_action_bar
-        btnShopping = (FloatingActionButton) findViewById(R.id.floating_action_bar);
-        btnShopping.setOnClickListener(onClickListener);
+        //btnShopping = (FloatingActionButton) findViewById(R.id.floating_action_bar);
+        //btnShopping.setOnClickListener(onClickListener);
 
         // navigation
         layoutHome = findViewById(R.id.home);
         layoutHome.setOnClickListener(onClickListener);
-        layoutOrder = findViewById(R.id.order);
-        layoutOrder.setOnClickListener(onClickListener);
+        layoutShoppingCart = findViewById(R.id.shopping_cart);
+        layoutShoppingCart.setOnClickListener(onClickListener);
         layoutPurchase = findViewById(R.id.purchase);
         layoutPurchase.setOnClickListener(onClickListener);
         layoutMember = findViewById(R.id.member);
         layoutMember.setOnClickListener(onClickListener);
         imgHome = findViewById(R.id.img_home);
-        imgOrder = findViewById(R.id.img_order);
+        imgShoppingCart = findViewById(R.id.img_shopping_cart);
         imgPurchase = findViewById(R.id.img_purchase);
         imgMember = findViewById(R.id.img_member);
         txtHome = findViewById(R.id.txt_home);
-        txtOrder = findViewById(R.id.txt_order);
+        txtShoppingCart = findViewById(R.id.txt_shopping_cart);
         txtPurchase = findViewById(R.id.txt_purchase);
         txtMember = findViewById(R.id.txt_member);
 
@@ -283,7 +284,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         donate.setOnClickListener(onClickListener);
 
         setAppToolbar(R.id.toolbar);
-        setCartBadge(R.id.tv_shopping_cart, R.id.tv_shopping_cart_e_ticket);
+        //setCartBadge(R.id.tv_shopping_cart, R.id.tv_shopping_cart_e_ticket);
+        setCartBadge(0, R.id.tv_shopping_cart_e_ticket);
 
         appToolbar.getBtnMail().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -410,6 +412,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         } else {
             switch (sSourceActive){
                 case "PRODUCT_WELCOME":
+                    /*
                 case "LOCATION_WELCOME":
                     //  外帶外送 未登入的情況
                     if(sSourceActive.equals("PRODUCT_WELCOME")){
@@ -421,6 +424,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     mainPresenter.saveFragmentLocation("");
                     changeTabFragment(LocationFragment.getInstance());
                     break;
+
+                     */
                 case "ETICKET_WELCOME":
                     //  買提貨卷 未登入的情況
                     changeNavigationColor(R.id.purchase);
@@ -445,6 +450,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             if (id == R.id.home){ //首頁
                 changeNavigationColor(v.getId());
                 changeTabFragment(MainIndexFragment.getInstance());
+                /*
             }else if (id == R.id.order){
                 //  外帶外送
                 changeNavigationColor(v.getId());
@@ -458,7 +464,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 //                    //initSelectCustomer("isSetLove");
 //                    changeTabFragment(CustomerFragment.getInstance());
 //                }
-
+*/
             }else if (id == R.id.purchase){
                 //  買提貨券
                 changeNavigationColor(v.getId());
@@ -476,7 +482,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }else if (id == R.id.member){ //會員中心
                 changeNavigationColor(v.getId());
                 mainPresenter.checkLoginForMemberCenter();
-            }else if (id == R.id.floating_action_bar){ //購物車
+            }else if (id == R.id.shopping_cart){ //購物車
                 changeNavigationColor(v.getId());
                 mainPresenter.checkLoginForShoppingCart("G");
             }
@@ -543,25 +549,25 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         if (layoutID == R.id.home){
             setMainIndexMessageUnreadVisibility(true);
             changeHomeColor(true);
-            changeOrderColor(false);
+            changeShoppingCartColor(false);
             changeStoreColor(false);
             changeMemberColor(false);
-        }else if (layoutID == R.id.order){
+        }else if (layoutID == R.id.shopping_cart){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
-            changeOrderColor(true);
+            changeShoppingCartColor(true);
             changeStoreColor(false);
             changeMemberColor(false);
         }else if (layoutID == R.id.purchase){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
-            changeOrderColor(false);
+            changeShoppingCartColor(false);
             changeStoreColor(true);
             changeMemberColor(false);
         }else if (layoutID == R.id.member){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
-            changeOrderColor(false);
+            changeShoppingCartColor(false);
             changeStoreColor(false);
             changeMemberColor(true);
         }
@@ -577,22 +583,22 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
     }
 
-    private void changeOrderColor(boolean isClicked) {
+    private void changeShoppingCartColor(boolean isClicked) {
         if (isClicked) {
-            imgOrder.setImageDrawable(getResources().getDrawable(R.drawable.bag_fill));
-            txtOrder.setTextColor(getResources().getColor(R.color.colorYunlinhn));
+            imgShoppingCart.setImageDrawable(getResources().getDrawable(R.drawable.cart_fill));
+            txtShoppingCart.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         } else {
-            imgOrder.setImageDrawable(getResources().getDrawable(R.drawable.bag_line));
-            txtOrder.setTextColor(getResources().getColor(R.color.colorYunlinhn));
+            imgShoppingCart.setImageDrawable(getResources().getDrawable(R.drawable.cart_line));
+            txtShoppingCart.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         }
     }
 
     private void changeStoreColor(boolean isClicked) {
         if (isClicked) {
-            imgPurchase.setImageDrawable(getResources().getDrawable(R.drawable.cart_fill));
+            imgPurchase.setImageDrawable(getResources().getDrawable(R.drawable.bag_fill));
             txtPurchase.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         } else {
-            imgPurchase.setImageDrawable(getResources().getDrawable(R.drawable.cart_line));
+            imgPurchase.setImageDrawable(getResources().getDrawable(R.drawable.bag_line));
             txtPurchase.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         }
     }
@@ -830,24 +836,27 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         // 購物車商品數量
         if (array.length == 4) {
             EOrderApplication.cartBadgeCount = array[3];
+            /*
             if (array[3].equals("0")) {
                 tvShoppingCart.setVisibility(View.GONE);
             } else {
                 tvShoppingCart.setVisibility(View.VISIBLE);
                 tvShoppingCart.setText(array[3]);
             }
+
+             */
             EOrderApplication.cartTicketBadgeCount = array[2];
             if (array[2].equals("0")) {
-                tvShoppingCartETicket.setVisibility(View.GONE);
+                tvBadgeShoppingCartETicket.setVisibility(View.GONE);
             } else {
-                tvShoppingCartETicket.setVisibility(View.VISIBLE);
-                tvShoppingCartETicket.setText(array[2]);
+                tvBadgeShoppingCartETicket.setVisibility(View.VISIBLE);
+                tvBadgeShoppingCartETicket.setText(array[2]);
             }
         }
         // 購物車沒東西時未讀數量會收到空字串
         else {
-            tvShoppingCart.setVisibility(View.GONE);
-            tvShoppingCartETicket.setVisibility(View.GONE);
+            //tvShoppingCart.setVisibility(View.GONE);
+            tvBadgeShoppingCartETicket.setVisibility(View.GONE);
         }
     }
 
@@ -1218,10 +1227,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     public void setShoppingCartCount(String Count) {
         if (!Count.equals("")) {
-            tvShoppingCart.setVisibility(View.VISIBLE);
-            tvShoppingCart.setText(Count);
+            tvBadgeShoppingCartETicket.setVisibility(View.VISIBLE);
+            tvBadgeShoppingCartETicket.setText(Count);
         } else {
-            tvShoppingCart.setVisibility(View.GONE);
+            tvBadgeShoppingCartETicket.setVisibility(View.GONE);
         }
     }
 
@@ -1260,7 +1269,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 if (isETicket.equals("Y")) {
                     changeNavigationColor(R.id.purchase); // 買提貨券
                 } else {
-                    changeNavigationColor(R.id.order); //我要點餐
+                    //changeNavigationColor(R.id.order); //我要點餐
                 }
             }
         });

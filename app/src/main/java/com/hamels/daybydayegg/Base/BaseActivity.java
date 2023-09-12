@@ -53,7 +53,7 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
 
     @Override
     public void setCartBadge(@IdRes int CartBadgeID, @IdRes int CartBadgeTicketID) {
-        tvShoppingCart = findViewById(CartBadgeID);
+        //tvShoppingCart = findViewById(CartBadgeID);
         tvShoppingCartETicket = findViewById(CartBadgeTicketID);
     }
 

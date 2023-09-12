@@ -137,7 +137,7 @@ public class WelcomeFragment extends BaseFragment implements WelcomeContract.Vie
 
 
         if(sSourceActive.equals("PRODUCT")){
-            ((MainActivity) getActivity()).changeNavigationColor(R.id.order);
+           // ((MainActivity) getActivity()).changeNavigationColor(R.id.order);
         }else{
             ((MainActivity) getActivity()).changeNavigationColor(R.id.purchase);
         }
