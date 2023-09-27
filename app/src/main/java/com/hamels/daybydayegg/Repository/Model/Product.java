@@ -25,6 +25,8 @@ public class Product implements Parcelable {
     private String modified_date = "";
     private String freight_title = "";
     private String picture_url = "";
+    private String coupon_id = "";
+    private String coupon_title = "";
     private List<ProductPicture> picture_url_list;
     private String dealer_product_id = "";
     private String desc = "";
@@ -115,6 +117,20 @@ public class Product implements Parcelable {
         return type_name;
     }
 
+    public String getCoupon_ID() {
+        return coupon_id;
+    }
+    public void setCoupon_ID(String coupon_id) {
+        this.coupon_id = coupon_id;
+    }
+
+    public String getCoupon_title() {
+        return coupon_title;
+    }
+    public void setCoupon_title(String coupon_title) {
+        this.coupon_title = coupon_title;
+    }
+
     public void setProduct_name(String product_name) {
         this.product_name = product_name;
     }
@@ -195,6 +211,8 @@ public class Product implements Parcelable {
         spec_list = in.createTypedArrayList(ProductSpec.CREATOR);
         soldout_flag = in.readString();
         product_type_main_id = in.readString();
+        coupon_id = in.readString();
+        coupon_title = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -231,6 +249,8 @@ public class Product implements Parcelable {
         dest.writeTypedList(spec_list);
         dest.writeString(soldout_flag);
         dest.writeString(product_type_main_id);
+        dest.writeString(coupon_id);
+        dest.writeString(coupon_title);
     }
 }
 

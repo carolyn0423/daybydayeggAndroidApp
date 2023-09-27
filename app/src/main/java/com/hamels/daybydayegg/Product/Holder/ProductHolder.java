@@ -24,7 +24,7 @@ import java.util.List;
 public class ProductHolder extends RecyclerView.ViewHolder {
     public static final String TAG = ProductHolder.class.getSimpleName();
     public ImageView img_product;
-    public TextView tv_product_name, tv_price, tv_sale_price,tv_water_mask;
+    public TextView tv_product_name, tv_price, tv_sale_price,tv_water_mask,tv_coupon_name;
     public ConstraintLayout layout;
     private DecimalFormat mDecimalFormat = new DecimalFormat("#,###");
 
@@ -35,6 +35,7 @@ public class ProductHolder extends RecyclerView.ViewHolder {
         tv_product_name = itemView.findViewById(R.id.tv_product_name);
         tv_price = itemView.findViewById(R.id.tv_price);
         tv_sale_price = itemView.findViewById(R.id.tv_sale_price);
+        tv_coupon_name = itemView.findViewById(R.id.tv_coupon_name);
         layout = itemView.findViewById(R.id.layout_constraint);
     }
 
@@ -55,7 +56,7 @@ public class ProductHolder extends RecyclerView.ViewHolder {
         img_product.setTag(R.id.img_product, product.getId());
         layout.setTag(R.id.layout_constraint, product.getId());
         tv_product_name.setText(product.getProduct_name());
-
+        tv_coupon_name.setText(product.getCoupon_title());
         String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() * product.getLimitQuantity()));
         String sPrice = mDecimalFormat.format((double) (product.getPrice() * product.getLimitQuantity()));
 

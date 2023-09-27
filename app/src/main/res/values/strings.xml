@@ -112,7 +112,7 @@
     <string name="gender_empty">性別尚未選取</string>
     <string name="not_yet_check_terms_of_use">請勾選同意會員使用條款</string>
     <string name="email_empty">Email尚未填寫</string>
-    <string name="delete_member">退出會員後將刪除所有交易紀錄，點數也將歸0</string>
+    <string name="delete_member">帳號刪除後，我們將不再保留您的個人資料、點數及票券，亦無法為您恢復帳號，請務必再次確認</string>
     <string name="logout_success">退出成功</string>
     <!-- verify code -->
     <string name="verify_title">請輸入簡訊驗證碼</string>
