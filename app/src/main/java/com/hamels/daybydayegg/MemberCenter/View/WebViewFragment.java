@@ -17,7 +17,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.R;
 
@@ -68,7 +67,7 @@ public class WebViewFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_cketitor, container, false);
         if (getArguments() != null) {
             url = getArguments().getString(URL, "");
             resTitleString = getArguments().getInt(TITLE, 0);

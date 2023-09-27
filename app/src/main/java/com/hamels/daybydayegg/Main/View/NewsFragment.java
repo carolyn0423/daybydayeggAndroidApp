@@ -1,5 +1,6 @@
 package com.hamels.daybydayegg.Main.View;
 
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,17 +20,20 @@ import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Contract.NewsContract;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Carousel;
+import com.hamels.daybydayegg.Utils.ArticleWebViewClient;
 import com.hamels.daybydayegg.Utils.PicassoImageGetter;
+
+import java.util.Objects;
 
 public class NewsFragment extends BaseFragment implements NewsContract.View {
     public static final String TAG = NewsFragment.class.getSimpleName();
 
     private static NewsFragment fragment;
     private static final String NEWS_ID = "news_id";
-    private TextView  tv_news_title ,tv_news_content;
+    private TextView  tv_news_title;
     private ImageView imageView;
     private Carousel carousel;
-
+    private WebView webView;
     public static NewsFragment getInstance(Carousel carousel) {
         if (fragment == null) {
             fragment = new NewsFragment();
@@ -52,7 +56,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     }
 
     private void initView(View view) {
-//        webView = view.findViewById(R.id.web_view);
         setAppTitle(R.string.tab_news);
         setBackButtonVisibility(true);
         setMailButtonVisibility(true);
@@ -61,8 +64,11 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         setAppToolbarVisibility(true);
+
+        webView = view.findViewById(R.id.web_view);
+        ((MainActivity) getActivity()).bindWebView(webView);
+
         imageView = view.findViewById(R.id.imageView);
-        tv_news_content = view.findViewById(R.id.tv_news_content);
         tv_news_title = view.findViewById(R.id.tv_news_title);
     }
     @Override
@@ -72,14 +78,23 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         String sPictureUrl = carousel.getPicture_url2() == null || carousel.getPicture_url2().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : carousel.getPicture_url2();
         Glide.with(getActivity()).load(EOrderApplication.sApiUrl + sPictureUrl).into(imageView);
         tv_news_title.setText(carousel.getTitle());
-        PicassoImageGetter imageGetter = new PicassoImageGetter(this.getContext(),tv_news_content);
-        Spannable html;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            html = (Spannable) Html.fromHtml(carousel.getContent(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
-        } else {
-            html = (Spannable) Html.fromHtml(carousel.getContent(), imageGetter, null);
-        }
 
-        tv_news_content.setText(html);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
+        }
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        // 禁用滾動條
+        webView.setVerticalScrollBarEnabled(false);
+        webView.setHorizontalScrollBarEnabled(false);
+
+        // 禁用觸摸滾動
+        webView.setOnTouchListener((v, event) -> true);
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=News&id=" + carousel.getId());
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
     }
 }

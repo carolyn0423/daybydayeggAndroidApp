@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.75" />
+
             <!--            -->
 
             <TextView
@@ -97,15 +98,32 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_sale_price"
                 />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_coupon_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="left"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:maxEms="5"
+                android:textSize="12sp"
+                android:text=""
+                android:textColor="@color/orangeText"
+                app:layout_constraintStart_toStartOf="@id/tv_product_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/product_ribbon"/>
-
+-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

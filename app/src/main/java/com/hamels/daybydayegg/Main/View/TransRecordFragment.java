@@ -58,7 +58,7 @@ public class TransRecordFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_cketitor, container, false);
         if(getArguments()!=null){
             mOrderType = getArguments().getString(ORDER_TYPE,"G");
             sOrderID = getArguments().getString(OrderID,"");

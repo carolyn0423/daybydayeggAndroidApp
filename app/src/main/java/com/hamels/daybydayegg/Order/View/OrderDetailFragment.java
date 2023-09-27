@@ -53,7 +53,7 @@ public class OrderDetailFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_cketitor, container, false);
 
         orderid = getArguments().getString(ORDERID, "");
         meal_no = getArguments().getString(MEALNO, "");

@@ -260,7 +260,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 
         try {
-            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 100, 100, hints);
+            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
 
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();

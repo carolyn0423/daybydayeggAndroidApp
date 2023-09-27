@@ -1,32 +1,31 @@
 package com.hamels.daybydayegg.MemberCenter.View;
 
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.text.Html;
-import android.text.Spannable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.webkit.WebView;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.MemberCenter.Contract.FaqContract;
-import com.hamels.daybydayegg.MemberCenter.Presenter.FaqPresenter;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Faq;
-import com.hamels.daybydayegg.Utils.PicassoImageGetter;
+
+import java.util.Objects;
 
 public class FaqFragment extends BaseFragment implements FaqContract.View{
     public static final String TAG = FaqFragment.class.getSimpleName();
 
     private static FaqFragment fragment;
-    private FaqContract.Presenter presenter;
     private String faq_id;
     private static final String FAQ_ID = "faq_id";
-
-    private TextView tv_faq_data;
+    private WebView webView;
 
     public static FaqFragment getInstance(String faq_id) {
         if (fragment == null) {
@@ -41,7 +40,7 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_faq, container, false);
+        View view = inflater.inflate(R.layout.fragment_cketitor, container, false);
         if (getArguments() != null) {
             faq_id = getArguments().getString(FAQ_ID, "");
             initView(view);
@@ -52,8 +51,6 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new FaqPresenter(this, getRepositoryManager(getContext()));
-        presenter.getFaqData(faq_id);
     }
 
     private void initView(View view) {
@@ -74,21 +71,29 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
-        tv_faq_data = view.findViewById(R.id.tv_faq_data);
+        webView = view.findViewById(R.id.web_view);
+        ((MainActivity) getActivity()).bindWebView(webView);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setWebContentsDebuggingEnabled(false); // 關閉調試模式以提高性能
+        }
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        // 禁用滾動條
+        webView.setVerticalScrollBarEnabled(false);
+        webView.setHorizontalScrollBarEnabled(false);
+
+        // 禁用觸摸滾動
+        webView.setOnTouchListener((v, event) -> true);
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_CONTENT_URL + "?mode=Faq&id=" + faq_id);
     }
 
     @Override
     public void setFaqData(Faq faq) {
-        PicassoImageGetter imageGetter = new PicassoImageGetter(getContext(), tv_faq_data);
-        Spannable html;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            html = (Spannable) Html.fromHtml(faq.getAnswer(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null);
-        } else {
-            html = (Spannable) Html.fromHtml(faq.getAnswer(), imageGetter, null);
-        }
 
-        tv_faq_data.setText(html);
-
-        //tv_faq_data.setText(Html.fromHtml(faq.getAnswer()));
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
     }
 }
