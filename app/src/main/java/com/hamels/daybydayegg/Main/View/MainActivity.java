@@ -40,6 +40,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -962,6 +963,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
             }
         });
+        webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        // 禁用滾動條
+        webView.setVerticalScrollBarEnabled(false);
+        webView.setHorizontalScrollBarEnabled(false);
+        // WebView启用混合内容
+        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         webView.getSettings().setUseWideViewPort(true);
         webView.addJavascriptInterface(new AndroidJsInterface(), "hamels");
         webView.getSettings().setLoadWithOverviewMode(true);
