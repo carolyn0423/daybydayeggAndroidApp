@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +70,6 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
         return view;
 
     }
-
     private void initView(View view) {
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
@@ -157,7 +158,17 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
             recyclerView.scrollToPosition(0);
         }
 
-        ((MainActivity) getActivity()).setMessageButtonVisibility(true);
+        // 延遲執行程式碼，例如 2000 毫秒（2秒）
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                if(mainActivity != null) {
+                    mainActivity.refreshBadge();
+                    mainActivity.setMessageButtonVisibility(true);
+                }
+            }
+        }, 100); // 2000 毫秒 = 2秒
     }
 
     @Override
