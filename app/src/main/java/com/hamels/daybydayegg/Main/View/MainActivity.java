@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -963,6 +964,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
             }
         });
+        // 關閉調試模式以提高性能
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.setWebContentsDebuggingEnabled(false);
+        }
         webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         // 禁用滾動條
         webView.setVerticalScrollBarEnabled(false);
@@ -974,6 +979,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.setBackgroundColor(getResources().getColor(R.color.gray));
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -1191,7 +1197,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             } else {
                 // 點推播通知進來的
                 if (getSupportFragmentManager().getBackStackEntryCount() == 1
-                        && getSupportFragmentManager().getFragments().get(0).equals(MailFileFragment.getInstance())) {
+                        && ( getSupportFragmentManager().getFragments().size() == 0
+                        || getSupportFragmentManager().getFragments().get(0).equals(MailFileFragment.getInstance()))
+                ) {
                     changeNavigationColor(R.id.home);
                     changeTabFragment(MainIndexFragment.getInstance());
                 } else {
@@ -1204,7 +1212,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }else if(currentFragment instanceof ProductMainTypeFragment){
                         changeTabFragment(MainIndexFragment.getInstance());
                     } else{
-                        super.onBackPressed();
+                        if(!getSupportFragmentManager().isStateSaved()){
+                            changeNavigationColor(R.id.home);
+                            changeTabFragment(MainIndexFragment.getInstance());
+                        }else {
+                            super.onBackPressed();
+                        }
                     }
                 }
             }
