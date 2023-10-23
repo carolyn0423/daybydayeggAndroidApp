@@ -176,7 +176,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:textSize="12sp"
+                            android:textSize="13sp"
                             android:textColor="@color/orangeText"
                             android:text=""
                             android:gravity="left"
@@ -185,7 +185,7 @@
                             android:maxEms="25"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_same_price"/>
+                            app:layout_constraintTop_toBottomOf="@+id/tv_price"/>
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline10"

@@ -123,8 +123,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     // qrcode
     private PopupWindow popupWindow;
     private ImageView dialog_img_qrcode;
-    private int barcodeWidth = 100;
-    private int barcodeHeight = 100;
+    private int barcodeWidth = 250;
+    private int barcodeHeight = 250;
     private int brightnessNow = 0;
     private TextView text_invite_code;
 
@@ -1356,8 +1356,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 try {
                     BitMatrix bitMatrix = new MultiFormatWriter().encode(qrcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
 
-                    int newWidth = 300;
-                    int newHeight = 300;
+                    int newWidth = 250;
+                    int newHeight = 250;
 
                     Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
                     float scaleX = (float) newWidth / barcodeWidth;

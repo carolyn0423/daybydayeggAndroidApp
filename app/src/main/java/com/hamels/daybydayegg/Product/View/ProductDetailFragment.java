@@ -217,7 +217,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1].replace(",", ""));
                 }
                 int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1].replace(",", ""));
-                tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice * iLimitQuantity));
+                //tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice * iLimitQuantity));
+                tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice));
             }
         });
 
@@ -446,7 +447,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     if (!(i == (SelectConf.size() - 1))) {
                         sTmpAllConfName += "/";
                     }
-                    iTmpAllPrice += SelectConf.get(i).getprice() * iLimitQuantity;
+                    //iTmpAllPrice += SelectConf.get(i).getprice() * iLimitQuantity;
+                    iTmpAllPrice += SelectConf.get(i).getprice() ;
 
                     if(SelectConf.get(i).getSoldOutQty().equals("Y")){
                         iAllSoldout += SelectConf.get(i).getSoldOutQty().equals("Y") ? 1 : 0;
@@ -540,9 +542,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         tv_product_type.setText(productDetail.get(0).getProduct_name());
         tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());
         tv_coupon_name.setText(productDetail.get(0).getCoupon_title());
-        String sTicketSalePrice = mDecimalFormat.format((double) (product.getticket_sales_price() * iLimitQuantity));
-        String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() * iLimitQuantity));
-        String sPrice = mDecimalFormat.format((double) (product.getPrice() * iLimitQuantity));
+        //String sTicketSalePrice = mDecimalFormat.format((double) (product.getticket_sales_price() * iLimitQuantity));
+        String sTicketSalePrice = mDecimalFormat.format((double) (product.getticket_sales_price()));
+       // String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() * iLimitQuantity));
+        String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() ));
+       // String sPrice = mDecimalFormat.format((double) (product.getPrice() * iLimitQuantity));
+        String sPrice = mDecimalFormat.format((double) (product.getPrice() ));
 
         if (isETicket.equals("Y")) {
             tv_same_price.setText("NT$" + sTicketSalePrice);
@@ -618,9 +623,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     Stock[0] = specArrayList.get(iSpecKey).getStock();
                 }
 
-                String sTicketSalePrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getticket_sales_price() * iLimitQuantity));
-                String sSalePrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getsale_price() * iLimitQuantity));
-                String sPrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getprice() * iLimitQuantity));
+                //String sTicketSalePrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getticket_sales_price() * iLimitQuantity));
+                String sTicketSalePrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getticket_sales_price() ));
+                //String sSalePrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getsale_price() * iLimitQuantity));
+                String sSalePrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getsale_price()));
+                //String sPrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getprice() * iLimitQuantity));
+                String sPrice = mDecimalFormat.format((double) (specArrayList.get(iSpecKey).getprice() ));
 
                 if (isETicket.equals("Y")) {
                     tv_same_price.setText("NT$" + sTicketSalePrice);
@@ -715,9 +723,11 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 for (int i = 0; i < productList.size(); i++) {
                     //Log.e(TAG, "" + productList.get(i).getPrice());
 
-                    iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1]) * iLimitQuantity;
+                    //iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1]) * iLimitQuantity;
+                    iAllConfPrice += Integer.parseInt(productList.get(i).getPrice().trim().split("\\$")[1]) ;
                 }
-                int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1]) * iLimitQuantity;
+                //int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1]) * iLimitQuantity;
+                int subTotal = Integer.parseInt(tv_sale_price.getText().toString().trim().split("NT\\$")[1]) ;
 
                 tv_subtotal.setText("$" + ((subTotal * quantity) + iAllConfPrice));
             }

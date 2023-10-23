@@ -24,13 +24,23 @@
         android:text="╳"
         android:textColor="#000" />
 
+    <TextView
+        android:id="@+id/text_member_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_btn_close"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="會員編碼"
+        android:textSize="14sp" />
+
     <ImageView
         android:id="@+id/dialog_img_qrcode"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
         android:layout_alignTop="@id/bg_shadow_corner"
-        android:layout_marginTop="40dp" />
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/text_invite_code_label"

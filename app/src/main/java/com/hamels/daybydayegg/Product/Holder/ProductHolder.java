@@ -57,8 +57,10 @@ public class ProductHolder extends RecyclerView.ViewHolder {
         layout.setTag(R.id.layout_constraint, product.getId());
         tv_product_name.setText(product.getProduct_name());
         tv_coupon_name.setText(product.getCoupon_title());
-        String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() * product.getLimitQuantity()));
-        String sPrice = mDecimalFormat.format((double) (product.getPrice() * product.getLimitQuantity()));
+        //String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() * product.getLimitQuantity()));
+        String sSalePrice = mDecimalFormat.format((double) (product.getSale_price() ));
+        //String sPrice = mDecimalFormat.format((double) (product.getPrice() * product.getLimitQuantity()));
+        String sPrice = mDecimalFormat.format((double) (product.getPrice()));
 
         if (1 < product.getspec_cnt()) {
             tv_sale_price.setText("NT$" + sSalePrice + " 起");
