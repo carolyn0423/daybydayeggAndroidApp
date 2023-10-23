@@ -23,6 +23,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -57,6 +58,11 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.hamels.daybydayegg.Donate.View.DonateFragment;
+import com.hamels.daybydayegg.MemberCenter.View.AboutFragment;
+import com.hamels.daybydayegg.MemberCenter.View.MemberInfoChangeFragment;
+import com.hamels.daybydayegg.MemberCenter.View.MemberPointFragment;
+import com.hamels.daybydayegg.MemberCenter.View.PasswordChangeFragment;
+import com.hamels.daybydayegg.Product.View.ProductDetailDescFragment;
 import com.hamels.daybydayegg.Product.View.ProductDetailFragment;
 import com.hamels.daybydayegg.Product.View.ProductMainTypeFragment;
 import com.hamels.daybydayegg.Repository.ApiRepository.ApiRepository;
@@ -84,6 +90,10 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_COUPON;
@@ -97,6 +107,10 @@ import static com.hamels.daybydayegg.Constant.Constant.REQUEST_SHOPPING_CART;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_LOT_LIST;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_DONATE;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -979,6 +993,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
         webView.setBackgroundColor(getResources().getColor(R.color.gray));
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -1043,16 +1059,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             return sData;
         }
 
-//        @JavascriptInterface
-//        public String jsCall_getConnectName() {
-//            return EOrderApplication.dbConnectName;
-//        }
-
         @JavascriptInterface
         public void jsCall_goLoginPage(String page, String function) {
             goPage();
         }
-
 
         @JavascriptInterface
         public void jsCall_goOrderPage(String orderType) {
@@ -1097,6 +1107,48 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         @JavascriptInterface
         public void jsCall_setShoppingCartAppTitle(String sParam) {
             ShoppingCartFragment.getInstance().setShoppingCartAppTitle(sParam);
+        }
+        @JavascriptInterface
+        public void jsCall_SharedPDF(String sPDFUrl) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(sPDFUrl)
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    // 下载成功，保存文件到本地
+                    String[] PDF = sPDFUrl.split("/");
+                    InputStream inputStream = response.body().byteStream();
+                    File outputFile = new File(getFilesDir(), PDF[PDF.length - 1]); // 保存到应用内部存储
+                    FileOutputStream outputStream = new FileOutputStream(outputFile);
+
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                    outputStream.close();
+
+                    // 现在文件已下载并保存到本地
+                    File file = new File(getFilesDir(), PDF[PDF.length - 1]); // 本地文件路径
+
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("application/pdf"); // 设置共享的内容类型为PDF
+                    Uri fileUri = FileProvider.getUriForFile(getBaseContext(), "com.hamels.daybydayegg.fileprovider", file);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri); // 设置共享的文件URI
+
+                    startActivity(Intent.createChooser(shareIntent, "Share PDF"));
+                } else {
+                    // 处理下载失败的情况
+                    Toast.makeText(getBaseContext(), "下載失敗，請重試。", Toast.LENGTH_SHORT).show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 处理异常
+                Toast.makeText(getBaseContext(), "下載失敗，請重試。", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -1205,19 +1257,32 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 } else {
                     Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
-                    if(currentFragment instanceof ProductDetailFragment){   //  商品內頁
+                    if(currentFragment instanceof MainIndexFragment){
+                        new AlertDialog.Builder(this).setTitle(null).setMessage(R.string.close_hint)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        System.exit(0);
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, null)
+                                .show();
+                    }else if(currentFragment instanceof ProductDetailDescFragment){     //  商品詳細
+                        super.onBackPressed();
+                    }else if(currentFragment instanceof ProductDetailFragment){         //  商品內頁
                         addFragment(ProductFragment.getInstance());
-                    }else if(currentFragment instanceof ProductFragment){   //  商品列表
+                    }else if(currentFragment instanceof ProductFragment){               //  商品列表
                         addFragment(ProductMainTypeFragment.getInstance());
                     }else if(currentFragment instanceof ProductMainTypeFragment){
                         changeTabFragment(MainIndexFragment.getInstance());
+                    }else if(currentFragment instanceof MemberInfoChangeFragment
+                            || currentFragment instanceof PasswordChangeFragment
+                            || currentFragment instanceof MemberPointFragment
+                            || currentFragment instanceof AboutFragment
+                            || currentFragment instanceof TransRecordFragment){
+                        addFragment(MemberCenterFragment.getInstance());
                     } else{
-                        if(!getSupportFragmentManager().isStateSaved()){
-                            changeNavigationColor(R.id.home);
-                            changeTabFragment(MainIndexFragment.getInstance());
-                        }else {
-                            super.onBackPressed();
-                        }
+                        super.onBackPressed();
                     }
                 }
             }
