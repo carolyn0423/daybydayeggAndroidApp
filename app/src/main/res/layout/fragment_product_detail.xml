@@ -70,7 +70,8 @@
                     <!--                名稱-->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
                         android:padding="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +94,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:textSize="14sp"
-                            android:visibility="gone"
+                            android:visibility="invisible"
                             android:text="復興店"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -121,10 +122,10 @@
                             android:layout_marginTop="8dp"
                             android:textSize="15sp"
                             android:textColor="@color/Black"
-                            android:text=""
+                            android:text="名稱"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_show_desc" />
 
                         <TextView
                             android:id="@+id/tv_same_price"
@@ -136,9 +137,9 @@
                             android:layout_marginBottom="8dp"
                             android:textColor="@color/Black"
                             android:textSize="16sp"
-
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="$ 123"
+                            app:layout_constraintStart_toStartOf="@+id/guideline10"
+                            app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintTop_toBottomOf="@+id/tv_product_type" />
 
                         <TextView
@@ -149,7 +150,7 @@
                             android:layout_marginEnd="6dp"
                             android:textColor="@color/Black"
                             android:textSize="16sp"
-                            android:text=""
+                            android:text="$ 456"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/guideline10"
                             app:layout_constraintHorizontal_bias="1.0"
@@ -165,6 +166,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="8dp"
                             android:textSize="14sp"
+                            android:text="$ 987"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@+id/guideline10"
@@ -176,16 +178,16 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             android:textColor="@color/orangeText"
-                            android:text=""
+                            android:text="1111"
                             android:gravity="left"
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:maxEms="25"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_price"/>
+                            app:layout_constraintTop_toBottomOf="@+id/tv_sale_price"/>
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline10"
