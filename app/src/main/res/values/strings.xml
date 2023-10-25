@@ -35,7 +35,7 @@
     <string name="logout">登出</string>
     <string name="store_title">商品清單</string>
     <string name="force_logout_message">連線逾時 請重新登入</string>
-    <string name="close_hint">是否要確定離開eOrder?</string>
+    <string name="close_hint">是否要確定離開?</string>
     <string name="select_customer">選擇商家</string>
     <string name="product_desc">商品內容</string>
 
