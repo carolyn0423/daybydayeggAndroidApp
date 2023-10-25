@@ -420,7 +420,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     changeTabFragment(MainIndexFragment.getInstance());
                 }else if (id == R.id.item_shop){
                     setMainIndexMessageUnreadVisibility(false);
-                    checkMerchantCount("PRODUCT", "N"); //非電子商品
+                    checkMerchantCount("PRODUCT", "Y"); //非電子商品
                 }else if (id == R.id.item_member_card){
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.checkLoginForMemberCenter();
@@ -518,7 +518,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 mainPresenter.checkLoginForMemberCenter();
             }else if (id == R.id.shopping_cart){ //購物車
                 changeNavigationColor(v.getId());
-                mainPresenter.checkLoginForShoppingCart("G");
+                mainPresenter.checkLoginForShoppingCart("E");
             }
 
             /*首頁上方menu*/
@@ -1089,8 +1089,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         @JavascriptInterface
         public void jsCall_goShopPage(String salesType) {
-            String isETicket = salesType.equals("E") ? "Y" : "N";
-            goProductPage(isETicket);
+            //String isETicket = salesType.equals("E") ? "Y" : "N";
+            goProductPage("Y");
         }
         @JavascriptInterface
         public void jsCall_goHomePage() {

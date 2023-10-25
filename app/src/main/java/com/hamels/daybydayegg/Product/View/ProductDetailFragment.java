@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.Guideline;
+
 import android.text.Html;
 import android.text.InputType;
 import android.util.Log;
@@ -70,6 +72,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private TabLayout tabLayout;
     private ListView listview;
     private ScrollView view_scroll;
+    private Guideline guideline10;
 
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
@@ -161,6 +164,8 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         listview = view.findViewById(R.id.listview);
         view_scroll = view.findViewById(R.id.view_scroll);
         tv_water_mask = view.findViewById(R.id.tv_water_mask);
+        guideline10 = view.findViewById(R.id.guideline10);
+
         if (isETicket.equals("Y")) {
             ((MainActivity) getActivity()).setAppTitle(R.string.tab_ticket);
             layout_spec.setVisibility(View.GONE);
@@ -565,10 +570,14 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
         if (productDetail.get(0).getSale_price() == productDetail.get(0).getPrice()) {
             tv_same_price.setVisibility(View.VISIBLE);
-            tv_sale_price.setVisibility(View.GONE);
-            tv_price.setVisibility(View.GONE);
+            tv_sale_price.setVisibility(View.INVISIBLE);
+            tv_price.setVisibility(View.INVISIBLE);
+
+//            ConstraintLayout.LayoutParams cl_same_price = (ConstraintLayout.LayoutParams) tv_same_price.getLayoutParams();
+//            cl_same_price.horizontalBias = 0.5f; // 设置水平偏移为0.5，即水平居中
+//            tv_same_price.setLayoutParams(cl_same_price);
         } else {
-            tv_same_price.setVisibility(View.GONE);
+            tv_same_price.setVisibility(View.INVISIBLE);
             tv_sale_price.setVisibility(View.VISIBLE);
             tv_price.setVisibility(View.VISIBLE);
         }
