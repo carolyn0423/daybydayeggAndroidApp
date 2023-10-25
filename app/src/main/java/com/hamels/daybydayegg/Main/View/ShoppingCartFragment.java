@@ -53,7 +53,7 @@ public class ShoppingCartFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_webview, container, false);
 
-        orderType = "G";
+        orderType = "E";
 
         //  orderType = getArguments().getString("G", "");
 
@@ -75,6 +75,8 @@ public class ShoppingCartFragment extends BaseFragment {
         ((MainActivity) getActivity()).bindWebView(webView);
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
+
+        //webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
 
         switch (orderType) {
             case "G":

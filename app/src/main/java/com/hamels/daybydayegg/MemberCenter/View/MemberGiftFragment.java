@@ -82,12 +82,13 @@ public class MemberGiftFragment extends BaseFragment implements MemberGiftContra
     }
 
     public void setCouponData(Coupon coupon){
-        String ShareInfoText2 = coupon.getCouponValueTypeRN().equals("1") ? coupon.getCouponValueRN() + " 元優惠卷" : coupon.getCouponValueRN() + " 折優惠卷";
-        String ShareInfoText3 = coupon.getCouponValueTypeRM().equals("1") ? coupon.getCouponValueRM() + " 元優惠卷" : coupon.getCouponValueRM() + " 折優惠卷";
+        String ShareInfoText2 = coupon.getDiscountModeRN().equals("1") ? coupon.getDiscountContentRN() + " 元優惠卷" : coupon.getDiscountContentRN() + " 折優惠卷";
+        String ShareInfoText3 = coupon.getDiscountModeRM().equals("1") ? coupon.getDiscountContentRM() + " 元優惠卷" : coupon.getDiscountContentRM() + " 折優惠卷";
+        String ShareInfoText4 = coupon.getLowerLimitRM().equals("0") ? "將可獲得" : "消費金額達 " + coupon.getLowerLimitRM() + " 元，您將可獲得";
         String ShareInfoText5 = coupon.getPermanentFlag().equals("Y") ? "無" : coupon.getValidityStartdate() + " ~ " + coupon.getValidityEnddate();
 
         tvShareInfoText2.setText("1. 好友完成註冊，將可獲得新會員獎勵: " + ShareInfoText2);
-        tvShareInfoText3.setText("2. 好友首次消費，消費金額達 " + coupon.getLowerLimitRM() + " 元，您將可獲得推薦人獎勵: " + ShareInfoText3);
+        tvShareInfoText3.setText("2. 好友首次消費，" + ShareInfoText4 + "推薦人獎勵: " + ShareInfoText3);
         tvShareInfoText5.setText("4. 活動期限: " + ShareInfoText5);
     }
 }

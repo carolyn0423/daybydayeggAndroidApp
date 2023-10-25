@@ -44,7 +44,7 @@ public class ProductFragment extends BaseFragment implements ProductContract.Vie
     private int product_type_main_id = 0;
     private String location_id = "";
     private String location_name = "";
-    private String sort = "NEW";
+    private String sort = "";
     private String type_id ="";
     private String isETicket= "N";
 

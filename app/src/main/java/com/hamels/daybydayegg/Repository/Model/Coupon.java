@@ -24,29 +24,31 @@ public class Coupon {
 
     @SerializedName("receiver_typeRN")
     private String ReceiverTypeRN;
+    @SerializedName("discount_modeRN")
+    private String DiscountModeRN;
+    @SerializedName("discount_contentRN")
+    private String DiscountContentRN;
     @SerializedName("lower_limitRN")
     private String LowerLimitRN;
-    @SerializedName("coupon_valueRN")
-    private String CouponValueRN;
-    @SerializedName("coupon_value_typeRN")
-    private String CouponValueTypeRN;
+    @SerializedName("max_discountRN")
+    private String MaxDiscountRN;
     @SerializedName("receive_valid_dayRN")
     private String ReceiveValidDayRN;
-    @SerializedName("coupon_value_type_nameRN")
-    private String CouponValueTypeNameRN;
 
     @SerializedName("receiver_typeRM")
     private String ReceiverTypeRM;
+    @SerializedName("discount_modeRM")
+    private String DiscountModeRM;
+    @SerializedName("discount_contentRM")
+    private String DiscountContentRM;
+    @SerializedName("release_lower_limitRM")
+    private String ReleaseLowerLimitRM;
     @SerializedName("lower_limitRM")
     private String LowerLimitRM;
-    @SerializedName("coupon_valueRM")
-    private String CouponValueRM;
-    @SerializedName("coupon_value_typeRM")
-    private String CouponValueTypeRM;
+    @SerializedName("max_discountRM")
+    private String MaxDiscountRM;
     @SerializedName("receive_valid_dayRM")
     private String ReceiveValidDayRM;
-    @SerializedName("coupon_value_type_nameRM")
-    private String CouponValueTypeNameRM;
 
     public String getCouponID() {
         return CouponID;
@@ -81,53 +83,42 @@ public class Coupon {
     }
 
 
-
     public String getReceiverTypeRN() {
         return ReceiverTypeRN;
     }
-
+    public String getDiscountModeRN() {
+        return DiscountModeRN;
+    }
+    public String getDiscountContentRN() {
+        return DiscountContentRN;
+    }
     public String getLowerLimitRN() {
         return LowerLimitRN;
     }
-
-    public String getCouponValueRN() {
-        return CouponValueRN;
+    public String getMaxDiscountRN() {
+        return MaxDiscountRN;
     }
-
-    public String getCouponValueTypeRN() {
-        return CouponValueTypeRN;
-    }
-
     public String getReceiveValidDayRN() {
         return ReceiveValidDayRN;
     }
 
-    public String getCouponValueTypeNameRN() {
-        return CouponValueTypeNameRN;
-    }
-
-
     public String getReceiverTypeRM() {
         return ReceiverTypeRM;
     }
-
+    public String getDiscountModeRM() {
+        return DiscountModeRM;
+    }
+    public String getDiscountContentRM() {
+        return DiscountContentRM;
+    }
+    public String getReleaseLowerLimitRM() { return ReleaseLowerLimitRM; }
     public String getLowerLimitRM() {
         return LowerLimitRM;
     }
-
-    public String getCouponValueRM() {
-        return CouponValueRM;
+    public String getMaxDiscountRM() {
+        return MaxDiscountRM;
     }
-
-    public String getCouponValueTypeRM() {
-        return CouponValueTypeRM;
-    }
-
     public String getReceiveValidDayRM() {
         return ReceiveValidDayRM;
-    }
-
-    public String getCouponValueTypeNameRM() {
-        return CouponValueTypeNameRM;
     }
 }

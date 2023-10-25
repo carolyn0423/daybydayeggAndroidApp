@@ -36,11 +36,11 @@
 
     <ImageView
         android:id="@+id/dialog_img_qrcode"
-        android:layout_alignTop="@id/bg_shadow_corner"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="70dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignTop="@id/bg_shadow_corner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp" />
 
     <TextView
         android:id="@+id/text_invite_code_label"

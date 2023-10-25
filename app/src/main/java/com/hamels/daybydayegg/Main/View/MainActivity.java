@@ -11,8 +11,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -23,6 +25,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -94,6 +97,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_COUPON;
@@ -146,6 +151,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public static String sCustomerID = "";
     private Boolean isUpdate = false;
     private int VersionCode = 0;
+    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+    private String sPDFDir = "";
 
     private Handler handler = new Handler() {
         @Override
@@ -242,7 +249,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         }, 3000);
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 用户授予权限，可以执行相关操作
+            } else {
+                if(!MainActivity.this.isFinishing()){
+                    new AlertDialog.Builder(MainActivity.this).setTitle(R.string.dialog_hint).setMessage("操作取消，無法取得權限。").setPositiveButton(android.R.string.ok, null).show();
+                }
+            }
+        }
+    }
     private void notifyChangeToMail() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
         if (fragment != null) {
@@ -402,7 +420,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     changeTabFragment(MainIndexFragment.getInstance());
                 }else if (id == R.id.item_shop){
                     setMainIndexMessageUnreadVisibility(false);
-                    checkMerchantCount("PRODUCT", "N"); //非電子商品
+                    checkMerchantCount("PRODUCT", "Y"); //非電子商品
                 }else if (id == R.id.item_member_card){
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.checkLoginForMemberCenter();
@@ -500,7 +518,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 mainPresenter.checkLoginForMemberCenter();
             }else if (id == R.id.shopping_cart){ //購物車
                 changeNavigationColor(v.getId());
-                mainPresenter.checkLoginForShoppingCart("G");
+                mainPresenter.checkLoginForShoppingCart("E");
             }
 
             /*首頁上方menu*/
@@ -1071,8 +1089,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         @JavascriptInterface
         public void jsCall_goShopPage(String salesType) {
-            String isETicket = salesType.equals("E") ? "Y" : "N";
-            goProductPage(isETicket);
+            //String isETicket = salesType.equals("E") ? "Y" : "N";
+            goProductPage("Y");
         }
         @JavascriptInterface
         public void jsCall_goHomePage() {
@@ -1110,45 +1128,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
         @JavascriptInterface
         public void jsCall_SharedPDF(String sPDFUrl) {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(sPDFUrl)
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-                if (response.isSuccessful()) {
-                    // 下载成功，保存文件到本地
-                    String[] PDF = sPDFUrl.split("/");
-                    InputStream inputStream = response.body().byteStream();
-                    File outputFile = new File(getFilesDir(), PDF[PDF.length - 1]); // 保存到应用内部存储
-                    FileOutputStream outputStream = new FileOutputStream(outputFile);
-
-                    byte[] buffer = new byte[4096];
-                    int bytesRead;
-                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                        outputStream.write(buffer, 0, bytesRead);
-                    }
-                    outputStream.close();
-
-                    // 现在文件已下载并保存到本地
-                    File file = new File(getFilesDir(), PDF[PDF.length - 1]); // 本地文件路径
-
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setType("application/pdf"); // 设置共享的内容类型为PDF
-                    Uri fileUri = FileProvider.getUriForFile(getBaseContext(), "com.hamels.daybydayegg.fileprovider", file);
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri); // 设置共享的文件URI
-
-                    startActivity(Intent.createChooser(shareIntent, "Share PDF"));
-                } else {
-                    // 处理下载失败的情况
-                    Toast.makeText(getBaseContext(), "下載失敗，請重試。", Toast.LENGTH_SHORT).show();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                // 处理异常
-                Toast.makeText(getBaseContext(), "下載失敗，請重試。", Toast.LENGTH_SHORT).show();
-            }
+            new DownloadFile().execute(sPDFUrl, "Shared");
+        }
+        @JavascriptInterface
+        public void jsCall_DownloadPDF(String sPDFUrl) {
+            new DownloadFile().execute(sPDFUrl, "Download");
         }
     }
 
@@ -1565,6 +1549,79 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             return false;
         }else{
             return true;
+        }
+    }
+
+    private class DownloadFile extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            Boolean bResult = false;
+            String fileUrl = strings[0];
+            String Mode = strings[1];
+            File pdffile = new File(fileUrl);
+            String fileName = pdffile.getName();
+            try {
+                // 检查是否已经获得写入外部存储的权限
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    // 如果没有权限，请求权限
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXTERNAL_STORAGE);
+                }
+
+                URL url = new URL(fileUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+
+                File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                storageDir.mkdirs();
+                sPDFDir = storageDir.getPath();
+                File oldFile = new File(storageDir.getPath() + "/" + fileName);
+                if (oldFile.exists()) {
+                    // 如果文件存在，首先删除它
+                    oldFile.delete();
+                }
+                File pdfFile = new File(storageDir, fileName);
+
+                FileOutputStream output = new FileOutputStream(pdfFile);
+                InputStream input = connection.getInputStream();
+
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = input.read(buffer)) != -1) {
+                    output.write(buffer, 0, len);
+                }
+
+                output.close();
+                input.close();
+
+                bResult = true;
+
+                if(Mode.equals("Shared")) {
+                    // Share the downloaded PDF using FileProvider
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.setType("application/pdf");
+
+                    Uri pdfUri = FileProvider.getUriForFile(getApplicationContext(), "com.hamels.daybydayegg.fileprovider", pdfFile);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, pdfUri);
+
+                    // Grant temporary read permission to the content URI
+                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                    startActivity(Intent.createChooser(shareIntent, "分享到"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bResult;
+        }
+        @Override
+        protected void onPostExecute(Boolean success) {
+            if (success) {
+                // 共享成功，显示成功消息
+                Toast.makeText(getApplicationContext(), "文件已成功儲存至: " + sPDFDir, Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ public class AboutFragment extends BaseFragment implements AboutContract.View{
     private static AboutFragment fragment;
     private AboutContract.Presenter presenter;
 
-    private TextView tv_office, tv_office_address, tv_office_service, tv_office_tel, tv_office_line, tv_office_mail, tv_office_fb;
+    private TextView tv_enterprise, tv_office, tv_office_address, tv_office_service, tv_office_tel, tv_office_line, tv_office_mail, tv_office_fb;
 //    private TextView tv_enterprise_service, tv_enterprise_tel, tv_enterprise_mail;
 
     public static AboutFragment getInstance() {
@@ -62,6 +62,7 @@ public class AboutFragment extends BaseFragment implements AboutContract.View{
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
+        //tv_enterprise = view.findViewById(R.id.tv_enterprise);
         tv_office = view.findViewById(R.id.tv_office);
         tv_office_address = view.findViewById(R.id.tv_office_address);
         tv_office_service = view.findViewById(R.id.tv_office_service);
@@ -79,6 +80,7 @@ public class AboutFragment extends BaseFragment implements AboutContract.View{
         final About office = aboutList.get(0);
 //        final About enterprise = aboutList.get(1);
 
+        //tv_enterprise.setText(office.getAbout_name());
         tv_office.setText(office.getAbout_name());
         tv_office_address.setText(office.getAddress());
         tv_office_service.setText(office.getService_time());
