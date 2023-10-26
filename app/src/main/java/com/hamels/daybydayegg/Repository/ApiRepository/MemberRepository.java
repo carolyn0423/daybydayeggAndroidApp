@@ -418,6 +418,7 @@ public class MemberRepository extends ApiRepository {
     public void SavePush(final String member_id, final String sendmember_id, final String title, final String content, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
+        map.put("customer_id", EOrderApplication.CUSTOMER_ID);
         map.put("push_id", "");
         map.put("push_type", "G");
         map.put("title", title);
