@@ -43,8 +43,8 @@
             android:id="@+id/layout_index_menu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rec_stroke_greyline_hint"
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="999+"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:textColor="@color/orangeText"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/coupon_guideline03"
@@ -132,17 +132,39 @@
                     app:layout_constraintStart_toStartOf="@+id/coupon_guideline01"
                     app:layout_constraintTop_toTopOf="@+id/coupon_guideline04" />
 
-                <TextView
-                    android:id="@+id/coupon_textView"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="優惠劵(張)"
-                    style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/coupon_guideline03" />
+                    app:layout_constraintTop_toTopOf="@+id/coupon_guideline03">
+
+                    <TextView
+                        android:id="@+id/coupon_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="優惠劵"
+                        style="@style/fontRegularTw.greyDoubleDark"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/coupon_textView2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:id="@+id/coupon_textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="(張)"
+                        style="@style/fontRegularTw.greyDoubleDark"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toEndOf="@+id/coupon_textView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"  />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -198,7 +220,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="999+"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:textColor="#3399ff"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/guideline4"
@@ -206,17 +228,39 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline34"
                     app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
-                <TextView
-                    android:id="@+id/textView3"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="點數(點)"
-                    style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/guideline4" />
+                    app:layout_constraintTop_toTopOf="@+id/guideline4">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="點數"
+                        style="@style/fontRegularTw.greyDoubleDark"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/textView32"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="(點)"
+                        style="@style/fontRegularTw.greyDoubleDark"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toEndOf="@+id/textView3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"  />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -270,9 +314,9 @@
                 <ImageView
                     android:id="@+id/imageView16"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="45dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline23"
-                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintDimensionRatio="h,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline36"
                     app:layout_constraintStart_toStartOf="@+id/guideline37"
                     app:layout_constraintTop_toTopOf="@+id/guideline22"
@@ -335,9 +379,9 @@
                 <ImageView
                     android:id="@+id/imageView17"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="45dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline24"
-                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintDimensionRatio="h,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline28"
                     app:layout_constraintStart_toStartOf="@+id/guideline29"
                     app:layout_constraintTop_toTopOf="@+id/guideline27"
@@ -407,9 +451,9 @@
                 <ImageView
                     android:id="@+id/imageView118"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="45dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline32"
-                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintDimensionRatio="h,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline30"
                     app:layout_constraintStart_toStartOf="@+id/guideline31"
                     app:layout_constraintTop_toTopOf="@+id/guideline33"
