@@ -42,7 +42,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_index_menu"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="85dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
@@ -123,7 +123,7 @@
                     android:id="@+id/coupon_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="999+"
+                    android:text="0"
                     android:textSize="25sp"
                     android:textColor="@color/orangeText"
                     android:textStyle="bold"
@@ -219,7 +219,7 @@
                     android:id="@+id/point_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="999+"
+                    android:text="0"
                     android:textSize="25sp"
                     android:textColor="#30B0C7"
                     android:textStyle="bold"
@@ -313,8 +313,8 @@
 
                 <ImageView
                     android:id="@+id/imageView16"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline23"
                     app:layout_constraintDimensionRatio="w,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline36"
@@ -378,8 +378,8 @@
 
                 <ImageView
                     android:id="@+id/imageView17"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline24"
                     app:layout_constraintDimensionRatio="w,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline28"
@@ -450,8 +450,8 @@
 
                 <ImageView
                     android:id="@+id/imageView118"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     app:layout_constraintBottom_toTopOf="@+id/guideline32"
                     app:layout_constraintDimensionRatio="w,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline30"
