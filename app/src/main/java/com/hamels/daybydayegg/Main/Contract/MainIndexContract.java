@@ -9,7 +9,7 @@ public interface MainIndexContract {
     interface View extends BaseContract.View {
         void setCarouselList(List<Carousel> carouselList);
 
-        void setMemberCardImg(String group);
+        void setMemberCouponPointData(String sTxt);
 
         void CustomerOnlineISFalse();
     }
@@ -17,12 +17,10 @@ public interface MainIndexContract {
     interface Presenter extends BaseContract.Presenter {
         void getCarouselList(String sCustomer_id);
 
-        String getName();
-
-        String getGroup();
-
         void checkMemberData();
 
         boolean getUserLogin();
+
+        void getMemberBadge();
     }
 }

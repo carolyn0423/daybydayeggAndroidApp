@@ -135,9 +135,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     // navigation
     //private FloatingActionButton btnShopping;
-    private LinearLayout layoutHome, layoutShoppingCart, layoutPurchase, layoutMember;
-    private ImageView imgHome, imgShoppingCart, imgPurchase, imgMember;
-    private TextView txtHome, txtShoppingCart, txtPurchase, txtMember;
+    private LinearLayout layoutHome, layoutEgg, layoutShop, layoutShoppingCart;
+    private ImageView imgHome, imgEgg, imgShop, imgShoppingCart;
+    private TextView txtHome, txtEgg, txtShop, txtShoppingCart;
 
     // qrcode
     private PopupWindow popupWindow;
@@ -292,30 +292,33 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         // navigation
         layoutHome = findViewById(R.id.home);
-        layoutHome.setOnClickListener(onClickListener);
+        layoutEgg = findViewById(R.id.egg);
+        layoutShop = findViewById(R.id.shop);
         layoutShoppingCart = findViewById(R.id.shopping_cart);
+
+        layoutHome.setOnClickListener(onClickListener);
+        layoutEgg.setOnClickListener(onClickListener);
+        layoutShop.setOnClickListener(onClickListener);
         layoutShoppingCart.setOnClickListener(onClickListener);
-        layoutPurchase = findViewById(R.id.purchase);
-        layoutPurchase.setOnClickListener(onClickListener);
-        layoutMember = findViewById(R.id.member);
-        layoutMember.setOnClickListener(onClickListener);
+
         imgHome = findViewById(R.id.img_home);
+        imgEgg = findViewById(R.id.img_egg);
+        imgShop = findViewById(R.id.img_shop);
         imgShoppingCart = findViewById(R.id.img_shopping_cart);
-        imgPurchase = findViewById(R.id.img_purchase);
-        imgMember = findViewById(R.id.img_member);
+
         txtHome = findViewById(R.id.txt_home);
+        txtEgg = findViewById(R.id.txt_egg);
+        txtShop = findViewById(R.id.txt_shop);
         txtShoppingCart = findViewById(R.id.txt_shopping_cart);
-        txtPurchase = findViewById(R.id.txt_purchase);
-        txtMember = findViewById(R.id.txt_member);
 
         LinearLayout qrcode = findViewById(R.id.qrcode);
         qrcode.setOnClickListener(onClickListener);
         LinearLayout message = findViewById(R.id.message);
         message.setOnClickListener(onClickListener);
-        LinearLayout store = findViewById(R.id.store);
-        store.setOnClickListener(onClickListener);
-        LinearLayout donate = findViewById(R.id.donate);
-        donate.setOnClickListener(onClickListener);
+        LinearLayout machine = findViewById(R.id.machine);
+        machine.setOnClickListener(onClickListener);
+        LinearLayout member = findViewById(R.id.member);
+        member.setOnClickListener(onClickListener);
 
         setAppToolbar(R.id.toolbar);
         //setCartBadge(R.id.tv_shopping_cart, R.id.tv_shopping_cart_e_ticket);
@@ -415,19 +418,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if (id == R.id.item_news){
+                if (id == R.id.item_home){
                     setMainIndexMessageUnreadVisibility(true);
                     changeTabFragment(MainIndexFragment.getInstance());
+                }else if (id == R.id.item_egg){
+                    setMainIndexMessageUnreadVisibility(false);
+                    mainPresenter.checkLoginForDonate();
                 }else if (id == R.id.item_shop){
                     setMainIndexMessageUnreadVisibility(false);
                     checkMerchantCount("PRODUCT", "Y"); //非電子商品
-                }else if (id == R.id.item_member_card){
+                }else if (id == R.id.item_cart){
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.checkLoginForMemberCenter();
-                }else if (id == R.id.item_location){
-                    setMainIndexMessageUnreadVisibility(false);
-                    mainPresenter.saveFragmentLocation("");
-                    changeTabFragment(LocationFragment.getInstance());
                 }
                 return true;
             }
@@ -462,7 +464,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                      */
                 case "ETICKET_WELCOME":
                     //  買提貨卷 未登入的情況
-                    changeNavigationColor(R.id.purchase);
+                    changeNavigationColor(R.id.shop);
                     mainPresenter.saveSourceActive("");
                     mainPresenter.saveFragmentMainType("", "Y");
                     changeTabFragment(ProductMainTypeFragment.getInstance());
@@ -481,42 +483,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         public void onClick(View v) {
             int id = v.getId();
             /*下方menu*/
-            if (id == R.id.home){ //首頁
+            if (id == R.id.home) {
                 changeNavigationColor(v.getId());
                 changeTabFragment(MainIndexFragment.getInstance());
-                /*
-            }else if (id == R.id.order){
-                //  外帶外送
+            }else if(id == R.id.egg){
+                changeNavigationColor(v.getId());
+                mainPresenter.checkLoginForDonate();
+            }else if (id == R.id.shop){
                 changeNavigationColor(v.getId());
                 mainPresenter.saveSourceActive("");
-                checkMerchantCount("PRODUCT", "N"); //非電子商品
-//                if (mainPresenter.getUserLogin()) {
-//                    mainPresenter.saveSourceActive("");
-//                    checkMerchantCount("PRODUCT", "N"); //非電子商品
-//                } else {
-//                    mainPresenter.saveSourceActive("PRODUCT_WELCOME");
-//                    //initSelectCustomer("isSetLove");
-//                    changeTabFragment(CustomerFragment.getInstance());
-//                }
-*/
-            }else if (id == R.id.purchase){
-                //  買提貨券
-                changeNavigationColor(v.getId());
-                mainPresenter.saveSourceActive("");
-                checkMerchantCount("PRODUCT", "Y"); //電子商品
-//                if (mainPresenter.getUserLogin()) {
-//                    mainPresenter.saveSourceActive("");
-//                    checkMerchantCount("PRODUCT", "Y"); //電子商品
-//                } else {
-//                    mainPresenter.saveSourceActive("ETICKET_WELCOME");
-//                    //initSelectCustomer("isSetLove");
-//                    changeTabFragment(CustomerFragment.getInstance());
-//                }
-
-            }else if (id == R.id.member){ //會員中心
-                changeNavigationColor(v.getId());
-                mainPresenter.checkLoginForMemberCenter();
-            }else if (id == R.id.shopping_cart){ //購物車
+                checkMerchantCount("PRODUCT", "Y");
+            }else if (id == R.id.shopping_cart){
                 changeNavigationColor(v.getId());
                 mainPresenter.checkLoginForShoppingCart("E");
             }
@@ -562,18 +539,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 setMainIndexMessageUnreadVisibility(false);
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
                 mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
-            }else if (id == R.id.store){
+            }else if (id == R.id.machine){
                 addFragment(MachineFragment.getInstance());
-//                if(mainPresenter.getUserLogin()){
-//                    mainPresenter.saveFragmentLocation("");
-//                    addFragment(LocationFragment.getInstance());
-//                }else{
-//                    mainPresenter.saveSourceActive("LOCATION_WELCOME");
-//                    addFragment(LocationFragment.getInstance());
-//                }
-            }else if (id == R.id.donate){
-                setMainIndexMessageUnreadVisibility(false);
-                mainPresenter.checkLoginForDonate();
+            }else if (id == R.id.member){
+                changeNavigationColor(v.getId());
+                mainPresenter.checkLoginForMemberCenter();
             }
         }
     };
@@ -583,68 +553,64 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         if (layoutID == R.id.home){
             setMainIndexMessageUnreadVisibility(true);
             changeHomeColor(true);
+            changeEggColor(false);
+            changeShopColor(false);
             changeShoppingCartColor(false);
-            changeStoreColor(false);
-            changeMemberColor(false);
+        }else if (layoutID == R.id.egg){
+            setMainIndexMessageUnreadVisibility(false);
+            changeHomeColor(false);
+            changeEggColor(true);
+            changeShopColor(false);
+            changeShoppingCartColor(true);
+        }else if (layoutID == R.id.shop){
+            setMainIndexMessageUnreadVisibility(false);
+            changeHomeColor(false);
+            changeEggColor(false);
+            changeShopColor(true);
+            changeShoppingCartColor(false);
         }else if (layoutID == R.id.shopping_cart){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
+            changeEggColor(false);
+            changeShopColor(false);
             changeShoppingCartColor(true);
-            changeStoreColor(false);
-            changeMemberColor(false);
-        }else if (layoutID == R.id.purchase){
-            setMainIndexMessageUnreadVisibility(false);
-            changeHomeColor(false);
-            changeShoppingCartColor(false);
-            changeStoreColor(true);
-            changeMemberColor(false);
-        }else if (layoutID == R.id.member){
-            setMainIndexMessageUnreadVisibility(false);
-            changeHomeColor(false);
-            changeShoppingCartColor(false);
-            changeStoreColor(false);
-            changeMemberColor(true);
         }
     }
 
     private void changeHomeColor(boolean isClicked) {
         if (isClicked) {
             imgHome.setImageDrawable(getResources().getDrawable(R.drawable.home_fill));
-            txtHome.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         } else {
             imgHome.setImageDrawable(getResources().getDrawable(R.drawable.home_line));
-            txtHome.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         }
+        txtHome.setTextColor(getResources().getColor(R.color.colorYunlinhn));
+    }
+
+    private void changeEggColor(boolean isClicked) {
+        if (isClicked) {
+            imgEgg.setImageDrawable(getResources().getDrawable(R.drawable.egg3_fill));
+        } else {
+            imgEgg.setImageDrawable(getResources().getDrawable(R.drawable.egg3_line));
+        }
+        txtEgg.setTextColor(getResources().getColor(R.color.colorYunlinhn));
+    }
+
+    private void changeShopColor(boolean isClicked) {
+        if (isClicked) {
+            imgShop.setImageDrawable(getResources().getDrawable(R.drawable.bag_fill));
+        } else {
+            imgShop.setImageDrawable(getResources().getDrawable(R.drawable.bag_line));
+        }
+        txtShop.setTextColor(getResources().getColor(R.color.colorYunlinhn));
     }
 
     private void changeShoppingCartColor(boolean isClicked) {
         if (isClicked) {
             imgShoppingCart.setImageDrawable(getResources().getDrawable(R.drawable.cart_fill));
-            txtShoppingCart.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         } else {
             imgShoppingCart.setImageDrawable(getResources().getDrawable(R.drawable.cart_line));
-            txtShoppingCart.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         }
-    }
-
-    private void changeStoreColor(boolean isClicked) {
-        if (isClicked) {
-            imgPurchase.setImageDrawable(getResources().getDrawable(R.drawable.bag_fill));
-            txtPurchase.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-        } else {
-            imgPurchase.setImageDrawable(getResources().getDrawable(R.drawable.bag_line));
-            txtPurchase.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-        }
-    }
-
-    private void changeMemberColor(boolean isClicked) {
-        if (isClicked) {
-            imgMember.setImageDrawable(getResources().getDrawable(R.drawable.member_fill));
-            txtMember.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-        } else {
-            imgMember.setImageDrawable(getResources().getDrawable(R.drawable.member_line));
-            txtMember.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-        }
+        txtShoppingCart.setTextColor(getResources().getColor(R.color.colorYunlinhn));
     }
 
     private void initAnimation(Context context) {
@@ -868,7 +834,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
 
         // 購物車商品數量
-        if (array.length == 4) {
+        if (array.length >= 4) {
             EOrderApplication.cartBadgeCount = array[3];
             /*
             if (array[3].equals("0")) {
@@ -1261,7 +1227,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         changeTabFragment(MainIndexFragment.getInstance());
                     }else if(currentFragment instanceof MemberInfoChangeFragment
                             || currentFragment instanceof PasswordChangeFragment
-                            || currentFragment instanceof MemberPointFragment
                             || currentFragment instanceof AboutFragment
                             || currentFragment instanceof TransRecordFragment){
                         addFragment(MemberCenterFragment.getInstance());
@@ -1336,7 +1301,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         runOnUiThread(new Runnable() {
             public void run() {
                 if (isETicket.equals("Y")) {
-                    changeNavigationColor(R.id.purchase); // 買提貨券
+                    changeNavigationColor(R.id.shop); // 買提貨券
                 } else {
                     //changeNavigationColor(R.id.order); //我要點餐
                 }

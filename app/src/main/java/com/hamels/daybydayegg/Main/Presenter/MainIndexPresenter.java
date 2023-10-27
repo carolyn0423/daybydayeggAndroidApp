@@ -30,7 +30,7 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
                     @Override
                     public void onValueCallback(int task, List<Carousel> type) {
                         view.setCarouselList(type);
-
+                        getMemberBadge();
                     }
                 });
             } else {
@@ -38,7 +38,7 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
                     @Override
                     public void onValueCallback(int task, List<Carousel> type) {
                         view.setCarouselList(type);
-
+                        getMemberBadge();
                     }
                 });
             }
@@ -46,43 +46,29 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
     }
 
     @Override
-    public String getName() {
-        String Name = "";
-        if (repositoryManager.getUserLogin()) {
-            Name = repositoryManager.getUser().getName();
-        }
-        else{
-
-        }
-        return Name;
-    }
-
-    @Override
-    public String getGroup() {
-        String Group = "";
-        if (repositoryManager.getUserLogin()) {
-            Group = repositoryManager.getUser().getGroup();
-        }
-        else{
-
-        }
-        return Group;
-    }
-
-    @Override
     public void checkMemberData() {
         if(!repositoryManager.getUserID().equals("")){
-            repositoryManager.callGetMemberInfoApi(repositoryManager.getUserID(),new BaseContract.ValueCallback<User>() {
+            repositoryManager.callGetMemberInfoApi(repositoryManager.getUserID(), new BaseContract.ValueCallback<User>() {
                 @Override
                 public void onValueCallback(int task, User user) {
                     if(user != null) {
                         if(user.getOnlineEnabled() != null && user.getOnlineEnabled().equals("Y")) {
                             repositoryManager.saveUser(user);
-                            view.setMemberCardImg(user.getGroup());
                         }
                     }else{
                         view.CustomerOnlineISFalse();
                     }
+                }
+            });
+        }
+    }
+
+    public void getMemberBadge() {
+        if(!repositoryManager.getUserID().equals("")){
+            repositoryManager.callGetBadgeNumberApi(new BaseContract.ValueCallback<String>() {
+                @Override
+                public void onValueCallback(int task, String type) {
+                    view.setMemberCouponPointData(type);
                 }
             });
         }
