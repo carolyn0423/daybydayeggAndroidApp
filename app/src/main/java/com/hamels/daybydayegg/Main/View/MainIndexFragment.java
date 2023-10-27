@@ -19,6 +19,8 @@ import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Contract.MainIndexContract;
 import com.hamels.daybydayegg.Main.Presenter.MainIndexPresenter;
+import com.hamels.daybydayegg.MemberCenter.View.MemberPointFragment;
+import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Carousel;
 import com.stx.xhb.xbanner.XBanner;
@@ -34,12 +36,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 
     private static MainIndexFragment fragment;
     private XBanner mXBanner;
-    private ImageView imv_membercard;
-//    private ImageView img_point , img_coupon;
-    private ConstraintLayout layout_pay , layout_coupon , layout_gift
-        , layout_enterprise;
-    private TextView txt_name;
+    private ConstraintLayout layout_coupon, layout_point, layout_aboutegg, layout_man, layout_eggfood;
     private MainIndexContract.Presenter mainindexPresenter;
+    private TextView tvCouponNum, tvPointNum;
     public static MainIndexFragment getInstance() {
         if (fragment == null) {
             fragment = new MainIndexFragment();
@@ -72,85 +71,78 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         mXBanner = view.findViewById(R.id.xbanner);
 
-        // 獲取屏幕高度
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int screenHeight = displayMetrics.heightPixels;
+        tvCouponNum = view.findViewById(R.id.coupon_num);
+        tvPointNum = view.findViewById(R.id.point_num);
 
-        // 設置 mXBanner 的高度為屏幕高度
-        mXBanner.setLayoutParams(new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                screenHeight
-        ));
+//        // 獲取屏幕高度
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int screenHeight = displayMetrics.heightPixels;
+//
+//        // 設置 mXBanner 的高度為屏幕高度
+//        mXBanner.setLayoutParams(new ConstraintLayout.LayoutParams(
+//                ConstraintLayout.LayoutParams.MATCH_PARENT,
+//                screenHeight
+//        ));
 
-        imv_membercard = view.findViewById(R.id.img_member_card);
-        imv_membercard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).goMemberCard();
-            }
-        });
-
-        layout_pay = view.findViewById(R.id.layout_pay);
-        layout_pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
+        //  優惠劵
         layout_coupon = view.findViewById(R.id.layout_coupon);
         layout_coupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).checkLoginForCoupon();
+                ((MainActivity) getActivity()).addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
             }
         });
-        layout_gift = view.findViewById(R.id.layout_gift);
-        layout_gift.setOnClickListener(new View.OnClickListener() {
+
+        //  點數
+        layout_point = view.findViewById(R.id.layout_point);
+        layout_point.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).checkLoginForLot();
+                ((MainActivity) getActivity()).addFragment(MemberPointFragment.getInstance());
             }
         });
-        layout_enterprise = view.findViewById(R.id.layout_enterprise);
-        layout_enterprise.setOnClickListener(new View.OnClickListener() {
+
+        //  認識雞蛋
+        layout_aboutegg = view.findViewById(R.id.layout_aboutegg);
+        layout_aboutegg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).checkLoginForBusiness();
+
             }
         });
 
-//        img_point = view.findViewById(R.id.img_point);
-//        img_point.setOnClickListener(this);
-//        img_coupon = view.findViewById(R.id.img_coupon);
-//        img_coupon.setOnClickListener(this);
+        //  職人介紹
+        layout_man = view.findViewById(R.id.layout_man);
+        layout_man.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
-        txt_name = view.findViewById(R.id.txt_name);
+        //  雞蛋美味
+        layout_eggfood = view.findViewById(R.id.layout_eggfood);
+        layout_eggfood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        //mainindexPresenter.getCarouselList(CUSTOMER_ID);
+            }
+        });
+
+        mainindexPresenter.getCarouselList(CUSTOMER_ID);
     }
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        txt_name.setText(mainindexPresenter.getName());
-
-        if(mainindexPresenter.getGroup()!=null){
-            if(mainindexPresenter.getGroup().equals("V")){
-                imv_membercard.setBackgroundResource(R.drawable.membercard_vip);
-            }else{
-                imv_membercard.setBackgroundResource(R.drawable.membercard_normal);
-            }
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        mainindexPresenter.getCarouselList(CUSTOMER_ID);
+        //mainindexPresenter.getCarouselList(CUSTOMER_ID);
     }
 
     public void CustomerOnlineISFalse() {
@@ -159,11 +151,31 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
     }
 
     @Override
-    public void setMemberCardImg(String group) {
-        if(group!=null){
-            if(group.equals("V")){
-                imv_membercard.setBackgroundResource(R.drawable.membercard_vip);
+    public void setMemberCouponPointData(String sTxt) {
+        String[] array= sTxt.split("_");
+
+        if(array.length >= 5){
+            //  優惠劵
+            int iCouponNum = Integer.parseInt(array[4]);
+            if(iCouponNum > 999){
+                tvCouponNum.setText("999+");
+            }else{
+                tvCouponNum.setText(iCouponNum + "");
             }
+        }else{
+            tvCouponNum.setText("0");
+        }
+
+        if(array.length >= 6){
+            //  點數
+            int iPoint = Integer.parseInt(array[5]);
+            if(iPoint > 999){
+                tvPointNum.setText("999+");
+            }else{
+                tvPointNum.setText(iPoint + "");
+            }
+        }else{
+            tvPointNum.setText("0");
         }
     }
 

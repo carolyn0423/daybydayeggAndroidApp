@@ -812,13 +812,13 @@ public class RepositoryManager {
     public void callGetBadgeNumberApi(final BaseContract.ValueCallback<String> valueCallback) {
         String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().getBadgeNumber(customer_id,member_id, new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
+        MemberRepository.getInstance().getBadgeNumber(customer_id, member_id, new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
                 super.onApiSuccess(response);
                 if (response.getSuccess()) {
                     List<Map<String, String>> map = response.getItems();
-                    String messageUnreadNum = "0", pushUnreadNum = "0", e_ticket_cart_total_quantity = "0", cartTotalQuantity = "0";
+                    String messageUnreadNum = "0", pushUnreadNum = "0", e_ticket_cart_total_quantity = "0", cartTotalQuantity = "0", sCouponNum = "", sPointNum = "";
                     if (map.get(0).containsKey("message_unread_num")) {
                         messageUnreadNum = response.getItems().get(0).get("message_unread_num");
                     }
@@ -841,9 +841,25 @@ public class RepositoryManager {
                             }
                         }
                     }
-                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, messageUnreadNum + "_" + pushUnreadNum + "_" + e_ticket_cart_total_quantity + "_" + cartTotalQuantity);
+                    if (map.get(0).containsKey("coupon_num")) {
+                        sCouponNum = response.getItems().get(0).get("coupon_num");
+                        if (sCouponNum != null) {
+                            if (sCouponNum.equals("")) {
+                                sCouponNum = "0";
+                            }
+                        }
+                    }
+                    if (map.get(0).containsKey("point_num")) {
+                        sPointNum = response.getItems().get(0).get("point_num");
+                        if (sPointNum != null) {
+                            if (sPointNum.equals("")) {
+                                sPointNum = "0";
+                            }
+                        }
+                    }
+                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, messageUnreadNum + "_" + pushUnreadNum + "_" + e_ticket_cart_total_quantity + "_" + cartTotalQuantity + "_" + sCouponNum + "_" + sPointNum);
                 } else {
-                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0_0_0_0");
+                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0_0_0_0_0_0");
                 }
             }
         });

@@ -91,17 +91,17 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                 @Override
                 public void onValueCallback(int task, String type) {
                     view.setAllBadge(type);
-
                     String[] array= type.split("_");
-                    if(array.length==4){
-                        repositoryManager.saveShoppingCartCount(array[3]);
-                    }else{
-                        repositoryManager.saveShoppingCartCount("0");
-                    }
+                    repositoryManager.saveShoppingCartCount(array[3]);
+//                    if(array.length==4){
+//                        repositoryManager.saveShoppingCartCount(array[3]);
+//                    }else{
+//                        repositoryManager.saveShoppingCartCount("0");
+//                    }
                 }
             });
         } else {
-            view.setAllBadge("0_0_0_0");
+            view.setAllBadge("0_0_0_0_0_0");
         }
     }
 

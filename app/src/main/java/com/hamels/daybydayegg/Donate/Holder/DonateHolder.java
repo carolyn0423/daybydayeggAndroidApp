@@ -286,7 +286,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
                 if(history.getWriteoff_order_id().equals("")){ //線下店鋪核銷
                     tv_ref_content.setText("店家核銷");
                 }else{ //線上APP訂單核銷
-                    tv_ref_content.setText("訂單編號："+ history.getWriteoff_order_id());
+                    tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 }
                 break;
         }
@@ -327,7 +327,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
                 if(history.getWriteoff_order_id().equals("")){ //線下店鋪核銷
                     tv_ref_content.setText("店家核銷");
                 }else{ //線上APP訂單核銷
-                    tv_ref_content.setText("訂單編號："+ history.getWriteoff_order_id());
+                    tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 }
                 break;
         }

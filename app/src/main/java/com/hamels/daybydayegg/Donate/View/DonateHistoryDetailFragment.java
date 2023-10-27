@@ -154,7 +154,7 @@ public class DonateHistoryDetailFragment extends BaseFragment implements DonateC
                 if(productDetail.get(0).getWriteoff_order_id().equals("")){ //線下店鋪核銷
                     tv_ref_content.setText("據點核銷");
                 }else{ //線上APP訂單核銷
-                    tv_ref_content.setText("訂單編號："+ productDetail.get(0).getWriteoff_order_id());
+                    tv_ref_content.setText("備註/編號："+ productDetail.get(0).getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 }
                 break;
         }

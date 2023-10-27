@@ -42,7 +42,7 @@
             android:id="@+id/img_point2"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/smilepoint"
+            android:src="@drawable/points_fill_green"
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="@+id/guide_point"
             app:layout_constraintTop_toTopOf="parent" />

@@ -48,7 +48,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                             @Override
                             public void onValueCallback(int task, String type) {
                                 String[] array= type.split("_");
-                                if(array.length==4){
+                                if(array.length >= 4){
                                     repositoryManager.saveShoppingCartCount(array[3]);
                                 }else{
                                     repositoryManager.saveShoppingCartCount("0");

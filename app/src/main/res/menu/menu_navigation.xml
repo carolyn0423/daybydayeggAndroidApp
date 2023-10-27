@@ -4,35 +4,28 @@
     <item
         style="@style/fontRegularTw.GreyDark"
         android:textSize="10sp"
-        android:id="@+id/item_news"
+        android:id="@+id/item_home"
         android:checked="true"
         android:icon="@drawable/icons8_home"
         android:title="@string/tab_main" />
     <item
         style="@style/fontBoldTw.GreyDoubleDark"
         android:textSize="10sp"
-        android:id="@+id/item_shop"
-        android:icon="@drawable/icons8_bag"
-        android:title="產品專區" />
+        android:id="@+id/item_egg"
+        android:icon="@drawable/egg3_line"
+        android:title="買好蛋" />
 
     <item
         style="@style/fontRegularTw.GreyDark"
         android:textSize="10sp"
-        android:id="@+id/item_member_info"
-        android:icon="@drawable/icons8_fastcart"
-        android:title="@string/tab_shopping_cart" />
-    <!--
+        android:id="@+id/item_shop"
+        android:icon="@drawable/bag_line"
+        android:title="買好蛋" />
+
     <item
         style="@style/fontRegularTw.GreyDark"
         android:textSize="10sp"
-        android:id="@+id/item_location"
-        android:icon="@drawable/icon_purchase_white"
+        android:id="@+id/item_cart"
+        android:icon="@drawable/cart_line"
         android:title="購物車" />
-    -->
-    <item
-        style="@style/fontRegularTw.GreyDark"
-        android:textSize="10sp"
-        android:id="@+id/item_member_card"
-        android:icon="@drawable/icons8_user"
-        android:title="@string/tab_member_info" />
 </menu>

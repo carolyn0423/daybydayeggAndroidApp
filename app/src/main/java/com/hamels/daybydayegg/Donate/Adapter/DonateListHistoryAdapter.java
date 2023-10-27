@@ -54,7 +54,9 @@ public class DonateListHistoryAdapter extends BaseAdapter<DonateHolder> {
             productHolder.donatehistory_constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    presenter.goPageHistoryDetail(history.get(position).getWriteoff_order_id(), history.get(position).getEticketDueDate(), history.get(position).getmodified_date(), history.get(position).getmeal_no());
+                    if(history.get(position).getWriteoff_order_id().indexOf("|||") == -1) {
+                        presenter.goPageHistoryDetail(history.get(position).getWriteoff_order_id(), history.get(position).getEticketDueDate(), history.get(position).getmodified_date(), history.get(position).getmeal_no());
+                    }
                 }
             });
 
