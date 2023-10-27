@@ -42,6 +42,7 @@
             android:id="@+id/img_point2"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:scaleType="fitXY"
             android:src="@drawable/points_fill_green"
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="@+id/guide_point"
