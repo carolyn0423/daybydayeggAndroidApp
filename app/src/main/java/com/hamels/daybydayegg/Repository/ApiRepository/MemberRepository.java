@@ -530,7 +530,6 @@ public class MemberRepository extends ApiRepository {
         map.put("customer_id", customer_id);
         map.put("modified_user", sMebmer_id);
         map.put("member_id", sMebmer_id);
-//        map.put("gender", gender);
         map.put("birthday", birth);
         map.put("city_code", city_code);
         map.put("area_code", area_code);
