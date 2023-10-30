@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:textColor="@color/orangeText"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/coupon_guideline03"
@@ -146,7 +146,7 @@
                         android:layout_marginTop="4dp"
                         android:text="優惠劵"
                         style="@style/fontRegularTw.greyDoubleDark"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/coupon_textView2"
                         app:layout_constraintTop_toTopOf="parent"
@@ -206,21 +206,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.6" />
+                    app:layout_constraintGuide_begin="47dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.25" />
+                    app:layout_constraintGuide_begin="20dp" />
 
                 <TextView
                     android:id="@+id/point_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:textColor="#30B0C7"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/guideline4"
@@ -242,7 +242,7 @@
                         android:layout_marginTop="4dp"
                         android:text="點數"
                         style="@style/fontRegularTw.greyDoubleDark"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/textView32"
                         app:layout_constraintTop_toTopOf="parent"
@@ -309,15 +309,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.6" />
+                    app:layout_constraintGuide_begin="47dp" />
+
 
                 <ImageView
                     android:id="@+id/imageView16"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toTopOf="@+id/guideline23"
-                    app:layout_constraintDimensionRatio="w,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline36"
                     app:layout_constraintStart_toStartOf="@+id/guideline37"
                     app:layout_constraintTop_toTopOf="@+id/guideline22"
@@ -330,7 +330,7 @@
                     android:layout_marginTop="4dp"
                     android:text="認識雞蛋"
                     style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline23" />
@@ -379,11 +379,10 @@
 
                 <ImageView
                     android:id="@+id/imageView17"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toTopOf="@+id/guideline24"
-                    app:layout_constraintDimensionRatio="w,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline28"
                     app:layout_constraintStart_toStartOf="@+id/guideline29"
                     app:layout_constraintTop_toTopOf="@+id/guideline27"
@@ -403,7 +402,7 @@
                     android:layout_marginTop="4dp"
                     android:text="職人介紹"
                     style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline24" />
@@ -424,7 +423,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintDimensionRatio="w,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline80"
                 app:layout_constraintTop_toTopOf="parent">
@@ -452,11 +451,10 @@
 
                 <ImageView
                     android:id="@+id/imageView118"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toTopOf="@+id/guideline32"
-                    app:layout_constraintDimensionRatio="w,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/guideline30"
                     app:layout_constraintStart_toStartOf="@+id/guideline31"
                     app:layout_constraintTop_toTopOf="@+id/guideline33"
@@ -476,7 +474,7 @@
                     android:layout_marginTop="4dp"
                     android:text="雞蛋美味"
                     style="@style/fontRegularTw.greyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline32" />
