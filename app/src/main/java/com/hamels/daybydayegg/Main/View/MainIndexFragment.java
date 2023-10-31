@@ -78,6 +78,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         tvCouponNum = view.findViewById(R.id.coupon_num);
         tvPointNum = view.findViewById(R.id.point_num);
 
+        tvCouponNum.setText("0");
+        tvPointNum.setText("0");
+
 //        // 獲取屏幕高度
 //        DisplayMetrics displayMetrics = new DisplayMetrics();
 //        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
