@@ -314,8 +314,8 @@
 
                 <ImageView
                     android:id="@+id/imageView16"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toTopOf="@+id/guideline23"
                     app:layout_constraintEnd_toStartOf="@+id/guideline36"
@@ -379,8 +379,8 @@
 
                 <ImageView
                     android:id="@+id/imageView17"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toTopOf="@+id/guideline24"
                     app:layout_constraintEnd_toStartOf="@+id/guideline28"
@@ -451,8 +451,8 @@
 
                 <ImageView
                     android:id="@+id/imageView118"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toTopOf="@+id/guideline32"
                     app:layout_constraintEnd_toStartOf="@+id/guideline30"
