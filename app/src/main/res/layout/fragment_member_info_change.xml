@@ -355,6 +355,7 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:textSize="13sp"
+                android:text="XXXXX"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_invitation_code_hint"
                 app:layout_constraintTop_toBottomOf="@id/tv_invitation_code_hint" />
