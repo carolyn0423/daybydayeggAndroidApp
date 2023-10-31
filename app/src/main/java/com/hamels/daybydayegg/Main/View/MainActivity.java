@@ -795,6 +795,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         // 获取剪贴板管理器
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         String copiedText = mainPresenter.getUserName() + " 邀請您下載 " + EOrderApplication.CUSTOMER_NAME + " APP，註冊時輸入邀請碼: " + mainPresenter.getInvitationCode() + "，即可獲得新會員獎勵";
+        copiedText += "\niOS下載連結 : https://itunes.apple.com/app/id6463211336";
+        copiedText += "\nAndroid下載連結 : https://play.google.com/store/apps/details?id=com.hamels.daybydayegg";
         if (clipboard != null) {
             // 创建一个ClipData对象，将文本复制到剪贴板
             ClipData clip = ClipData.newPlainText("Copied Text", copiedText);
@@ -1223,7 +1225,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         addFragment(ProductFragment.getInstance());
                     }else if(currentFragment instanceof ProductFragment){               //  商品列表
                         addFragment(ProductMainTypeFragment.getInstance());
-                    }else if(currentFragment instanceof ProductMainTypeFragment){
+                    }else if(
+                            currentFragment instanceof ProductMainTypeFragment ||
+                            currentFragment instanceof DonateFragment){
                         changeTabFragment(MainIndexFragment.getInstance());
                     }else if(currentFragment instanceof MemberInfoChangeFragment
                             || currentFragment instanceof PasswordChangeFragment

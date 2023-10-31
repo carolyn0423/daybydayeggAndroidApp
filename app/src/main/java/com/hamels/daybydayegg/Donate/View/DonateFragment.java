@@ -234,9 +234,13 @@ public class DonateFragment extends BaseFragment implements DonateContract.View{
         Log.e(TAG, "----------------------------" + modified_date);
 
         if (!writeoff_order_id.equals("")) {
-            ((MainActivity) getActivity()).addFragment(OrderDetailFragment.getInstance(writeoff_order_id, meal_no));
-        }
-        else {
+            if(writeoff_order_id.indexOf("|||") == -1) {
+                ((MainActivity) getActivity()).addFragment(OrderDetailFragment.getInstance(writeoff_order_id, meal_no));
+            }else{
+                DonateHistoryDetailFragment.getInstance().type_idMode("1");
+                ((MainActivity) getActivity()).addFragment(DonateHistoryDetailFragment.getInstance(writeoff_order_id, eticket_due_date, modified_date));
+            }
+        } else {
             DonateHistoryDetailFragment.getInstance().type_idMode("1");
             ((MainActivity) getActivity()).addFragment(DonateHistoryDetailFragment.getInstance(writeoff_order_id, eticket_due_date, modified_date));
         }

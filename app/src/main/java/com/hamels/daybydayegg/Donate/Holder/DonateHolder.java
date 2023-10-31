@@ -30,14 +30,13 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     public TextView tv_product_name_left, tv_spec_name2_left, tv_eticket_due_date_left, tv_type_name_left, tv_spec_name_left, tv_buy_quantity_left, tv_give_quantity_left, tv_left_number_left;
     public TextView tv_product_name_right, tv_spec_name2_right, tv_eticket_due_date_right, tv_type_name_right, tv_spec_name_right, tv_buy_quantity_right, tv_give_quantity_right, tv_left_number_right;
     public TextView tv_giveflag_left, tv_giveflag_right;
-    public ConstraintLayout layout_left, layout_right, donatehistory_constraintLayout;
+    public ConstraintLayout layout_left, layout_right, donatehistory_constraintLayout, donatehistory_constraintLayout2;
 
     // donatehistorylist no meal_no
     public TextView tv_meal_no_title, tv_meal_no, tv_tickets_count_title, tv_tickets_count, tv_ref_content, tv_writeoff_due_date, tv_expiredflag_left;
     public TextView tv_product_name, tv_spec_name;
 
     // meal_no
-    public ConstraintLayout donatehistory_constraintLayout2;
     public ImageView img_product;
     private TextView tv_title2, tv_meal_no_title2, tv_meal_no2, tv_tickets_count_title2, tv_tickets_count2, tv_pickup_date2, tv_order_no2, tv_order_date2, tv_order_status2, tv_writeoff_due_date2;
 
@@ -227,53 +226,57 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     }
 
     public void setImg_product_history(Donate history) {
-        if (history.getmeal_no().equals("")) {
-            donatehistory_constraintLayout.setVisibility(View.VISIBLE);
-            donatehistory_constraintLayout2.setVisibility(View.GONE);
+//        if (history.getmeal_no().equals("")) {
+//            donatehistory_constraintLayout.setVisibility(View.VISIBLE);
+//            donatehistory_constraintLayout2.setVisibility(View.GONE);
+//
+//            tv_meal_no_title.setText("轉贈提貨券");
+//            //tv_meal_no_title.setTextSize(13);
+//            tv_meal_no.setText("");
+//        }
+//        else {
+//            donatehistory_constraintLayout.setVisibility(View.GONE);
+//            donatehistory_constraintLayout2.setVisibility(View.VISIBLE);
+//
+//            // pickupway
+//            switch (history.getpickup_way()) {
+//                case "1":
+//                case "DO":
+//                case "FP":
+//                case "UE":
+//                    tv_title2.setText(history.getLocationName() + "配送");
+//                    img_product.setImageResource(R.drawable.delivery_service);
+//                    break;
+//                case "2":
+//                case "TO":
+//                    tv_title2.setText(history.getLocationName());
+//                    img_product.setImageResource(R.drawable.takeout_service);
+//                    break;
+//            }
+//            tv_meal_no_title2.setText(history.getpickup_way_name());
+//
+//            tv_meal_no2.setText(history.getmeal_no());
+//            tv_tickets_count2.setText(history.getquantity());
+//            tv_pickup_date2.setText(history.getbooking_pickup_datetime());
+//            tv_order_no2.setText(history.getWriteoff_order_id().substring(0, 8) + "-" + history.getWriteoff_order_id().substring(8, 14));
+//            tv_order_date2.setText(history.getorder_end_datetime());
+//            tv_order_status2.setText(history.getorder_status_name());
+//            tv_writeoff_due_date2.setText(history.getwriteoff_due_date());
+//        }
 
-            tv_meal_no_title.setText("轉贈提貨券");
-            //tv_meal_no_title.setTextSize(13);
-            tv_meal_no.setText("");
-        }
-        else {
-            donatehistory_constraintLayout.setVisibility(View.GONE);
-            donatehistory_constraintLayout2.setVisibility(View.VISIBLE);
-
-            // pickupway
-            switch (history.getpickup_way()) {
-                case "1":
-                case "DO":
-                case "FP":
-                case "UE":
-                    tv_title2.setText(history.getLocationName() + "配送");
-                    img_product.setImageResource(R.drawable.delivery_service);
-                    break;
-                case "2":
-                case "TO":
-                    tv_title2.setText(history.getLocationName());
-                    img_product.setImageResource(R.drawable.takeout_service);
-                    break;
-            }
-            tv_meal_no_title2.setText(history.getpickup_way_name());
-
-            tv_meal_no2.setText(history.getmeal_no());
-            tv_tickets_count2.setText(history.getquantity());
-            tv_pickup_date2.setText(history.getbooking_pickup_datetime());
-            tv_order_no2.setText(history.getWriteoff_order_id().substring(0, 8) + "-" + history.getWriteoff_order_id().substring(8, 14));
-            tv_order_date2.setText(history.getorder_end_datetime());
-            tv_order_status2.setText(history.getorder_status_name());
-            tv_writeoff_due_date2.setText(history.getwriteoff_due_date());
-        }
-
-        tv_tickets_count_title.setText(history.getshowText() + "：");
+        tv_tickets_count_title.setText(history.getshowText());
         tv_tickets_count.setText(history.getquantity());
         tv_writeoff_due_date.setText(history.getwriteoff_due_date());
+        tv_meal_no.setText("");
+        donatehistory_constraintLayout.setVisibility(View.VISIBLE);
+        donatehistory_constraintLayout2.setVisibility(View.GONE);
 
         switch (history.getTicketStatus()){
             case "B": //購買
                 tv_giveflag_left.setVisibility(View.INVISIBLE);
                 break;
             case "G": //贈出
+                tv_meal_no_title.setText("轉贈提貨券");
                 tv_giveflag_left.setVisibility(View.INVISIBLE);
                 tv_ref_content.setText("受贈者：" + history.getGive_member_name() + " " + history.getGive_member_mobile());
                 break;
@@ -281,13 +284,14 @@ public class DonateHolder extends RecyclerView.ViewHolder {
                 tv_giveflag_left.setVisibility(View.VISIBLE);
                 break;
             case "BU": //自購自用
-            case "RU": //接收贈送兌換
+                tv_meal_no_title.setText("提貨卷核銷");
                 tv_giveflag_left.setVisibility(View.INVISIBLE);
-                if(history.getWriteoff_order_id().equals("")){ //線下店鋪核銷
-                    tv_ref_content.setText("店家核銷");
-                }else{ //線上APP訂單核銷
-                    tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
-                }
+                tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
+                break;
+            case "RU": //接收贈送兌換
+                tv_meal_no_title.setText("受贈核銷");
+                tv_giveflag_left.setVisibility(View.INVISIBLE);
+                tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 break;
         }
 
@@ -324,11 +328,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
             case "BU": //自購自用
             case "RU": //接收贈送兌換
                 tv_giveflag_left.setVisibility(View.INVISIBLE);
-                if(history.getWriteoff_order_id().equals("")){ //線下店鋪核銷
-                    tv_ref_content.setText("店家核銷");
-                }else{ //線上APP訂單核銷
-                    tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
-                }
+                tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 break;
         }
 

@@ -45,7 +45,6 @@ public class MemberInfoChangePresenter extends BasePresenter<MemberInfoChangeCon
 
     @Override
     public void updateMember(String customer_id, String city_code , String area_code, String address,String email, String birth, String carrier_no) {
-
         if(city_code.equals("請選擇城市")){
             view.showAlert(R.string.register_city);
             return;
@@ -71,13 +70,7 @@ public class MemberInfoChangePresenter extends BasePresenter<MemberInfoChangeCon
             return;
         }
 
-//        if (gender == -1) {
-//            view.showAlert(R.string.gender_empty);
-//            return;
-//        }
-
         repositoryManager.callUpdateMemberInfoApi(customer_id, city_code,area_code,address,email,birth, carrier_no, new BaseContract.ValueCallback<String>() {
-//            repositoryManager.callUpdateMemberInfoApi(city_code,area_code,address,email, gender == R.id.radio_male ? "1" : "0", new BaseContract.ValueCallback<String>() {
             @Override
             public void onValueCallback(int task, String message) {
                 view.showAlert(message);

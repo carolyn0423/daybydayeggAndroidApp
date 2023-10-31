@@ -133,29 +133,21 @@ public class DonateHistoryDetailFragment extends BaseFragment implements DonateC
     @Override
     public void setDonateDetail(List<Donate> productDetail) {
 
-        if (productDetail.get(0).getmeal_no().equals("")) {
-            tv_meal_no_title.setText("轉贈提貨券");
-            //tv_meal_no_title.setTextSize(15);
-            tv_meal_no.setText("");
-        }
-        else {
-            tv_meal_no_title.setText("取餐編號 ");
-            tv_meal_no.setText(productDetail.get(0).getmeal_no());
-        }
-
+        tv_meal_no.setText("");
         tv_writeoff_due_date.setText(productDetail.get(0).getwriteoff_due_date());
 
         switch (productDetail.get(0).getTicketStatus()){
             case "G": //贈出
+                tv_meal_no_title.setText("轉贈提貨券");
                 tv_ref_content.setText("受贈者：" + productDetail.get(0).getGive_member_name() + " " + productDetail.get(0).getGive_member_mobile());
                 break;
             case "BU": //自購自用
+                tv_meal_no_title.setText("提貨卷核銷");
+                tv_ref_content.setText("備註/編號："+ productDetail.get(0).getWriteoff_order_id().split("\\|\\|\\|")[0]);
+                break;
             case "RU": //接收贈送兌換
-                if(productDetail.get(0).getWriteoff_order_id().equals("")){ //線下店鋪核銷
-                    tv_ref_content.setText("據點核銷");
-                }else{ //線上APP訂單核銷
-                    tv_ref_content.setText("備註/編號："+ productDetail.get(0).getWriteoff_order_id().split("\\|\\|\\|")[0]);
-                }
+                tv_meal_no_title.setText("受贈核銷");
+                tv_ref_content.setText("備註/編號："+ productDetail.get(0).getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 break;
         }
     }

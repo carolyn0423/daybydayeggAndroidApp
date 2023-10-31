@@ -82,7 +82,6 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         spinner_city = view.findViewById(R.id.spinner_city);
         spinner_area = view.findViewById(R.id.spinner_area);
 
-
         radioGender = view.findViewById(R.id.group_gender);
         tvName = view.findViewById(R.id.tv_name);
         tvBirth = view.findViewById(R.id.tv_birth);
@@ -121,7 +120,7 @@ public class MemberInfoChangeFragment extends BaseFragment implements MemberInfo
         etMail.setText(user.getEmail());
         etAddress.setText(user.getAddress());
         etCarrierNo.setText(user.getCarrierNo());
-        tvInvitationCode.setText(user.getInvitationCode());
+        tvInvitationCode.setText(user.getInvitationCode().equals("") ? "無輸入" : "");
         //tvRecommendMember.setText(user.getRecommendMemberName());
 
         int spinnerCity = 0;
