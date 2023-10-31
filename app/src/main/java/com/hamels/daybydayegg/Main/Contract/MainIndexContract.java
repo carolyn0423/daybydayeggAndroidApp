@@ -12,6 +12,8 @@ public interface MainIndexContract {
         void setMemberCouponPointData(String sTxt);
 
         void CustomerOnlineISFalse();
+
+        void intentToLogin(int page);
     }
 
     interface Presenter extends BaseContract.Presenter {

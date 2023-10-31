@@ -2,6 +2,7 @@ package com.hamels.daybydayegg.Main.View;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,17 +18,20 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.EOrderApplication;
+import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.Contract.MainIndexContract;
 import com.hamels.daybydayegg.Main.Presenter.MainIndexPresenter;
 import com.hamels.daybydayegg.MemberCenter.View.MemberPointFragment;
 import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Carousel;
+import com.hamels.daybydayegg.Utils.IntentUtils;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIN_INDEX;
 
 import static com.hamels.daybydayegg.EOrderApplication.*;
 
@@ -90,7 +94,11 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         layout_coupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
+                if(mainindexPresenter.getUserLogin()) {
+                    ((MainActivity) getActivity()).addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
+                }else{
+                    ((MainActivity) getActivity()).intentToLogin(REQUEST_MAIN_INDEX);
+                }
             }
         });
 
@@ -99,7 +107,11 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         layout_point.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).addFragment(MemberPointFragment.getInstance());
+                if(mainindexPresenter.getUserLogin()) {
+                    ((MainActivity) getActivity()).addFragment(MemberPointFragment.getInstance());
+                }else{
+                    ((MainActivity) getActivity()).intentToLogin(REQUEST_MAIN_INDEX);
+                }
             }
         });
 
@@ -143,6 +155,12 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
     public void onResume() {
         super.onResume();
         //mainindexPresenter.getCarouselList(CUSTOMER_ID);
+    }
+
+    @Override
+    public void intentToLogin(int requestCode) {
+        Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
+        fragment.getActivity().startActivityForResult(intent, requestCode);
     }
 
     public void CustomerOnlineISFalse() {
