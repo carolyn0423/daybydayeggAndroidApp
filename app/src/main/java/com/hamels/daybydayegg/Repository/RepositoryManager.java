@@ -818,7 +818,7 @@ public class RepositoryManager {
                 super.onApiSuccess(response);
                 if (response.getSuccess()) {
                     List<Map<String, String>> map = response.getItems();
-                    String messageUnreadNum = "0", pushUnreadNum = "0", e_ticket_cart_total_quantity = "0", cartTotalQuantity = "0", sCouponNum = "", sPointNum = "";
+                    String messageUnreadNum = "0", pushUnreadNum = "0", e_ticket_cart_total_quantity = "0", cartTotalQuantity = "0", sTicketNum = "0", sCouponNum = "0", sPointNum = "0";
                     if (map.get(0).containsKey("message_unread_num")) {
                         messageUnreadNum = response.getItems().get(0).get("message_unread_num");
                     }
@@ -841,6 +841,14 @@ public class RepositoryManager {
                             }
                         }
                     }
+                    if (map.get(0).containsKey("ticket_num")) {
+                        sTicketNum = response.getItems().get(0).get("ticket_num");
+                        if (sTicketNum != null) {
+                            if (sTicketNum.equals("")) {
+                                sTicketNum = "0";
+                            }
+                        }
+                    }
                     if (map.get(0).containsKey("coupon_num")) {
                         sCouponNum = response.getItems().get(0).get("coupon_num");
                         if (sCouponNum != null) {
@@ -857,9 +865,9 @@ public class RepositoryManager {
                             }
                         }
                     }
-                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, messageUnreadNum + "_" + pushUnreadNum + "_" + e_ticket_cart_total_quantity + "_" + cartTotalQuantity + "_" + sCouponNum + "_" + sPointNum);
+                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, messageUnreadNum + "_" + pushUnreadNum + "_" + e_ticket_cart_total_quantity + "_" + cartTotalQuantity + "_" + sTicketNum + "_" + sCouponNum + "_" + sPointNum);
                 } else {
-                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0_0_0_0_0_0");
+                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0_0_0_0_0_0_0");
                 }
             }
         });

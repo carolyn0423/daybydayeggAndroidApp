@@ -127,7 +127,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private MainContract.Presenter mainPresenter;
     private WebView webView;
     //private static TextView tvShoppingCart, tvShoppingCartETicket, tvMessageUnread;
-    private static TextView  tvBadgeShoppingCartETicket, tvMessageUnread;
+    private static TextView  tvBadgeShoppingCartETicket, tvMessageUnread, tvBadgeMemberTicket;
 
     // toolbar
     private ConstraintLayout constClose, constBackground, constBase;
@@ -284,6 +284,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         //tvShoppingCart = findViewById(R.id.tv_shopping_cart);
         tvBadgeShoppingCartETicket = findViewById(R.id.tv_shopping_cart_e_ticket);
+        tvBadgeMemberTicket = findViewById(R.id.tv_ticket_num);
         tvMessageUnread = findViewById(R.id.tv_message_unread);
 
         // floating_action_bar
@@ -837,28 +838,34 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         // 購物車商品數量
         if (array.length >= 4) {
-            EOrderApplication.cartBadgeCount = array[3];
-            /*
-            if (array[3].equals("0")) {
-                tvShoppingCart.setVisibility(View.GONE);
-            } else {
-                tvShoppingCart.setVisibility(View.VISIBLE);
-                tvShoppingCart.setText(array[3]);
-            }
+            EOrderApplication.cartTicketBadgeCount = array[2].equals("") ? "0" : array[2];
+            EOrderApplication.cartBadgeCount = array[3].equals("") ? "0" : array[3];
 
-             */
-            EOrderApplication.cartTicketBadgeCount = array[2];
-            if (array[2].equals("0")) {
+            int iCartQuantity = Integer.parseInt(EOrderApplication.cartTicketBadgeCount) + Integer.parseInt(EOrderApplication.cartBadgeCount);
+
+            if (iCartQuantity == 0) {
                 tvBadgeShoppingCartETicket.setVisibility(View.GONE);
             } else {
                 tvBadgeShoppingCartETicket.setVisibility(View.VISIBLE);
-                tvBadgeShoppingCartETicket.setText(array[2]);
+                tvBadgeShoppingCartETicket.setText(iCartQuantity + "");
             }
         }
         // 購物車沒東西時未讀數量會收到空字串
         else {
             //tvShoppingCart.setVisibility(View.GONE);
             tvBadgeShoppingCartETicket.setVisibility(View.GONE);
+        }
+
+        //  提貨卷數量
+        if (array.length >= 5) {
+            if (array[4].equals("0")) {
+                tvBadgeMemberTicket.setVisibility(View.GONE);
+            } else {
+                tvBadgeMemberTicket.setVisibility(View.VISIBLE);
+                tvBadgeMemberTicket.setText(Integer.parseInt(array[4]) > 99 ? "99+" : array[4]);
+            }
+        } else {
+            tvBadgeMemberTicket.setVisibility(View.GONE);
         }
     }
 

@@ -101,7 +101,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                 }
             });
         } else {
-            view.setAllBadge("0_0_0_0_0_0");
+            view.setAllBadge("0_0_0_0_0_0_0");
         }
     }
 
@@ -254,7 +254,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                 repositoryManager.saveVerifyCode("");
                 repositoryManager.saveInvitationCode("");
                 repositoryManager.saveUserName("");
-                view.setAllBadge("0_0_");
+                view.setAllBadge("0_0_0_0_0_0_0");
             }
         });
     }

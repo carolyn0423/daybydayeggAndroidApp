@@ -401,6 +401,23 @@
             app:layout_constraintStart_toEndOf="@+id/guideline01"
             app:layout_constraintVertical_bias="0.19999999" />
 
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_ticket_num"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="37dp"
+            android:background="@drawable/icon_circle_orange"
+            android:backgroundTint="@color/redHint"
+            android:fontFamily="@font/rcb"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toEndOf="@+id/guideline02"
+            app:layout_constraintVertical_bias="0.19999999" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline01"
             android:layout_width="wrap_content"

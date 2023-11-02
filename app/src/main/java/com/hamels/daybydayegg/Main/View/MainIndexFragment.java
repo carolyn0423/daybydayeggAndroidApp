@@ -175,9 +175,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
     public void setMemberCouponPointData(String sTxt) {
         String[] array= sTxt.split("_");
 
-        if(array.length >= 5){
+        if(array.length >= 6){
             //  優惠劵
-            int iCouponNum = Integer.parseInt(array[4]);
+            int iCouponNum = Integer.parseInt(array[5]);
             if(iCouponNum > 999){
                 tvCouponNum.setText("999+");
             }else{
@@ -187,9 +187,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
             tvCouponNum.setText("0");
         }
 
-        if(array.length >= 6){
+        if(array.length >= 7){
             //  點數
-            int iPoint = Integer.parseInt(array[5]);
+            int iPoint = Integer.parseInt(array[6]);
             if(iPoint > 999){
                 tvPointNum.setText("999+");
             }else{
