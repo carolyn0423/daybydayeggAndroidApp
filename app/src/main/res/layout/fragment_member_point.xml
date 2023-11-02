@@ -55,7 +55,7 @@
             android:gravity="center"
             android:fontFamily="@font/rcb"
             android:textColor="@color/colorYunlinhn"
-            android:textSize="93sp"
+            android:textSize="60sp"
             android:text="0"
             app:layout_constraintBottom_toBottomOf="@+id/img_point"
             app:layout_constraintEnd_toEndOf="@+id/img_point"
