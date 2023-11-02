@@ -44,7 +44,7 @@
                 android:hint="商家名稱"
                 android:inputType="text"
                 android:textColorHint="@color/greyHint"
-                android:textSize="13sp" />
+                android:textSize="13dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

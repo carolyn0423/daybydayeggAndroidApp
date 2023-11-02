@@ -65,7 +65,7 @@ public class SplashActivity extends BaseActivity {
             public void run() {
 
                 //  20230731 Leslie 不顯示開啟提醒畫面
-                IntentUtils.intentToMain(SplashActivity.this, true, EOrderApplication.CUSTOMER_ID,false);
+                IntentUtils.intentToMain(SplashActivity.this, true, EOrderApplication.CUSTOMER_ID,false, false);
 
 //                if (SharedUtils.getInstance().getUserFirstOpenApp(SplashActivity.this)) {
 //                    SharedUtils.getInstance().setUserOpenApp(SplashActivity.this);

@@ -39,4 +39,5 @@ public class MailFilePresenter extends BasePresenter<MailFileContract.View> impl
             }
         });
     }
+    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
 }

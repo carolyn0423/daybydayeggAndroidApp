@@ -48,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:gravity="center"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:background="#FFF"
         android:text="僅顯示180天內的使用歷程"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/main"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:text=""
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -100,7 +100,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/main"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toEndOf="@+id/tv_meal_no_title"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -109,7 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/main"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_meal_no"/>
 
@@ -118,7 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="#595757"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@+id/tv_product_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
 
@@ -147,7 +147,7 @@
                 android:id="@+id/tv_writeoff_due_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="12dp"
                 android:text="2020-12-32 12:12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/donatehistorydetail_recycler_view" />

@@ -38,7 +38,7 @@ public interface MemberApiService {
     Call<BaseModel<User>> postGetMemberInfo(@Body RequestBody body);
 
     @POST("Member/DeleteData")
-    Call<BaseModel<String>> postDeleteData(@Body RequestBody body);
+    Call<BaseModel<List<Map<String , String>>>> postDeleteData(@Body RequestBody body);
 
     @POST("Authority/DoLogout")
     Call<BaseModel<Map<String, String>>> postLogout(@Body RequestBody body);
@@ -121,8 +121,8 @@ public interface MemberApiService {
     @POST("Order/GiveTicketGiftByCart")
     Call<BaseModel<List<Donate>>> GiveTicketGiftByCart(@Body RequestBody body);
 
-    @POST("Push/SaveData")
-    Call<BaseModel<Donate>> SavePush(@Body RequestBody body);
+//    @POST("Push/SaveData")
+//    Call<BaseModel<Donate>> SavePush(@Body RequestBody body);
 
     @POST("Lot/GetDetail")
     Call<BaseModel<DrawLots>> GetLotDetail(@Body RequestBody body);

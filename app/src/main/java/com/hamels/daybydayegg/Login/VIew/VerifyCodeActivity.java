@@ -31,7 +31,7 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
     private ArrayList<EditText> etList;
     private VerifyCodeContract.Presenter verifyPresenter;
     private CountDownTimer timer;
-
+    private Boolean mStateEnable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
         tvHint.setVisibility(View.GONE);
 
         tvResend = findViewById(R.id.tv_resend);
-        ViewUtils.addUnderLine(tvResend);
+        //ViewUtils.addUnderLine(tvResend);
         tvResend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +95,6 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
 
         startTimer();
     }
-
     private void startTimer() {
         tvResend.setEnabled(false); // 禁用按钮
 
@@ -127,7 +126,7 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
     @Override
     public void showResendHint(String hint) {
         tvHint.setVisibility(View.VISIBLE);
-        tvHint.setTextColor(getResources().getColor(R.color.orangeText));
+        tvHint.setTextColor(getResources().getColor(R.color.colorYunlinhn));
         tvHint.setText(hint);
 //        tvHint.setText(R.string.verify_code_resend);
     }
@@ -188,7 +187,7 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
 
     @Override
     public void finishActivity() {
-        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false);
+        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, true);
     }
 
     class AutoFocusWatchLayout implements TextWatcher {

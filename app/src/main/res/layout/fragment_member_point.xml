@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/pcircle"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/bg_card"
             app:layout_constraintStart_toStartOf="@+id/bg_card"
             app:layout_constraintEnd_toEndOf="@+id/bg_card"
@@ -38,28 +39,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:id="@+id/view01"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#90FFFFFF"
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="@+id/bg_card"
+            app:layout_constraintEnd_toEndOf="@+id/bg_card"
+            app:layout_constraintTop_toTopOf="@+id/bg_card"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_card" />
+
         <ImageView
             android:id="@+id/img_point2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:scaleType="fitXY"
-            android:src="@drawable/points_fill_green"
-            android:layout_marginTop="40dp"
-            app:layout_constraintStart_toStartOf="@+id/guide_point"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/ic_point_orange"
+            android:layout_marginRight="30dp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_total_point"
+            app:layout_constraintTop_toTopOf="@+id/view01"
+            app:layout_constraintBottom_toBottomOf="@+id/view01"/>
 
         <TextView
             android:id="@+id/tv_total_point"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:fontFamily="@font/rcb"
-            android:textColor="@color/colorYunlinhn"
-            android:textSize="93sp"
+            android:textSize="60dp"
             android:text="0"
             app:layout_constraintBottom_toBottomOf="@+id/img_point"
-            app:layout_constraintEnd_toEndOf="@+id/img_point"
-            app:layout_constraintStart_toStartOf="@+id/img_point"
+            app:layout_constraintEnd_toEndOf="@+id/bg_card"
+            app:layout_constraintStart_toStartOf="@+id/guide_mid"
             app:layout_constraintTop_toTopOf="@+id/img_point" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -85,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="本月無點數紀錄"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/recyclerview"
                 app:layout_constraintEnd_toEndOf="@+id/recyclerview"
@@ -161,7 +172,7 @@
                 android:layout_marginHorizontal="2dp"
                 android:gravity="center"
                 android:fontFamily="@font/rcr"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:text="2023年05月"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_left_arrow"
                 app:layout_constraintEnd_toStartOf="@+id/btn_right_arrow"
@@ -194,16 +205,16 @@
 
         <TextView
             android:id="@+id/tv_expire_time"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="100dp"
             android:gravity="center"
             android:text="@string/expire_date"
-            android:textSize="13sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@+id/bg_card"
-            app:layout_constraintEnd_toEndOf="@+id/bg_card"
-            app:layout_constraintStart_toStartOf="@+id/bg_card"
+            app:layout_constraintEnd_toEndOf="@+id/guide_mid"
+            app:layout_constraintStart_toStartOf="@+id/guide_mid"
             app:layout_constraintTop_toBottomOf="@+id/img_point" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

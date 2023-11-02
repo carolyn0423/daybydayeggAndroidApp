@@ -69,6 +69,9 @@ public class User {
     @SerializedName("connection_name")
     private String ConnectionName;
 
+    @SerializedName("shopkeeper")
+    private String Shopkeeper;
+
     private List<String> topic;
 
     public int getCustomer() {
@@ -275,6 +278,9 @@ public class User {
     public String getRecommendMemberName() {
         return RecommendMemberName;
     }
+    public String getShopkeeper() {
+        return Shopkeeper;
+    }
     @Override
     public String toString() {
         JSONObject jsonObject = new JSONObject();
@@ -308,6 +314,7 @@ public class User {
             jsonObject.put("carrier_no", CarrierNo);
             jsonObject.put("recommend_member_name", RecommendMemberName);
             jsonObject.put("connection_name", ConnectionName);
+            jsonObject.put("shopkeeper", Shopkeeper);
         } catch (JSONException e) {
             e.printStackTrace();
         }

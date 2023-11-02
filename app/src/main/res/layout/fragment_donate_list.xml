@@ -31,13 +31,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="未使用"
-            android:tag="UNUSED" />
+            android:tag="UNUSED"
+            android:textSize="12dp"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="使用歷程"
-            android:tag="HISTORY" />
+            android:tag="HISTORY"
+            android:textSize="12dp"/>
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -46,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:gravity="center"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:text="僅顯示180天內的使用歷程"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"

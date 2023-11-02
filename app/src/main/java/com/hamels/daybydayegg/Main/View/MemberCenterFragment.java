@@ -150,7 +150,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         }else if (id == R.id.btn_trans_record){
             ((MainActivity) getActivity()).addFragment(TransRecordFragment.getInstance("G", "", ""));
         }else if (id == R.id.btn_logout){
-            memberPresenter.logout();
+            Logout();
         }else if (id == R.id.btn_customerservice){
             ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance());
 //                Toast.makeText(getActivity(), "此功能未開放", Toast.LENGTH_LONG).show();
@@ -163,7 +163,6 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             memberPresenter.getDeleteMember();
-                            deleteMember();
                         }
                     })
                     .setNegativeButton(android.R.string.no, null)
@@ -171,6 +170,9 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         }
     }
 
+    public void Logout(){
+        memberPresenter.logout();
+    }
     @Override
     public void setUserName(String name) {
         tvName.setText(name);
@@ -204,6 +206,15 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         memberPresenter.logout();
+                    }
+                })
+                .show();
+    }
+    public void deleteError(String sMessage){
+        new AlertDialog.Builder(getContext()).setTitle(null).setMessage(sMessage)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                     }
                 })
                 .show();

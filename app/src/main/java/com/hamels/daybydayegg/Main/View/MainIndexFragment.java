@@ -2,7 +2,9 @@ package com.hamels.daybydayegg.Main.View;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +23,7 @@ import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.Contract.MainIndexContract;
 import com.hamels.daybydayegg.Main.Presenter.MainIndexPresenter;
+import com.hamels.daybydayegg.Main.Presenter.MemberCenterPresenter;
 import com.hamels.daybydayegg.MemberCenter.View.MemberPointFragment;
 import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.R;
@@ -123,7 +126,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         layout_aboutegg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //  開啟外部網址
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bettereggs.tw/blog/?utm_source=App_Android&utm_medium=App_Menu&utm_campaign=BETW_Blog"));
+                startActivity(intent);
             }
         });
 
@@ -132,7 +137,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         layout_man.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //  開啟外部網址
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bettereggs.tw/free-range/?utm_source=App_Android&utm_medium=App_Menu&utm_campaign=BETW_Hero"));
+                startActivity(intent);
             }
         });
 
@@ -141,7 +148,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         layout_eggfood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //  開啟外部網址
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bettereggs.tw/blog/?utm_source=App_Android&utm_medium=App_Menu&utm_campaign=BETW_Recipes"));
+                startActivity(intent);
             }
         });
 
@@ -160,6 +169,23 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         //mainindexPresenter.getCarouselList(CUSTOMER_ID);
     }
 
+    public void getNoVerift() {
+        //  尚未通過驗證，自動執行登出作業
+        mainindexPresenter.logout();
+
+//        new AlertDialog.Builder(fragment.getActivity())
+//                .setTitle(R.string.dialog_hint)
+//                .setMessage("尚未完成簡訊驗證")
+//                .setPositiveButton(android.R.string.ok,
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                ((MainActivity) getActivity()).intentToVerifyCode();
+//                            }
+//                        })
+//                .show();
+    }
+
     @Override
     public void intentToLogin(int requestCode) {
         Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
@@ -175,9 +201,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
     public void setMemberCouponPointData(String sTxt) {
         String[] array= sTxt.split("_");
 
-        if(array.length >= 5){
+        if(array.length >= 6){
             //  優惠劵
-            int iCouponNum = Integer.parseInt(array[4]);
+            int iCouponNum = Integer.parseInt(array[5]);
             if(iCouponNum > 999){
                 tvCouponNum.setText("999+");
             }else{
@@ -187,9 +213,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
             tvCouponNum.setText("0");
         }
 
-        if(array.length >= 6){
+        if(array.length >= 7){
             //  點數
-            int iPoint = Integer.parseInt(array[5]);
+            int iPoint = Integer.parseInt(array[6]);
             if(iPoint > 999){
                 tvPointNum.setText("999+");
             }else{

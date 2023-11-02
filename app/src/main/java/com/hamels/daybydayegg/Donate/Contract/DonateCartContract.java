@@ -25,6 +25,6 @@ public interface DonateCartContract {
 
         void updateTicketCartCode(String cart_ticket_code);
 
-        void SavePush(String mobile, String title, String content);
+//        void SavePush(String mobile, String title, String content);
     }
 }

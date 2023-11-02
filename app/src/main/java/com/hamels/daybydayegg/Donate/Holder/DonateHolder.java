@@ -115,46 +115,61 @@ public class DonateHolder extends RecyclerView.ViewHolder {
 
         Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_donate_left);
         Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sRightPictureUrl).into(img_donate_right);
+        img_donate_right.setVisibility(View.VISIBLE);
 
         tv_eticket_due_date_left.setText(productleft.getEticketDueDate());
         tv_eticket_due_date_right.setText(productright.getEticketDueDate());
+        tv_eticket_due_date_right.setVisibility(View.VISIBLE);
 
         tv_product_name_left.setText(productleft.getProductName());
         tv_product_name_right.setText(productright.getProductName());
+        tv_product_name_right.setVisibility(View.VISIBLE);
 
         //tv_spec_name2_left.setText(" (" + productleft.getTypeName() + "-" + productleft.getSpecName() + ")");
         //tv_spec_name2_right.setText(" (" + productright.getTypeName() + "-" + productright.getSpecName() + ")");
 
         if (productleft.getTicketStatus().equals("B")) {
+            tv_buy_quantity_left_title.setVisibility(View.VISIBLE);
+            tv_buy_quantity_left.setVisibility(View.VISIBLE);
             tv_give_quantity_left_title.setVisibility(View.GONE);
             tv_give_quantity_left.setVisibility(View.GONE);
+            tv_giveflag_left.setVisibility(View.GONE);
 
             tv_buy_quantity_left.setText(productleft.getBuy_quantity());
+
+            tv_giveflag_left.setVisibility(View.GONE);
         } else if (productleft.getTicketStatus().equals("R")) {
             tv_buy_quantity_left_title.setVisibility(View.GONE);
             tv_buy_quantity_left.setVisibility(View.GONE);
+            tv_give_quantity_left_title.setVisibility(View.VISIBLE);
+            tv_give_quantity_left.setVisibility(View.VISIBLE);
+            tv_giveflag_left.setVisibility(View.VISIBLE);
 
             tv_give_quantity_left.setText(productleft.getGive_quantity());
-
-            tv_giveflag_left.setVisibility(View.VISIBLE);
         }
 
         if (productright.getTicketStatus().equals("B")) {
+            tv_buy_quantity_right_title.setVisibility(View.VISIBLE);
+            tv_buy_quantity_right.setVisibility(View.VISIBLE);
             tv_give_quantity_right_title.setVisibility(View.GONE);
             tv_give_quantity_right.setVisibility(View.GONE);
+            tv_giveflag_right.setVisibility(View.GONE);
 
             tv_buy_quantity_right.setText(productright.getBuy_quantity());
+            tv_giveflag_right.setVisibility(View.GONE);
         } else if (productright.getTicketStatus().equals("R")) {
+            tv_give_quantity_right_title.setVisibility(View.VISIBLE);
+            tv_give_quantity_right.setVisibility(View.VISIBLE);
             tv_buy_quantity_right_title.setVisibility(View.GONE);
             tv_buy_quantity_right.setVisibility(View.GONE);
+            tv_giveflag_right.setVisibility(View.VISIBLE);
 
             tv_give_quantity_right.setText(productright.getGive_quantity());
-
-            tv_giveflag_right.setVisibility(View.VISIBLE);
         }
 
         tv_left_number_left.setText(productleft.getLeftNumber());
         tv_left_number_right.setText(productright.getLeftNumber());
+        tv_left_number_right.setVisibility(View.VISIBLE);
 
         if (productleft.getcart_flag().equals("Y")) {
             tv_cart_left.setImageResource(R.drawable.sge);
@@ -167,9 +182,12 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         } else {
             tv_cart_right.setImageResource(R.drawable.sga);
         }
+        tv_cart_right.setVisibility(View.VISIBLE);
 
         layout_left.setTag(R.id.donate_constraintLayout_left, productleft.getUid());
         layout_right.setTag(R.id.donate_constraintLayout_right, productright.getUid());
+
+        layout_right.setVisibility(View.VISIBLE);
 
         chkImgDrawable(img_donate_left, productleft);
         chkImgDrawable(img_donate_right, productright);
@@ -191,17 +209,23 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         tv_eticket_due_date_right.setVisibility(View.INVISIBLE);
 
         if (productleft.getTicketStatus().equals("B")) {
+            tv_buy_quantity_left_title.setVisibility(View.VISIBLE);
+            tv_buy_quantity_left.setVisibility(View.VISIBLE);
             tv_give_quantity_left_title.setVisibility(View.GONE);
             tv_give_quantity_left.setVisibility(View.GONE);
+            tv_giveflag_left.setVisibility(View.GONE);
 
             tv_buy_quantity_left.setText(productleft.getBuy_quantity());
+
+            tv_giveflag_left.setVisibility(View.GONE);
         } else if (productleft.getTicketStatus().equals("R")) {
             tv_buy_quantity_left_title.setVisibility(View.GONE);
             tv_buy_quantity_left.setVisibility(View.GONE);
+            tv_give_quantity_left_title.setVisibility(View.VISIBLE);
+            tv_give_quantity_left.setVisibility(View.VISIBLE);
+            tv_giveflag_left.setVisibility(View.VISIBLE);
 
             tv_give_quantity_left.setText(productleft.getGive_quantity());
-
-            tv_giveflag_left.setVisibility(View.VISIBLE);
         }
 
         tv_give_quantity_right.setVisibility(View.INVISIBLE);

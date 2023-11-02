@@ -30,7 +30,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/name"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +42,7 @@
                 android:layout_marginEnd="12dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@id/tv_name_hint" />
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/cellphone"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="@id/tv_name"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@id/tv_phone_hint" />
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/gender"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/tv_birth" />
 
@@ -105,7 +105,7 @@
                     android:gravity="center"
                     android:text="@string/male"
                     android:textColor="@color/selec_orange_grey_hint"
-                    android:textSize="13sp" />
+                    android:textSize="13dp" />
 
                 <RadioButton
                     android:id="@+id/radio_female"
@@ -117,7 +117,7 @@
                     android:gravity="center"
                     android:text="@string/female"
                     android:textColor="@color/selec_orange_grey_hint"
-                    android:textSize="13sp" />
+                    android:textSize="13dp" />
             </RadioGroup>
 
             <!-- 性別 End -->
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/birth"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
 
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 android:textColorHint="@color/greyHint"
                 android:hint="@string/hint_birthday"
                 app:layout_constraintEnd_toEndOf="@id/tv_name"
@@ -184,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/receiveaddress"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/group_gender" />
 
@@ -254,7 +254,7 @@
                     android:inputType="text"
                     android:paddingTop="14dp"
                     android:paddingBottom="10dp"
-                    android:textSize="13sp" />
+                    android:textSize="13dp" />
             </com.google.android.material.textfield.TextInputLayout>
             <!-- 信箱 End -->
 
@@ -266,7 +266,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/mail"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/layout_address" />
 
@@ -292,7 +292,7 @@
                     android:inputType="text"
                     android:paddingTop="12dp"
                     android:paddingBottom="10dp"
-                    android:textSize="13sp" />
+                    android:textSize="13dp" />
             </com.google.android.material.textfield.TextInputLayout>
             <!-- 信箱 End -->
 
@@ -304,7 +304,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/carrier_no"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/layout_mail" />
 
@@ -330,7 +330,7 @@
                     android:inputType="text"
                     android:paddingTop="12dp"
                     android:paddingBottom="10dp"
-                    android:textSize="13sp" />
+                    android:textSize="13dp" />
             </com.google.android.material.textfield.TextInputLayout>
             <!-- 手機載具 End -->
 
@@ -342,7 +342,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/invitation_code"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name_hint"
                 app:layout_constraintTop_toBottomOf="@+id/layout_carrier_no" />
 
@@ -354,8 +354,8 @@
                 android:layout_marginEnd="12dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:textSize="13sp"
-                android:text="XXXXX"
+                android:textSize="13dp"
+                android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_invitation_code_hint"
                 app:layout_constraintTop_toBottomOf="@id/tv_invitation_code_hint" />
@@ -405,7 +405,7 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="@string/send"
-            android:textSize="13sp"
+            android:textSize="13dp"
             android:textColor="@color/colorYunlinhn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

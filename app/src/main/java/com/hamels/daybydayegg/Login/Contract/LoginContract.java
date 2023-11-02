@@ -66,5 +66,7 @@ public interface LoginContract {
         String getLoveCustomer();
 
         void getCustomerDetailList(String sLoveCustomer);
+
+        boolean getUserLogin();
     }
 }

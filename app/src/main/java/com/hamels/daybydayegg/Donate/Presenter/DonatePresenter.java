@@ -74,4 +74,6 @@ public class DonatePresenter extends BasePresenter<DonateContract.View> implemen
     public void showContactMessage(String sContactPhone){
         view.showAlert(sContactPhone);
     }
+
+    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
 }

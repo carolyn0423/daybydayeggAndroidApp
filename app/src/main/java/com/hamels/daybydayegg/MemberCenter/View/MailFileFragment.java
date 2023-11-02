@@ -52,7 +52,10 @@ public class MailFileFragment extends BaseFragment implements MailFileContract.V
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mailPresenter.getMessageList();
+
+        if(mailPresenter.getUserLogin()) {
+            mailPresenter.getMessageList();
+        }
     }
 
     private void initView(View view) {

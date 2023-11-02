@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="登入"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/login_title_hint"
-        android:textSize="13sp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_eorder" />
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
-        android:textSize="8sp"
+        android:textSize="10dp"
         android:textColor="#FFF"
         android:text="商家"
         android:paddingBottom="5dp"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
-        android:textSize="8sp"
+        android:textSize="10dp"
         android:textColor="#FFF"
         android:text="掃碼"
         android:paddingBottom="5dp"
@@ -100,7 +100,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/cellphone"
-            android:textSize="13sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -128,7 +128,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:textColorHint="@color/greyHint"
-                android:textSize="13sp" />
+                android:textSize="14dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -140,7 +140,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/password"
-            android:textSize="13sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_input_phone" />
 
@@ -171,7 +171,7 @@
                 android:paddingBottom="10dp"
                 android:lines="1"
                 android:textColorHint="@color/greyHint"
-                android:textSize="13sp" />
+                android:textSize="14dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -182,7 +182,7 @@
             android:layout_marginEnd="40dp"
             android:gravity="center"
             android:text="@string/login_forget_password"
-            android:textSize="13sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/layout_input_password"
             app:layout_constraintEnd_toEndOf="@id/layout_input_password"
             app:layout_constraintTop_toTopOf="@id/layout_input_password" />
@@ -198,7 +198,7 @@
         android:button="@drawable/selec_check_login"
         android:paddingLeft="8dp"
         android:text="@string/check_login_remember"
-        android:textSize="13sp"
+        android:textSize="14dp"
         android:visibility="gone"
         android:checked="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -229,7 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
             android:layout_marginBottom="9dp"
-            android:textSize="13sp"
+            android:textSize="14dp"
             android:background="@null"
             android:drawableStart="@drawable/ic_user_orange"
             android:drawablePadding="10dp"
@@ -263,7 +263,7 @@
             android:drawableStart="@drawable/ic_login_white"
             android:drawablePadding="10dp"
             android:text="@string/login"
-            android:textSize="13sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -278,7 +278,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:text="@string/login_terms_of_use"
-        android:textSize="13sp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 

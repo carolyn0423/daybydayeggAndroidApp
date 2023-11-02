@@ -46,7 +46,7 @@
             android:ellipsize="end"
             android:text="@string/item_no"
             android:textColor="@color/greyText"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_item"
             app:layout_constraintTop_toTopOf="@id/img_item" />
@@ -61,7 +61,7 @@
             android:maxLines="3"
             android:text="NIKE 男款經典慢跑鞋"
             android:textColor="@color/greyText"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@id/tv_item_no"
             app:layout_constraintStart_toStartOf="@id/tv_item_no"
             app:layout_constraintTop_toBottomOf="@id/tv_item_no" />
@@ -76,7 +76,7 @@
             android:maxLines="3"
             android:text="SIZE US 10.5"
             android:textColor="@color/greyText"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@id/tv_item_no"
             app:layout_constraintStart_toStartOf="@id/tv_item_no"
             app:layout_constraintTop_toBottomOf="@id/tv_item_name" />
@@ -89,7 +89,7 @@
             android:layout_marginTop="6dp"
             android:text="$2,470"
             android:textColor="@color/greyText"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@id/tv_item_no"
             app:layout_constraintStart_toStartOf="@id/tv_item_no"
             app:layout_constraintTop_toBottomOf="@id/tv_item_style" />
@@ -113,7 +113,7 @@
             android:layout_marginEnd="14dp"
             android:layout_marginBottom="12dp"
             android:text="@string/item_total_price"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_line_item" />

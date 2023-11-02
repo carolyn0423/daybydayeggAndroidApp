@@ -28,6 +28,8 @@ import com.hamels.daybydayegg.Utils.ViewUtils;
 import com.hamels.daybydayegg.Widget.SpinnerDatePickerDialog;
 
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends BaseActivity implements RegisterContract.View {
     public static final String TAG = RegisterActivity.class.getSimpleName();
@@ -77,14 +79,18 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerPresenter.checkInputValue(etName.getText().toString()
-                        , radioGender.getCheckedRadioButtonId()
-                        , ""
-                        , etPhone.getText().toString()
-                        , etPassword.getText().toString()
-                        , etRePassword.getText().toString()
-                        , etInvitationCode.getText().toString()
-                        , cbTermsOfUse.isChecked());
+                if(chkMobile(etPhone.getText().toString())) {
+                    registerPresenter.checkInputValue(etName.getText().toString()
+                            , radioGender.getCheckedRadioButtonId()
+                            , ""
+                            , etPhone.getText().toString()
+                            , etPassword.getText().toString()
+                            , etRePassword.getText().toString()
+                            , etInvitationCode.getText().toString()
+                            , cbTermsOfUse.isChecked());
+                }else{
+                    showErrorMessage("手機格式錯誤");
+                }
             }
         });
 
@@ -104,6 +110,24 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         cbTermsOfUse.setMovementMethod(LinkMovementMethod.getInstance());
 
         registerPresenter = new RegisterPresenter(this, getRepositoryManager(this));
+    }
+
+    private boolean chkMobile(String sMobile){
+        // 定義手機號碼的正則表達式
+        String phoneRegex = "^(09)\\d{8}$"; // 符合台灣手機號碼格式的正則表達式
+
+        // 建立 Pattern 物件
+        Pattern pattern = Pattern.compile(phoneRegex);
+
+        // 使用 Matcher 進行檢驗
+        Matcher matcher = pattern.matcher(sMobile);
+
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     private void showDatePickerDialog() {

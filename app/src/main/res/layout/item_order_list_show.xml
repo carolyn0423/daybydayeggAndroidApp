@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/order_no"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toTopOf="@id/tv_order_time"
             app:layout_constraintStart_toEndOf="@id/img_item"
             app:layout_constraintTop_toTopOf="@id/img_item"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/order_time"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toTopOf="@id/tv_order_price"
             app:layout_constraintStart_toStartOf="@id/tv_order_no"
             app:layout_constraintTop_toBottomOf="@id/tv_order_no" />
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/order_price"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/img_item"
             app:layout_constraintStart_toStartOf="@id/tv_order_no"
             app:layout_constraintTop_toBottomOf="@id/tv_order_time" />
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:text="@string/order_total"
             android:textColor="@color/greyText"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/img_item"
             app:layout_constraintTop_toBottomOf="@id/view_line" />
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:text="@string/order_special"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_order_count"
             app:layout_constraintStart_toEndOf="@id/tv_order_count"
             app:layout_constraintTop_toTopOf="@id/tv_order_count" />
@@ -115,7 +115,7 @@
             android:layout_marginBottom="12dp"
             android:background="@color/orangeText"
             android:text="@string/order_exchange"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_line" />
@@ -128,7 +128,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/rec_stroke_green_button"
             android:text="@string/order_return"
-            android:textSize="14sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/btn_order_exchange"
             app:layout_constraintEnd_toStartOf="@id/btn_order_exchange"
             app:layout_constraintTop_toTopOf="@id/btn_order_exchange" />

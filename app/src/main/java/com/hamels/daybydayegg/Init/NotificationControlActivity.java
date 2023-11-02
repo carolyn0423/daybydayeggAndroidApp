@@ -51,7 +51,7 @@ public class NotificationControlActivity extends BaseActivity implements View.On
             IntentUtils.intentToSystemPermissionSetting(this);
 
         }else if (id == R.id.btn_close){
-            IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false);
+            IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, false);
             finish();
         }
     }

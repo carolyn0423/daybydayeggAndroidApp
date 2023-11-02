@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="0dp"
                 android:text="金卡會員限定"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 android:visibility="gone"/>
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="0dp"
-                android:textSize="15sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/tv_location_name"
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="0dp"
-                android:textSize="12sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_end_date"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="0dp"
                 android:paddingBottom="10dp"
-                android:textSize="12sp" />
+                android:textSize="14dp" />
         </LinearLayout>
 
         <ImageView

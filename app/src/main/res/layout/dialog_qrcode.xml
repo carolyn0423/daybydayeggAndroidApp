@@ -32,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:text="會員編碼"
-        android:textSize="14sp" />
+        android:textSize="16dp" />
 
     <ImageView
         android:id="@+id/dialog_img_qrcode"
@@ -50,7 +50,7 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:text="邀請碼"
-        android:textSize="18sp" />
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/text_invite_code"
@@ -59,7 +59,7 @@
         android:layout_below="@id/text_invite_code_label"
         android:layout_centerHorizontal="true"
         android:text="xxxxxx"
-        android:textSize="32sp"
+        android:textSize="32dp"
         android:textStyle="bold" />
 
     <TextView
@@ -70,6 +70,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:text="長按邀請碼可複製分享給好友"
-        android:textSize="14sp" />
+        android:textSize="14dp" />
 
 </RelativeLayout>

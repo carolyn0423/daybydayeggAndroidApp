@@ -22,7 +22,7 @@
             android:layout_marginEnd="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/greyMessage"
-            android:textSize="13sp"
+            android:textSize="13dp"
             android:text="2021/05/19 12:10"
             android:layout_margin="8dp"
             android:paddingBottom="8dp"
@@ -49,17 +49,17 @@
                 android:scaleType="fitXY" />
 
             <TextView
-                style="@style/fontRegularTw"
                 android:id="@+id/tv_self_message"
-                android:text="留言留言留言留言留言留言留言留言留言留言留言留言留言"
+                style="@style/fontRegularTw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toStartOf="@+id/triangle_gray"
+                android:background="@drawable/rec_solid_green_button"
                 android:padding="15dp"
+                android:text="留言留言留言留言留言留言留言留言留言留言留言留言留言"
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                android:background="@drawable/rec_solid_green_button"/>
+                android:textSize="13dp" />
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -83,7 +83,7 @@
             android:layout_marginEnd="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/greyMenu"
-            android:textSize="13sp"
+            android:textSize="13dp"
             android:text="管理員"
             android:layout_margin="8dp"
             android:paddingBottom="8dp"
@@ -100,7 +100,7 @@
             android:layout_marginEnd="20dp"
             android:gravity="center_vertical"
             android:textColor="@color/greyMessage"
-            android:textSize="13sp"
+            android:textSize="13dp"
             android:text="2021/05/19 12:10"
             android:layout_margin="8dp"
             android:paddingBottom="8dp"
@@ -130,12 +130,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:layout_toEndOf="@+id/triangle_green"
+                android:background="@drawable/rec_solid_gray_button"
                 android:padding="15dp"
                 android:text="留言"
-                android:textSize="13sp"
                 android:textColor="@color/white"
-                android:background="@drawable/rec_solid_gray_button"
-                />
+                android:textSize="13dp" />
         </RelativeLayout>
 
 

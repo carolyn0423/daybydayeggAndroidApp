@@ -46,6 +46,7 @@
                         android:layout_height="0dp"
                         android:layout_margin="10dp"
                         app:isAutoPlay="true"
+                        android:scaleType="fitXY"
                         app:layout_constraintDimensionRatio="h,1:1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +71,7 @@
                     <!--                名稱-->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginBottom="20dp"
                         android:padding="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -93,7 +94,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:visibility="invisible"
                             android:text="復興店"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +107,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:text="詳細介紹"
                             android:gravity="end"
                             android:textColor="@color/blue"
@@ -120,12 +121,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:textColor="@color/Black"
                             android:text=""
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_show_desc" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_store_name" />
 
                         <TextView
                             android:id="@+id/tv_same_price"
@@ -136,10 +137,10 @@
                             android:layout_marginEnd="6dp"
                             android:layout_marginBottom="8dp"
                             android:textColor="@color/Black"
-                            android:textSize="16sp"
-                            android:text=""
-                            app:layout_constraintStart_toStartOf="@+id/guideline10"
-                            app:layout_constraintHorizontal_bias="1.0"
+                            android:textSize="16dp"
+
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_product_type" />
 
                         <TextView
@@ -149,9 +150,10 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginEnd="6dp"
                             android:textColor="@color/Black"
-                            android:textSize="16sp"
+                            android:textSize="16dp"
                             android:text=""
                             android:textStyle="bold"
+
                             app:layout_constraintEnd_toStartOf="@+id/guideline10"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
@@ -165,8 +167,8 @@
                             android:layout_marginStart="6dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="8dp"
-                            android:textSize="14sp"
-                            android:text=""
+                            android:textSize="14dp"
+
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@+id/guideline10"
@@ -178,7 +180,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:textSize="12sp"
+                            android:textSize="16dp"
                             android:textColor="@color/orangeText"
                             android:text=""
                             android:gravity="left"
@@ -187,7 +189,7 @@
                             android:maxEms="25"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_sale_price"/>
+                            app:layout_constraintTop_toBottomOf="@+id/tv_price"/>
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline10"
@@ -264,7 +266,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="20dp"
                             android:textColor="@color/Black"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:text="數量"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -310,7 +312,7 @@
                                 android:gravity="center"
                                 android:inputType="none"
                                 android:text="1"
-                                android:textSize="14sp"
+                                android:textSize="14dp"
                                 android:background="@drawable/gray_noborder_left_right"
                                 android:textStyle="bold"
                                 android:textColor="@color/Black"
@@ -366,7 +368,7 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
                             android:text="規格"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -380,7 +382,7 @@
                             android:layout_marginEnd="20dp"
                             android:layout_marginBottom="1dp"
                             android:background="@drawable/selec_et_line"
-                            android:textSize="13sp"
+                            android:textSize="13dp"
                             style="@style/fontRegularTw.Black"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -449,7 +451,7 @@
                                 android:paddingHorizontal="20dp"
                                 android:gravity="center"
                                 android:text="製作份數"
-                                android:textSize="14sp"
+                                android:textSize="14dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -462,7 +464,7 @@
                                 android:gravity="center"
                                 android:inputType="none"
                                 android:text="1"
-                                android:textSize="14sp"
+                                android:textSize="14dp"
                                 android:background="@drawable/rec_stroke_grey"
                                 style="@style/fontRegularTw.Black"
                                 app:layout_constraintStart_toEndOf="@+id/conf_qty_title"
@@ -486,7 +488,7 @@
                                     android:layout_marginVertical="5dp"
                                     android:layout_marginHorizontal="10dp"
                                     android:text="加入"
-                                    android:textSize="13sp"
+                                    android:textSize="13dp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -659,7 +661,7 @@
                 android:background="@null"
                 android:drawablePadding="10dp"
                 android:text="加入購物車"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

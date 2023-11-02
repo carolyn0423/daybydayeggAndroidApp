@@ -39,7 +39,7 @@ public class MachinePresenter extends BasePresenter<MachineContract.View> implem
 
     @Override
     public void setStoreOften(String machine_id, String uid) {
-        if(!repositoryManager.getUserID().equals("")) {
+        if(getUserLogin()) {
             repositoryManager.callSetMachineOftenApi(machine_id, uid, new BaseContract.ValueCallback<Boolean>() {
                 @Override
                 public void onValueCallback(int task, Boolean bSuccess) {

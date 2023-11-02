@@ -2,4 +2,5 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="design_fab_image_size" tools:override="true">56dp</dimen>
+    <dimen name="text_size">12sp</dimen>
 </resources>

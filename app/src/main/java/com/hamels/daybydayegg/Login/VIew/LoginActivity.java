@@ -26,6 +26,8 @@ import com.hamels.daybydayegg.Utils.SharedUtils;
 import com.hamels.daybydayegg.Utils.ViewUtils;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View{
     public static final String TAG = LoginActivity.class.getSimpleName();
@@ -76,6 +78,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         finish();
         startActivity(getIntent());
         initView();
+
+//        if(loginPresenter.getUserLogin()){
+//            setResultOkFinishActivity();
+//        }
     }
 
     private void initView() {
@@ -157,7 +163,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
                 if(EOrderApplication.CUSTOMER_ID == ""){
                     showErrorAlert("請選擇商家");
                 }else {
-                    loginPresenter.checkAccount(SharedUtils.getInstance().getCustomerID(EOrderApplication.getInstance()), etPhone.getText().toString());
+                    if(chkMobile(etPhone.getText().toString())) {
+                        loginPresenter.checkAccount(SharedUtils.getInstance().getCustomerID(EOrderApplication.getInstance()), etPhone.getText().toString());
+                    }else{
+                        showErrorAlert("手機格式錯誤");
+                    }
                 }
             }
         });
@@ -185,7 +195,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
                 if (EOrderApplication.CUSTOMER_ID == ""){
                     showErrorAlert("請選擇商家");
                 }else{
-                    loginPresenter.login(EOrderApplication.CUSTOMER_ID, etPhone.getText().toString(), etPassword.getText().toString());
+                    if(chkMobile(etPhone.getText().toString())) {
+                        loginPresenter.login(EOrderApplication.CUSTOMER_ID, etPhone.getText().toString(), etPassword.getText().toString());
+                    }else{
+                        showErrorAlert("手機格式錯誤");
+                    }
                 }
 
             }
@@ -238,6 +252,24 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     public void getCheckCustomerNo(String sCutomerNo){
         loginPresenter.checkCustomerNo(sCutomerNo);
+    }
+
+    private boolean chkMobile(String sMobile){
+        // 定義手機號碼的正則表達式
+        String phoneRegex = "^(09)\\d{8}$"; // 符合台灣手機號碼格式的正則表達式
+
+        // 建立 Pattern 物件
+        Pattern pattern = Pattern.compile(phoneRegex);
+
+        // 使用 Matcher 進行檢驗
+        Matcher matcher = pattern.matcher(sMobile);
+
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public void setCustomerList(List<Customer> customers){
@@ -405,7 +437,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     public void setResultOkFinishActivity() {
         //  防止登入後自動跳轉到交易明細頁
         getRepositoryManager(this).savePaySchemeOrderData("");
-        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,true);
+        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, true);
         setResult(RESULT_OK);
         finish();
     }

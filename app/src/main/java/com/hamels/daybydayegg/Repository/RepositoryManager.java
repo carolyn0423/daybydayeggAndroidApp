@@ -66,6 +66,10 @@ public class RepositoryManager {
             isLogin = false;
         }
 
+//        if(SharedUtils.getInstance().getVerifyCode(context) != null && SharedUtils.getInstance().getVerifyCode(context).equals("N")){
+//            isLogin = false;
+//        }
+
 //        return (SharedUtils.getInstance().getUser(context) != null && SharedUtils.getInstance().getVerifyCode(context).equals("Y"));
         return isLogin;
     }
@@ -136,6 +140,7 @@ public class RepositoryManager {
             @Override
             public void onApiSuccess(BaseModel response) {
                 super.onApiSuccess(response);
+
                 SharedUtils.getInstance().removeAllLocalData(context);
                 valueCallback.onValueCallback(TASK_POST_LOGOUT, response.getMessage());
             }
@@ -157,11 +162,11 @@ public class RepositoryManager {
 
     public void callDeleteMemberApi(String member_id, final BaseContract.ValueCallback<String> valueCallback) {
         basePresenter.startCallApi();
-        MemberRepository.getInstance().getDeleteMember(member_id, new ApiCallback<BaseModel<String>>(basePresenter) {
+        MemberRepository.getInstance().getDeleteMember(member_id, new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
             @Override
-            public void onApiSuccess(BaseModel<String> response) {
+            public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
                 super.onApiSuccess(response);
-                valueCallback.onValueCallback(TASK_POST_DELETE_MEMBER, response.getItems());
+                valueCallback.onValueCallback(TASK_POST_DELETE_MEMBER, response.getMessage());
             }
         });
     }
@@ -169,11 +174,7 @@ public class RepositoryManager {
     public void callResendSmsApi(final String customer_id,final String account, final BaseContract.ValueCallback<String> valueCallback) {
         basePresenter.startCallApi();
         int iRandom = new Random().nextInt(9999);
-        String srandom;
-        srandom = Integer.toString(iRandom);
-        if (iRandom < 1000) {
-            srandom = "0" + srandom;
-        }
+        String srandom = String.format("%04d", iRandom);
         context.getSharedPreferences("SmsCode", Context.MODE_PRIVATE).edit()
                 .putString("SmsCode", srandom)
                 .apply();
@@ -201,7 +202,7 @@ public class RepositoryManager {
                     String Message = response.getMessage();
                     String[] sMessage = Message.split("\\|");
                     if (isSuccess) {
-                        if (sMessage[0].equals("V_1X000") || sMessage[0].equals("V_1X001") ||
+                        if (sMessage[0].equals("V_1X000") || sMessage[0].equals("V_1X001") || sMessage[0].equals("V_1X002") ||
                                 sMessage[0].equals("V_0X001") || sMessage[0].equals("V_0X002")) {
                             valueCallback.onValueCallback(TASK_POST_VERIFY_SMS, sMessage[1]);
                         } else {
@@ -569,17 +570,17 @@ public class RepositoryManager {
         });
     }
 
-    public void callSavePushApi(final String sendmember_id, final String title, final String content, final BaseContract.ValueCallback<Boolean> valueCallback) {
-        basePresenter.startCallApi();
-        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().SavePush(member_id, sendmember_id, title, content, new ApiCallback<BaseModel<Donate>>(basePresenter) {
-            @Override
-            public void onApiSuccess(BaseModel<Donate> response) {
-                super.onApiSuccess(response);
-                valueCallback.onValueCallback(TASK_POST_GET_DONATE_DETAIL, response.getSuccess());
-            }
-        });
-    }
+//    public void callSavePushApi(final String sendmember_id, final String title, final String content, final BaseContract.ValueCallback<Boolean> valueCallback) {
+//        basePresenter.startCallApi();
+//        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+//        MemberRepository.getInstance().SavePush(member_id, sendmember_id, title, content, new ApiCallback<BaseModel<Donate>>(basePresenter) {
+//            @Override
+//            public void onApiSuccess(BaseModel<Donate> response) {
+//                super.onApiSuccess(response);
+//                valueCallback.onValueCallback(TASK_POST_GET_DONATE_DETAIL, response.getSuccess());
+//            }
+//        });
+//    }
 
     public void callgetMemberInfoAssignmemberApi(String keyword, final BaseContract.ValueCallback<User> valueCallback) {
         basePresenter.startCallApi();
@@ -818,7 +819,7 @@ public class RepositoryManager {
                 super.onApiSuccess(response);
                 if (response.getSuccess()) {
                     List<Map<String, String>> map = response.getItems();
-                    String messageUnreadNum = "0", pushUnreadNum = "0", e_ticket_cart_total_quantity = "0", cartTotalQuantity = "0", sCouponNum = "", sPointNum = "";
+                    String messageUnreadNum = "0", pushUnreadNum = "0", e_ticket_cart_total_quantity = "0", cartTotalQuantity = "0", sTicketNum = "0", sCouponNum = "0", sPointNum = "0";
                     if (map.get(0).containsKey("message_unread_num")) {
                         messageUnreadNum = response.getItems().get(0).get("message_unread_num");
                     }
@@ -841,6 +842,14 @@ public class RepositoryManager {
                             }
                         }
                     }
+                    if (map.get(0).containsKey("ticket_num")) {
+                        sTicketNum = response.getItems().get(0).get("ticket_num");
+                        if (sTicketNum != null) {
+                            if (sTicketNum.equals("")) {
+                                sTicketNum = "0";
+                            }
+                        }
+                    }
                     if (map.get(0).containsKey("coupon_num")) {
                         sCouponNum = response.getItems().get(0).get("coupon_num");
                         if (sCouponNum != null) {
@@ -857,9 +866,9 @@ public class RepositoryManager {
                             }
                         }
                     }
-                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, messageUnreadNum + "_" + pushUnreadNum + "_" + e_ticket_cart_total_quantity + "_" + cartTotalQuantity + "_" + sCouponNum + "_" + sPointNum);
+                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, messageUnreadNum + "_" + pushUnreadNum + "_" + e_ticket_cart_total_quantity + "_" + cartTotalQuantity + "_" + sTicketNum + "_" + sCouponNum + "_" + sPointNum);
                 } else {
-                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0_0_0_0_0_0");
+                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0_0_0_0_0_0_0");
                 }
             }
         });
@@ -1028,9 +1037,9 @@ public class RepositoryManager {
 
     public void callSendMessageApi(String message, final BaseContract.ValueCallback<Boolean> valueCallback) {
         basePresenter.startCallApi();
-        String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
+        //String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().addMemberContact(customer_id,member_id, message, new ApiCallback<BaseModel>(basePresenter) {
+        MemberRepository.getInstance().addMemberContact(EOrderApplication.CUSTOMER_ID, member_id, message, new ApiCallback<BaseModel>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel response) {
                 super.onApiSuccess(response);
@@ -1079,6 +1088,8 @@ public class RepositoryManager {
     public void saveUserID(String member_id) { SharedUtils.getInstance().saveUserID(context, member_id); }
 
     public void saveUserName(String member_name) { SharedUtils.getInstance().saveUserName(context, member_name); }
+
+    public void saveShopkeeper(String Shopkeeper) { SharedUtils.getInstance().saveShopkeeper(context, Shopkeeper); }
 
     public Boolean saveLoveCustomer(String customer_id) {
         String sLoveCustomerID = getLoveCustomer();
@@ -1151,6 +1162,8 @@ public class RepositoryManager {
     public String getUserID() { return SharedUtils.getInstance().getUserID(context); }
 
     public String getUserName() { return SharedUtils.getInstance().getUserName(context); }
+
+    public String getShopkeeper() { return SharedUtils.getInstance().getShopkeeper(context); }
 
     public String getLoveCustomer() { return SharedUtils.getInstance().getLoveCustomer(context); }
 

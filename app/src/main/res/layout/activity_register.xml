@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/register_title_hint"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -40,7 +40,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/login_title_hint"
             android:textColor="@color/redHint"
-            android:textSize="13sp"
+            android:textSize="14dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/tv_hint"
             app:layout_constraintStart_toStartOf="@id/tv_hint"
@@ -65,7 +65,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/name"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +78,7 @@
                 android:layout_marginTop="20dp"
                 android:paddingLeft="5dp"
                 android:text="*"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:textColor="@color/redHint"
                 app:layout_constraintStart_toStartOf="@+id/tv_name"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -92,7 +92,7 @@
                 android:layout_marginTop="20dp"
                 android:paddingLeft="5dp"
                 android:text="*為必填欄位"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:textColor="@color/redHint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -121,7 +121,7 @@
                     android:paddingBottom="10dp"
                     android:text=""
                     android:textColorHint="@color/greyHint"
-                    android:textSize="13sp" />
+                    android:textSize="14dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/gender"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@id/layout_name" />
 
@@ -156,7 +156,7 @@
                     android:gravity="center"
                     android:text="@string/male"
                     android:textColor="@color/selec_orange_grey_hint"
-                    android:textSize="13sp" />
+                    android:textSize="14dp" />
 
                 <RadioButton
                     android:id="@+id/radio_female"
@@ -168,7 +168,7 @@
                     android:gravity="center"
                     android:text="@string/female"
                     android:textColor="@color/selec_orange_grey_hint"
-                    android:textSize="13sp" />
+                    android:textSize="14dp" />
             </RadioGroup>
 
 <!--            <TextView-->
@@ -218,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/cellphone"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@id/group_gender"  />
 
@@ -229,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="1dp"
                 android:text="*"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:textColor="@color/redHint"
                 app:layout_constraintStart_toEndOf="@+id/tv_phone"
                 app:layout_constraintTop_toTopOf="@+id/tv_phone" />
@@ -258,7 +258,7 @@
                     android:paddingBottom="10dp"
                     android:text=""
                     android:textColorHint="@color/greyHint"
-                    android:textSize="13sp" />
+                    android:textSize="14dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -268,7 +268,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/password"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@+id/layout_phone" />
 
@@ -279,7 +279,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="1dp"
                 android:text="*"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:textColor="@color/redHint"
                 app:layout_constraintStart_toEndOf="@+id/tv_password"
                 app:layout_constraintTop_toTopOf="@+id/tv_password" />
@@ -311,7 +311,7 @@
                     android:lines="1"
                     android:text=""
                     android:textColorHint="@color/greyHint"
-                    android:textSize="13sp" />
+                    android:textSize="14dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -321,7 +321,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/repassword"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@+id/layout_password" />
 
@@ -332,7 +332,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="1dp"
                 android:text="*"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:textColor="@color/redHint"
                 app:layout_constraintStart_toEndOf="@+id/tv_repassword"
                 app:layout_constraintTop_toTopOf="@+id/tv_repassword" />
@@ -364,7 +364,7 @@
                     android:lines="1"
                     android:text=""
                     android:textColorHint="@color/greyHint"
-                    android:textSize="13sp" />
+                    android:textSize="14dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -374,7 +374,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/invitation_code"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@+id/layout_repassword" />
 
@@ -402,7 +402,7 @@
                     android:lines="1"
                     android:text=""
                     android:textColorHint="@color/greyHint"
-                    android:textSize="13sp" />
+                    android:textSize="14dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -415,7 +415,7 @@
             android:layout_marginLeft="45dp"
             android:button="@drawable/selec_check_login"
             android:paddingLeft="8dp"
-            android:textSize="13sp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="@+id/layout_info"
             app:layout_constraintTop_toBottomOf="@+id/layout_info" />
 
@@ -444,7 +444,7 @@
                 android:drawableTint="@color/colorYunlinhn"
                 android:drawablePadding="10dp"
                 android:text="@string/register_member"
-                android:textSize="13sp"
+                android:textSize="14dp"
                 android:textColor="@color/colorYunlinhn"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

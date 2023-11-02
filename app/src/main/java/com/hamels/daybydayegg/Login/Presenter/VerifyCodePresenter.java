@@ -40,6 +40,7 @@ public class VerifyCodePresenter extends BasePresenter<VerifyCodeContract.View> 
                 @Override
                 public void onValueCallback(int task, String type) {
                     if(task==TASK_POST_VERIFY_SMS){
+                        repositoryManager.saveVerifyCode("Y");
                         view.showWrongVerifyHint(true,type);
                     }
                     else{
