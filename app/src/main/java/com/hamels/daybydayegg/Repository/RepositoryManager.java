@@ -66,6 +66,10 @@ public class RepositoryManager {
             isLogin = false;
         }
 
+        if(SharedUtils.getInstance().getVerifyCode(context) != null && SharedUtils.getInstance().getVerifyCode(context).equals("N")){
+            isLogin = false;
+        }
+
 //        return (SharedUtils.getInstance().getUser(context) != null && SharedUtils.getInstance().getVerifyCode(context).equals("Y"));
         return isLogin;
     }
@@ -169,11 +173,7 @@ public class RepositoryManager {
     public void callResendSmsApi(final String customer_id,final String account, final BaseContract.ValueCallback<String> valueCallback) {
         basePresenter.startCallApi();
         int iRandom = new Random().nextInt(9999);
-        String srandom;
-        srandom = Integer.toString(iRandom);
-        if (iRandom < 1000) {
-            srandom = "0" + srandom;
-        }
+        String srandom = String.format("%04d", iRandom);
         context.getSharedPreferences("SmsCode", Context.MODE_PRIVATE).edit()
                 .putString("SmsCode", srandom)
                 .apply();
