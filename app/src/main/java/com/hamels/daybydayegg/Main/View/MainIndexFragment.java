@@ -3,6 +3,7 @@ package com.hamels.daybydayegg.Main.View;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -123,7 +124,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         layout_aboutegg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //  開啟外部網址
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bettereggs.tw/blog/?utm_source=App_Android&utm_medium=App_Menu&utm_campaign=BETW_Blog"));
+                startActivity(intent);
             }
         });
 
@@ -132,7 +135,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         layout_man.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //  開啟外部網址
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bettereggs.tw/free-range/?utm_source=App_Android&utm_medium=App_Menu&utm_campaign=BETW_Hero"));
+                startActivity(intent);
             }
         });
 
@@ -141,7 +146,9 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         layout_eggfood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //  開啟外部網址
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bettereggs.tw/blog/?utm_source=App_Android&utm_medium=App_Menu&utm_campaign=BETW_Recipes"));
+                startActivity(intent);
             }
         });
 
