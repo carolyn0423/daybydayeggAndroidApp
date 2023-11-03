@@ -130,6 +130,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
             tv_give_quantity_left.setVisibility(View.GONE);
 
             tv_buy_quantity_left.setText(productleft.getBuy_quantity());
+
+            tv_giveflag_left.setVisibility(View.GONE);
         } else if (productleft.getTicketStatus().equals("R")) {
             tv_buy_quantity_left_title.setVisibility(View.GONE);
             tv_buy_quantity_left.setVisibility(View.GONE);
@@ -144,6 +146,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
             tv_give_quantity_right.setVisibility(View.GONE);
 
             tv_buy_quantity_right.setText(productright.getBuy_quantity());
+            tv_giveflag_right.setVisibility(View.GONE);
         } else if (productright.getTicketStatus().equals("R")) {
             tv_buy_quantity_right_title.setVisibility(View.GONE);
             tv_buy_quantity_right.setVisibility(View.GONE);
@@ -195,6 +198,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
             tv_give_quantity_left.setVisibility(View.GONE);
 
             tv_buy_quantity_left.setText(productleft.getBuy_quantity());
+
+            tv_giveflag_left.setVisibility(View.GONE);
         } else if (productleft.getTicketStatus().equals("R")) {
             tv_buy_quantity_left_title.setVisibility(View.GONE);
             tv_buy_quantity_left.setVisibility(View.GONE);
