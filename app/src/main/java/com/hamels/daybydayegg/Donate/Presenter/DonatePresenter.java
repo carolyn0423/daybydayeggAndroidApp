@@ -75,11 +75,5 @@ public class DonatePresenter extends BasePresenter<DonateContract.View> implemen
         view.showAlert(sContactPhone);
     }
 
-    public boolean getUserLogin(){
-        if(repositoryManager.getVerifyCode().equals("N")){
-            return false;
-        }else {
-            return repositoryManager.getUserLogin();
-        }
-    }
+    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
 }

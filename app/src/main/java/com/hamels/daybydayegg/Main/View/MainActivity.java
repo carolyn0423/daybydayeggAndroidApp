@@ -910,6 +910,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         IntentUtils.intentToLogin(this, requestCode);
     }
 
+    public void intentToVerifyCode() { IntentUtils.intentToVerifyCode(this, true); }
+
     public BottomNavigationViewEx getBottomNavigationViewEx() {
         return bottomNavigationViewEx;
     }

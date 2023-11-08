@@ -214,13 +214,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 //        }
 //    }
 
-    public Boolean getUserLogin() {
-        if(repositoryManager.getVerifyCode().equals("N")){
-            return false;
-        }else {
-            return repositoryManager.getUserLogin();
-        }
-    }
+    public Boolean getUserLogin() { return repositoryManager.getUserLogin(); }
 
     public String getSourceActive() { return repositoryManager.getSourceActive(); }
 

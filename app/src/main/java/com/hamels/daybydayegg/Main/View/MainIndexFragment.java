@@ -2,6 +2,7 @@ package com.hamels.daybydayegg.Main.View;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -165,6 +166,20 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
     public void onResume() {
         super.onResume();
         //mainindexPresenter.getCarouselList(CUSTOMER_ID);
+    }
+
+    public void getVeriftCode() {
+        new AlertDialog.Builder(fragment.getActivity())
+                .setTitle(R.string.dialog_hint)
+                .setMessage("尚未完成簡訊驗證")
+                .setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((MainActivity) getActivity()).intentToVerifyCode();
+                            }
+                        })
+                .show();
     }
 
     @Override

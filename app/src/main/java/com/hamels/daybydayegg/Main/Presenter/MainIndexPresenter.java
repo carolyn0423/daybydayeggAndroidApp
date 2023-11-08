@@ -48,18 +48,22 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
     @Override
     public void checkMemberData() {
         if(!repositoryManager.getUserID().equals("")){
-            repositoryManager.callGetMemberInfoApi(repositoryManager.getUserID(), new BaseContract.ValueCallback<User>() {
-                @Override
-                public void onValueCallback(int task, User user) {
-                    if(user != null) {
-                        if(user.getOnlineEnabled() != null && user.getOnlineEnabled().equals("Y")) {
-                            repositoryManager.saveUser(user);
+            if(repositoryManager.getVerifyCode().equals("N")){
+                view.getVeriftCode();
+            }else {
+                repositoryManager.callGetMemberInfoApi(repositoryManager.getUserID(), new BaseContract.ValueCallback<User>() {
+                    @Override
+                    public void onValueCallback(int task, User user) {
+                        if (user != null) {
+                            if (user.getOnlineEnabled() != null && user.getOnlineEnabled().equals("Y")) {
+                                repositoryManager.saveUser(user);
+                            }
+                        } else {
+                            view.CustomerOnlineISFalse();
                         }
-                    }else{
-                        view.CustomerOnlineISFalse();
                     }
-                }
-            });
+                });
+            }
         }
     }
 
@@ -74,13 +78,7 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
         }
     }
 
-    public boolean getUserLogin(){ 
-        if(repositoryManager.getVerifyCode().equals("N")){
-            return false;
-        }else {
-            return repositoryManager.getUserLogin();
-        }
-    }
+    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
 
     public void checkCustomerNo(String customer_no) {
         if (customer_no.isEmpty()) {

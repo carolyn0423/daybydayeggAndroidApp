@@ -14,6 +14,8 @@ public interface MainIndexContract {
         void CustomerOnlineISFalse();
 
         void intentToLogin(int page);
+
+        void getVeriftCode();
     }
 
     interface Presenter extends BaseContract.Presenter {

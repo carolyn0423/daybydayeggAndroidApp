@@ -18,13 +18,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     }
 
     @Override
-    public boolean getUserLogin(){
-        if(repositoryManager.getVerifyCode().equals("N")){
-            return false;
-        }else {
-            return repositoryManager.getUserLogin();
-        }
-    }
+    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
     @Override
     public void register() {
         view.intentToRegister();

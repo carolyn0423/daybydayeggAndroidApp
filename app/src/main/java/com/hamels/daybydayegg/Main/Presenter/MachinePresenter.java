@@ -49,12 +49,6 @@ public class MachinePresenter extends BasePresenter<MachineContract.View> implem
         }
     }
 
-    public boolean getUserLogin(){
-        if(repositoryManager.getVerifyCode().equals("N")){
-            return false;
-        }else {
-            return repositoryManager.getUserLogin();
-        }
-    }
+    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
 
 }

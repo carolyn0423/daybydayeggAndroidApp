@@ -18,13 +18,7 @@ public class BasePresenter<V extends BaseContract.View> implements BaseContract.
     }
 
     @Override
-    public boolean isLogin() {
-        if(repositoryManager.getVerifyCode().equals("N")){
-            return false;
-        }else {
-            return repositoryManager.getUserLogin();
-        }
-    }
+    public boolean isLogin() { return repositoryManager.getUserLogin(); }
 
     @Override
     public void forceLogout() {
