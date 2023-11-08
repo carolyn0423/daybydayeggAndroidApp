@@ -18,5 +18,7 @@ public interface MailFileContract {
         void deleteMessage(MemberMessage memberMessage, BaseContract.ValueCallback<String> valueCallback);
 
         void readMessage(MemberMessage memberMessage);
+
+        boolean getUserLogin();
     }
 }

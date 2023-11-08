@@ -38,5 +38,7 @@ public interface DonateContract {
         void getDonateHistoryDetailByID(String writeoff_order_id, String eticket_due_date, String modified_date);
 
         void showContactMessage(String contactPhone);
+
+        boolean getUserLogin();
     }
 }

@@ -75,7 +75,7 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
 
     @Override
     public void setStoreOften(String location_id, String uid) {
-        if(!repositoryManager.getUserID().equals("")) {
+        if(getUserLogin()) {
             repositoryManager.callSetLocationOftenApi(location_id, uid, new BaseContract.ValueCallback<Boolean>() {
                 @Override
                 public void onValueCallback(int task, Boolean bSuccess) {
@@ -85,7 +85,13 @@ public class LocationListPresenter extends BasePresenter<LocationListContract.Vi
         }
     }
 
-    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
+    public boolean getUserLogin(){
+        if(repositoryManager.getVerifyCode().equals("N")){
+            return false;
+        }else {
+            return repositoryManager.getUserLogin();
+        }
+    }
 
     public String getSourceActive() { return repositoryManager.getSourceActive(); }
 

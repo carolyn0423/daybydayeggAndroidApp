@@ -49,7 +49,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     }
     @Override
     public void getMailBadgeFromApi() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             repositoryManager.callGetMailBadgeApi(new BaseContract.ValueCallback<String>() {
                 @Override
                 public void onValueCallback(int task, String type) {
@@ -63,7 +63,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void getMessageBadgeFromApi() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             repositoryManager.callGetMessageBadgeApi(new BaseContract.ValueCallback<String>() {
                 @Override
                 public void onValueCallback(int task, String type) {
@@ -86,7 +86,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void getBadgeNumberFromApi() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             repositoryManager.callGetBadgeNumberApi(new BaseContract.ValueCallback<String>() {
                 @Override
                 public void onValueCallback(int task, String type) {
@@ -107,7 +107,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void checkLoginForMemberCard() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             view.addFragment(MemberCardFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_MEMBER_CARD);
@@ -116,7 +116,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void checkLoginForCoupon() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             view.addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
         } else {
             view.intentToLogin(REQUEST_COUPON);
@@ -125,7 +125,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void checkLoginForLot() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             view.addFragment(DrawLotsFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_LOT_LIST);
@@ -134,7 +134,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void checkLoginForBusiness() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             view.addFragment(BusinessFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_BUSINESS);
@@ -153,7 +153,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void checkLoginForMemberCenter() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             view.changeTabFragment(MemberCenterFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_MEMBER_CENTER);
@@ -162,7 +162,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void checkLoginForShoppingCart(String orderType) {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             view.changeTabFragment(ShoppingCartFragment.getInstance(orderType));
         } else {
             view.intentToLogin(REQUEST_SHOPPING_CART);
@@ -174,7 +174,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         if (fragmentName.equals(MailFileFragment.TAG) || fragmentName.equals(MailDetailFragment.TAG)) {
             return;
         }
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             view.addFragment(MailFileFragment.getInstance());
             //view.addFragment(MainIndexFragment.getInstance());
         } else {
@@ -188,7 +188,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
             return;
         }
 
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             view.addFragment(MessageListFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_MESSAGE);
@@ -197,7 +197,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void checkLoginForDonate() {
-        if (repositoryManager.getUserLogin()) {
+        if (getUserLogin()) {
             DonateFragment.getInstance().type_idMode("0");
             view.addFragment(DonateFragment.getInstance());
         } else {
@@ -215,7 +215,11 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 //    }
 
     public Boolean getUserLogin() {
-        return repositoryManager.getUserLogin();
+        if(repositoryManager.getVerifyCode().equals("N")){
+            return false;
+        }else {
+            return repositoryManager.getUserLogin();
+        }
     }
 
     public String getSourceActive() { return repositoryManager.getSourceActive(); }

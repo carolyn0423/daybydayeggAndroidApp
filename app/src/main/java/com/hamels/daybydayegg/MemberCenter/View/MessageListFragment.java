@@ -52,7 +52,9 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     @Override
     public void onResume() {
         super.onResume();
-        messagePresenter.getMessageList();
+        if(messagePresenter.getUserLogin()){
+            messagePresenter.getMessageList();
+        }
     }
 
     @Override

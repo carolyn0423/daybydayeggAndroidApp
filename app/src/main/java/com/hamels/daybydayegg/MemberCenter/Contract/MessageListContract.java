@@ -16,5 +16,7 @@ public interface MessageListContract {
         void updateReadMessageApi();
 
         void sendMessage(String message);
+
+        boolean getUserLogin();
     }
 }
