@@ -53,7 +53,13 @@ public class MemberCenterPresenter extends BasePresenter<MemberCenterContract.Vi
         });
     }
 
-    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
+    public boolean getUserLogin(){
+        if(repositoryManager.getVerifyCode().equals("N")){
+            return false;
+        }else {
+            return repositoryManager.getUserLogin();
+        }
+    }
 
     public void saveSourceActive(String sSourceActive) { repositoryManager.saveSourceActive(sSourceActive); }
 }

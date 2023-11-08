@@ -74,7 +74,13 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
         }
     }
 
-    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
+    public boolean getUserLogin(){ 
+        if(repositoryManager.getVerifyCode().equals("N")){
+            return false;
+        }else {
+            return repositoryManager.getUserLogin();
+        }
+    }
 
     public void checkCustomerNo(String customer_no) {
         if (customer_no.isEmpty()) {

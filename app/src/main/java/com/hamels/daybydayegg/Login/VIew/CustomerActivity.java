@@ -134,7 +134,7 @@ public class CustomerActivity extends BaseActivity implements CustomerListContra
         if(frg != null) {
             getSupportFragmentManager().beginTransaction().remove(frg).commit();
         }
-        IntentUtils.intentToMain(this, false, sCustomerID,false);
+        IntentUtils.intentToMain(this, false, sCustomerID,false, false);
     }
 
     public void goETicketProductMainType(String sCustomerID){
@@ -143,7 +143,7 @@ public class CustomerActivity extends BaseActivity implements CustomerListContra
         if(frg != null) {
             getSupportFragmentManager().beginTransaction().remove(frg).commit();
         }
-        IntentUtils.intentToMain(this, false, sCustomerID,false);
+        IntentUtils.intentToMain(this, false, sCustomerID,false, false);
     }
 
     @Override

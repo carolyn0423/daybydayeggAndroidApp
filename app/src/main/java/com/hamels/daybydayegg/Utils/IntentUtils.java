@@ -21,6 +21,7 @@ import com.hamels.daybydayegg.Login.VIew.VerifyCodeActivity;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 
 import static com.hamels.daybydayegg.Constant.Constant.PHONE;
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIN_INDEX;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MEMBER_CENTER;
 import static com.hamels.daybydayegg.Constant.Constant.TITLE;
 import static com.hamels.daybydayegg.Constant.Constant.URL;
@@ -97,7 +98,7 @@ public class IntentUtils {
         baseActivity.startActivity(intent);
     }
 
-    public static void intentToMain(BaseActivity baseActivity, boolean needClearStack, String sCustomerID, boolean showMemberCenter) {
+    public static void intentToMain(BaseActivity baseActivity, boolean needClearStack, String sCustomerID, boolean showMemberCenter, boolean showMainIndex) {
         Intent intent = new Intent(baseActivity, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("CUSTOMER_ID", sCustomerID);
@@ -107,10 +108,14 @@ public class IntentUtils {
             intent.putExtra(MainActivity.TAG, true);
         }
 
-        if(showMemberCenter){
-            baseActivity.startActivityForResult(intent, REQUEST_MEMBER_CENTER);
-        }else{
-            baseActivity.startActivity(intent);
+        if(baseActivity.isStateEnable()) {
+            if (showMainIndex) {
+                baseActivity.startActivityForResult(intent, REQUEST_MAIN_INDEX);
+            } else if (showMemberCenter) {
+                baseActivity.startActivityForResult(intent, REQUEST_MEMBER_CENTER);
+            } else {
+                baseActivity.startActivity(intent);
+            }
         }
     }
 

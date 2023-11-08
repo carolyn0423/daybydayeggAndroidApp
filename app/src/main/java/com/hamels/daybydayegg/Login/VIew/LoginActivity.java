@@ -76,6 +76,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         finish();
         startActivity(getIntent());
         initView();
+
+//        if(loginPresenter.getUserLogin()){
+//            setResultOkFinishActivity();
+//        }
     }
 
     private void initView() {
@@ -405,7 +409,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     public void setResultOkFinishActivity() {
         //  防止登入後自動跳轉到交易明細頁
         getRepositoryManager(this).savePaySchemeOrderData("");
-        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,true);
+        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, true);
         setResult(RESULT_OK);
         finish();
     }

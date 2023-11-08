@@ -31,7 +31,7 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
     private ArrayList<EditText> etList;
     private VerifyCodeContract.Presenter verifyPresenter;
     private CountDownTimer timer;
-
+    private Boolean mStateEnable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +95,6 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
 
         startTimer();
     }
-
     private void startTimer() {
         tvResend.setEnabled(false); // 禁用按钮
 
@@ -188,7 +187,7 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
 
     @Override
     public void finishActivity() {
-        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false);
+        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, true);
     }
 
     class AutoFocusWatchLayout implements TextWatcher {

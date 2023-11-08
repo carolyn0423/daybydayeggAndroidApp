@@ -57,7 +57,13 @@ public class ProductMainTypePresenter extends BasePresenter<ProductMainTypeContr
     @Override
     public void getProductList(int product_type_main_id) { view.getProductList(product_type_main_id); }
 
-    public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
+    public boolean getUserLogin(){
+        if(repositoryManager.getVerifyCode().equals("N")){
+            return false;
+        }else {
+            return repositoryManager.getUserLogin();
+        }
+    }
 
     public String getApiUrl() { return repositoryManager.getApiUrl(); }
 

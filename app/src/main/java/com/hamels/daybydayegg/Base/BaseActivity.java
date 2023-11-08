@@ -30,7 +30,7 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     private BaseContract.ValueCallback<Boolean> callback;
     private ProgressDialog progressDialog;
     private TextView tvShoppingCart, tvShoppingCartETicket;
-
+    private Boolean mStateEnable;
     @Override
     public RepositoryManager getRepositoryManager(Context context) {
         return new RepositoryManager(context);
@@ -45,7 +45,38 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading");
     }
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // super.onStart();中将mStateSaved置为false
+        mStateEnable = true;
+    }
+    @Override
+    protected void onResume() {
+        // onPause之后便可能调用onSaveInstanceState，因此onresume中也需要置true
+        mStateEnable = true;
+        super.onResume();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // super.onSaveInstanceState();中将mStateSaved置为true
+        mStateEnable = false;
+        super.onSaveInstanceState(outState);
+    }
+    @Override
+    protected void onStop() {
+        // super.onStop();中将mStateSaved置为true
+        mStateEnable = false;
+        super.onStop();
+    }
+    /**
+     *
+     * activity状态是否处于可修改周期内，避免状态丢失的错误
+     * @return
+     */
+    public boolean isStateEnable() {
+        return mStateEnable;
+    }
     @Override
     public void setAppToolbar(@IdRes int appToolbarId) {
         appToolbar = findViewById(appToolbarId);

@@ -162,7 +162,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     removeExistFragment();
                     break;
                 case FRAGMENT_REMOVE:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, willChangeFragment, "").commit();
+                    if (!getSupportFragmentManager().isStateSaved()) {
+                        // 执行 Fragment 事务
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, willChangeFragment, "").commit();
+                    }
                     break;
             }
             super.handleMessage(msg);

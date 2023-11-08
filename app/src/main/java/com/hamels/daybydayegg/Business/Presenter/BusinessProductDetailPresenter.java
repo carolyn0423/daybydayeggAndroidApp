@@ -32,7 +32,7 @@ public class BusinessProductDetailPresenter extends BasePresenter<BusinessProduc
 
     @Override
     public void addShoppingCart(String business_sale_id, String product_id, String spec_id, String location_id, String spec_qty, String stock, String quantity, String order_type, String conf_list) {
-        if (repositoryManager.getUserLogin()) {
+        if (repositoryManager.getUserLogin() && repositoryManager.getVerifyCode().equals("Y")) {
             if (spec_id.equals("0") || spec_id.isEmpty()) {
                 view.showErrorAlert("請填寫商品規格");
             } else if (quantity.equals("0") || quantity.isEmpty()) {

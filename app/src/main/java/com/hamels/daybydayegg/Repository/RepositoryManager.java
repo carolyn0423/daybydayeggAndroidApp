@@ -66,9 +66,9 @@ public class RepositoryManager {
             isLogin = false;
         }
 
-        if(SharedUtils.getInstance().getVerifyCode(context) != null && SharedUtils.getInstance().getVerifyCode(context).equals("N")){
-            isLogin = false;
-        }
+//        if(SharedUtils.getInstance().getVerifyCode(context) != null && SharedUtils.getInstance().getVerifyCode(context).equals("N")){
+//            isLogin = false;
+//        }
 
 //        return (SharedUtils.getInstance().getUser(context) != null && SharedUtils.getInstance().getVerifyCode(context).equals("Y"));
         return isLogin;
@@ -201,7 +201,7 @@ public class RepositoryManager {
                     String Message = response.getMessage();
                     String[] sMessage = Message.split("\\|");
                     if (isSuccess) {
-                        if (sMessage[0].equals("V_1X000") || sMessage[0].equals("V_1X001") ||
+                        if (sMessage[0].equals("V_1X000") || sMessage[0].equals("V_1X001") || sMessage[0].equals("V_1X002") ||
                                 sMessage[0].equals("V_0X001") || sMessage[0].equals("V_0X002")) {
                             valueCallback.onValueCallback(TASK_POST_VERIFY_SMS, sMessage[1]);
                         } else {
