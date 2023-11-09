@@ -95,7 +95,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="會員編碼"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/white" />
@@ -128,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="我的訊息"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/white" />
@@ -161,7 +161,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="何處領"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/white" />
@@ -195,7 +195,7 @@
                         android:layout_height="match_parent"
                         android:text="會員中心"
                         android:autoSizeTextType="uniform"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/white" />
@@ -262,7 +262,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/tab_main"
-                            android:textSize="12dp"
+                            android:textSize="11sp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="@color/colorYunlinhn" />
@@ -291,7 +291,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="領好蛋"
-                            android:textSize="12dp"
+                            android:textSize="11sp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="@color/colorYunlinhn" />
@@ -321,7 +321,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="買好蛋"
-                            android:textSize="12dp"
+                            android:textSize="11sp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="@color/colorYunlinhn" />
@@ -350,7 +350,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="購物車"
-                            android:textSize="12dp"
+                            android:textSize="11sp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="@color/colorYunlinhn" />
