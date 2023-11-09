@@ -38,7 +38,7 @@ public interface MemberApiService {
     Call<BaseModel<User>> postGetMemberInfo(@Body RequestBody body);
 
     @POST("Member/DeleteData")
-    Call<BaseModel<String>> postDeleteData(@Body RequestBody body);
+    Call<BaseModel<List<Map<String , String>>>> postDeleteData(@Body RequestBody body);
 
     @POST("Authority/DoLogout")
     Call<BaseModel<Map<String, String>>> postLogout(@Body RequestBody body);

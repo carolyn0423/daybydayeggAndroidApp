@@ -23,6 +23,7 @@ import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.Contract.MainIndexContract;
 import com.hamels.daybydayegg.Main.Presenter.MainIndexPresenter;
+import com.hamels.daybydayegg.Main.Presenter.MemberCenterPresenter;
 import com.hamels.daybydayegg.MemberCenter.View.MemberPointFragment;
 import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.R;
@@ -168,18 +169,21 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         //mainindexPresenter.getCarouselList(CUSTOMER_ID);
     }
 
-    public void getVeriftCode() {
-        new AlertDialog.Builder(fragment.getActivity())
-                .setTitle(R.string.dialog_hint)
-                .setMessage("尚未完成簡訊驗證")
-                .setPositiveButton(android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ((MainActivity) getActivity()).intentToVerifyCode();
-                            }
-                        })
-                .show();
+    public void getNoVerift() {
+        //  尚未通過驗證，自動執行登出作業
+        mainindexPresenter.logout();
+
+//        new AlertDialog.Builder(fragment.getActivity())
+//                .setTitle(R.string.dialog_hint)
+//                .setMessage("尚未完成簡訊驗證")
+//                .setPositiveButton(android.R.string.ok,
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                ((MainActivity) getActivity()).intentToVerifyCode();
+//                            }
+//                        })
+//                .show();
     }
 
     @Override

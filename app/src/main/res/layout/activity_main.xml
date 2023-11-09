@@ -82,20 +82,20 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:padding="10dp"
+                    android:padding="10sp"
                     android:onClick="member"
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="24sp"
+                        android:layout_height="24sp"
                         app:srcCompat="@drawable/icon_barcode" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="會員編碼"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/white" />
@@ -113,22 +113,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:padding="10dp"
+                    android:padding="10sp"
                     android:onClick="message"
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="24sp"
+                        android:layout_height="24sp"
                         app:layout_constraintStart_toEndOf="@+id/imageView"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/icon_message" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="我的訊息"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/white" />
@@ -146,22 +146,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:padding="10dp"
+                    android:padding="10sp"
                     android:onClick="lottery"
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="24sp"
+                        android:layout_height="24sp"
                         app:layout_constraintStart_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/icon_store" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="何處領"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/white" />
@@ -179,22 +179,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:padding="10dp"
+                    android:padding="10sp"
                     android:onClick="donate"
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="24sp"
+                        android:layout_height="24sp"
                         app:layout_constraintStart_toEndOf="@+id/imageView"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/member" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="會員中心"
-                        android:textSize="12sp"
+                        android:autoSizeTextType="uniform"
+                        android:textSize="12dp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:textColor="@color/white" />
@@ -261,7 +262,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/tab_main"
-                            android:textSize="11sp"
+                            android:textSize="12dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="@color/colorYunlinhn" />
@@ -290,7 +291,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="領好蛋"
-                            android:textSize="11sp"
+                            android:textSize="12dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="@color/colorYunlinhn" />
@@ -320,7 +321,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="買好蛋"
-                            android:textSize="11sp"
+                            android:textSize="12dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="@color/colorYunlinhn" />
@@ -349,7 +350,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="購物車"
-                            android:textSize="11sp"
+                            android:textSize="12dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:textColor="@color/colorYunlinhn" />

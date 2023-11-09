@@ -2,9 +2,15 @@ package com.hamels.daybydayegg.Main.Presenter;
 
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BasePresenter;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Contract.MemberCenterContract;
+import com.hamels.daybydayegg.Repository.ApiCallback;
+import com.hamels.daybydayegg.Repository.Model.BaseModel;
 import com.hamels.daybydayegg.Repository.Model.User;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
+
+import java.util.List;
+import java.util.Map;
 
 public class MemberCenterPresenter extends BasePresenter<MemberCenterContract.View> implements MemberCenterContract.Presenter {
     public static final String TAG = MemberCenterPresenter.class.getSimpleName();
@@ -43,12 +49,18 @@ public class MemberCenterPresenter extends BasePresenter<MemberCenterContract.Vi
             }
         });
     }
+
     @Override
     public void getDeleteMember() {
-        repositoryManager.callDeleteMemberApi(repositoryManager.getUserID(),new BaseContract.ValueCallback<String>() {
+        repositoryManager.callDeleteMemberApi(repositoryManager.getUserID(), new BaseContract.ValueCallback<String>() {
             @Override
-            public void onValueCallback(int task, String user) {
-                view.deleteMember();
+            public void onValueCallback(int task, String type) {
+                String[] Message = type.split("\\|");
+                if(Message[0].equals("1X001")){
+                    view.deleteMember();
+                }else{
+                    view.deleteError(Message[1]);
+                }
             }
         });
     }

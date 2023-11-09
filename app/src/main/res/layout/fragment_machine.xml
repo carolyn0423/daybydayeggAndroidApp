@@ -44,7 +44,8 @@
             android:layout_height="match_parent"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="常用據點" />
+            android:text="常用據點"
+            android:textSize="12dp"/>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem2"
@@ -52,7 +53,8 @@
             android:layout_height="match_parent"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="最近五公里" />
+            android:text="最近五公里"
+            android:textSize="12dp"/>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"
@@ -60,7 +62,8 @@
             android:layout_height="match_parent"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="據點清單" />
+            android:text="據點清單"
+            android:textSize="12dp"/>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem4"
@@ -68,7 +71,8 @@
             android:layout_height="match_parent"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="城市探索" />
+            android:text="城市探索"
+            android:textSize="12dp"/>
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -112,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/empty_location"
-        android:textSize="24sp"
+        android:textSize="24dp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/tv_go_home"
         app:layout_constraintEnd_toEndOf="@id/img_no_online"
@@ -133,7 +137,7 @@
         android:background="@drawable/rec_stroke_green_button"
         android:gravity="center"
         android:text="@string/go_home"
-        android:textSize="13sp"
+        android:textSize="13dp"
         android:textColor="@color/main"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

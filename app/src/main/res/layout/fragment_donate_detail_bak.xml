@@ -188,7 +188,7 @@
                         android:stateListAnimator="@null"
                         android:textColor="#FFF"
                         android:text="轉贈提貨券"
-                        android:textSize="13sp"
+                        android:textSize="13dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_redemption_period_title" />
@@ -335,7 +335,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rcr"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_left_arrow"
                 app:layout_constraintEnd_toStartOf="@+id/tv_page_slash"
                 app:layout_constraintTop_toTopOf="@+id/btn_left_arrow" />
@@ -346,7 +346,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rcr"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:text="/"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_left_arrow"
                 app:layout_constraintEnd_toStartOf="@+id/btn_right_arrow"
@@ -359,7 +359,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rcr"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_left_arrow"
                 app:layout_constraintStart_toEndOf="@+id/tv_page_slash"
                 app:layout_constraintTop_toTopOf="@+id/btn_left_arrow" />
