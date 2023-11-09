@@ -49,7 +49,7 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
     public void checkMemberData() {
         if(!repositoryManager.getUserID().equals("")){
             if(repositoryManager.getVerifyCode().equals("N")){
-                view.getVeriftCode();
+                view.getNoVerift();
             }else {
                 repositoryManager.callGetMemberInfoApi(repositoryManager.getUserID(), new BaseContract.ValueCallback<User>() {
                     @Override
@@ -110,5 +110,14 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
                 }
             });
         }
+    }
+
+    public void logout() {
+        repositoryManager.callLogOutApi(repositoryManager.getUserID(), new BaseContract.ValueCallback<String>() {
+            @Override
+            public void onValueCallback(int task, String type) {
+
+            }
+        });
     }
 }

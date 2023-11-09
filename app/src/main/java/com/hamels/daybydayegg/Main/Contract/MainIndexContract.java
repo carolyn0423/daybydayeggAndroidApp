@@ -15,7 +15,7 @@ public interface MainIndexContract {
 
         void intentToLogin(int page);
 
-        void getVeriftCode();
+        void getNoVerift();
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -26,5 +26,7 @@ public interface MainIndexContract {
         boolean getUserLogin();
 
         void getMemberBadge();
+
+        void logout();
     }
 }
