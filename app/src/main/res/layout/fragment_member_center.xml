@@ -37,7 +37,7 @@
                         android:id="@+id/tv_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="16dp"
+                        android:textSize="18dp"
                         android:textColor="@color/white" />
 
                     <ImageView
@@ -120,7 +120,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="交易紀錄"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -140,7 +140,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="點數歷程"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -160,7 +160,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="優惠票券"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -180,7 +180,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="修改密碼"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -213,7 +213,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="客服中心"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -233,7 +233,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="聯絡我們"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -253,7 +253,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="紅利/規範"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -273,7 +273,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="隱私條款"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -306,7 +306,7 @@
                             <TextView
                                 style="@style/imgtext_text_0"
                                 android:text="邀請好友"
-                                android:textSize="12dp"/>
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 
@@ -416,7 +416,7 @@
                 android:drawablePadding="10dp"
                 android:gravity="center"
                 android:text="@string/logout"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:textColor="@color/colorYunlinhn"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -442,7 +442,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="注意事項\n如果您想刪除會員帳號，請點選下方[刪除帳號]。\n提醒您，帳號刪除後，我們將不再保留您的任何個人資料、點數，亦無法協助您恢復帳號，謝謝您。"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:textColor="@color/greyMenu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -472,7 +472,7 @@
                 android:drawablePadding="10dp"
                 android:gravity="center"
                 android:text="刪除帳號"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:textColor="@color/greyMenu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
