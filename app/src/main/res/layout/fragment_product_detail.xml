@@ -125,7 +125,7 @@
                             android:text=""
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_show_desc" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_store_name" />
 
                         <TextView
                             android:id="@+id/tv_same_price"
@@ -137,9 +137,9 @@
                             android:layout_marginBottom="8dp"
                             android:textColor="@color/Black"
                             android:textSize="16dp"
-                            android:text=""
-                            app:layout_constraintStart_toStartOf="@+id/guideline10"
-                            app:layout_constraintHorizontal_bias="1.0"
+
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_product_type" />
 
                         <TextView
@@ -152,6 +152,7 @@
                             android:textSize="16dp"
                             android:text=""
                             android:textStyle="bold"
+
                             app:layout_constraintEnd_toStartOf="@+id/guideline10"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
@@ -166,7 +167,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="8dp"
                             android:textSize="14dp"
-                            android:text=""
+
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@+id/guideline10"
@@ -178,7 +179,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:textSize="12dp"
+                            android:textSize="16dp"
                             android:textColor="@color/orangeText"
                             android:text=""
                             android:gravity="left"
@@ -187,7 +188,7 @@
                             android:maxEms="25"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_sale_price"/>
+                            app:layout_constraintTop_toBottomOf="@+id/tv_price"/>
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline10"

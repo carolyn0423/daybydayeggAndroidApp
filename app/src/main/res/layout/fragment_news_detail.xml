@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="微笑會員專屬優惠，\n你消費我回饋！"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:layout_margin="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
