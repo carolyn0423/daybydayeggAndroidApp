@@ -62,7 +62,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/send"
-        android:textSize="13sp"
+        android:textSize="14dp"
         android:textColor="#FFFFFF"
         android:background="@drawable/rec_solid_green"
         app:layout_constraintEnd_toEndOf="parent"

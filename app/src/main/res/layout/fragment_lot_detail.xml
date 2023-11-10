@@ -218,7 +218,7 @@
                 <TextView
                     android:id="@+id/tv_product_spec"
                     style="@style/fontRobotoRegular.GreyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -230,7 +230,7 @@
                 <TextView
                     android:id="@+id/textView7"
                     style="@style/fontRegularTw.GreyDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -247,7 +247,7 @@
                 <TextView
                     android:id="@+id/textView12"
                     style="@style/fontRegularTw.GreyDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -260,7 +260,7 @@
                 <TextView
                     android:id="@+id/tv_lot_product_price"
                     style="@style/fontRobotoRegular.GreyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -277,7 +277,7 @@
                 <TextView
                     android:id="@+id/textView13"
                     style="@style/fontRegularTw.GreyDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -290,7 +290,7 @@
                 <TextView
                     android:id="@+id/tv_lot_dealer_product"
                     style="@style/fontRobotoRegular.GreyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -307,7 +307,7 @@
                 <TextView
                     android:id="@+id/textView15"
                     style="@style/fontRegularTw.GreyDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -320,7 +320,7 @@
                 <TextView
                     android:id="@+id/tv_location_name"
                     style="@style/fontRegularTw.GreyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -336,7 +336,7 @@
                 <TextView
                     android:id="@+id/textView14"
                     style="@style/fontRegularTw.GreyDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -349,7 +349,7 @@
                 <TextView
                     android:id="@+id/tv_lot_date"
                     style="@style/fontRobotoRegular.GreyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -365,7 +365,7 @@
                 <TextView
                     android:id="@+id/textView16"
                     style="@style/fontRegularTw.GreyDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -378,7 +378,7 @@
                 <TextView
                     android:id="@+id/tv_announce_date"
                     style="@style/fontRobotoRegular.GreyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -394,7 +394,7 @@
                 <TextView
                     android:id="@+id/textView17"
                     style="@style/fontRegularTw.GreyDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -407,7 +407,7 @@
                 <TextView
                     android:id="@+id/tv_pickup_date"
                     style="@style/fontRobotoRegular.GreyDoubleDark"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
             android:text="企業優惠專區"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
             android:fontFamily="@font/roboto_condensed_regular"
             android:hint="@string/hint_business_code"
             android:inputType="textPersonName"
-            android:textSize="13sp"
+            android:textSize="14dp"
             android:textColorHint="@color/greyHint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
         android:gravity="center"
         android:text="取消"
         android:textColor="@color/main"
-        android:textSize="13sp"
+        android:textSize="14dp"
         android:fontFamily="@font/noto_sans_tc_regular"
         app:layout_constraintEnd_toStartOf="@+id/guideline38"
         app:layout_constraintTop_toBottomOf="@+id/bg_business" />
@@ -93,7 +93,7 @@
         android:background="@drawable/rec_solid_green_button"
         android:gravity="center"
         android:text="確認"
-        android:textSize="13sp"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@+id/guideline38"
         app:layout_constraintTop_toBottomOf="@+id/bg_business" />
 

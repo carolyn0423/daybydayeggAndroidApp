@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="10dp"
-                    android:textSize="15sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:text="壽喜牛"
                     app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textSize="12sp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:text="(標準)"
                     android:visibility="gone"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textColor="#595757"
-                    android:textSize="12sp"
+                    android:textSize="14dp"
                     android:text="兌換期限："
                     app:layout_constraintStart_toStartOf="@+id/tv_type_name_spec_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_type_name_spec_name"
@@ -90,7 +90,7 @@
                     style="@style/fontRegularTw.greyDoubleDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="14dp"
                     app:layout_constraintStart_toEndOf="@+id/tv_eticket_due_date_title"
                     app:layout_constraintTop_toTopOf="@+id/tv_eticket_due_date_title" />
 
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textColor="#595757"
-                    android:textSize="12sp"
+                    android:textSize="14dp"
                     android:text="剩餘數量："
                     app:layout_constraintStart_toStartOf="@+id/tv_eticket_due_date_title"
                     app:layout_constraintTop_toBottomOf="@+id/tv_eticket_due_date_title"
@@ -111,7 +111,7 @@
                     style="@style/fontRegularTw.greyDoubleDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="14dp"
                     app:layout_constraintStart_toEndOf="@+id/tv_left_number_title"
                     app:layout_constraintTop_toTopOf="@+id/tv_left_number_title" />
 
