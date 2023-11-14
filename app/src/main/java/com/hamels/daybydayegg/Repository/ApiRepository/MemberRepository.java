@@ -415,24 +415,24 @@ public class MemberRepository extends ApiRepository {
         retrofit.create(MemberApiService.class).GiveTicketGiftByCart(requestBody).enqueue(callback);
     }
 
-    public void SavePush(final String member_id, final String sendmember_id, final String title, final String content, final AbsApiCallback callback) {
-        Map<String, String> map = new HashMap<>();
-        map.put("connection_name", EOrderApplication.dbConnectName);
-        map.put("customer_id", EOrderApplication.CUSTOMER_ID);
-        map.put("push_id", "");
-        map.put("push_type", "G");
-        map.put("title", title);
-        map.put("content", content);
-        map.put("schedule_flag", "N");
-        map.put("schedule_datetime", "");
-        map.put("receiver_type", "S");
-        map.put("receiver_member_list", sendmember_id);
-        map.put("modified_user", member_id);
-
-        Log.e(TAG, "API SavePush : " + map);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
-        retrofit.create(MemberApiService.class).SavePush(requestBody).enqueue(callback);
-    }
+//    public void SavePush(final String member_id, final String sendmember_id, final String title, final String content, final AbsApiCallback callback) {
+//        Map<String, String> map = new HashMap<>();
+//        map.put("connection_name", EOrderApplication.dbConnectName);
+//        map.put("customer_id", EOrderApplication.CUSTOMER_ID);
+//        map.put("push_id", "");
+//        map.put("push_type", "S");
+//        map.put("title", title);
+//        map.put("content", content);
+//        map.put("schedule_flag", "N");
+//        map.put("schedule_datetime", "");
+//        map.put("receiver_type", "S");
+//        map.put("receiver_member_list", sendmember_id);
+//        map.put("modified_user", member_id);
+//
+//        Log.e(TAG, "API SavePush : " + map);
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+//        retrofit.create(MemberApiService.class).SavePush(requestBody).enqueue(callback);
+//    }
 
     public void getMemberInfoAssignmember(String customer_id,String member_id, String keyword, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
