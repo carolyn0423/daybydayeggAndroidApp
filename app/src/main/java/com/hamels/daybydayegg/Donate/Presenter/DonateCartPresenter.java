@@ -57,7 +57,7 @@ public class DonateCartPresenter extends BasePresenter<DonateCartContract.View> 
                                 @Override
                                 public void onValueCallback(int task, Boolean bSuccess) {
                                     if (bSuccess) {
-                                        SavePush(mobile, "提貨券訊息", user.getName() + "送了提貨券給您");
+//                                        SavePush(mobile, "提貨券訊息", user.getName() + "送了提貨券給您");
 
                                         view.showErrorAlert("已贈送禮物");
                                         view.goBack();
@@ -85,25 +85,25 @@ public class DonateCartPresenter extends BasePresenter<DonateCartContract.View> 
         });
     }
 
-    @Override
-    public void SavePush(final String mobile, final String title, final String content) {
-        repositoryManager.callgetMemberInfoAssignmemberApi(mobile, new BaseContract.ValueCallback<User>() {
-            @Override
-            public void onValueCallback(int task, User user) {
-                Log.e(TAG, "sendmember_id:" + user.getMember());
-                if (0 != user.getMember()) {
-                    repositoryManager.callSavePushApi(Integer.toString(user.getMember()), title, content, new BaseContract.ValueCallback<Boolean>() {
-                        @Override
-                        public void onValueCallback(int task, Boolean bSuccess) {
-                            if (bSuccess) {
-                                Log.e(TAG, "SUCCESS");
-                            } else {
-                                Log.e(TAG, "ERROR");
-                            }
-                        }
-                    });
-                }
-            }
-        });
-    }
+//    @Override
+//    public void SavePush(final String mobile, final String title, final String content) {
+//        repositoryManager.callgetMemberInfoAssignmemberApi(mobile, new BaseContract.ValueCallback<User>() {
+//            @Override
+//            public void onValueCallback(int task, User user) {
+//                Log.e(TAG, "sendmember_id:" + user.getMember());
+//                if (0 != user.getMember()) {
+//                    repositoryManager.callSavePushApi(Integer.toString(user.getMember()), title, content, new BaseContract.ValueCallback<Boolean>() {
+//                        @Override
+//                        public void onValueCallback(int task, Boolean bSuccess) {
+//                            if (bSuccess) {
+//                                Log.e(TAG, "SUCCESS");
+//                            } else {
+//                                Log.e(TAG, "ERROR");
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
+//    }
 }

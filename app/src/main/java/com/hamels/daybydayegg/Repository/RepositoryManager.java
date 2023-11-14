@@ -570,17 +570,17 @@ public class RepositoryManager {
         });
     }
 
-    public void callSavePushApi(final String sendmember_id, final String title, final String content, final BaseContract.ValueCallback<Boolean> valueCallback) {
-        basePresenter.startCallApi();
-        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().SavePush(member_id, sendmember_id, title, content, new ApiCallback<BaseModel<Donate>>(basePresenter) {
-            @Override
-            public void onApiSuccess(BaseModel<Donate> response) {
-                super.onApiSuccess(response);
-                valueCallback.onValueCallback(TASK_POST_GET_DONATE_DETAIL, response.getSuccess());
-            }
-        });
-    }
+//    public void callSavePushApi(final String sendmember_id, final String title, final String content, final BaseContract.ValueCallback<Boolean> valueCallback) {
+//        basePresenter.startCallApi();
+//        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+//        MemberRepository.getInstance().SavePush(member_id, sendmember_id, title, content, new ApiCallback<BaseModel<Donate>>(basePresenter) {
+//            @Override
+//            public void onApiSuccess(BaseModel<Donate> response) {
+//                super.onApiSuccess(response);
+//                valueCallback.onValueCallback(TASK_POST_GET_DONATE_DETAIL, response.getSuccess());
+//            }
+//        });
+//    }
 
     public void callgetMemberInfoAssignmemberApi(String keyword, final BaseContract.ValueCallback<User> valueCallback) {
         basePresenter.startCallApi();

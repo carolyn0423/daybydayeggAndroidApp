@@ -56,10 +56,10 @@ public class MemberCenterPresenter extends BasePresenter<MemberCenterContract.Vi
             @Override
             public void onValueCallback(int task, String type) {
                 String[] Message = type.split("\\|");
-                if(Message[0].equals("1X001")){
-                    view.deleteMember();
-                }else{
+                if(Message[0].equals("T_0X008")){
                     view.deleteError(Message[1]);
+                }else{
+                    view.deleteMember();
                 }
             }
         });

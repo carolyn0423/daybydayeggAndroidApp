@@ -21,6 +21,6 @@ public interface DonateDetailContract {
 
         void SaveTicketData(String mobile, String uid, String quantity);
 
-        void SavePush(String mobile, String title, String content);
+//        void SavePush(String mobile, String title, String content);
     }
 }

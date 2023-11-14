@@ -121,8 +121,8 @@ public interface MemberApiService {
     @POST("Order/GiveTicketGiftByCart")
     Call<BaseModel<List<Donate>>> GiveTicketGiftByCart(@Body RequestBody body);
 
-    @POST("Push/SaveData")
-    Call<BaseModel<Donate>> SavePush(@Body RequestBody body);
+//    @POST("Push/SaveData")
+//    Call<BaseModel<Donate>> SavePush(@Body RequestBody body);
 
     @POST("Lot/GetDetail")
     Call<BaseModel<DrawLots>> GetLotDetail(@Body RequestBody body);
