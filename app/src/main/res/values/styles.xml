@@ -100,6 +100,10 @@
         <item name="android:fontFamily">@font/noto_sans_tc_regular</item>
     </style>
 
+    <style name="fontBoldEn.colorYunlinhn">
+        <item name="android:textColor">@color/colorYunlinhn</item>
+    </style>
+
     <style name="fontDefaultTw.Black">
         <item name="android:textColor">@android:color/black</item>
     </style>

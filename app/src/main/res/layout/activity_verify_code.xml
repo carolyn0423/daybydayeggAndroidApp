@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/tv_otp"
-        style="@style/fontBoldEn.Orange"
+        style="@style/fontBoldEn.colorYunlinhn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -155,9 +155,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:background="@drawable/oval_white"
+        android:background="@drawable/oval_yunlinhn"
         android:padding="12dp"
-        android:src="@drawable/ic_arrow_right_orange"
+        android:src="@drawable/ic_arrow_right_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_resend" />
