@@ -531,35 +531,12 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         mXBanner.loadImage(new XBanner.XBannerAdapter() {
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
-                ImageView img_carousel = view.findViewById(R.id.img_carousel);
-                Glide.with(getActivity())
+                ImageView img_carousel = (ImageView) view.findViewById(R.id.img_carousel);
+                Glide
+                        .with(getActivity())
                         .load(((CustomViewsInfo) model).getXBannerUrl())
-                        .into(new CustomViewTarget<ImageView, Drawable>(img_carousel) {
-                            @Override
-                            public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                                // 图片加载失败时的操作
-                            }
+                        .into(img_carousel);
 
-                            @Override
-                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                                int width = resource.getIntrinsicWidth();
-                                int height = resource.getIntrinsicHeight();
-
-                                // 根据图片比例设置 XBanner 的高度
-                                int newHeight = (int) ((float) height / width * getResources().getDisplayMetrics().widthPixels);
-
-                                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mXBanner.getLayoutParams();
-                                params.height = newHeight;
-                                mXBanner.setLayoutParams(params);
-
-                                img_carousel.setImageDrawable(resource);
-                            }
-
-                            @Override
-                            protected void onResourceCleared(@Nullable Drawable placeholder) {
-                                // 图片加载失败或清除的处理
-                            }
-                        });
             }
         });
 
