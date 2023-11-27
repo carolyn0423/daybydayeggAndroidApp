@@ -1037,9 +1037,9 @@ public class RepositoryManager {
 
     public void callSendMessageApi(String message, final BaseContract.ValueCallback<Boolean> valueCallback) {
         basePresenter.startCallApi();
-        String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
+        //String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().addMemberContact(customer_id,member_id, message, new ApiCallback<BaseModel>(basePresenter) {
+        MemberRepository.getInstance().addMemberContact(EOrderApplication.CUSTOMER_ID, member_id, message, new ApiCallback<BaseModel>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel response) {
                 super.onApiSuccess(response);

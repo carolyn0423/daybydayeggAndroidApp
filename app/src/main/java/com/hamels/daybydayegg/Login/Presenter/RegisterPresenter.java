@@ -57,6 +57,8 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
                 repositoryManager.saveAccountInfo(phone, password);
                 repositoryManager.saveUserID(Integer.toString(type.getMember()));
                 repositoryManager.saveVerifyCode(type.getVerifyCode());
+                repositoryManager.saveInvitationCode(user.getInvitationCode());
+                repositoryManager.saveUserName(user.getName());
                 view.intentToVerifyCode();
             }
         }, new BaseContract.ValueCallback<String>() {
