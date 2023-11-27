@@ -1037,9 +1037,9 @@ public class RepositoryManager {
 
     public void callSendMessageApi(String message, final BaseContract.ValueCallback<Boolean> valueCallback) {
         basePresenter.startCallApi();
-        String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
+        //String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().addMemberContact(customer_id,member_id, message, new ApiCallback<BaseModel>(basePresenter) {
+        MemberRepository.getInstance().addMemberContact(EOrderApplication.CUSTOMER_ID, member_id, message, new ApiCallback<BaseModel>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel response) {
                 super.onApiSuccess(response);
@@ -1088,6 +1088,8 @@ public class RepositoryManager {
     public void saveUserID(String member_id) { SharedUtils.getInstance().saveUserID(context, member_id); }
 
     public void saveUserName(String member_name) { SharedUtils.getInstance().saveUserName(context, member_name); }
+
+    public void saveShopkeeper(String Shopkeeper) { SharedUtils.getInstance().saveShopkeeper(context, Shopkeeper); }
 
     public Boolean saveLoveCustomer(String customer_id) {
         String sLoveCustomerID = getLoveCustomer();
@@ -1160,6 +1162,8 @@ public class RepositoryManager {
     public String getUserID() { return SharedUtils.getInstance().getUserID(context); }
 
     public String getUserName() { return SharedUtils.getInstance().getUserName(context); }
+
+    public String getShopkeeper() { return SharedUtils.getInstance().getShopkeeper(context); }
 
     public String getLoveCustomer() { return SharedUtils.getInstance().getLoveCustomer(context); }
 

@@ -209,6 +209,7 @@
     <!-- trans record -->
     <string name="empty_location">目前無開放APP線上購物</string>
     <string name="empty_order">您目前沒有任何訂單</string>
+    <string name="empty_message">目前沒有未讀訊息</string>
     <string name="go_home">返回首頁</string>
     <string name="keep_shopping">繼續購物</string>
     <string name="order_waiting_pay">待付款</string>

@@ -252,6 +252,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                 repositoryManager.saveVerifyCode("");
                 repositoryManager.saveInvitationCode("");
                 repositoryManager.saveUserName("");
+                repositoryManager.saveShopkeeper("");
                 view.setAllBadge("0_0_0_0_0_0_0");
             }
         });
@@ -293,6 +294,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                                     repositoryManager.saveVerifyCode(user.getVerifyCode());
                                     repositoryManager.saveInvitationCode(user.getInvitationCode());
                                     repositoryManager.saveUserName(user.getName());
+                                    repositoryManager.saveShopkeeper(user.getShopkeeper());
                                     repositoryManager.saveApiUrl(customers.getApiUrl());
                                 }
                             }, new BaseContract.ValueCallback<String>() {
@@ -303,7 +305,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                                     repositoryManager.saveVerifyCode("");
                                     repositoryManager.saveInvitationCode("");
                                     repositoryManager.saveUserName("");
-
+                                    repositoryManager.saveShopkeeper("");
                                     getCustomer();
                                 }
                             });
@@ -313,7 +315,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                             repositoryManager.saveVerifyCode("");
                             repositoryManager.saveInvitationCode("");
                             repositoryManager.saveUserName("");
-
+                            repositoryManager.saveShopkeeper("");
                             getCustomer();
                         }
                     }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "73786572415",
+    "project_id": "daybydayegg-uat",
+    "storage_bucket": "daybydayegg-uat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73786572415:android:b5889de9361f386b27494a",
+        "android_client_info": {
+          "package_name": "com.hamels.daybydayegg.uat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4u9vbn3B5HpnKummHMmu9V6fzgQxQBEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

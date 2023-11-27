@@ -42,6 +42,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                     repositoryManager.saveInvitationCode(user.getInvitationCode());
                     repositoryManager.saveUserName(user.getName());
                     repositoryManager.saveApiUrl(EOrderApplication.sApiUrl);
+                    repositoryManager.saveShopkeeper(user.getShopkeeper());
                     if(task == ApiConstant.RESPONSE_CODE_LOGIN_VERIFIED_ERROR){
                         view.showVerifyErrorAlert("尚未完成簡訊驗證");
                     }

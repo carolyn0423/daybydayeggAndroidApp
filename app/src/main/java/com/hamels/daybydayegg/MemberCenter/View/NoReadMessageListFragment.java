@@ -1,11 +1,6 @@
 package com.hamels.daybydayegg.MemberCenter.View;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,32 +8,34 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Main.View.MainActivity;
-import com.hamels.daybydayegg.MemberCenter.Adapter.MessageListAdapter;
-import com.hamels.daybydayegg.MemberCenter.Contract.MessageListContract;
-import com.hamels.daybydayegg.MemberCenter.Presenter.MessageListPresenter;
+import com.hamels.daybydayegg.MemberCenter.Adapter.NoReadMessageListAdapter;
+import com.hamels.daybydayegg.MemberCenter.Contract.NoReadMessageListContract;
+import com.hamels.daybydayegg.MemberCenter.Presenter.NoReadMessageListPresenter;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Message;
 
 import java.util.List;
 
-public class MessageListFragment extends BaseFragment implements MessageListContract.View {
-    public static final String TAG = MessageListFragment.class.getSimpleName();
+public class NoReadMessageListFragment extends BaseFragment implements NoReadMessageListContract.View {
+    public static final String TAG = NoReadMessageListFragment.class.getSimpleName();
 
-    private static MessageListFragment fragment;
+    private static NoReadMessageListFragment fragment;
     private RecyclerView recyclerView;
-    private EditText etMessage;
-    private ImageButton btnSend;
 
-    private MessageListAdapter messageListAdapter;
-    private MessageListContract.Presenter messagePresenter;
+    private NoReadMessageListAdapter mAdapter;
+    private NoReadMessageListContract.Presenter mPresenter;
     private Handler handler = new Handler();
     private int iMessageCount = 0;
-
-    public static MessageListFragment getInstance() {
+    public static NoReadMessageListFragment getInstance() {
         if (fragment == null) {
-            fragment = new MessageListFragment();
+            fragment = new NoReadMessageListFragment();
         }
         return fragment;
     }
@@ -46,17 +43,17 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_message_list, container, false);
+        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_noread_message_list, container, false);
         initView(view);
 
-        messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
+        mPresenter = new NoReadMessageListPresenter(this, getRepositoryManager(getContext()));
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(messagePresenter.getUserLogin()){
+        if(mPresenter.getUserLogin()){
             startAutoRefresh();
         }
     }
@@ -78,26 +75,14 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
-        etMessage = view.findViewById(R.id.et_message);
-        btnSend = view.findViewById(R.id.btn_send);
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String msg = etMessage.getText().toString();
-                if (!msg.isEmpty()) {
-                    messagePresenter.sendMessage(msg);
-                    etMessage.setText("");
-                }
-            }
-        });
-
-        recyclerView = view.findViewById(R.id.product_recycler_view);
+        recyclerView = view.findViewById(R.id.item_location);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setStackFromEnd(false);
         recyclerView.setLayoutManager(manager);
-        messageListAdapter = new MessageListAdapter();
+
+        mAdapter = new NoReadMessageListAdapter();
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(messageListAdapter);
+        recyclerView.setAdapter(mAdapter);
     }
 
     private void startAutoRefresh() {
@@ -105,7 +90,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
             @Override
             public void run() {
                 // 在此处执行API请求以刷新数据
-                messagePresenter.getMessageList();
+                mPresenter.getMessageList();
                 // 完成后再次调度自动刷新
                 startAutoRefresh();
             }
@@ -114,8 +99,8 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
 
     @Override
     public void setMessageList(List<Message> list) {
-        messageListAdapter.setMessages(list);
-        messagePresenter.updateReadMessageApi();
+        mAdapter.setMessages(list);
+        mPresenter.updateReadMessageApi();
 
         if(iMessageCount != list.size()){
             iMessageCount = list.size();
