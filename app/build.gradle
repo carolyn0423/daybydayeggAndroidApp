@@ -4,11 +4,14 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 33
     buildToolsVersion "29.0.3"
-    flavorDimensions "version"
+    flavorDimensions "default"
     productFlavors {
+        prod {
+            versionCode 6
+            versionName "6.0"
+        }
         uat {
-            dimension "version"
-            applicationId "com.hamels.daybydayegg.uat"
+            applicationIdSuffix ".uat"
             versionCode 6
             versionName "6.0"
             // 其他配置
@@ -18,8 +21,6 @@ android {
         applicationId "com.hamels.daybydayegg"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 6
-        versionName '6.0'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
