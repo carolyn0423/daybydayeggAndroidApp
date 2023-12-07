@@ -11,8 +11,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
-import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.EOrderApplication;
+import com.hamels.daybydayegg.R;
 
 import java.util.Objects;
 

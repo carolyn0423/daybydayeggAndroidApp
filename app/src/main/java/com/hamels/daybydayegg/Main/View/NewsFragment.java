@@ -1,15 +1,12 @@
 package com.hamels.daybydayegg.Main.View;
 
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.text.Html;
-import android.text.Spannable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,8 +17,6 @@ import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Contract.NewsContract;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Carousel;
-import com.hamels.daybydayegg.Utils.ArticleWebViewClient;
-import com.hamels.daybydayegg.Utils.PicassoImageGetter;
 
 import java.util.Objects;
 

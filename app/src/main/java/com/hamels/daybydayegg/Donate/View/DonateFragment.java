@@ -21,7 +21,6 @@ import com.hamels.daybydayegg.Donate.Adapter.DonateListAdapter;
 import com.hamels.daybydayegg.Donate.Adapter.DonateListHistoryAdapter;
 import com.hamels.daybydayegg.Donate.Contract.DonateContract;
 import com.hamels.daybydayegg.Donate.Presenter.DonatePresenter;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.Order.View.OrderDetailFragment;

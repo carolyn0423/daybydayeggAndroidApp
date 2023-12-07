@@ -13,8 +13,8 @@ import android.webkit.WebView;
 
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.hamels.daybydayegg.Base.BaseFragment;
-import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.EOrderApplication;
+import com.hamels.daybydayegg.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

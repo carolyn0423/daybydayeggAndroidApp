@@ -148,7 +148,7 @@
         <!-- com.hamels.daybydayegg 的清单文件中 -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.hamels.daybydayegg.fileprovider"
+            android:authorities="${applicationId}.fileprovider.prod"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -159,12 +159,12 @@
         <!-- com.hamels.daybydayegg.uat 的清单文件中 -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.hamels.daybydayegg.uat.fileprovider"
+            android:authorities="${applicationId}.fileprovider.uat"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_uat" />
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 

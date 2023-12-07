@@ -2,19 +2,14 @@ package com.hamels.daybydayegg.Login.VIew;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Handler;
-import android.text.Html;
-import android.text.Spannable;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
@@ -22,17 +17,13 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
 import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.MemberCenter.Contract.FaqContract;
-import com.hamels.daybydayegg.MemberCenter.Presenter.FaqPresenter;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Faq;
-import com.hamels.daybydayegg.Utils.ArticleWebViewClient;
-import com.hamels.daybydayegg.Utils.PicassoImageGetter;
 
 public class TermsOfUseActivity extends BaseActivity implements FaqContract.View{
     public static final String TAG = MainActivity.class.getSimpleName();

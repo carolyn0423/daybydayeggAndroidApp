@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">日日好蛋.uat</string>
-    <string name="eorder_app_name">日日好蛋.uat</string>
+    <string name="app_name">日日好蛋測試版</string>
+    <string name="eorder_app_name">日日好蛋測試版</string>
 
     <!-- basic -->
-    <string name="store_name">日日好蛋</string>
+    <string name="store_name">日日好蛋測試版</string>
     <string name="setting">設定</string>
     <string name="name">姓名</string>
     <string name="gender">性別</string>

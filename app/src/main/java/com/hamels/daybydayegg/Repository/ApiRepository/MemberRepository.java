@@ -3,11 +3,11 @@ package com.hamels.daybydayegg.Repository.ApiRepository;
 import android.util.Log;
 
 import com.hamels.daybydayegg.Base.BaseContract;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Repository.AbsApiCallback;
 import com.hamels.daybydayegg.Repository.ApiService.MemberApiService;
 import com.hamels.daybydayegg.Repository.Model.OrderProduct;
 import com.hamels.daybydayegg.Repository.Model.User;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Utils.ApiUtils;
 import com.hamels.daybydayegg.Utils.SharedUtils;
 

@@ -2,11 +2,11 @@ package com.hamels.daybydayegg.Order.Presenter;
 
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BasePresenter;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Order.Contract.TransRecordContract;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Order;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
-import com.hamels.daybydayegg.EOrderApplication;
 
 import java.util.ArrayList;
 import java.util.HashMap;

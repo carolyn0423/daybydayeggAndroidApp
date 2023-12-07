@@ -1,6 +1,5 @@
 package com.hamels.daybydayegg.Main.View;
 
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,8 +10,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
-import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.EOrderApplication;
+import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Widget.AppToolbar;
 
 import java.util.Objects;

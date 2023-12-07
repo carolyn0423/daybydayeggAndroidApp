@@ -1,6 +1,5 @@
 package com.hamels.daybydayegg.MemberCenter.View;
 
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

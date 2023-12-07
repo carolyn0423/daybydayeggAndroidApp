@@ -11,11 +11,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Product.View.ProductMerchantFragment;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Merchant;
 import com.hamels.daybydayegg.Repository.Model.Product;
-import com.hamels.daybydayegg.EOrderApplication;
 
 import java.text.DecimalFormat;
 

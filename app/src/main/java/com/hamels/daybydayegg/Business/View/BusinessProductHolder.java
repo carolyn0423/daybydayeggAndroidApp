@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Product;
-import com.hamels.daybydayegg.EOrderApplication;
 
 import java.text.DecimalFormat;
 

@@ -15,6 +15,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Contract.MemberCenterContract;
 import com.hamels.daybydayegg.Main.Presenter.MemberCenterPresenter;
 import com.hamels.daybydayegg.MemberCenter.View.AboutFragment;
@@ -26,7 +27,6 @@ import com.hamels.daybydayegg.MemberCenter.View.MessageListFragment;
 import com.hamels.daybydayegg.MemberCenter.View.PasswordChangeFragment;
 import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.R;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Repository.Model.User;
 
 import java.util.Objects;

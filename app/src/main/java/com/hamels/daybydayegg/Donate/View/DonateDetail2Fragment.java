@@ -23,12 +23,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Donate.Presenter.DonateDetailPresenter;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.Donate.Contract.DonateDetailContract;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Donate;
-import com.hamels.daybydayegg.EOrderApplication;
 
 import java.util.List;
 
