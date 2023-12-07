@@ -2,14 +2,13 @@ package com.hamels.daybydayegg.Main.View;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import android.util.DisplayMetrics;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +22,10 @@ import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.Contract.MainIndexContract;
 import com.hamels.daybydayegg.Main.Presenter.MainIndexPresenter;
-import com.hamels.daybydayegg.Main.Presenter.MemberCenterPresenter;
 import com.hamels.daybydayegg.MemberCenter.View.MemberPointFragment;
 import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Carousel;
-import com.hamels.daybydayegg.Utils.IntentUtils;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;

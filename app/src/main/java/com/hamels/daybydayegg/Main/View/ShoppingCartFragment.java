@@ -1,6 +1,7 @@
 package com.hamels.daybydayegg.Main.View;
 
-import android.os.Build;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,11 +12,15 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
-import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.EOrderApplication;
+import com.hamels.daybydayegg.Login.VIew.LoginActivity;
+import com.hamels.daybydayegg.Product.View.ProductFragment;
+import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Widget.AppToolbar;
+import com.hamels.daybydayegg.Repository.RepositoryManager;
 
 import java.util.Objects;
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_SHOPPING_CART;
 
 public class ShoppingCartFragment extends BaseFragment {
     public static final String TAG = ShoppingCartFragment.class.getSimpleName();
@@ -25,6 +30,7 @@ public class ShoppingCartFragment extends BaseFragment {
     protected AppToolbar appToolbar;
     private static final String ORDERTYPE = "orderType";
     private String orderType = "";
+    private RepositoryManager repositoryManager;
 
     public static ShoppingCartFragment getInstance() {
         if (fragment == null) {
@@ -78,16 +84,28 @@ public class ShoppingCartFragment extends BaseFragment {
 
         //webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
 
-        switch (orderType) {
-            case "G":
-                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
-                break;
-            case "E":
-                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
-                break;
-            default:
-                webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
-                break;
+        if(EOrderApplication.CUSTOMER_ID.equals("") || EOrderApplication.sApiUrl.equals("") || EOrderApplication.dbConnectName.equals("") ||
+                repositoryManager.getCustomerID().equals("") || !repositoryManager.getUserLogin()){
+            new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("登入資訊不完整，請重新登入")
+                    .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
+                            fragment.getActivity().startActivityForResult(intent, REQUEST_SHOPPING_CART);
+                        }
+                    }).show();
+        }else {
+            switch (orderType) {
+                case "G":
+                    webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
+                    break;
+                case "E":
+                    webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
+                    break;
+                default:
+                    webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL);
+                    break;
+            }
         }
 
     }

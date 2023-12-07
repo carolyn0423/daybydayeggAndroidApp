@@ -4,17 +4,20 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 33
     buildToolsVersion "29.0.3"
-    flavorDimensions "default"
+    flavorDimensions "version"
     productFlavors {
         prod {
+            dimension "version"
             versionCode 6
             versionName "6.0"
+            // 其他配置
         }
         uat {
+            dimension "version"
+            versionCode 5
+            versionName "5.0"
             applicationIdSuffix ".uat"
             versionNameSuffix "-uat"
-            versionCode 6
-            versionName "6.0"
             // 其他配置
         }
     }
@@ -34,6 +37,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${variant.applicationId}-${variant.versionName}.apk"
+        }
     }
 }
 
@@ -112,4 +120,7 @@ dependencies {
 
     //ImageGetter
     implementation 'com.squareup.picasso:picasso:2.8'
+
+    // Maps SDK for Android
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
 }

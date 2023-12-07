@@ -6,12 +6,12 @@ import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.hamels.daybydayegg.Base.BaseContract;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Repository.AbsApiCallback;
 import com.hamels.daybydayegg.Repository.ApiService.BaseApiService;
 import com.hamels.daybydayegg.Repository.ApiService.MemberApiService;
 import com.hamels.daybydayegg.Repository.Model.BaseModel;
 import com.hamels.daybydayegg.Repository.SmileGsonConverterFactory;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Utils.ApiUtils;
 import com.hamels.daybydayegg.Utils.SharedUtils;
 

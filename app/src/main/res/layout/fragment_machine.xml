@@ -24,55 +24,48 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:tabIndicatorHeight="0dp"
-        app:tabGravity="center"
         app:tabMaxWidth="100000dp"
-        app:tabMinWidth="90dp"
         app:tabIndicatorFullWidth="true"
         app:tabTextAppearance="@style/TabLayoutTextSizeStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_01"
         app:tabIndicatorColor="@color/colorYunlinhn"
-        app:tabMode="scrollable"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
         app:tabSelectedTextColor="@color/white"
         app:tabTextColor="@color/colorYunlinhn"
         app:tabBackground="@drawable/selec_tab_green">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="常用據點"
-            android:textSize="12dp"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="最近五公里"
-            android:textSize="12dp"/>
+            android:textSize="12sp" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="據點清單"
-            android:textSize="12dp"/>
+            android:textSize="12sp" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem4"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="城市探索"
-            android:textSize="12dp"/>
+            android:textSize="12sp" />
 
     </com.google.android.material.tabs.TabLayout>
 

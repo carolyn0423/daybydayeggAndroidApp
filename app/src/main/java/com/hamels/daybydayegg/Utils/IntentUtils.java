@@ -9,7 +9,6 @@ import android.provider.Settings;
 import androidx.annotation.StringRes;
 import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.Base.WebViewActivity;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Init.NotificationControlActivity;
 import com.hamels.daybydayegg.Login.VIew.ForgetPasswordActivity;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;

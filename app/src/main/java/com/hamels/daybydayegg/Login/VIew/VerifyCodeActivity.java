@@ -18,7 +18,6 @@ import com.hamels.daybydayegg.Login.Presenter.VerifyCodePresenter;
 import com.hamels.daybydayegg.Login.Contract.VerifyCodeContract;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Utils.IntentUtils;
-import com.hamels.daybydayegg.Utils.ViewUtils;
 
 import java.util.ArrayList;
 

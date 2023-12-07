@@ -1,9 +1,13 @@
 package com.hamels.daybydayegg.Main.View;
 
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_SHOPPING_CART;
+
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,12 +26,15 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Main.Contract.MemberCardContract;
 import com.hamels.daybydayegg.Main.Presenter.MemberCardPresenter;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.User;
+import com.hamels.daybydayegg.Repository.RepositoryManager;
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MEMBER_CARD;
 
 public class MemberCardFragment extends BaseFragment implements MemberCardContract.View {
     public static final String TAG = MemberCardFragment.class.getSimpleName();
@@ -40,6 +47,7 @@ public class MemberCardFragment extends BaseFragment implements MemberCardContra
 
     private AnimatorSet rightOutSet, leftInSet;
     private MemberCardContract.Presenter memberCardPresenter;
+    private RepositoryManager repositoryManager;
 
     public static MemberCardFragment getInstance() {
         if (fragment == null) {
@@ -93,7 +101,19 @@ public class MemberCardFragment extends BaseFragment implements MemberCardContra
         tvCellphone = view.findViewById(R.id.tv_cellphone);
 
         memberCardPresenter = new MemberCardPresenter(this, getRepositoryManager(getContext()));
-        memberCardPresenter.getMemberInfo();
+
+        if(repositoryManager.getUserLogin()) {
+            memberCardPresenter.getMemberInfo();
+        }else {
+            new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("登入資訊不完整，請重新登入")
+                    .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
+                            fragment.getActivity().startActivityForResult(intent, REQUEST_MEMBER_CARD);
+                        }
+                    }).show();
+        }
     }
 
     private void initAnimation() {

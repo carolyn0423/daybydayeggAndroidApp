@@ -3,9 +3,9 @@ package com.hamels.daybydayegg.Main.Presenter;
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BasePresenter;
 import com.hamels.daybydayegg.Business.View.BusinessFragment;
-import com.hamels.daybydayegg.Constant.ApiConstant;
 import com.hamels.daybydayegg.Donate.View.DonateFragment;
 import com.hamels.daybydayegg.DrawLots.View.DrawLotsFragment;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Contract.MainContract;
 
 import com.hamels.daybydayegg.Main.View.MemberCardFragment;
@@ -17,30 +17,19 @@ import com.hamels.daybydayegg.MemberCenter.View.MailFileFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MessageListFragment;
 import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.R;
-import com.hamels.daybydayegg.Repository.ApiCallback;
-import com.hamels.daybydayegg.Repository.ApiRepository.ApiAdminRepository;
-import com.hamels.daybydayegg.Repository.Model.BaseModel;
 import com.hamels.daybydayegg.Repository.Model.Customer;
 import com.hamels.daybydayegg.Repository.Model.User;
-import com.hamels.daybydayegg.Repository.Model.WebSetup;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
-import com.hamels.daybydayegg.EOrderApplication;
 
-import static com.hamels.daybydayegg.Constant.ApiConstant.TASK_POST_GET_CUSTOMER_DETAIL;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_COUPON;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_DONATE;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_LOT_LIST;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIL;
-import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIN_INDEX;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MEMBER_CARD;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MEMBER_CENTER;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MESSAGE;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_SHOPPING_CART;
-
-import android.util.Log;
-
-import java.util.List;
 
 public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
     public static final String TAG = MainPresenter.class.getSimpleName();

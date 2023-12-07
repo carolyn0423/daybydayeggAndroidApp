@@ -2,9 +2,9 @@ package com.hamels.daybydayegg.Base;
 
 import android.util.Log;
 
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Utils.SharedUtils;
 
 public class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter {

@@ -11,10 +11,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Product.View.ProductFragment;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Product;
-import com.hamels.daybydayegg.EOrderApplication;
 import  com.hamels.daybydayegg.Utils.WaterMaskUtils;
 
 import java.text.DecimalFormat;

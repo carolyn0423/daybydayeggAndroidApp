@@ -21,10 +21,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
@@ -39,11 +37,8 @@ import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Donate;
 //import com.hamels.daybydayegg.Repository.Model.DonatePicture;
 //import com.hamels.daybydayegg.Repository.Model.DonateSpec;
-import com.hamels.daybydayegg.EOrderApplication;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 

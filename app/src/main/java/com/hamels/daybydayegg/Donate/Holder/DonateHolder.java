@@ -18,9 +18,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hamels.daybydayegg.Donate.View.DonateFragment;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Donate;
-import com.hamels.daybydayegg.EOrderApplication;
 
 public class DonateHolder extends RecyclerView.ViewHolder {
     public static final String TAG = DonateHolder.class.getSimpleName();

@@ -1,5 +1,7 @@
 package com.hamels.daybydayegg.Main.View;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -11,16 +13,22 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
-import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.EOrderApplication;
+import com.hamels.daybydayegg.Login.VIew.LoginActivity;
+import com.hamels.daybydayegg.R;
 
 import java.util.Objects;
+import com.hamels.daybydayegg.Repository.RepositoryManager;
+
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MEMBER_CARD;
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MESSAGE;
 
 public class MessageFragment extends BaseFragment {
     public static final String TAG = MessageFragment.class.getSimpleName();
 
     private static MessageFragment fragment;
     private WebView webView;
+    private RepositoryManager repositoryManager;
 
     public static MessageFragment getInstance() {
         if (fragment == null) {
@@ -73,7 +81,19 @@ public class MessageFragment extends BaseFragment {
                 }
             }
         });
-        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_MESSAGE_URL);
+
+        if(repositoryManager.getUserLogin()) {
+            webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_MESSAGE_URL);
+        }else {
+            new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("登入資訊不完整，請重新登入")
+                    .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
+                            fragment.getActivity().startActivityForResult(intent, REQUEST_MESSAGE);
+                        }
+                    }).show();
+        }
     }
 
     @Override

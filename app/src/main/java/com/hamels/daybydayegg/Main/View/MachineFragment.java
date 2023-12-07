@@ -3,23 +3,18 @@ package com.hamels.daybydayegg.Main.View;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.Guideline;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,7 +60,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
         tabLayout = view.findViewById(R.id.tab_machine_layout);
         tabItem1 = view.findViewById(R.id.tabItem1);
-        tabItem2 = view.findViewById(R.id.tabItem2);
+        //  tabItem2 = view.findViewById(R.id.tabItem2);
         tabItem3 = view.findViewById(R.id.tabItem3);
         tabItem4 = view.findViewById(R.id.tabItem4);
 

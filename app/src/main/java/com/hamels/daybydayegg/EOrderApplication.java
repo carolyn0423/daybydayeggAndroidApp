@@ -5,7 +5,8 @@ import android.app.Application;
 public class EOrderApplication extends Application {
     public static final String TAG = EOrderApplication.class.getSimpleName();
 
-    public static final boolean isPrd = false;
+    public static final String sAppVersion = BuildConfig.FLAVOR;
+    public static final boolean isPrd = true;
 
     //public static final String DOMAIN_SIT = "https://eorder.hamels.com.tw:9903/";
     //public static final String DOMAIN_UAT = "https://eorder.hamels.com.tw:9920/";
@@ -16,7 +17,7 @@ public class EOrderApplication extends Application {
     public static final String DOMAIN_ADMIN_UAT = "https://www.hamels.com.tw:9941/";
     public static final String DOMAIN_ADMIN_SIT = "https://eorder.hamels.com.tw:9940/";
 
-    public static String ADMIN_DOMAIN = isPrd ? DOMAIN_ADMIN_PRO : DOMAIN_ADMIN_SIT;
+    public static String ADMIN_DOMAIN = sAppVersion.equals("uat") ? DOMAIN_ADMIN_UAT : isPrd ? DOMAIN_ADMIN_PRO : DOMAIN_ADMIN_SIT;
 
     public static String CUSTOMER_ID = "111";
     public static String CUSTOMER_NAME = "日日好蛋";

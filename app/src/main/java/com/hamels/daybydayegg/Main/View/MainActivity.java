@@ -23,12 +23,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
@@ -61,9 +60,9 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.hamels.daybydayegg.Donate.View.DonateFragment;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.MemberCenter.View.AboutFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MemberInfoChangeFragment;
-import com.hamels.daybydayegg.MemberCenter.View.MemberPointFragment;
 import com.hamels.daybydayegg.MemberCenter.View.PasswordChangeFragment;
 import com.hamels.daybydayegg.Product.View.ProductDetailDescFragment;
 import com.hamels.daybydayegg.Product.View.ProductDetailFragment;
@@ -71,7 +70,6 @@ import com.hamels.daybydayegg.Product.View.ProductMainTypeFragment;
 import com.hamels.daybydayegg.Repository.ApiRepository.ApiRepository;
 import com.hamels.daybydayegg.Repository.ApiRepository.MemberRepository;
 import com.hamels.daybydayegg.Repository.Model.Customer;
-import com.hamels.daybydayegg.Repository.Model.Product;
 import com.hamels.daybydayegg.Utils.SharedUtils;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.hamels.daybydayegg.Base.BaseActivity;
@@ -87,15 +85,12 @@ import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.Product.View.ProductFragment;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.User;
-import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Utils.IntentUtils;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -112,10 +107,6 @@ import static com.hamels.daybydayegg.Constant.Constant.REQUEST_SHOPPING_CART;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_LOT_LIST;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_DONATE;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
     public static final String TAG = MainActivity.class.getSimpleName();

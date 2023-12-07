@@ -5,8 +5,8 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
-import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.EOrderApplication;
+import com.hamels.daybydayegg.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -160,7 +160,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         tvForgetPsd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(EOrderApplication.CUSTOMER_ID == ""){
+                if(EOrderApplication.CUSTOMER_ID.equals("")){
                     showErrorAlert("請選擇商家");
                 }else {
                     if(chkMobile(etPhone.getText().toString())) {
@@ -179,7 +179,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (EOrderApplication.CUSTOMER_ID == ""){
+                if (EOrderApplication.CUSTOMER_ID.equals("")){
                     showErrorAlert("請選擇商家");
                 }else{
                     loginPresenter.register();
@@ -289,6 +289,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
             EOrderApplication.CUSTOMER_ID = "";
             EOrderApplication.CUSTOMER_NAME = "";
             EOrderApplication.sApiUrl = "";
+
+            loginPresenter.checkCustomerNo(EOrderApplication.sPecialCustomerNo);
         }
     }
 
@@ -305,6 +307,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
                 EOrderApplication.CUSTOMER_ID = "";
                 EOrderApplication.CUSTOMER_NAME = "";
                 EOrderApplication.sApiUrl = "";
+
+                loginPresenter.checkCustomerNo(EOrderApplication.sPecialCustomerNo);
             }
         }else if(!sCustomerName.equals((""))){
             //tvEOrder.setText(sCustomerName);

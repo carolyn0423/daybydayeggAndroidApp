@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.DrawLots;
-import com.hamels.daybydayegg.EOrderApplication;
 
 public class DrawLotsHolder extends RecyclerView.ViewHolder {
     public static final String TAG = DrawLotsHolder.class.getSimpleName();
