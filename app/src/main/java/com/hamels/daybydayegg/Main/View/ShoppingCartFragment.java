@@ -20,7 +20,8 @@ import com.hamels.daybydayegg.Widget.AppToolbar;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
 
 import java.util.Objects;
-import static com.hamels.daybydayegg.Constant.Constant.REQUEST_SHOPPING_CART;
+
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIN_INDEX;
 
 public class ShoppingCartFragment extends BaseFragment {
     public static final String TAG = ShoppingCartFragment.class.getSimpleName();
@@ -82,16 +83,18 @@ public class ShoppingCartFragment extends BaseFragment {
         ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
+        repositoryManager = getRepositoryManager(getContext());
+
         //webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_SHOPPING_CART_URL2);
 
         if(EOrderApplication.CUSTOMER_ID.equals("") || EOrderApplication.sApiUrl.equals("") || EOrderApplication.dbConnectName.equals("") ||
-                repositoryManager.getCustomerID().equals("") || !repositoryManager.getUserLogin()){
+                repositoryManager == null || repositoryManager.getCustomerID() == null || repositoryManager.getCustomerID().equals("")){
             new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("登入資訊不完整，請重新登入")
                     .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(fragment.getActivity(), LoginActivity.class);
-                            fragment.getActivity().startActivityForResult(intent, REQUEST_SHOPPING_CART);
+                            fragment.getActivity().startActivityForResult(intent, REQUEST_MAIN_INDEX);
                         }
                     }).show();
         }else {

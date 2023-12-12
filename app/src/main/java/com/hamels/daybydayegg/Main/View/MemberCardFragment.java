@@ -1,7 +1,4 @@
 package com.hamels.daybydayegg.Main.View;
-
-import static com.hamels.daybydayegg.Constant.Constant.REQUEST_SHOPPING_CART;
-
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
@@ -100,6 +97,7 @@ public class MemberCardFragment extends BaseFragment implements MemberCardContra
         tvPoint = view.findViewById(R.id.btn_point);
         tvCellphone = view.findViewById(R.id.tv_cellphone);
 
+        repositoryManager = getRepositoryManager(getContext());
         memberCardPresenter = new MemberCardPresenter(this, getRepositoryManager(getContext()));
 
         if(repositoryManager.getUserLogin()) {
