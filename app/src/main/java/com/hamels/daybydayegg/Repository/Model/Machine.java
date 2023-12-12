@@ -2,8 +2,28 @@ package com.hamels.daybydayegg.Repository.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Machine {
     public static final String TAG = Machine.class.getSimpleName();
+
+    public class Product {
+        private String product_name;
+        private String quantity;
+
+        public Product(String product_name, String quantity) {
+            this.product_name = product_name;
+            this.quantity = quantity;
+        }
+
+        public String getName() {
+            return product_name;
+        }
+
+        public String getQuantity() {
+            return quantity;
+        }
+    }
 
     @SerializedName("machine_id")
     private String machine_id;
@@ -27,6 +47,8 @@ public class Machine {
     private double distance;
     @SerializedName("often_id")
     private String often_id;
+
+    private List<Product> product;
 
     public String getMachineID() {
         return machine_id;
@@ -70,5 +92,9 @@ public class Machine {
 
     public String geOftenID() {
         return often_id;
+    }
+
+    public List<Product> getProductList() {
+        return product;
     }
 }

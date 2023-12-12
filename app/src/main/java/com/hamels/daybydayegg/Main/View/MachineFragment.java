@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
     public static final String TAG = MachineFragment.class.getSimpleName();
 
     private static MachineFragment fragment;
+    public static int lastSelectedTabPosition = 0;
     private TabLayout tabLayout;
     private TabItem tabItem1, tabItem2, tabItem3, tabItem4;
     private RecyclerView recyclerView;
@@ -98,19 +100,29 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
                 switch (stTabText){
                     case "常用據點":
                         //  常用機台
+                        lastSelectedTabPosition = 0;
                         machinePresenter.setFunctionname("AppOften");
                         break;
                     case "最近五公里":
                         //  最近五公里
-                        machinePresenter.setFunctionname("AppDistance");
+                        //machinePresenter.setFunctionname("AppDistance");
                         break;
                     case "據點清單":
                         //  據點清單
+                        lastSelectedTabPosition = 1;
                         machinePresenter.setFunctionname("All");
                         break;
                     case "城市探索":
                         //  城市探索
-                        Toast.makeText(getContext(), "敬請期待", Toast.LENGTH_SHORT).show();
+                        if(EOrderApplication.lon == 0 || EOrderApplication.lat == 0){
+                            requestUserLocation();
+                            tabLayout.getTabAt(lastSelectedTabPosition).select();
+                            new AlertDialog.Builder(fragment.getActivity())
+                                    .setTitle("取得所在位置座標中，請稍後再試。")
+                                    .setPositiveButton(android.R.string.ok, null).show();
+                        }else {
+                            ((MainActivity) getActivity()).addFragment(MachineMapFragment.getInstance());
+                        }
                         break;
                 }
             }
@@ -128,13 +140,28 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
         requestUserLocation();
 
-        if(machinePresenter.getUserLogin()){
-            tabLayout.getTabAt(0).select();
-            machinePresenter.setFunctionname("AppOften");
+        if(lastSelectedTabPosition == 0) {
+            if (machinePresenter.getUserLogin()) {
+                lastSelectedTabPosition = 0;
+                tabLayout.getTabAt(0).select();
+                machinePresenter.setFunctionname("AppOften");
+            } else {
+                lastSelectedTabPosition = 1;
+                tabLayout.getTabAt(1).select();
+                machinePresenter.setFunctionname("All");
+                tabLayout.removeTabAt(0);
+            }
         }else{
-            tabLayout.getTabAt(2).select();
-            machinePresenter.setFunctionname("All");
-            tabLayout.removeTabAt(0);
+            switch (lastSelectedTabPosition){
+                case 0:
+                    tabLayout.getTabAt(0).select();
+                    machinePresenter.setFunctionname("AppOften");
+                    break;
+                case 1:
+                    tabLayout.getTabAt(1).select();
+                    machinePresenter.setFunctionname("All");
+                    break;
+            }
         }
 
         recyclerView = view.findViewById(R.id.product_recycler_view);

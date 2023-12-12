@@ -6,7 +6,7 @@ public class EOrderApplication extends Application {
     public static final String TAG = EOrderApplication.class.getSimpleName();
 
     public static final String sAppVersion = BuildConfig.FLAVOR;
-    public static final boolean isPrd = true;
+    public static final boolean isPrd = false;
 
     //public static final String DOMAIN_SIT = "https://eorder.hamels.com.tw:9903/";
     //public static final String DOMAIN_UAT = "https://eorder.hamels.com.tw:9920/";
