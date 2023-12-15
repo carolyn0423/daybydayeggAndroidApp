@@ -2,11 +2,13 @@ package com.hamels.daybydayegg;
 
 import android.app.Application;
 
+import java.util.HashMap;
+
 public class EOrderApplication extends Application {
     public static final String TAG = EOrderApplication.class.getSimpleName();
 
     public static final String sAppVersion = BuildConfig.FLAVOR;
-    public static final boolean isPrd = false;
+    public static final boolean isPrd = true;
 
     //public static final String DOMAIN_SIT = "https://eorder.hamels.com.tw:9903/";
     //public static final String DOMAIN_UAT = "https://eorder.hamels.com.tw:9920/";
@@ -50,9 +52,39 @@ public class EOrderApplication extends Application {
         return application;
     }
 
+    // 建立城市代稱與座標的對應關係
+    public static HashMap<String, String> cityCenterItems = new HashMap<>();
+
+    public void setCityCenterItems() {
+        cityCenterItems.put("KEE", "25.121548494171105, 121.72244294093696"); // 基隆市
+        cityCenterItems.put("NWT", "25.014264872988026, 121.4638364525016"); // 新北市
+        cityCenterItems.put("TPE", "25.05121225087254, 121.5504942644944"); // 臺北市
+        cityCenterItems.put("TAO", "24.957548036618288, 121.24077639598674"); // 桃園市
+        cityCenterItems.put("HSQ", "24.723574807245818, 121.09939937041177"); // 新竹縣
+        cityCenterItems.put("HSZ", "24.800370344124158, 120.97994325365435"); // 新竹市
+        cityCenterItems.put("MIA", "24.578542505186086, 120.82249685652936"); // 苗栗縣
+        cityCenterItems.put("TXG", "24.136957030376042, 120.68499865493263"); // 臺中市
+        cityCenterItems.put("CHA", "23.952336394857223, 120.48081973741228"); // 彰化縣
+        cityCenterItems.put("NAN", "23.832845886011185, 120.86576145362285"); // 南投縣
+        cityCenterItems.put("YUN", "23.709390268445183, 120.43357159673828"); // 雲林縣
+        cityCenterItems.put("CYQ", "23.47887600865977, 120.4415274937309"); // 嘉義縣
+        cityCenterItems.put("CYI", "23.47887600865977, 120.4415274937309"); // 嘉義市
+        cityCenterItems.put("TNN", "23.1016124861523, 120.2835775889087"); // 臺南市
+        cityCenterItems.put("KHH", "22.66093703063071, 120.35381183292542"); // 高雄市
+        cityCenterItems.put("PIF", "22.683221227817754, 120.48791334616459"); // 屏東縣
+        cityCenterItems.put("ILA", "24.67810172029387, 121.77319426765386"); // 宜蘭縣
+        cityCenterItems.put("HUA", "23.746407690798886, 121.44698877382433"); // 花蓮縣
+        cityCenterItems.put("TTT", "22.755807666504946, 121.15035646346827"); // 台東縣
+    }
+
+    public static String getCityCenterItems(String sCityCode){
+        return cityCenterItems.get(sCityCode);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         application = this;
+        setCityCenterItems();
     }
 }

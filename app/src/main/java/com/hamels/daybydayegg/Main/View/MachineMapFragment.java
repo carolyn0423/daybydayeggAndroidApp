@@ -92,7 +92,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         initView(view);
 
         if(EOrderApplication.lat == 0 && EOrderApplication.lon == 0){
-            requestUserLocation();
+            ((MainActivity) getActivity()).requestUserLocation();
         }else{
             currentLocation = new LatLng(EOrderApplication.lat, EOrderApplication.lon);
         }
@@ -145,7 +145,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
-        ((MainActivity) getActivity()).setSortButtonVisibility(false);
+        ((MainActivity) getActivity()).setSortButtonVisibility(true);
 
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
@@ -169,15 +169,15 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                 switch (stTabText){
                     case "常用據點":
                         //  常用機台
-                        MachineFragment.lastSelectedTabPosition = 0;
-                        ((MainActivity) getActivity()).addFragment(MachineFragment.getInstance());
+                        MachineFragment.lastSelectedTabPosition = 1;
                         break;
                     case "據點清單":
                         //  據點清單
-                        MachineFragment.lastSelectedTabPosition = 1;
-                        ((MainActivity) getActivity()).addFragment(MachineFragment.getInstance());
+                        MachineFragment.lastSelectedTabPosition = 0;
                         break;
                 }
+
+                ((MainActivity) getActivity()).addFragment(MachineFragment.getInstance());
             }
 
             @Override
@@ -194,7 +194,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         machineMapPresenter.getMachineList(true);
 
         if(!machineMapPresenter.getUserLogin()){
-            tabLayout.removeTabAt(0);
+            tabLayout.removeTabAt(1);
         }
     }
 
@@ -203,7 +203,8 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
 
         if(isOne) {
             mapView.getMapAsync(googleMap -> {
-                boolean isMAx5000 = false;
+                float isMAx5000 = 0;
+                LatLng latLng = null;
 
                 if (googleMap != null) {
                     for (Machine machine : machines) {
@@ -221,16 +222,18 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
 
                         addCustomMarkerToMap(getContext(), sMarkerColor, googleMap, machine);
                         LatLng targetLocation = new LatLng(machine.getLat(), machine.getLon());
-                        if (calculateDistance(currentLocation, targetLocation) < 5000) {
-                            isMAx5000 = true;
+                        float iDistance = calculateDistance(currentLocation, targetLocation);
+                        if (iDistance < 5000 && iDistance < isMAx5000) {
+                            isMAx5000 = iDistance;
+                            latLng = new LatLng(machine.getLat(), machine.getLon());
                         }
                     }
 
                     if (EOrderApplication.lat == 0 || EOrderApplication.lon == 0) {
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machines.get(0).getLat(), machines.get(0).getLon()), 13));
                     } else {
-                        if (isMAx5000) {
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 13));
+                        if (isMAx5000 > 0) {
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
                         } else {
                             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 8));
                         }
@@ -238,6 +241,13 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                 }
             });
         }
+    }
+
+    public void getCityZoom(String sCityCode){
+        String[] LatLon = EOrderApplication.getCityCenterItems(sCityCode).split(",");
+        mapView.getMapAsync(googleMap -> {
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(LatLon[0]), Double.parseDouble(LatLon[1])), 10));
+        });
     }
 
     public void openBtn(ConstraintLayout btnOften, boolean isOpen){
@@ -450,65 +460,5 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         target.setLongitude(targetLocation.longitude);
 
         return current.distanceTo(target);
-    }
-
-    public void requestUserLocation() {
-        int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
-
-        LocationListener locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                // 在這裡處理位置更新
-                EOrderApplication.lat = location.getLatitude();  // 獲取緯度
-                EOrderApplication.lon = location.getLongitude();  // 獲取經度
-                if(EOrderApplication.lat != 0 && EOrderApplication.lon != 0 && !isOneLatLon) {
-                    currentLocation = new LatLng(EOrderApplication.lat, EOrderApplication.lon);
-                    mapView.getMapAsync(googleMap -> {
-                        if (googleMap != null) {
-                            // 在地圖上添加目前位置標記
-                            isOneLatLon = true;
-                            googleMap.addMarker(new MarkerOptions().position(currentLocation).title("目前位置"));
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 13));
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                // 在這裡處理提供程序停用事件
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                // 在這裡處理提供程序啟用事件
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-                // 在這裡處理狀態更改事件
-            }
-        };
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            // 沒有權限，需要向用戶請求權限
-            // 取得 GPS 權限
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // Permission is not granted
-                // Ask for permission
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                        100);
-                return;
-            }
-        } else {
-            // 已經有權限，可以繼續操作
-            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                // 請求權限
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            }
-        }
     }
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:textSize="16dp"
+        android:id="@+id/KEE"
+        android:title="基隆市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/NWT"
+        android:title="新北市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/TPE"
+        android:title="臺北市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/TAO"
+        android:title="桃園市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/HSQ"
+        android:title="新竹縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/HSZ"
+        android:title="新竹市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/MIA"
+        android:title="苗栗縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/TXG"
+        android:title="臺中市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/CHA"
+        android:title="彰化縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/NAN"
+        android:title="南投縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/YUN"
+        android:title="雲林縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/CYQ"
+        android:title="嘉義縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/CYI"
+        android:title="嘉義市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/TNN"
+        android:title="臺南市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/KHH"
+        android:title="高雄市" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/PIF"
+        android:title="屏東縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/ILA"
+        android:title="宜蘭縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/HUA"
+        android:title="花蓮縣" />
+    <item
+        android:textSize="16dp"
+        android:id="@+id/TTT"
+        android:title="台東縣" />
+</menu>

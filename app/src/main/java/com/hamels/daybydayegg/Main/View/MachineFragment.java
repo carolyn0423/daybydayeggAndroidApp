@@ -47,7 +47,6 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
     private MachineAdapter machineAdapter;
     private MachineContract.Presenter machinePresenter;
-    private static final int REQUEST_LOCATION_PERMISSION = 100;
 
     public static MachineFragment getInstance() {
         if (fragment == null) {
@@ -100,7 +99,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
                 switch (stTabText){
                     case "常用據點":
                         //  常用機台
-                        lastSelectedTabPosition = 0;
+                        lastSelectedTabPosition = 1;
                         machinePresenter.setFunctionname("AppOften");
                         break;
                     case "最近五公里":
@@ -109,13 +108,13 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
                         break;
                     case "據點清單":
                         //  據點清單
-                        lastSelectedTabPosition = 1;
+                        lastSelectedTabPosition = 0;
                         machinePresenter.setFunctionname("All");
                         break;
                     case "城市探索":
                         //  城市探索
                         if(EOrderApplication.lon == 0 || EOrderApplication.lat == 0){
-                            requestUserLocation();
+                            ((MainActivity) getActivity()).requestUserLocation();
                             tabLayout.getTabAt(lastSelectedTabPosition).select();
                             new AlertDialog.Builder(fragment.getActivity())
                                     .setTitle("取得所在位置座標中，請稍後再試。")
@@ -138,28 +137,25 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
             }
         });
 
-        requestUserLocation();
+        ((MainActivity) getActivity()).requestUserLocation();
 
         if(lastSelectedTabPosition == 0) {
-            if (machinePresenter.getUserLogin()) {
-                lastSelectedTabPosition = 0;
-                tabLayout.getTabAt(0).select();
-                machinePresenter.setFunctionname("AppOften");
-            } else {
-                lastSelectedTabPosition = 1;
-                tabLayout.getTabAt(1).select();
-                machinePresenter.setFunctionname("All");
-                tabLayout.removeTabAt(0);
+            lastSelectedTabPosition = 0;
+            tabLayout.getTabAt(0).select();
+            machinePresenter.setFunctionname("All");
+
+            if (!machinePresenter.getUserLogin()) {
+                tabLayout.removeTabAt(1);
             }
         }else{
             switch (lastSelectedTabPosition){
                 case 0:
                     tabLayout.getTabAt(0).select();
-                    machinePresenter.setFunctionname("AppOften");
+                    machinePresenter.setFunctionname("All");
                     break;
                 case 1:
                     tabLayout.getTabAt(1).select();
-                    machinePresenter.setFunctionname("All");
+                    machinePresenter.setFunctionname("AppOften");
                     break;
             }
         }
@@ -181,54 +177,5 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
     @Override
     public void intentToGoogleMap(String address) {
         IntentUtils.intentToGoogleMap((BaseActivity) getActivity(), address);
-    }
-
-    public void requestUserLocation() {
-        int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
-
-        LocationListener locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                // 在這裡處理位置更新
-                EOrderApplication.lat = location.getLatitude();  // 獲取緯度
-                EOrderApplication.lon = location.getLongitude();  // 獲取經度
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                // 在這裡處理提供程序停用事件
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                // 在這裡處理提供程序啟用事件
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-                // 在這裡處理狀態更改事件
-            }
-        };
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            // 沒有權限，需要向用戶請求權限
-            // 取得 GPS 權限
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // Permission is not granted
-                // Ask for permission
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                        REQUEST_LOCATION_PERMISSION);
-                return;
-            }
-        } else {
-            // 已經有權限，可以繼續操作
-            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                // 請求權限
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            }
-        }
     }
 }

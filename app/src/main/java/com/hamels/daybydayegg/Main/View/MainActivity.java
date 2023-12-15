@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -144,6 +147,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private int VersionCode = 0;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private String sPDFDir = "";
+    private static final int REQUEST_LOCATION_PERMISSION = 100;
 
     private Handler handler = new Handler() {
         @Override
@@ -355,6 +359,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     popupMenu.getMenuInflater().inflate(R.menu.menu_sort, popupMenu.getMenu());
                     page = 3;
                 }
+                else if(MachineMapFragment.getInstance().isVisible()){
+                    popupMenu.getMenuInflater().inflate(R.menu.menu_city, popupMenu.getMenu());
+                    page = 4;
+                }
                 final int mPage = page;
                 popupMenu.show();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -364,36 +372,107 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         String filter = "";
                         int id = item.getItemId();
 
-                        // product
-                        if (id == R.id.item_CHEAP){
-                            sort = "CHEAP";
-                        }else if (id == R.id.item_EXPENSIVE){
-                            sort = "EXPENSIVE";
-                        }else if (id == R.id.item_NEW){
-                            sort = "NEW";
+                        switch (id){
+                            //  product
+                            case R.id.item_CHEAP:
+                                sort = "CHEAP";
+                                break;
+                            case R.id.item_EXPENSIVE:
+                                sort = "EXPENSIVE";
+                                break;
+                            case R.id.item_NEW:
+                                sort = "NEW";
+                                break;
+
+                            //  order
+                            case R.id.item_order_status_all:
+                                filter = "";
+                                break;
+                            case R.id.item_order_status_1:
+                                filter = "1";
+                                break;
+                            case R.id.item_order_status_2:
+                                filter = "2";
+                                break;
+                            case R.id.item_order_status_3:
+                                filter = "3";
+                                break;
+                            case R.id.item_order_status_4:
+                                filter = "4";
+                                break;
+
+                            //  Google Map
+                            case R.id.KEE:
+                                filter = "KEE";
+                                break;
+                            case R.id.NWT:
+                                filter = "NWT";
+                                break;
+                            case R.id.TPE:
+                                filter = "TPE";
+                                break;
+                            case R.id.TAO:
+                                filter = "TAO";
+                                break;
+                            case R.id.HSQ:
+                                filter = "HSQ";
+                                break;
+                            case R.id.HSZ:
+                                filter = "HSZ";
+                                break;
+                            case R.id.MIA:
+                                filter = "MIA";
+                                break;
+                            case R.id.TXG:
+                                filter = "TXG";
+                                break;
+                            case R.id.CHA:
+                                filter = "CHA";
+                                break;
+                            case R.id.NAN:
+                                filter = "NAN";
+                                break;
+                            case R.id.YUN:
+                                filter = "YUN";
+                                break;
+                            case R.id.CYQ:
+                                filter = "CYQ";
+                                break;
+                            case R.id.CYI:
+                                filter = "CYI";
+                                break;
+                            case R.id.TNN:
+                                filter = "TNN";
+                                break;
+                            case R.id.KHH:
+                                filter = "KHH";
+                                break;
+                            case R.id.PIF:
+                                filter = "PIF";
+                                break;
+                            case R.id.ILA:
+                                filter = "ILA";
+                                break;
+                            case R.id.HUA:
+                                filter = "HUA";
+                                break;
+                            case R.id.TTT:
+                                filter = "TTT";
+                                break;
                         }
 
-                        // order
-                        else if (id == R.id.item_order_status_all){
-                            filter = "";
-                        }else if (id == R.id.item_order_status_1){
-                            filter = "1";
-                        }else if (id == R.id.item_order_status_2){
-                            filter = "2";
-                        }else if (id == R.id.item_order_status_3){
-                            filter = "3";
-                        }else if (id == R.id.item_order_status_4){
-                            filter = "4";
-                        }
                         switch (mPage) {
-                            case 1: //order
+                            case 1: //  order
                                 TransRecordFragment.getInstance().orderFilterMode(filter);
                                 break;
-                            case 2: //product
+                            case 2: //  product
                                 ProductFragment.getInstance().SortMode(sort);
                                 break;
-                            case 3: //business product
+                            case 3: //  business product
                                 BusinessProductFragment.getInstance().SortMode(sort);
+                                break;
+                            case 4: //  Google Map
+                                MachineMapFragment.getInstance().getCityZoom(filter);
                                 break;
                         }
                         return true;
@@ -471,6 +550,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         }
 
+        //  取得座標
+        requestUserLocation();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -1499,6 +1580,56 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }
                 })
                 .show();
+    }
+
+    //  取得座標
+    public void requestUserLocation() {
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                // 在這裡處理位置更新
+                EOrderApplication.lat = location.getLatitude();  // 獲取緯度
+                EOrderApplication.lon = location.getLongitude();  // 獲取經度
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                // 在這裡處理提供程序停用事件
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+                // 在這裡處理提供程序啟用事件
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+                // 在這裡處理狀態更改事件
+            }
+        };
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            // 沒有權限，需要向用戶請求權限
+            // 取得 GPS 權限
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // Permission is not granted
+                // Ask for permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        REQUEST_LOCATION_PERMISSION);
+                return;
+            }
+        } else {
+            // 已經有權限，可以繼續操作
+            LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                // 請求權限
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            }
+        }
     }
 
     /**
