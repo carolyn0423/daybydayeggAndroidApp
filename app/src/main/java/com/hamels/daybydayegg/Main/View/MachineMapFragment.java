@@ -92,7 +92,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         initView(view);
 
         if(EOrderApplication.lat == 0 && EOrderApplication.lon == 0){
-            ((MainActivity) getActivity()).requestUserLocation();
+            ((MainActivity) getActivity()).checkLocationPermission();
         }else{
             currentLocation = new LatLng(EOrderApplication.lat, EOrderApplication.lon);
         }
@@ -109,8 +109,10 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                 googleMap.getUiSettings().setAllGesturesEnabled(true);
 
                 // 在地圖上添加目前位置標記
-                googleMap.addMarker(new MarkerOptions().position(currentLocation).title("目前位置"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 13));
+                if(EOrderApplication.lat != 0 && EOrderApplication.lon != 0){
+                    googleMap.addMarker(new MarkerOptions().position(currentLocation).title("目前位置"));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 13));
+                }
             }
         });
         return view;

@@ -40,7 +40,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
     public static final String TAG = MachineFragment.class.getSimpleName();
 
     private static MachineFragment fragment;
-    public static int lastSelectedTabPosition = 0;
+    public static int lastSelectedTabPosition = -1;
     private TabLayout tabLayout;
     private TabItem tabItem1, tabItem2, tabItem3, tabItem4;
     private RecyclerView recyclerView;
@@ -113,15 +113,8 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
                         break;
                     case "城市探索":
                         //  城市探索
-                        if(EOrderApplication.lon == 0 || EOrderApplication.lat == 0){
-                            ((MainActivity) getActivity()).requestUserLocation();
-                            tabLayout.getTabAt(lastSelectedTabPosition).select();
-                            new AlertDialog.Builder(fragment.getActivity())
-                                    .setTitle("取得所在位置座標中，請稍後再試。")
-                                    .setPositiveButton(android.R.string.ok, null).show();
-                        }else {
-                            ((MainActivity) getActivity()).addFragment(MachineMapFragment.getInstance());
-                        }
+                        ((MainActivity) getActivity()).checkLocationPermission();
+                        ((MainActivity) getActivity()).addFragment(MachineMapFragment.getInstance());
                         break;
                 }
             }
@@ -137,27 +130,23 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
             }
         });
 
-        ((MainActivity) getActivity()).requestUserLocation();
+        ((MainActivity) getActivity()).checkLocationPermission();
 
-        if(lastSelectedTabPosition == 0) {
-            lastSelectedTabPosition = 0;
-            tabLayout.getTabAt(0).select();
-            machinePresenter.setFunctionname("All");
+        if(!machinePresenter.getUserLogin()) {
+            //  若未登入，移除常用鈕
+            tabLayout.removeTabAt(1);
+        }
 
-            if (!machinePresenter.getUserLogin()) {
-                tabLayout.removeTabAt(1);
-            }
-        }else{
-            switch (lastSelectedTabPosition){
-                case 0:
-                    tabLayout.getTabAt(0).select();
-                    machinePresenter.setFunctionname("All");
-                    break;
-                case 1:
-                    tabLayout.getTabAt(1).select();
-                    machinePresenter.setFunctionname("AppOften");
-                    break;
-            }
+        switch (lastSelectedTabPosition){
+            case -1:    //  代表第一次近來
+            case 0:
+                tabLayout.getTabAt(0).select();
+                machinePresenter.setFunctionname("All");
+                break;
+            case 1:
+                tabLayout.getTabAt(1).select();
+                machinePresenter.setFunctionname("AppOften");
+                break;
         }
 
         recyclerView = view.findViewById(R.id.product_recycler_view);
@@ -167,11 +156,19 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
     @Override
     public void setMachineList(List<Machine> machines) {
+        boolean isOften = false;
         for (Machine machine : machines) {
+            if(!isOften) isOften = machine.geOftenID() != null && !machine.geOftenID().equals("") ? true : false;
             Log.e(TAG, machine.getTitle());
         }
-        
-        machineAdapter.setData(machines);
+
+        if(isOften && lastSelectedTabPosition == -1){
+            tabLayout.getTabAt(1).select();
+            machinePresenter.setFunctionname("AppOften");
+            lastSelectedTabPosition = 1;
+        } else {
+            machineAdapter.setData(machines);
+        }
     }
 
     @Override
