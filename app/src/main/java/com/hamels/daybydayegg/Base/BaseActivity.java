@@ -9,7 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +34,7 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     private ProgressDialog progressDialog;
     private TextView tvShoppingCart, tvShoppingCartETicket;
     private Boolean mStateEnable;
+    private PopupWindow popupWindow;
     @Override
     public RepositoryManager getRepositoryManager(Context context) {
         return new RepositoryManager(context);

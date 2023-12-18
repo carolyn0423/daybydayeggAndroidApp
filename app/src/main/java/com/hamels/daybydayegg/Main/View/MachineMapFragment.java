@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -112,6 +114,39 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                 }
             }
         });
+
+//        mapView.getMapAsync(new OnMapReadyCallback() {
+//            @Override
+//            public void onMapReady(GoogleMap googleMap) {
+//                // 獲取 GoogleMap 實例後，可以添加事件監聽器
+//
+//                // 監聽地圖的點擊事件
+//                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//                    @Override
+//                    public void onMapClick(LatLng latLng) {
+//                        // 在地圖上點擊時觸發的操作
+//                        // latLng 包含了被點擊的地圖坐標
+//                        Log.d("MapEvent", "Map clicked at: " + latLng.toString());
+//                    }
+//                });
+//
+//                // 監聽地圖的滑動事件
+//                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//                    @Override
+//                    public void onMapClick(LatLng latLng) {
+//                        // 在地圖上滑動時觸發的操作
+//                        // latLng 包含了滑動後的地圖坐標
+//                        Log.d("MapEvent", "Map scrolled to: " + latLng.toString());
+//
+//                        // 在這裡添加保持 PopupWindow 的代碼
+//                        if (popupWindow.isShowing()) {
+//                            // 如果 PopupWindow 正在顯示，則不關閉它
+//                            // 可以根據需要更新 PopupWindow 的位置或內容
+//                        }
+//                    }
+//                });
+//            }
+//        });
         return view;
     }
 
