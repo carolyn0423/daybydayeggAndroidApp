@@ -3,31 +3,28 @@ package com.hamels.daybydayegg.Main.View;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,12 +38,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.EOrderApplication;
-import com.hamels.daybydayegg.Main.Adapter.MachineAdapter;
 import com.hamels.daybydayegg.Main.Adapter.MachineMapAdapter;
 import com.hamels.daybydayegg.Main.Contract.MachineMapContract;
 import com.hamels.daybydayegg.Main.Presenter.MachineMapPresenter;
@@ -72,6 +67,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     private MachineMapAdapter machineMapAdapter;
     private boolean isOneLatLon = false;
     private Map<Marker, Machine> markerMachineMap = new HashMap<>();
+    private PopupWindow popupWindow;
     public static MachineMapFragment getInstance() {
         if (fragment == null) {
             fragment = new MachineMapFragment();
@@ -90,6 +86,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         tabItem4 = view.findViewById(R.id.tabItem4);
 
         initView(view);
+
 
         if(EOrderApplication.lat == 0 && EOrderApplication.lon == 0){
             ((MainActivity) getActivity()).checkLocationPermission();
@@ -205,7 +202,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
 
         if(isOne) {
             mapView.getMapAsync(googleMap -> {
-                float isMAx5000 = 0;
+                double isMAx5000 = 0;
                 LatLng latLng = null;
 
                 if (googleMap != null) {
@@ -223,11 +220,13 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                         }
 
                         addCustomMarkerToMap(getContext(), sMarkerColor, googleMap, machine);
-                        LatLng targetLocation = new LatLng(machine.getLat(), machine.getLon());
-                        float iDistance = calculateDistance(currentLocation, targetLocation);
-                        if (iDistance < 5000 && iDistance < isMAx5000) {
-                            isMAx5000 = iDistance;
-                            latLng = new LatLng(machine.getLat(), machine.getLon());
+                        //LatLng targetLocation = new LatLng(machine.getLat(), machine.getLon());
+                        double iDistance = machine.getDistance();
+                        if (iDistance < 5) {
+                            if(isMAx5000 == 0 || isMAx5000 > iDistance){
+                                isMAx5000 = iDistance;
+                                latLng = new LatLng(machine.getLat(), machine.getLon());
+                            }
                         }
                     }
 
@@ -246,6 +245,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     }
 
     public void getCityZoom(String sCityCode){
+        popupWindow.dismiss();
         String[] LatLon = EOrderApplication.getCityCenterItems(sCityCode).split(",");
         mapView.getMapAsync(googleMap -> {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(LatLon[0]), Double.parseDouble(LatLon[1])), 10));
@@ -294,7 +294,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
             Machine clickedMachine = markerMachineMap.get(now_marker); // 根據點擊的 Marker 獲取對應的 Machine 物件
             if (clickedMachine != null) {
                 // 顯示底部表單（Bottom Sheet）
-                showBottomSheet(now_marker, clickedMachine);
+                showBottomSheet(now_marker, clickedMachine, googleMap);
             }
             return false;
         });
@@ -334,21 +334,33 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
-    private void showBottomSheet(Marker marker, Machine machine) {
+    private void showBottomSheet(Marker marker, Machine machine, GoogleMap googleMap) {
         String sMachineID = machine.getMachineID();
-
         // 創建底部表單（Bottom Sheet）視圖
         View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_google_map_layout, null);
 
-        // 顯示底部表單（Bottom Sheet）
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
-        bottomSheetDialog.setContentView(bottomSheetView);
+        popupWindow = new PopupWindow(bottomSheetView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
 
-        // 設置 BottomSheetDialog 的背景為透明
-        if (bottomSheetDialog.getWindow() != null) {
-            bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet)
-                    .setBackgroundResource(android.R.color.transparent);
-        }
+        // 設置 PopupWindow 背景
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        // 設置觸摸事件，點擊背景時不關閉 PopupWindow
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(false);
+
+        // 監聽背景的觸摸事件，點擊背景時不關閉 PopupWindow
+        popupWindow.getContentView().setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // 如果點擊了背景，但未點擊 PopupWindow 內容，則返回 true 防止關閉 PopupWindow
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                    return true;
+                }
+                return false;
+            }
+        });
 
         // 獲取底部表單中的元素，並設置相應的內容
         RecyclerView recyclerView = bottomSheetView.findViewById(R.id.recycler_view_products);
@@ -359,6 +371,8 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         ConstraintLayout btnRoute = bottomSheetView.findViewById(R.id.cl_sheet_route_button);
 
         machine = getNowMachine(sMachineID);
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machine.getLat(), machine.getLon()), 13));
 
         if(machineMapPresenter.getUserLogin()) {
             //  設置常用圖形
@@ -437,30 +451,20 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         tvTitle.setText(marker.getTitle());
         tvAddress.setText(marker.getSnippet());
 
-        // 設置關閉按鈕的點擊事件
-        //closeButton.setOnClickListener(view -> bottomSheetDialog.dismiss());
-
         // 顯示底部表單
-        bottomSheetDialog.show();
+        View rootView = requireActivity().getWindow().getDecorView().findViewById(android.R.id.content);
+        popupWindow.showAtLocation(rootView, Gravity.BOTTOM, 0, 0);
 
+        ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+        params.height = 400;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutParams(params);
         recyclerView.setHasFixedSize(true);
+        // 啟用 RecyclerView 的垂直滾動
+        recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(machineMapAdapter);
 
         // 找到 RecyclerView
         machineMapAdapter.setData(machine.getProductList());
-    }
-
-    // 計算兩個經緯度位置之間的距離（單位：公尺）
-    private float calculateDistance(LatLng currentLocation, LatLng targetLocation) {
-        Location current = new Location("");
-        current.setLatitude(currentLocation.latitude);
-        current.setLongitude(currentLocation.longitude);
-
-        Location target = new Location("");
-        target.setLatitude(targetLocation.latitude);
-        target.setLongitude(targetLocation.longitude);
-
-        return current.distanceTo(target);
     }
 }
