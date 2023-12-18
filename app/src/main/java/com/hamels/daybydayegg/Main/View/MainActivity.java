@@ -25,6 +25,10 @@ import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.core.app.ActivityCompat;
@@ -148,7 +152,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private String sPDFDir = "";
     private static final int REQUEST_LOCATION_PERMISSION = 100;
-
+    private static final int PERMISSION_REQUEST_LOCATION = 1;
+    private FusedLocationProviderClient fusedLocationClient;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -186,6 +191,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 初始化 FusedLocationProviderClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
         mainPresenter = new MainPresenter(this, getRepositoryManager(this));
 
         //mainPresenter.saveSourceActive("");
@@ -246,18 +255,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
             }
         }, 3000);
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 用户授予权限，可以执行相关操作
-            } else {
-                if(!MainActivity.this.isFinishing()){
-                    new AlertDialog.Builder(MainActivity.this).setTitle(R.string.dialog_hint).setMessage("操作取消，無法取得權限。").setPositiveButton(android.R.string.ok, null).show();
-                }
-            }
-        }
     }
     private void notifyChangeToMail() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
@@ -551,7 +548,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
 
         //  取得座標
-        requestUserLocation();
+        checkLocationPermission();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -1581,57 +1578,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 })
                 .show();
     }
-
-    //  取得座標
-    public void requestUserLocation() {
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-
-        LocationListener locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                // 在這裡處理位置更新
-                EOrderApplication.lat = location.getLatitude();  // 獲取緯度
-                EOrderApplication.lon = location.getLongitude();  // 獲取經度
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                // 在這裡處理提供程序停用事件
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                // 在這裡處理提供程序啟用事件
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-                // 在這裡處理狀態更改事件
-            }
-        };
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            // 沒有權限，需要向用戶請求權限
-            // 取得 GPS 權限
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // Permission is not granted
-                // Ask for permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                        REQUEST_LOCATION_PERMISSION);
-                return;
-            }
-        } else {
-            // 已經有權限，可以繼續操作
-            LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                // 請求權限
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            }
-        }
-    }
-
     /**
      * 版本号比较
      */
@@ -1726,5 +1672,63 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 Toast.makeText(getApplicationContext(), "文件已成功儲存至: " + sPDFDir, Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    //  取得座標
+    // 检查位置权限
+    void checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // 如果没有位置权限，则请求权限
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSION_REQUEST_LOCATION);
+        } else {
+            // 如果已经有位置权限，则获取位置信息
+            getLocation();
+        }
+    }
+
+    // 处理权限请求结果
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 如果用户授予了位置权限，则获取位置信息
+                getLocation();
+            } else {
+                // 用户拒绝了位置权限，可以在此处理相应的操作
+            }
+        }
+    }
+
+    // 获取位置信息
+    private void getLocation() {
+        // 在获取位置信息之前应该检查权限
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // 如果没有位置权限，则不执行位置获取操作
+            EOrderApplication.lat = 0;
+            EOrderApplication.lon = 0;
+            return;
+        }
+
+        // 获取位置信息的代码
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            // 处理获取到的位置信息
+                            EOrderApplication.lat = location.getLatitude();
+                            EOrderApplication.lon = location.getLongitude();
+                        }
+                    }
+                });
     }
 }

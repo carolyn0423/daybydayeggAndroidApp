@@ -27,13 +27,22 @@ android {
         targetSdkVersion 33
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
+    // 签名配置信息
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\Leslie\\.android\\eorder_new.jks') // 你的密钥库文件路径
+            storePassword '123456' // 密钥库密码
+            keyAlias 'key0' // 密钥别名
+            keyPassword '123456' // 密钥密码
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -123,4 +132,7 @@ dependencies {
 
     // Maps SDK for Android
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+
+    //  Location
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
 }
