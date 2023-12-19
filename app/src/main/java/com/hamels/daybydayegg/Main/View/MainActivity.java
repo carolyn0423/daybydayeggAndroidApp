@@ -325,6 +325,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public void onClick(View v) {
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+                if(fragment instanceof MachineMapFragment){
+                    //  城市探索特規，關閉 popwindow
+                    MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                }
+
                 mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
             }
         });
@@ -332,6 +337,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public void onClick(View v) {
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+                if(fragment instanceof MachineMapFragment){
+                    //  城市探索特規，關閉 popwindow
+                    MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                }
+
                 mainPresenter.checkLoginForMessage(fragment.getClass().getSimpleName());
                 appToolbar.setMessageBadgeCount(Integer.parseInt("0"));
             }
@@ -1312,8 +1322,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         addFragment(ProductMainTypeFragment.getInstance());
                     }else if(
                             currentFragment instanceof ProductMainTypeFragment ||
-                            currentFragment instanceof DonateFragment){
+                            currentFragment instanceof DonateFragment ||
+                            currentFragment instanceof MachineFragment){
                         changeTabFragment(MainIndexFragment.getInstance());
+                    }else if(currentFragment instanceof MachineMapFragment){
+                        MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                        changeTabFragment(MachineFragment.getInstance());
                     }else if(currentFragment instanceof MemberInfoChangeFragment
                             || currentFragment instanceof PasswordChangeFragment
                             || currentFragment instanceof AboutFragment

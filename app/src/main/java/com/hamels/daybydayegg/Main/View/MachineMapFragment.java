@@ -60,6 +60,7 @@ import java.util.Map;
 public class MachineMapFragment extends BaseFragment implements MachineMapContract.View {
     public static final String TAG = MachineMapFragment.class.getSimpleName();
     private static MachineMapFragment fragment;
+    private AppToolbar appToolbar = null;
     private TabLayout tabLayout;
     private TabItem tabItem1, tabItem2, tabItem3, tabItem4;
     private MachineMapContract.Presenter machineMapPresenter;
@@ -80,7 +81,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_machine_map, container, false);
-
+        appToolbar = ((MainActivity) getActivity()).getAppToolbarObj();
         tabLayout = view.findViewById(R.id.tab_machine_layout);
         tabItem1 = view.findViewById(R.id.tabItem1);
         //  tabItem2 = view.findViewById(R.id.tabItem2);
@@ -114,39 +115,6 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                 }
             }
         });
-
-//        mapView.getMapAsync(new OnMapReadyCallback() {
-//            @Override
-//            public void onMapReady(GoogleMap googleMap) {
-//                // 獲取 GoogleMap 實例後，可以添加事件監聽器
-//
-//                // 監聽地圖的點擊事件
-//                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//                    @Override
-//                    public void onMapClick(LatLng latLng) {
-//                        // 在地圖上點擊時觸發的操作
-//                        // latLng 包含了被點擊的地圖坐標
-//                        Log.d("MapEvent", "Map clicked at: " + latLng.toString());
-//                    }
-//                });
-//
-//                // 監聽地圖的滑動事件
-//                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//                    @Override
-//                    public void onMapClick(LatLng latLng) {
-//                        // 在地圖上滑動時觸發的操作
-//                        // latLng 包含了滑動後的地圖坐標
-//                        Log.d("MapEvent", "Map scrolled to: " + latLng.toString());
-//
-//                        // 在這裡添加保持 PopupWindow 的代碼
-//                        if (popupWindow.isShowing()) {
-//                            // 如果 PopupWindow 正在顯示，則不關閉它
-//                            // 可以根據需要更新 PopupWindow 的位置或內容
-//                        }
-//                    }
-//                });
-//            }
-//        });
         return view;
     }
 
@@ -173,27 +141,10 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         super.onLowMemory();
         mapView.onLowMemory(); // 確保管理地圖的生命週期
     }
-    @Override
-    public void setBackButtonVisibility(boolean isVisible) {
-        AppToolbar appToolbar = ((MainActivity) getActivity()).getAppToolbarObj();
-        if (appToolbar != null) {
-            appToolbar.getBtnBack().setVisibility(isVisible ? View.VISIBLE : View.GONE);
-            appToolbar.getBtnBack().setOnClickListener(isVisible ? new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(popupWindow != null) {
-                        popupWindow.dismiss();
-                    }
-                    ((MainActivity) getActivity()).addFragment(MachineFragment.getInstance());
-                }
-            } : null);
-        }
-    }
-
     private void initView(View view) {
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
-        setBackButtonVisibility(true);
+        ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setSortButtonVisibility(true);
 
@@ -253,7 +204,9 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
             tabLayout.removeTabAt(1);
         }
     }
-
+    public PopupWindow getPopupWindow(){
+        return popupWindow;
+    }
     public void setMachineList(List<Machine> machines, boolean isOne) {
         this.machines = machines;
 
@@ -392,6 +345,11 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     }
 
     private void showBottomSheet(Marker marker, Machine machine, GoogleMap googleMap) {
+        //  先關閉之前的
+        if(popupWindow != null) {
+            popupWindow.dismiss();
+        }
+
         String sMachineID = machine.getMachineID();
         // 創建底部表單（Bottom Sheet）視圖
         View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_google_map_layout, null);
