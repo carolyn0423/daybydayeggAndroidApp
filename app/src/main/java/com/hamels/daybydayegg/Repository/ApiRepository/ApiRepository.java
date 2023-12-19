@@ -129,7 +129,6 @@ public class ApiRepository {
 
     public void getMachineList(String functionname, String customer_id, String member_id, AbsApiCallback apiCallback) {
         Map<String, String> map = new HashMap<>();
-
         map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("isApp", "true");
         map.put("functionname", functionname);

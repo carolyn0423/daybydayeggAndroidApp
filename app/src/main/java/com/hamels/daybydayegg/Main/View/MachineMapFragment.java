@@ -280,7 +280,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     }
 
     public void getCityZoom(String sCityCode){
-        popupWindow.dismiss();
+        if(popupWindow != null) popupWindow.dismiss();
         String[] LatLon = EOrderApplication.getCityCenterItems(sCityCode).split(",");
         mapView.getMapAsync(googleMap -> {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(LatLon[0]), Double.parseDouble(LatLon[1])), 10));
@@ -381,21 +381,9 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         // 設置觸摸事件，點擊背景時不關閉 PopupWindow
-        popupWindow.setOutsideTouchable(true);
+        popupWindow.setOutsideTouchable(false);
         popupWindow.setTouchable(true);
         popupWindow.setFocusable(false);
-
-        // 監聽背景的觸摸事件，點擊背景時不關閉 PopupWindow
-        popupWindow.getContentView().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // 如果點擊了背景，但未點擊 PopupWindow 內容，則返回 true 防止關閉 PopupWindow
-                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                    return true;
-                }
-                return false;
-            }
-        });
 
         // 獲取底部表單中的元素，並設置相應的內容
         RecyclerView recyclerView = bottomSheetView.findViewById(R.id.recycler_view_products);
@@ -408,6 +396,14 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         machine = getNowMachine(sMachineID);
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machine.getLat(), machine.getLon()), 13));
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                if(popupWindow != null) {
+                    popupWindow.dismiss();
+                }
+            }
+        });
 
         if(machineMapPresenter.getUserLogin()) {
             //  設置常用圖形
@@ -491,7 +487,11 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         popupWindow.showAtLocation(rootView, Gravity.BOTTOM, 0, 0);
 
         ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-        params.height = 400;
+        if(machine.getProductList().size() > 0) {
+            params.height = 300;
+        }else{
+            params.height = 0;
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setLayoutParams(params);
         recyclerView.setHasFixedSize(true);
