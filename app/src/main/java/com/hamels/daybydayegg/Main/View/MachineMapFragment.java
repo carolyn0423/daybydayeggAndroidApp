@@ -51,6 +51,7 @@ import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.ApiRepository.ApiRepository;
 import com.hamels.daybydayegg.Repository.ApiRepository.MemberRepository;
 import com.hamels.daybydayegg.Repository.Model.Machine;
+import com.hamels.daybydayegg.Widget.AppToolbar;
 
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +59,6 @@ import java.util.Map;
 
 public class MachineMapFragment extends BaseFragment implements MachineMapContract.View {
     public static final String TAG = MachineMapFragment.class.getSimpleName();
-
     private static MachineMapFragment fragment;
     private TabLayout tabLayout;
     private TabItem tabItem1, tabItem2, tabItem3, tabItem4;
@@ -173,11 +173,27 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         super.onLowMemory();
         mapView.onLowMemory(); // 確保管理地圖的生命週期
     }
+    @Override
+    public void setBackButtonVisibility(boolean isVisible) {
+        AppToolbar appToolbar = ((MainActivity) getActivity()).getAppToolbarObj();
+        if (appToolbar != null) {
+            appToolbar.getBtnBack().setVisibility(isVisible ? View.VISIBLE : View.GONE);
+            appToolbar.getBtnBack().setOnClickListener(isVisible ? new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(popupWindow != null) {
+                        popupWindow.dismiss();
+                    }
+                    ((MainActivity) getActivity()).addFragment(MachineFragment.getInstance());
+                }
+            } : null);
+        }
+    }
 
     private void initView(View view) {
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
-        ((MainActivity) getActivity()).setBackButtonVisibility(true);
+        setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setSortButtonVisibility(true);
 
@@ -204,10 +220,16 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                     case "常用據點":
                         //  常用機台
                         MachineFragment.lastSelectedTabPosition = 1;
+                        if(popupWindow != null) {
+                            popupWindow.dismiss();
+                        }
                         break;
                     case "據點清單":
                         //  據點清單
                         MachineFragment.lastSelectedTabPosition = 0;
+                        if(popupWindow != null) {
+                            popupWindow.dismiss();
+                        }
                         break;
                 }
 

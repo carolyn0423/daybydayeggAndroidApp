@@ -78,6 +78,7 @@ import com.hamels.daybydayegg.Repository.ApiRepository.ApiRepository;
 import com.hamels.daybydayegg.Repository.ApiRepository.MemberRepository;
 import com.hamels.daybydayegg.Repository.Model.Customer;
 import com.hamels.daybydayegg.Utils.SharedUtils;
+import com.hamels.daybydayegg.Widget.AppToolbar;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.Base.BaseFragment;
@@ -837,6 +838,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         appToolbar.setMessageBadgeCount(Integer.parseInt(count));
     }
 
+    public AppToolbar getAppToolbarObj(){
+        return appToolbar;
+    }
     // 判斷畫面上顯示的是否為MainIndexFragment
     public boolean isMainIndex() {
         boolean isMainIndex = false;
