@@ -468,7 +468,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
 
         ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
         if(machine.getProductList().size() > 0) {
-            params.height = 300;
+            params.height = 320;
         }else{
             params.height = 0;
         }
