@@ -111,7 +111,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                 // 在地圖上添加目前位置標記
                 if(EOrderApplication.lat != 0 && EOrderApplication.lon != 0){
                     googleMap.addMarker(new MarkerOptions().position(currentLocation).title("目前位置"));
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 13));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f));
                 }
             }
         });
@@ -241,12 +241,12 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
                     }
 
                     if (EOrderApplication.lat == 0 || EOrderApplication.lon == 0) {
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machines.get(0).getLat(), machines.get(0).getLon()), 13));
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machines.get(0).getLat(), machines.get(0).getLon()), 15f));
                     } else {
                         if (isMAx5000 > 0) {
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
                         } else {
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 8));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 8f));
                         }
                     }
                 }
@@ -258,7 +258,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         if(popupWindow != null) popupWindow.dismiss();
         String[] LatLon = EOrderApplication.getCityCenterItems(sCityCode).split(",");
         mapView.getMapAsync(googleMap -> {
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(LatLon[0]), Double.parseDouble(LatLon[1])), 10));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(LatLon[0]), Double.parseDouble(LatLon[1])), 12f));
         });
     }
 
@@ -375,7 +375,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
 
         machine = getNowMachine(sMachineID);
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machine.getLat(), machine.getLon()), 13));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machine.getLat(), machine.getLon()), 15f));
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -468,7 +468,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
 
         ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
         if(machine.getProductList().size() > 0) {
-            params.height = 300;
+            params.height = 320;
         }else{
             params.height = 0;
         }
