@@ -9,6 +9,7 @@ import com.hamels.daybydayegg.Repository.Model.Donate;
 import com.hamels.daybydayegg.Repository.Model.User;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class DonateDetailPresenter extends BasePresenter<DonateDetailContract.View> implements DonateDetailContract.Presenter {
@@ -29,7 +30,7 @@ public class DonateDetailPresenter extends BasePresenter<DonateDetailContract.Vi
     }
 
     @Override
-    public void SaveTicketData(final String mobile, final String uid, final String quantity) {
+    public void SaveTicketData(final String mobile, final String uid, final String quantity, String nike) {
         if (mobile.isEmpty()) {
             view.showErrorAlert("請填寫手機號");
         } else {
@@ -37,8 +38,7 @@ public class DonateDetailPresenter extends BasePresenter<DonateDetailContract.Vi
 
             if (mobile.equals(user.getMobile())) {
                 view.showErrorAlert("不可贈送禮物給自己");
-            }
-            else {
+            } else {
                 repositoryManager.callChkPhoneExistApi(mobile, new BaseContract.ValueCallback<Boolean>() {
                     @Override
                     public void onValueCallback(int task, Boolean bSuccess) {
@@ -48,7 +48,7 @@ public class DonateDetailPresenter extends BasePresenter<DonateDetailContract.Vi
                                 public void onValueCallback(int task, Boolean bSuccess) {
                                     if (bSuccess) {
 //                                        SavePush(mobile, "提貨券訊息", user.getName() + "送了提貨券給您");
-
+                                        repositoryManager.saveOftenMobile(mobile, nike);
                                         view.showErrorAlert("已贈送禮物");
                                         view.goBack();
                                     }
@@ -64,6 +64,10 @@ public class DonateDetailPresenter extends BasePresenter<DonateDetailContract.Vi
                 });
             }
         }
+    }
+
+    public HashMap getOftenMobile(){
+        return repositoryManager.getOftenMobile();
     }
 
 //    @Override

@@ -1326,7 +1326,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                             currentFragment instanceof MachineFragment){
                         changeTabFragment(MainIndexFragment.getInstance());
                     }else if(currentFragment instanceof MachineMapFragment){
-                        MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                        if(MachineMapFragment.getInstance().getPopupWindow() != null) {
+                            MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                        }
                         changeTabFragment(MachineFragment.getInstance());
                     }else if(currentFragment instanceof MemberInfoChangeFragment
                             || currentFragment instanceof PasswordChangeFragment

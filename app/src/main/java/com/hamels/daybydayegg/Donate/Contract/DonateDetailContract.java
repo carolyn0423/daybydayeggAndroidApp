@@ -3,6 +3,7 @@ package com.hamels.daybydayegg.Donate.Contract;
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Repository.Model.Donate;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface DonateDetailContract {
@@ -19,7 +20,9 @@ public interface DonateDetailContract {
     interface Presenter extends BaseContract.Presenter {
         void getDonateDetailByID(String uid);
 
-        void SaveTicketData(String mobile, String uid, String quantity);
+        void SaveTicketData(String mobile, String uid, String quantity, String nike);
+
+        HashMap getOftenMobile();
 
 //        void SavePush(String mobile, String title, String content);
     }

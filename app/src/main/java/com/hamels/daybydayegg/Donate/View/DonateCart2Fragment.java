@@ -18,20 +18,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Donate.Adapter.DonateCartAdapter;
+import com.hamels.daybydayegg.Donate.Adapter.OftenMobileAdapter;
 import com.hamels.daybydayegg.Donate.Contract.DonateCartContract;
 import com.hamels.daybydayegg.Donate.Presenter.DonateCartPresenter;
+import com.hamels.daybydayegg.Donate.Presenter.DonateDetailPresenter;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.DonateCart;
+import com.hamels.daybydayegg.Repository.Model.OftenMobile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DonateCart2Fragment extends BaseFragment implements DonateCartContract.View{
     public static final String TAG = DonateCart2Fragment.class.getSimpleName();
@@ -42,9 +50,11 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
     private DonateCartContract.Presenter donateCartPresenter;
     private RecyclerView recyclerView;
     private DonateCartAdapter donateCartAdapter;
-    private EditText edit_phone;
-    private Button btn_close, btn_addressbook, btn_submit;
+    private EditText edit_phone, edit_nick;
+    private Button btn_close, btn_submit;
+    private Spinner spinner;
     private TextView tv_product_cnt;
+    private String SpnnerText = "從常用資料選擇";
 
     public static DonateCart2Fragment getInstance() {
         if (fragment == null) {
@@ -84,9 +94,11 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
         btn_close = view.findViewById(R.id.btn_close);
         recyclerView = view.findViewById(R.id.donate_recycler_view);
         edit_phone = view.findViewById(R.id.edit_phone);
-        btn_addressbook = view.findViewById(R.id.btn_addressbook);
+        edit_nick = view.findViewById(R.id.edit_nick);
+        //  btn_addressbook = view.findViewById(R.id.btn_addressbook);
         btn_submit = view.findViewById(R.id.btn_submit);
         tv_product_cnt = view.findViewById(R.id.tv_product_cnt);
+        spinner = view.findViewById(R.id.spinnerDropdown);
 
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,21 +107,63 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
             }
         });
 
-        btn_addressbook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.PICK");
-                intent.addCategory("android.intent.category.DEFAULT");
-                intent.setType("vnd.android.cursor.dir/phone_v2");
-                startActivityForResult(intent, REQUEST_ADDRESSBOOK);
-            }
-        });
+//        btn_addressbook.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setAction("android.intent.action.PICK");
+//                intent.addCategory("android.intent.category.DEFAULT");
+//                intent.setType("vnd.android.cursor.dir/phone_v2");
+//                startActivityForResult(intent, REQUEST_ADDRESSBOOK);
+//            }
+//        });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                donateCartPresenter.GiveTicketGiftByCart(edit_phone.getText().toString());
+                donateCartPresenter.GiveTicketGiftByCart(edit_phone.getText().toString(), edit_nick.getText().toString());
+            }
+        });
+
+        donateCartPresenter = new DonateCartPresenter(this, getRepositoryManager(getContext()));
+        HashMap<String, String> oftenMobileMap = new HashMap<>();
+        oftenMobileMap = donateCartPresenter.getOftenMobile();
+
+        List<OftenMobile> oftenMobileList = new ArrayList<>();
+        oftenMobileList.add(0, new OftenMobile("", SpnnerText));
+        // 从您的数据源中获取 OftenMobile 对象并添加到 oftenMobileList 中
+        for (Map.Entry<String, String> entry : oftenMobileMap.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            OftenMobile oftenMobile = new OftenMobile(key, value);
+            oftenMobileList.add(oftenMobile);
+        }
+
+        OftenMobileAdapter adapter = new OftenMobileAdapter(getContext(), android.R.layout.simple_spinner_item, oftenMobileList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // 當選項被選中時呼叫此方法
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                // 使用 selectedItem 進行您想要的操作，比如顯示在日誌中或者更新 UI 等
+                if(!selectedItem.equals(SpnnerText)){
+                    String[] vItem = selectedItem.split("-");
+                    edit_phone.setText(vItem[0].trim());
+                    if(vItem.length > 1) edit_nick.setText(vItem[1].trim());
+                    else edit_nick.setText("");
+                }else{
+                    edit_phone.setText("");
+                    edit_nick.setText("");
+                }
+                Log.d("Selected Item", selectedItem);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // 當沒有選項被選中時呼叫此方法
             }
         });
     }

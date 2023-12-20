@@ -9,6 +9,7 @@ import com.hamels.daybydayegg.Repository.Model.DonateCart;
 import com.hamels.daybydayegg.Repository.Model.User;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class DonateCartPresenter extends BasePresenter<DonateCartContract.View> implements DonateCartContract.Presenter {
@@ -39,7 +40,7 @@ public class DonateCartPresenter extends BasePresenter<DonateCartContract.View> 
     }
 
     @Override
-    public void GiveTicketGiftByCart(final String mobile) {
+    public void GiveTicketGiftByCart(final String mobile, String nike) {
         if (mobile.isEmpty()) {
             view.showErrorAlert("請填寫手機號");
         } else {
@@ -58,7 +59,7 @@ public class DonateCartPresenter extends BasePresenter<DonateCartContract.View> 
                                 public void onValueCallback(int task, Boolean bSuccess) {
                                     if (bSuccess) {
 //                                        SavePush(mobile, "提貨券訊息", user.getName() + "送了提貨券給您");
-
+                                        repositoryManager.saveOftenMobile(mobile, nike);
                                         view.showErrorAlert("已贈送禮物");
                                         view.goBack();
                                     }
@@ -74,6 +75,10 @@ public class DonateCartPresenter extends BasePresenter<DonateCartContract.View> 
                 });
             }
         }
+    }
+
+    public HashMap getOftenMobile(){
+        return repositoryManager.getOftenMobile();
     }
 
     @Override

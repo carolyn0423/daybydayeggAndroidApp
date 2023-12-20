@@ -4,7 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.hamels.daybydayegg.Repository.Model.OftenMobile;
 import com.hamels.daybydayegg.Repository.Model.User;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
 
 public class SharedUtils {
     public static final String TAG = SharedUtils.class.getSimpleName();
@@ -155,6 +160,28 @@ public class SharedUtils {
                 .apply();
     }
 
+    public void saveOftenMobile(Context context, String sMobile, String sNick){
+        HashMap hashMap = getOftenMobile(context);
+        if(hashMap == null) hashMap = new HashMap();
+        hashMap.put(sMobile, sNick);
+
+        // 將 HashMap 轉換為 JSON 字符串
+        context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit()
+                .putString("OftenMobileJson", new Gson().toJson(hashMap))
+                .apply();
+    }
+
+    public void removeOftenMobile(Context context, String sMobile){
+        HashMap hashMap = getOftenMobile(context);
+        if(hashMap == null) hashMap = new HashMap();
+        hashMap.remove(sMobile);
+
+        // 將 HashMap 轉換為 JSON 字符串
+        context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit()
+                .putString("OftenMobileJson", new Gson().toJson(hashMap))
+                .apply();
+    }
+
     public void removeAllLocalData(Context context) {
         context.getSharedPreferences(User.TAG, Context.MODE_PRIVATE).edit().clear().apply();
         context.getSharedPreferences(ACCOUNT_INFO, Context.MODE_PRIVATE).edit().clear().apply();
@@ -168,6 +195,7 @@ public class SharedUtils {
         context.getSharedPreferences("FRAGMENT_MAINTYPE", Context.MODE_PRIVATE).edit().clear().apply();
         context.getSharedPreferences("IMAGE_URL", Context.MODE_PRIVATE).edit().clear().apply();
         context.getSharedPreferences("SOURCE_ACTIVE", Context.MODE_PRIVATE).edit().clear().apply();
+        context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit().clear().apply();
     }
     public User getUser(Context context) {
         String json = context.getSharedPreferences(User.TAG, Context.MODE_PRIVATE).getString(User.TAG, "");
@@ -259,5 +287,13 @@ public class SharedUtils {
 
     public String getPaySchemeOrderData(Context context) {
         return context.getSharedPreferences("SchemeOrderData", context.MODE_PRIVATE).getString("SchemeOrderData", "");
+    }
+
+    public HashMap getOftenMobile(Context context){
+        String sJson = context.getSharedPreferences("OftenMobileJson", context.MODE_PRIVATE).getString("OftenMobileJson", "");
+        // 將 JSON 字串轉換為 HashMap
+        Type type = new TypeToken<HashMap<String, String>>() {}.getType();
+        HashMap<String, String> hashMap = new Gson().fromJson(sJson, type);
+        return hashMap;
     }
 }

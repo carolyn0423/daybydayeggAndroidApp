@@ -14,14 +14,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hamels.daybydayegg.Base.BaseFragment;
+import com.hamels.daybydayegg.Donate.Adapter.OftenMobileAdapter;
 import com.hamels.daybydayegg.Donate.Presenter.DonateDetailPresenter;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
@@ -29,8 +33,12 @@ import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.Donate.Contract.DonateDetailContract;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Donate;
+import com.hamels.daybydayegg.Repository.Model.OftenMobile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DonateDetail2Fragment extends BaseFragment implements DonateDetailContract.View{
     public static final String TAG = DonateDetailFragment.class.getSimpleName();
@@ -43,12 +51,13 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
     private ScrollView sv_scrollview;
     private ImageView img_donate;
     private TextView tv_product_name, tv_type_name_spec_name, tv_eticket_due_date;
-    private EditText edit_num, edit_phone;
-    private Button btn_close, btn_minus, btn_plus, btn_addressbook, btn_submit;
-
+    private EditText edit_num, edit_phone, edit_nick;
+    private Button btn_close, btn_minus, btn_plus, btn_submit;
+    private Spinner spinner;
     private int uid = 0;
     private int left_number = 0;
     private int quantity = 0;
+    private String SpnnerText = "從常用資料選擇";
 
     public static DonateDetail2Fragment getInstance(int uid) {
         if (fragment == null) {
@@ -97,8 +106,10 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         btn_plus = view.findViewById(R.id.btn_plus);
         edit_num = view.findViewById(R.id.edit_num);
         edit_phone = view.findViewById(R.id.edit_phone);
-        btn_addressbook = view.findViewById(R.id.btn_addressbook);
+        edit_nick = view.findViewById(R.id.edit_nick);
+        //  btn_addressbook = view.findViewById(R.id.btn_addressbook);
         btn_submit = view.findViewById(R.id.btn_submit);
+        spinner = view.findViewById(R.id.spinnerDropdown);
 
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,21 +140,63 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
             }
         });
 
-        btn_addressbook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.PICK");
-                intent.addCategory("android.intent.category.DEFAULT");
-                intent.setType("vnd.android.cursor.dir/phone_v2");
-                startActivityForResult(intent, REQUEST_ADDRESSBOOK);
-            }
-        });
+//        btn_addressbook.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setAction("android.intent.action.PICK");
+//                intent.addCategory("android.intent.category.DEFAULT");
+//                intent.setType("vnd.android.cursor.dir/phone_v2");
+//                startActivityForResult(intent, REQUEST_ADDRESSBOOK);
+//            }
+//        });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.SaveTicketData(edit_phone.getText().toString(), Integer.toString(uid), edit_num.getText().toString());
+                presenter.SaveTicketData(edit_phone.getText().toString(), Integer.toString(uid), edit_num.getText().toString(), edit_nick.getText().toString());
+            }
+        });
+
+        presenter = new DonateDetailPresenter(this, getRepositoryManager(getContext()));
+        HashMap<String, String> oftenMobileMap = new HashMap<>();
+        oftenMobileMap = presenter.getOftenMobile();
+
+        List<OftenMobile> oftenMobileList = new ArrayList<>();
+        oftenMobileList.add(0, new OftenMobile("", SpnnerText));
+        // 从您的数据源中获取 OftenMobile 对象并添加到 oftenMobileList 中
+        for (Map.Entry<String, String> entry : oftenMobileMap.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            OftenMobile oftenMobile = new OftenMobile(key, value);
+            oftenMobileList.add(oftenMobile);
+        }
+
+        OftenMobileAdapter adapter = new OftenMobileAdapter(getContext(), android.R.layout.simple_spinner_item, oftenMobileList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // 當選項被選中時呼叫此方法
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                // 使用 selectedItem 進行您想要的操作，比如顯示在日誌中或者更新 UI 等
+                if(!selectedItem.equals(SpnnerText)){
+                    String[] vItem = selectedItem.split("-");
+                    edit_phone.setText(vItem[0].trim());
+                    if(vItem.length > 1) edit_nick.setText(vItem[1].trim());
+                    else edit_nick.setText("");
+                }else{
+                    edit_phone.setText("");
+                    edit_nick.setText("");
+                }
+                Log.d("Selected Item", selectedItem);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // 當沒有選項被選中時呼叫此方法
             }
         });
     }
@@ -160,6 +213,9 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         //tv_spec_name.setText(productDetail.get(0).getSpecName());
         edit_num.setText("1");
         edit_phone.setText("");
+        edit_nick.setText("");
+
+        spinner.setSelection(0);
 
         left_number = Integer.parseInt(productDetail.get(0).getLeftNumber());
     }

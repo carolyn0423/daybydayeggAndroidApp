@@ -36,6 +36,7 @@ import com.hamels.daybydayegg.Utils.ApiUtils;
 import com.hamels.daybydayegg.Utils.SharedUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -1151,6 +1152,10 @@ public class RepositoryManager {
         SharedUtils.getInstance().saveUser(context, user);
     }
 
+    public void saveOftenMobile(String sMobile, String sNick) { SharedUtils.getInstance().saveOftenMobile(context, sMobile, sNick); }
+
+    public void removeOftenMobile(String sMobile){ SharedUtils.getInstance().removeOftenMobile(context, sMobile); }
+
     /* ------------------------------------------------------------------------- */
 
     public User getUser() {
@@ -1190,4 +1195,6 @@ public class RepositoryManager {
     public String getFragmentMainType(String sParam) { return SharedUtils.getInstance().getFragmentMainType(context, sParam); }
 
     public String getPaySchemeOrderData() { return SharedUtils.getInstance().getPaySchemeOrderData(context); }
+
+    public HashMap getOftenMobile() { return SharedUtils.getInstance().getOftenMobile(context); }
 }
