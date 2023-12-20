@@ -17,9 +17,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Product Name"
-            android:padding="8dp"
-            android:textSize="16sp"
+            android:text=""
+            android:padding="5dp"
+            android:textSize="16dp"
             android:textColor="#FFFFFF"/>
 
         <TextView
@@ -27,10 +27,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Quantity"
-            android:padding="8dp"
-            android:textSize="16sp"
+            android:gravity="right"
+            android:text=""
+            android:paddingRight ="10dp"
+            android:paddingLeft ="10dp"
+            android:textSize="18dp"
             android:textColor="#FFFFFF"/>
     </LinearLayout>
 
