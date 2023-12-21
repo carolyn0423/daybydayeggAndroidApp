@@ -44,8 +44,7 @@ public class MemberRepository extends ApiRepository {
         map.put("accountno", user.getAccount());
         map.put("password", password);
         map.put("name", user.getName());
-        //map.put("birthday", user.getBirthday());
-        map.put("birthday", "");
+        map.put("birthday", user.getBirthday());
         map.put("email", "");
         //map.put("gender", user.getGender());
         map.put("isApp", "true");

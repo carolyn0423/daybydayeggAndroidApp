@@ -1199,6 +1199,16 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         public void jsCall_DownloadPDF(String sPDFUrl) {
             new DownloadFile().execute(sPDFUrl, "Download");
         }
+        @JavascriptInterface
+        public void jsCall_copyToClipboard(String sAccount) {
+            ClipboardManager clipboard = (ClipboardManager) getBaseContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Copied Text", sAccount);
+
+            if (clipboard != null) {
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(getBaseContext(), "已複製", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void savePaySchemeOrderData(String sParam){

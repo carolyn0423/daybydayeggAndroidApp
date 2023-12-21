@@ -1,10 +1,13 @@
 package com.hamels.daybydayegg.Login.VIew;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -60,16 +63,18 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         setSortButtonVisibility(false);
         setAppToolbarVisibility(true);
 
+        Context context = this;
+
         scrollView = findViewById(R.id.scrollview);
         tvErrorMessage = findViewById(R.id.tv_error_message);
         etName = findViewById(R.id.et_name);
-//        tvBirth = findViewById(R.id.tv_birthday);
-//        tvBirth.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDatePickerDialog();
-//            }
-//        });
+        tvBirth = findViewById(R.id.tv_birthday);
+        tvBirth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
         etPhone = findViewById(R.id.et_phone);
         etPassword = findViewById(R.id.et_password);
         etRePassword = findViewById(R.id.et_repassword);
@@ -80,14 +85,37 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             @Override
             public void onClick(View v) {
                 if(chkMobile(etPhone.getText().toString())) {
-                    registerPresenter.checkInputValue(etName.getText().toString()
-                            , radioGender.getCheckedRadioButtonId()
-                            , ""
-                            , etPhone.getText().toString()
-                            , etPassword.getText().toString()
-                            , etRePassword.getText().toString()
-                            , etInvitationCode.getText().toString()
-                            , cbTermsOfUse.isChecked());
+                    if(tvBirth.getText().toString().isEmpty()){
+                        registerPresenter.checkInputValue(etName.getText().toString()
+                                , radioGender.getCheckedRadioButtonId()
+                                , ""
+                                , etPhone.getText().toString()
+                                , etPassword.getText().toString()
+                                , etRePassword.getText().toString()
+                                , etInvitationCode.getText().toString()
+                                , cbTermsOfUse.isChecked());
+                    }else{
+
+                        new AlertDialog.Builder(context).setTitle("生日設定後就不能修改").setMessage("為了維護您的權益，請確認日期無誤")
+                                .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        registerPresenter.checkInputValue(etName.getText().toString()
+                                                , radioGender.getCheckedRadioButtonId()
+                                                , tvBirth.getText().toString()
+                                                , etPhone.getText().toString()
+                                                , etPassword.getText().toString()
+                                                , etRePassword.getText().toString()
+                                                , etInvitationCode.getText().toString()
+                                                , cbTermsOfUse.isChecked());
+                                    }
+                                })
+                                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // User cancelled the dialog
+                                    }
+                                }).show();
+                    }
                 }else{
                     showErrorMessage("手機格式錯誤");
                 }
