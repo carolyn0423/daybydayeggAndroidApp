@@ -18,24 +18,21 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/bottom_sheet_title"
-            android:layout_width="190dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="10"
             android:text=""
             android:textColor="#FFCC00"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_sheet_frequent_button"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/rec_stroke_green_transparent_button"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            app:layout_constraintEnd_toStartOf="@id/guideline_mid"
-            app:layout_constraintTop_toBottomOf="@id/cb_remember">
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/rec_stroke_green_transparent_button">
 
             <TextView
                 android:id="@+id/tv_sheet_frequent"
@@ -44,9 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="9dp"
-                android:background="@null"
                 android:drawableStart="@drawable/ic_love_full"
-                android:drawablePadding="10dp"
+                android:drawablePadding="5dp"
                 android:drawableTint="@color/colorYunlinhn"
                 android:text="常用"
                 android:textColor="@color/colorYunlinhn"
@@ -59,13 +55,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_sheet_route_button"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rec_stroke_orange_transparent_button"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            app:layout_constraintEnd_toStartOf="@id/guideline_mid"
-            app:layout_constraintTop_toBottomOf="@id/cb_remember">
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:id="@+id/tv_sheet_route"
@@ -74,9 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="9dp"
-                android:background="@null"
                 android:drawableStart="@drawable/ic_distance"
-                android:drawablePadding="10dp"
+                android:drawablePadding="5dp"
                 android:drawableTint="#FFCC00"
                 android:text="路線"
                 android:textColor="#FFCC00"
@@ -101,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="6"
         android:text="Address"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:layout_marginTop="8dp"
         android:textColor="#FFCC00"/>
 
