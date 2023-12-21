@@ -227,6 +227,10 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
         tv_product_cnt.setText(Integer.toString(total_cart_count));
 
         recyclerView.scrollToPosition(0);
+
+        edit_phone.setText("");
+        edit_nick.setText("");
+        spinner.setSelection(0);
     }
 
     public void intentToLogin(int requestCode) {
@@ -238,6 +242,8 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
     public void showErrorAlert(String message) {
         new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage(message).setPositiveButton(android.R.string.ok, null).show();
         edit_phone.setText("");
+        edit_nick.setText("");
+        spinner.setSelection(0);
         ((MainActivity) getActivity()).refreshBadge();
     }
 
