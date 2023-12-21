@@ -47,6 +47,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
     private MachineAdapter machineAdapter;
     private MachineContract.Presenter machinePresenter;
+    private boolean isOne = true;
 
     public static MachineFragment getInstance() {
         if (fragment == null) {
@@ -72,6 +73,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
 
     private void initView(View view) {
+        isOne = true;
         ((MainActivity) getActivity()).refreshBadge();
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_store);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
@@ -99,7 +101,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
                 switch (stTabText){
                     case "常用據點":
                         //  常用機台
-                        lastSelectedTabPosition = 1;
+                        lastSelectedTabPosition = -1;
                         machinePresenter.setFunctionname("AppOften");
                         break;
                     case "最近五公里":
@@ -108,7 +110,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
                         break;
                     case "據點清單":
                         //  據點清單
-                        lastSelectedTabPosition = 0;
+                        lastSelectedTabPosition = -1;
                         machinePresenter.setFunctionname("All");
                         break;
                     case "城市探索":
@@ -162,13 +164,14 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
             Log.e(TAG, machine.getTitle());
         }
 
-        if(isOften && lastSelectedTabPosition == -1){
+        if(isOften && lastSelectedTabPosition == -1 && isOne){
             tabLayout.getTabAt(1).select();
             machinePresenter.setFunctionname("AppOften");
-            lastSelectedTabPosition = 1;
         } else {
             machineAdapter.setData(machines);
         }
+
+        isOne = false;
     }
 
     @Override
