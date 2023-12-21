@@ -371,4 +371,8 @@
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/bg_spinner</item>
     </style>
+
+    <style name="SpinnerShadowTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/bg_shadow_spinner</item>
+    </style>
 </resources>

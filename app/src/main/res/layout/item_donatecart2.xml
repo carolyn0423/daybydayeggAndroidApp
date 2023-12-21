@@ -19,7 +19,7 @@
             android:id="@+id/img_picture_url"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="220dp"
+            android:layout_marginEnd="280dp"
             android:adjustViewBounds="true"
             android:padding="10dp"
             android:scaleType="centerCrop"
@@ -38,7 +38,7 @@
             android:ellipsize="end"
             android:singleLine="false"
             android:textColor="#231815"
-            android:textSize="19dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_picture_url"
@@ -65,7 +65,7 @@
             android:layout_marginTop="10dp"
             android:text="兌換期限 : "
             android:textColor="#595757"
-            android:textSize="13dp"
+            android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/img_picture_url"
             app:layout_constraintTop_toBottomOf="@+id/tv_type_name_spec_name" />
 
@@ -77,7 +77,7 @@
             android:maxLines="2"
             android:singleLine="false"
             android:textColor="#595757"
-            android:textSize="13dp"
+            android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_eticket_due_date_title"
             app:layout_constraintTop_toTopOf="@+id/tv_eticket_due_date_title" />
@@ -89,7 +89,7 @@
             android:layout_marginTop="5dp"
             android:text="兌換數量 : "
             android:textColor="#595757"
-            android:textSize="13dp"
+            android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/img_picture_url"
             app:layout_constraintTop_toBottomOf="@+id/tv_eticket_due_date" />
 
@@ -100,7 +100,7 @@
             android:maxLines="2"
             android:singleLine="false"
             android:textColor="#595757"
-            android:textSize="13dp"
+            android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_cart_count_title"
             app:layout_constraintTop_toTopOf="@+id/tv_cart_count_title" />
