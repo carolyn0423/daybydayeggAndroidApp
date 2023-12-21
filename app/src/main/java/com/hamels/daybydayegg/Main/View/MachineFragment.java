@@ -99,7 +99,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
                 switch (stTabText){
                     case "常用據點":
                         //  常用機台
-                        lastSelectedTabPosition = 1;
+                        lastSelectedTabPosition = -1;
                         machinePresenter.setFunctionname("AppOften");
                         break;
                     case "最近五公里":
@@ -108,7 +108,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
                         break;
                     case "據點清單":
                         //  據點清單
-                        lastSelectedTabPosition = 0;
+                        lastSelectedTabPosition = -1;
                         machinePresenter.setFunctionname("All");
                         break;
                     case "城市探索":
@@ -165,7 +165,6 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
         if(isOften && lastSelectedTabPosition == -1){
             tabLayout.getTabAt(1).select();
             machinePresenter.setFunctionname("AppOften");
-            lastSelectedTabPosition = 1;
         } else {
             machineAdapter.setData(machines);
         }
