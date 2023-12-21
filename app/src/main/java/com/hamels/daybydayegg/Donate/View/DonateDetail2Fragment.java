@@ -165,11 +165,13 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         List<OftenMobile> oftenMobileList = new ArrayList<>();
         oftenMobileList.add(0, new OftenMobile("", SpnnerText));
         // 从您的数据源中获取 OftenMobile 对象并添加到 oftenMobileList 中
-        for (Map.Entry<String, String> entry : oftenMobileMap.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            OftenMobile oftenMobile = new OftenMobile(key, value);
-            oftenMobileList.add(oftenMobile);
+        if(oftenMobileMap != null) {
+            for (Map.Entry<String, String> entry : oftenMobileMap.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                OftenMobile oftenMobile = new OftenMobile(key, value);
+                oftenMobileList.add(oftenMobile);
+            }
         }
 
         OftenMobileAdapter adapter = new OftenMobileAdapter(getContext(), android.R.layout.simple_spinner_item, oftenMobileList);
