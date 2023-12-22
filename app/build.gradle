@@ -8,8 +8,8 @@ android {
     productFlavors {
         prod {
             dimension "version"
-            versionCode 10
-            versionName "10.0"
+            versionCode 6
+            versionName "6.0"
             // 其他配置
         }
         uat {
@@ -30,10 +30,10 @@ android {
     // 签名配置信息
     signingConfigs {
         release {
-            // 你的密钥库文件路径
-            // 密钥库密码
-            // 密钥别名
-            // 密钥密码
+            storeFile file('eorder_new.jks') // 你的密钥库文件路径
+            storePassword '123456' // 密钥库密码
+            keyAlias 'key0' // 密钥别名
+            keyPassword '123456' // 密钥密码
         }
     }
     buildTypes {
