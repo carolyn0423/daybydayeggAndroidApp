@@ -30,7 +30,7 @@ android {
     // 签名配置信息
     signingConfigs {
         release {
-            storeFile file('C:\\Users\\Leslie\\.android\\eorder_new.jks') // 你的密钥库文件路径
+            storeFile file('eorder_new.jks') // 你的密钥库文件路径
             storePassword '123456' // 密钥库密码
             keyAlias 'key0' // 密钥别名
             keyPassword '123456' // 密钥密码
