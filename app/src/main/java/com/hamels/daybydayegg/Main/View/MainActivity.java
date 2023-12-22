@@ -1705,21 +1705,55 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         }
     }
-
+    private void showPermissionSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("需要位置權限以提供更好的功能。前往設定頁面開啟權限？")
+                .setPositiveButton("前往設定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // 開啟應用程式設定頁面
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Uri.parse("package:" + getPackageName()));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.create().show();
+    }
     //  取得座標
     // 检查位置权限
     void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // 如果没有位置权限，则请求权限
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSION_REQUEST_LOCATION);
-        } else {
-            // 如果已经有位置权限，则获取位置信息
-            getLocation();
+            // 檢查是否顯示了拒絕且不再顯示的選項
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // 如果之前拒絕過，但沒有選擇「不再顯示」，可以再次要求權限
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                        PERMISSION_REQUEST_LOCATION);
+                showPermissionSettingsDialog();
+            } else {
+                // 如果使用者已拒絕且選擇「不再顯示」，引導使用者前往手機設定頁面開啟權限
+                showPermissionSettingsDialog();
+            }
         }
+
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//                != PackageManager.PERMISSION_GRANTED) {
+//
+//            // 如果没有位置权限，则请求权限
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                    PERMISSION_REQUEST_LOCATION);
+//        } else {
+//            // 如果已经有位置权限，则获取位置信息
+//            getLocation();
+//        }
     }
 
     // 处理权限请求结果
@@ -1734,6 +1768,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 getLocation();
             } else {
                 // 用户拒绝了位置权限，可以在此处理相应的操作
+                showPermissionSettingsDialog();
             }
         }
     }
