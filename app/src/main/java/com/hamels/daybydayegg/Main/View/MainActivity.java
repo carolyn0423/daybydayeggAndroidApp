@@ -1705,7 +1705,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         }
     }
-
+    private void showPermissionSettingsDialog() {
+        // 開啟應用程式設定頁面
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:" + getPackageName()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
     //  取得座標
     // 检查位置权限
     void checkLocationPermission() {
@@ -1734,6 +1740,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 getLocation();
             } else {
                 // 用户拒绝了位置权限，可以在此处理相应的操作
+                showPermissionSettingsDialog();
             }
         }
     }
