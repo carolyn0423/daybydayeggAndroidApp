@@ -77,6 +77,14 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        edit_phone.setText("");
+        edit_nick.setText("");
+        spinner.setSelection(0);
+    }
+
     private void initView(View view) {
         Log.e(TAG, "initView");
 
@@ -249,6 +257,9 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
 
     @Override
     public void goBack() {
+        edit_phone.setText("");
+        edit_nick.setText("");
+        spinner.setSelection(0);
         getActivity().getSupportFragmentManager().popBackStack();
         getActivity().getSupportFragmentManager().popBackStack();
     }

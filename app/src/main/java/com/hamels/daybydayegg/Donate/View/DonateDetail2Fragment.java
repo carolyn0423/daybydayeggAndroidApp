@@ -1,5 +1,6 @@
 package com.hamels.daybydayegg.Donate.View;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -50,7 +51,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
 
     private ScrollView sv_scrollview;
     private ImageView img_donate;
-    private TextView tv_product_name, tv_type_name_spec_name, tv_eticket_due_date;
+    private TextView tv_product_name, tv_type_name_spec_name, tv_eticket_due_date, tv_left_number;
     private EditText edit_num, edit_phone, edit_nick;
     private Button btn_close, btn_minus, btn_plus, btn_submit;
     private Spinner spinner;
@@ -82,6 +83,15 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        edit_num.setText("1");
+        edit_phone.setText("");
+        edit_nick.setText("");
+        spinner.setSelection(0);
+    }
+
     private void initView(View view) {
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
@@ -100,6 +110,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         tv_product_name = view.findViewById(R.id.tv_product_name);
         tv_type_name_spec_name = view.findViewById(R.id.tv_type_name_spec_name);
         tv_eticket_due_date = view.findViewById(R.id.tv_eticket_due_date);
+        tv_left_number = view.findViewById(R.id.tv_left_number);
         //tv_spec_name = view.findViewById(R.id.tv_spec_name);
         btn_close = view.findViewById(R.id.btn_close);
         btn_minus = view.findViewById(R.id.btn_minus);
@@ -212,6 +223,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         tv_product_name.setText(productDetail.get(0).getProductName());
         tv_type_name_spec_name.setText(" ( " + productDetail.get(0).getTypeName() + " - " + productDetail.get(0).getSpecName() + " ) ");
         tv_eticket_due_date.setText(productDetail.get(0).getEticketDueDate());
+        tv_left_number.setText(productDetail.get(0).getLeftNumber());
         //tv_spec_name.setText(productDetail.get(0).getSpecName());
         edit_num.setText("1");
         edit_phone.setText("");
@@ -238,6 +250,10 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
 
     @Override
     public void goBack() {
+        edit_num.setText("1");
+        edit_phone.setText("");
+        edit_nick.setText("");
+        spinner.setSelection(0);
         getActivity().getSupportFragmentManager().popBackStack();
     }
 
@@ -248,6 +264,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         presenter.getDonateDetailByID(Integer.toString(uid));
     }
 
+    @SuppressLint("Range")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
