@@ -232,17 +232,17 @@
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@id/layout_phone" />
 
-            <TextView
-                android:id="@+id/tv_birthday_hint_required"
-                style="@style/fontRegularTw.greyDoubleDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="1dp"
-                android:text="*"
-                android:textSize="13sp"
-                android:textColor="@color/redHint"
-                app:layout_constraintStart_toEndOf="@+id/tv_birthday_hint"
-                app:layout_constraintTop_toTopOf="@+id/tv_birthday_hint" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_birthday_hint_required"-->
+<!--                style="@style/fontRegularTw.greyDoubleDark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="1dp"-->
+<!--                android:text="*"-->
+<!--                android:textSize="13sp"-->
+<!--                android:textColor="@color/redHint"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/tv_birthday_hint"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/tv_birthday_hint" />-->
 
             <TextView
                 android:id="@+id/tv_birthday"
