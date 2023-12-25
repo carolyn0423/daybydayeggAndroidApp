@@ -1598,7 +1598,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private void AlertUpdateApp(){
         String PackageName = this.getPackageName();
-        new AlertDialog.Builder(this).setTitle(R.string.dialog_hint).setMessage("發現新版本")
+        new AlertDialog.Builder(this).setTitle(R.string.dialog_hint).setMessage("目前有新版本，請更新")
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
