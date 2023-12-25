@@ -23,6 +23,7 @@ import com.hamels.daybydayegg.Repository.Model.Machine;
 import com.hamels.daybydayegg.Repository.Model.MemberMessage;
 import com.hamels.daybydayegg.Repository.Model.Merchant;
 import com.hamels.daybydayegg.Repository.Model.Message;
+import com.hamels.daybydayegg.Repository.Model.Often;
 import com.hamels.daybydayegg.Repository.Model.Order;
 import com.hamels.daybydayegg.Repository.Model.OrderProduct;
 import com.hamels.daybydayegg.Repository.Model.PointHistory;
@@ -692,6 +693,17 @@ public class RepositoryManager {
         });
     }
 
+    public void callGetFunctionSaveDataApi(String sFunctionName, String sField1, String sField2, String sField3, String sField4, String sField5, final BaseContract.ValueCallback<Boolean> valueCallback) {
+        basePresenter.startCallApi();
+        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+        MemberRepository.getInstance().getFunctionSaveData(sFunctionName, member_id, sField1, sField2, sField3, sField4, sField5, new ApiCallback<BaseModel>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel response) {
+                super.onApiSuccess(response);
+                valueCallback.onValueCallback(TASK_POST_GET_FUNCTION_SAVE_DATA, response.getSuccess());
+            }
+        });
+    }
 
     public void callMemberPointHistoryApi(final String date, final BaseContract.ValueCallback<List<PointHistory>> valueCallback) {
         basePresenter.startCallApi();
@@ -1080,6 +1092,34 @@ public class RepositoryManager {
             public void onApiSuccess(BaseModel<String> response) {
                 super.onApiSuccess(response);
                 valueCallback.onValueCallback(TASK_POST_GET_SHOPCARTLOCATIONQUANTITY, response.getItems());
+            }
+        });
+    }
+
+    public void getOftenPickup(final BaseContract.ValueCallback<List<Often>> valueCallback) {
+        basePresenter.startCallApi();
+        String sMemberID = getUserLogin() ? context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "") : "";
+        MemberRepository.getInstance().getOftenPickup(sMemberID, new ApiCallback<BaseModel<List<Often>>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<List<Often>> response) {
+                super.onApiSuccess(response);
+
+                Log.e(TAG, "onApiSuccess : " + response);
+                valueCallback.onValueCallback(TASK_POST_GET_OFTENPICKUP, response.getItems());
+            }
+        });
+    }
+
+    public void getOftenVatNumber(final BaseContract.ValueCallback<List<Often>> valueCallback) {
+        basePresenter.startCallApi();
+        String sMemberID = getUserLogin() ? context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "") : "";
+        MemberRepository.getInstance().getOftenVatNumber(sMemberID, new ApiCallback<BaseModel<List<Often>>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<List<Often>> response) {
+                super.onApiSuccess(response);
+
+                Log.e(TAG, "onApiSuccess : " + response);
+                valueCallback.onValueCallback(TASK_POST_GET_OFTENVATNUMBER, response.getItems());
             }
         });
     }

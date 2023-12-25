@@ -24,6 +24,7 @@ import com.hamels.daybydayegg.MemberCenter.View.MemberGiftFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MemberInfoChangeFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MemberPointFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MessageListFragment;
+import com.hamels.daybydayegg.MemberCenter.View.OftenFragment;
 import com.hamels.daybydayegg.MemberCenter.View.PasswordChangeFragment;
 import com.hamels.daybydayegg.MemberCenter.View.WebViewFragment;
 import com.hamels.daybydayegg.R;
@@ -34,7 +35,7 @@ import java.util.Objects;
 public class MemberCenterFragment extends BaseFragment implements View.OnClickListener, MemberCenterContract.View {
     public static final String TAG = MemberCenterFragment.class.getSimpleName();
 
-    private LinearLayout btnChangePassword, btnTransRecord, btnPoint, btnCoupon, btnContactUs, btnPrivacy, btnTerms, btnCustomerservice, btnMemberGift;
+    private LinearLayout btnChangePassword, btnTransRecord, btnPoint, btnCoupon, btnContactUs, btnPrivacy, btnTerms, btnCustomerservice, btnMemberGift, btnOften;
     private TextView tvName, tvPoint, tvPhone;
     private ImageView btnMemberInfo;
     private PopupWindow popupWindow;
@@ -124,6 +125,9 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         btnMemberGift = view.findViewById(R.id.btn_member_gift);
         btnMemberGift.setOnClickListener(this);
 
+        btnOften = view.findViewById(R.id.btn_often);
+        btnOften.setOnClickListener(this);
+
         if(!memberPresenter.getUserLogin()){
             memberPresenter.saveSourceActive("");
             ((MainActivity) getActivity()).changeTabFragment(MainIndexFragment.getInstance());
@@ -154,8 +158,10 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         }else if (id == R.id.btn_customerservice){
             ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance());
 //                Toast.makeText(getActivity(), "此功能未開放", Toast.LENGTH_LONG).show();
-        }else if(id == R.id.btn_member_gift){
+        }else if(id == R.id.btn_member_gift) {
             ((MainActivity) getActivity()).addFragment(MemberGiftFragment.getInstance());
+        }else if(id == R.id.btn_often){
+            ((MainActivity) getActivity()).addFragment(OftenFragment.getInstance());
         }else if(id == R.id.btn_delete){
             //  刪除會員
             new AlertDialog.Builder(getContext()).setTitle("確定刪除帳號?").setMessage(R.string.delete_member)

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_often"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_shadow_corner_white"
+    android:layout_marginTop="5dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <!-- 常用手機號 -->
+
+    <TextView
+        android:id="@+id/tv_nick_name"
+        style="@style/fontRegularTw.greyDoubleDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="暱稱"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_nick_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginEnd="20dp"
+        android:theme="@style/EditTextBlack"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@id/guideline80"
+        app:layout_constraintStart_toStartOf="@id/tv_nick_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_nick_name">
+
+        <EditText
+            android:id="@+id/et_nick_name"
+            style="@style/fontRegularTw.GreyDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selec_et_line"
+            android:hint="請輸入 暱稱"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text=""
+            android:textColorHint="@color/greyHint"
+            android:textSize="14dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_mobile"
+        style="@style/fontRegularTw.greyDoubleDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="手機號碼"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="@id/tv_nick_name"
+        app:layout_constraintTop_toBottomOf="@id/layout_nick_name" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_mobile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginEnd="20dp"
+        android:theme="@style/EditTextBlack"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@id/guideline80"
+        app:layout_constraintStart_toStartOf="@id/tv_mobile"
+        app:layout_constraintTop_toBottomOf="@id/tv_mobile">
+
+        <EditText
+            android:id="@+id/et_mobile"
+            style="@style/fontRegularTw.GreyDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selec_et_line"
+            android:hint="請輸入 手機號碼"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text=""
+            android:textColorHint="@color/greyHint"
+            android:textSize="14dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 常用地址 -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_addr_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:theme="@style/EditTextBlack"
+        app:hintEnabled="false"
+        app:layout_constraintStart_toStartOf="@+id/spinnerCity"
+        app:layout_constraintEnd_toEndOf="@+id/guideline80"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_addr_name"
+            style="@style/fontRegularTw.GreyDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selec_et_line"
+            android:hint="請輸入 常用註記"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text=""
+            android:textColorHint="@color/greyHint"
+            android:textSize="14dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spinnerCity"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|start"
+        android:textSize="16dp"
+        style="@style/SpinnerShadowTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline40"
+        app:layout_constraintTop_toBottomOf="@+id/layout_addr_name"/>
+
+    <Spinner
+        android:id="@+id/spinnerArea"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|start"
+        android:textSize="16dp"
+        style="@style/SpinnerShadowTheme"
+        app:layout_constraintStart_toStartOf="@+id/guideline40"
+        app:layout_constraintEnd_toEndOf="@id/guideline80"
+        app:layout_constraintTop_toBottomOf="@+id/layout_addr_name"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:theme="@style/EditTextBlack"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@id/guideline80"
+        app:layout_constraintStart_toStartOf="@id/spinnerCity"
+        app:layout_constraintTop_toBottomOf="@id/spinnerCity">
+
+        <EditText
+            android:id="@+id/et_address"
+            style="@style/fontRegularTw.GreyDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selec_et_line"
+            android:hint="請輸入 地址"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text=""
+            android:textColorHint="@color/greyHint"
+            android:textSize="14dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 常用統一編號 -->
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/fontRegularTw.greyDoubleDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="發票抬頭"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginEnd="20dp"
+        android:theme="@style/EditTextBlack"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@id/guideline80"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+        <EditText
+            android:id="@+id/et_title"
+            style="@style/fontRegularTw.GreyDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selec_et_line"
+            android:hint="請輸入 發票抬頭"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text=""
+            android:textColorHint="@color/greyHint"
+            android:textSize="14dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_vat_number"
+        style="@style/fontRegularTw.greyDoubleDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="統一編號"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/layout_title" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_vat_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginEnd="20dp"
+        android:theme="@style/EditTextBlack"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@id/guideline80"
+        app:layout_constraintStart_toStartOf="@id/tv_vat_number"
+        app:layout_constraintTop_toBottomOf="@id/tv_vat_number">
+
+        <EditText
+            android:id="@+id/et_vat_number"
+            style="@style/fontRegularTw.GreyDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selec_et_line"
+            android:hint="請輸入 統一編號"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text=""
+            android:textColorHint="@color/greyHint"
+            android:textSize="14dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/rec_stroke_green_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline80"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/fontBoldTw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="9dp"
+            android:background="@null"
+            android:drawableTint="@color/colorYunlinhn"
+            android:drawablePadding="10dp"
+            android:text="儲存"
+            android:textSize="14dp"
+            android:textColor="@color/colorYunlinhn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

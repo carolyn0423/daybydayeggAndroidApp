@@ -313,7 +313,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/layout_002"
+                        android:id="@+id/btn_often"
                         style="@style/user_function_formcontent_col">
 
                         <LinearLayout
@@ -321,11 +321,12 @@
 
                             <ImageView
                                 style="@style/user_function_img"
-                                 />
+                                app:srcCompat="@drawable/ic_hands" />
 
                             <TextView
                                 style="@style/imgtext_text_0"
-                                android:text="" />
+                                android:text="常用資料"
+                                android:textSize="14dp"/>
 
                         </LinearLayout>
 

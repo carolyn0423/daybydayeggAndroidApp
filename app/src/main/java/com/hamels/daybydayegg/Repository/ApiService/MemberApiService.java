@@ -12,6 +12,7 @@ import com.hamels.daybydayegg.Repository.Model.Faq;
 import com.hamels.daybydayegg.Repository.Model.MemberMessage;
 import com.hamels.daybydayegg.Repository.Model.Merchant;
 import com.hamels.daybydayegg.Repository.Model.Message;
+import com.hamels.daybydayegg.Repository.Model.Often;
 import com.hamels.daybydayegg.Repository.Model.Order;
 import com.hamels.daybydayegg.Repository.Model.PointHistory;
 import com.hamels.daybydayegg.Repository.Model.Product;
@@ -64,8 +65,17 @@ public interface MemberApiService {
     @POST("Member/SaveData")
     Call<BaseModel<Map<String, String>>> putUpdateMember(@Body RequestBody body);
 
+    @POST("Member/GetFunctionSaveData")
+    Call<BaseModel<Map<String, String>>> GetFunctionSaveData(@Body RequestBody body);
+
     @POST("Property/GetPropertyList_AddressData")
     Call<BaseModel<List<Address>>> GetPropertyList_AddressData(@Body RequestBody body);
+
+    @POST("Member/GetOftenPickup")
+    Call<BaseModel<List<Often>>> GetOftenPickup(@Body RequestBody body);
+
+    @POST("Member/GetOftenVatNumber")
+    Call<BaseModel<List<Often>>> GetOftenVatNumber(@Body RequestBody body);
 
     @POST("News/GetList")
     Call<BaseModel<List<Carousel>>> GetCarouselList(@Body RequestBody body);

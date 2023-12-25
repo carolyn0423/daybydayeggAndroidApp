@@ -1714,7 +1714,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
     //  取得座標
     // 检查位置权限
-    void checkLocationPermission() {
+    public void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 

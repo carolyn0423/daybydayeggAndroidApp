@@ -192,6 +192,30 @@ public class MemberRepository extends ApiRepository {
         retrofit.create(MemberApiService.class).GetMerchantList(requestBody).enqueue(callback);
     }
 
+    //  常用地址
+    public void getOftenPickup(String sMemberID, final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
+        map.put("isApp", "true");
+        map.put("customer_id", EOrderApplication.CUSTOMER_ID);
+        map.put("member_id", sMemberID);
+        Log.e(TAG, "API getOftenPickup : " + map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).GetOftenPickup(requestBody).enqueue(callback);
+    }
+
+    //  常用統編
+    public void getOftenVatNumber(String sMemberID, final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
+        map.put("isApp", "true");
+        map.put("customer_id", EOrderApplication.CUSTOMER_ID);
+        map.put("member_id", sMemberID);
+        Log.e(TAG, "API getOftenVatNumber : " + map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).GetOftenVatNumber(requestBody).enqueue(callback);
+    }
+
     public void getProductMainTypeList(final String location_id, final String customer_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
@@ -540,6 +564,37 @@ public class MemberRepository extends ApiRepository {
         Log.e(TAG, "API updateMemberInfo : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).putUpdateMember(requestBody).enqueue(callback);
+    }
+
+    public void getFunctionSaveData(String sFunctionName, String sMemberID, String sField1, String sField2, String sField3, String sField4, String sField5, final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("isApp", "true");
+        map.put("connection_name", EOrderApplication.dbConnectName);
+        map.put("customer_id", EOrderApplication.CUSTOMER_ID);
+        map.put("modified_user", sMemberID);
+
+        switch (sFunctionName){
+            case "UpdateOftenAddress":
+                map.put("uid", sField1);
+                map.put("addr_name", sField2);
+                map.put("city_code", sField3);
+                map.put("area_code", sField4);
+                map.put("address", sField5);
+                break;
+            case "DeleteOftenInvoice":
+            case "DeleteOftenAddress":
+                map.put("uid", sField1);
+                break;
+            case "UpdateOftenInvoice":
+                map.put("uid", sField1);
+                map.put("vat_title", sField2);
+                map.put("vat_number", sField3);
+                break;
+        }
+
+        Log.e(TAG, "API getFunctionSaveData : " + map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).GetFunctionSaveData(requestBody).enqueue(callback);
     }
 
     public void getMemberPointHistory(final String date, final String member_id, final AbsApiCallback callback) {

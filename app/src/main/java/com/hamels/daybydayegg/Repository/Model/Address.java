@@ -16,6 +16,11 @@ public class Address implements Parcelable {
     private String City = "";
     private String Area = "";
 
+    public Address(String City, String Area) {
+        if(!City.isEmpty()) this.City = City;
+        if(!Area.isEmpty()) this.Area = Area;
+    }
+
     public int getId() {
         return id;
     }
@@ -78,6 +83,14 @@ public class Address implements Parcelable {
         dest.writeString(Zip);
         dest.writeString(City);
         dest.writeString(Area);
+    }
+
+    public String toData() {
+        if(City.isEmpty()){
+            return Area;
+        }else{
+            return City;
+        }
     }
 }
 
