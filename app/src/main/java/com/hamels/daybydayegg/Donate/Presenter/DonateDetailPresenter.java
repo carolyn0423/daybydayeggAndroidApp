@@ -48,7 +48,7 @@ public class DonateDetailPresenter extends BasePresenter<DonateDetailContract.Vi
                                 public void onValueCallback(int task, Boolean bSuccess) {
                                     if (bSuccess) {
 //                                        SavePush(mobile, "提貨券訊息", user.getName() + "送了提貨券給您");
-                                        repositoryManager.saveOftenMobile(mobile, nike);
+                                        repositoryManager.saveOftenMobile(mobile, nike, "");
                                         view.showErrorAlert("已贈送禮物");
                                         view.goBack();
                                     }

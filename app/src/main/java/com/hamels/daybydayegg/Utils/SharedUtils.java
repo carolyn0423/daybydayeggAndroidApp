@@ -160,9 +160,14 @@ public class SharedUtils {
                 .apply();
     }
 
-    public void saveOftenMobile(Context context, String sMobile, String sNick){
+    public void saveOftenMobile(Context context, String sMobile, String sNick, String sRemoveKey){
         HashMap hashMap = getOftenMobile(context);
         if(hashMap == null) hashMap = new HashMap();
+        if(!sRemoveKey.isEmpty()){
+            if(hashMap.containsKey(sRemoveKey)){
+                hashMap.remove(sRemoveKey);
+            }
+        }
         hashMap.put(sMobile, sNick);
 
         // 將 HashMap 轉換為 JSON 字符串

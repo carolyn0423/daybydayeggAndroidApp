@@ -2,6 +2,7 @@ package com.hamels.daybydayegg.MemberCenter.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -61,12 +62,12 @@ public class OftenAdapter extends BaseAdapter<OftenHolder> {
                         String sVatTitle = oftenHolder.et_title.getText().toString();
                         String sVatNumber = oftenHolder.et_vat_number.getText().toString();
 
-                        presenter.GetFunctionSaveDataApi(FunctionName, oftens.get(position).getUid(), sVatTitle, sVatNumber, "", "");
+                        presenter.GetFunctionSaveDataApi("UpdateOftenInvoice", oftens.get(position).getUid(), sVatTitle, sVatNumber, "", "");
                         break;
                     case "MOBILE":
                         String sMobile = oftenHolder.et_mobile.getText().toString();
                         String sNick = oftenHolder.et_nick_name.getText().toString();
-                        presenter.saveOftenMobile(sMobile, sNick);
+                        presenter.saveOftenMobile(sMobile, sNick, oftens.get(position).getMobile());
                         break;
                     case "ADDRESS":
                         String sAddrName = oftenHolder.et_addr_name.getText().toString();
@@ -74,7 +75,24 @@ public class OftenAdapter extends BaseAdapter<OftenHolder> {
                         String sAreaCode = oftens.get(position).getTmpAreaCode();
                         String sAddress = oftenHolder.et_address.getText().toString();
 
-                        presenter.GetFunctionSaveDataApi(FunctionName, oftens.get(position).getUid(), sAddrName, sCityCode, sAreaCode, sAddress);
+                        presenter.GetFunctionSaveDataApi("UpdateOftenAddress", oftens.get(position).getUid(), sAddrName, sCityCode, sAreaCode, sAddress);
+                        break;
+                }
+            }
+        });
+
+        oftenHolder.btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (FunctionName){
+                    case "INVOICE":
+                        presenter.GetFunctionSaveDataApi("DeleteOftenInvoice", oftens.get(position).getUid(), "", "", "", "");
+                        break;
+                    case "MOBILE":
+                        presenter.removeOftenMobile(oftens.get(position).getMobile());
+                        break;
+                    case "ADDRESS":
+                        presenter.GetFunctionSaveDataApi("DeleteOftenAddress", oftens.get(position).getUid(), "", "", "", "");
                         break;
                 }
             }

@@ -1192,7 +1192,7 @@ public class RepositoryManager {
         SharedUtils.getInstance().saveUser(context, user);
     }
 
-    public void saveOftenMobile(String sMobile, String sNick) { SharedUtils.getInstance().saveOftenMobile(context, sMobile, sNick); }
+    public void saveOftenMobile(String sMobile, String sNick, String sRemoveKey) { SharedUtils.getInstance().saveOftenMobile(context, sMobile, sNick, sRemoveKey); }
 
     public void removeOftenMobile(String sMobile){ SharedUtils.getInstance().removeOftenMobile(context, sMobile); }
 

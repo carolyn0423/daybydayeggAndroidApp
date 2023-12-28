@@ -1,14 +1,18 @@
 package com.hamels.daybydayegg.MemberCenter.View;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabItem;
@@ -25,6 +29,7 @@ import com.hamels.daybydayegg.Repository.ApiRepository.MemberRepository;
 import com.hamels.daybydayegg.Repository.Model.Address;
 import com.hamels.daybydayegg.Repository.Model.Often;
 import com.hamels.daybydayegg.Utils.IntentUtils;
+import com.hamels.daybydayegg.Utils.SwipeToDeleteCallback;
 
 import java.util.List;
 
@@ -117,6 +122,11 @@ public class OftenFragment extends BaseFragment implements OftenContract.View {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(Adapter);
 
+        // 创建 SwipeToDeleteCallback 实例并绑定到 RecyclerView
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(Adapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         //  取得地址清單
         if(addresses == null){
             Presenter.getPropertyData();
@@ -139,5 +149,13 @@ public class OftenFragment extends BaseFragment implements OftenContract.View {
     public void showAlert(String message) {
         new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage(message).setPositiveButton(android.R.string.ok, null).show();
         ((MainActivity) getActivity()).refreshBadge();
+    }
+
+    public void CloseWindow(){
+        // 关闭键盘
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        // 隐藏键盘，传入当前焦点的 View
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 }

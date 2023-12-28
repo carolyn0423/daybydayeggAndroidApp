@@ -13,6 +13,8 @@ public interface OftenContract {
         void showAlert(String sMessage);
 
         void setPropertyCode(List<Address> addresses);
+
+        void CloseWindow();
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -20,8 +22,10 @@ public interface OftenContract {
 
         void GetFunctionSaveDataApi(String functionName, String uid, String sAddrName, String sCityCode, String sAreaCode, String sAddress);
 
-        void saveOftenMobile(String sMobile, String sNick);
+        void saveOftenMobile(String sMobile, String sNick, String sRemoveKey);
 
         void getPropertyData();
+
+        void removeOftenMobile(String sRemoveKey);
     }
 }

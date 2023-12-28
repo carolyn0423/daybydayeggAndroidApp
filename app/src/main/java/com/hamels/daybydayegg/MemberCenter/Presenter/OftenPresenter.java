@@ -79,15 +79,35 @@ public class OftenPresenter extends BasePresenter<OftenContract.View> implements
             @Override
             public void onValueCallback(int task, Boolean bSuccess) {
                 if (bSuccess) {
-                    view.showAlert("儲存成功");
+                    switch (sFunctionName){
+                        case "DeleteOftenInvoice":
+                            getOftenList("INVOICE");
+                            break;
+                        case "DeleteOftenAddress":
+                            getOftenList("ADDRESS");
+                            break;
+                        default:
+                            view.showAlert("儲存成功");
+                            break;
+                    }
                 } else {
                     view.showAlert("系統錯誤");
                 }
+
+                // 关闭键盘
+                view.CloseWindow();
             }
         });
     }
 
-    public void saveOftenMobile(String sMobile, String sNike){
-        repositoryManager.saveOftenMobile(sMobile, sNike);
+    public void saveOftenMobile(String sMobile, String sNike, String sRemoveKey){
+        repositoryManager.saveOftenMobile(sMobile, sNike, sRemoveKey);
+        view.showAlert("儲存成功");
+        getOftenList("MOBILE");
+    }
+
+    public void removeOftenMobile(String sRemoveKey){
+        repositoryManager.removeOftenMobile(sRemoveKey);
+        getOftenList("MOBILE");
     }
 }

@@ -572,6 +572,8 @@ public class MemberRepository extends ApiRepository {
         map.put("connection_name", EOrderApplication.dbConnectName);
         map.put("customer_id", EOrderApplication.CUSTOMER_ID);
         map.put("modified_user", sMemberID);
+        map.put("member_id", sMemberID);
+        map.put("functionname", sFunctionName);
 
         switch (sFunctionName){
             case "UpdateOftenAddress":
