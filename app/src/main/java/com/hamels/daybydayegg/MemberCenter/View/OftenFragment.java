@@ -3,21 +3,17 @@ package com.hamels.daybydayegg.MemberCenter.View;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.MemberCenter.Adapter.OftenAdapter;
@@ -28,8 +24,6 @@ import com.hamels.daybydayegg.Repository.ApiRepository.ApiRepository;
 import com.hamels.daybydayegg.Repository.ApiRepository.MemberRepository;
 import com.hamels.daybydayegg.Repository.Model.Address;
 import com.hamels.daybydayegg.Repository.Model.Often;
-import com.hamels.daybydayegg.Utils.IntentUtils;
-import com.hamels.daybydayegg.Utils.SwipeToDeleteCallback;
 
 import java.util.List;
 
@@ -121,11 +115,6 @@ public class OftenFragment extends BaseFragment implements OftenContract.View {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(Adapter);
-
-        // 创建 SwipeToDeleteCallback 实例并绑定到 RecyclerView
-        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(Adapter);
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         //  取得地址清單
         if(addresses == null){
