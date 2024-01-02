@@ -69,9 +69,6 @@ public class OftenHolder extends RecyclerView.ViewHolder {
     }
 
     public void setMobile(Often often) {
-        btn_save.setVisibility(View.VISIBLE);
-        btn_delete.setVisibility(View.GONE);
-
         tv_nick_name.setVisibility(View.VISIBLE);
         tv_mobile.setVisibility(View.VISIBLE);
         layout_nick_name.setVisibility(View.VISIBLE);
@@ -98,9 +95,6 @@ public class OftenHolder extends RecyclerView.ViewHolder {
     }
 
     public void setAddress(Often often) {
-        btn_save.setVisibility(View.VISIBLE);
-        btn_delete.setVisibility(View.GONE);
-
         tv_nick_name.setVisibility(View.GONE);
         tv_mobile.setVisibility(View.GONE);
         layout_nick_name.setVisibility(View.GONE);
@@ -148,9 +142,6 @@ public class OftenHolder extends RecyclerView.ViewHolder {
     }
 
     public void setVatNumber(Often often) {
-        btn_save.setVisibility(View.VISIBLE);
-        btn_delete.setVisibility(View.GONE);
-
         tv_nick_name.setVisibility(View.GONE);
         tv_mobile.setVisibility(View.GONE);
         layout_nick_name.setVisibility(View.GONE);

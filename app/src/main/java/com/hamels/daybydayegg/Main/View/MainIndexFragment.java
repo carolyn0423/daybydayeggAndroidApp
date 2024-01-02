@@ -3,6 +3,7 @@ package com.hamels.daybydayegg.Main.View;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -61,6 +62,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         initView(view);
         return view;
     }
+
     private void initView(View view) {
         ((MainActivity) getActivity()).setAppTitle(R.string.tab_index);
         ((MainActivity) getActivity()).refreshBadge();
@@ -162,8 +164,19 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 
     @Override
     public void onResume() {
+        initView(getView());
+
         super.onResume();
         //mainindexPresenter.getCarouselList(CUSTOMER_ID);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            // 当Fragment变得可见时执行的操作
+            initView(getView());
+        }
     }
 
     public void getNoVerift() {

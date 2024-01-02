@@ -208,6 +208,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         loginPresenter.getCustomer();
     }
 
+    @Override
+    public void onBackPressed() {
+        IntentUtils.intentToMain(this, false, EOrderApplication.CUSTOMER_ID,false, true);
+        setResult(RESULT_OK);
+        finish();
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         final IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);

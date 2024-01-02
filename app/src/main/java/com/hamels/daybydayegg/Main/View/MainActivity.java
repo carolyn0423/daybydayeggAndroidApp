@@ -552,8 +552,20 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     changeTabFragment(ProductMainTypeFragment.getInstance());
                     break;
                 default:
-                    changeNavigationColor(R.id.home);
-                    changeTabFragment(MainIndexFragment.getInstance());
+                    MainIndexFragment fragment = new MainIndexFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame, fragment);
+                    transaction.commit();
+
+                    //  addFragment(MainIndexFragment.getInstance());
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            bottomNavigationViewEx.getIconAt(0).callOnClick();
+                        }
+                    }, 500);
                     break;
             }
         }
