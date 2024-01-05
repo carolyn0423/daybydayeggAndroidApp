@@ -86,15 +86,15 @@ public class OftenFragment extends BaseFragment implements OftenContract.View {
             public void onTabSelected(TabLayout.Tab tab) {
                 String stTabText = tab.getText().toString();
                 switch (stTabText){
-                    case "常用統一編號":
+                    case "統一編號":
                         //  常用統一編號
                         Presenter.getOftenList("INVOICE");
                         break;
-                    case "常用轉贈手機號":
+                    case "轉贈手機號":
                         //  常用轉贈手機號
                         Presenter.getOftenList("MOBILE");
                         break;
-                    case "常用地址":
+                    case "宅配地址":
                         //  常用地址
                         Presenter.getOftenList("ADDRESS");
                         break;

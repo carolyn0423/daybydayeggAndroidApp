@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="常用統一編號"
+            android:text="統一編號"
             android:textSize="12sp" />
 
         <com.google.android.material.tabs.TabItem
@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="常用轉贈手機號"
+            android:text="轉贈手機號"
             android:textSize="12sp" />
 
         <com.google.android.material.tabs.TabItem
@@ -64,7 +64,7 @@
             android:layout_weight="1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="常用地址"
+            android:text="宅配地址"
             android:textSize="12sp" />
 
     </com.google.android.material.tabs.TabLayout>
