@@ -1192,9 +1192,11 @@ public class RepositoryManager {
         SharedUtils.getInstance().saveUser(context, user);
     }
 
-    public void saveOftenMobile(String sMobile, String sNick, String sRemoveKey) { SharedUtils.getInstance().saveOftenMobile(context, sMobile, sNick, sRemoveKey); }
+    public void saveOftenMobile(String sMobile, String sNick, String sRemoveKey) { SharedUtils.getInstance().saveOftenMobile(context, getUserID(), sMobile, sNick, sRemoveKey); }
 
-    public void removeOftenMobile(String sMobile){ SharedUtils.getInstance().removeOftenMobile(context, sMobile); }
+    public void removeOftenMobile(String sMobile){ SharedUtils.getInstance().removeOftenMobile(context, getUserID(), sMobile); }
+
+    public void removeMemberOftenMobile(){ SharedUtils.getInstance().removeMemberOftenMobile(context, getUserID()); }
 
     /* ------------------------------------------------------------------------- */
 
@@ -1236,5 +1238,5 @@ public class RepositoryManager {
 
     public String getPaySchemeOrderData() { return SharedUtils.getInstance().getPaySchemeOrderData(context); }
 
-    public HashMap getOftenMobile() { return SharedUtils.getInstance().getOftenMobile(context); }
+    public HashMap getOftenMobile() { return SharedUtils.getInstance().getOftenMobile(context, getUserID()); }
 }

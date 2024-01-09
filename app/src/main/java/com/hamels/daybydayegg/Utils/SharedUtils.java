@@ -2,14 +2,20 @@ package com.hamels.daybydayegg.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hamels.daybydayegg.Repository.Model.OftenMobile;
 import com.hamels.daybydayegg.Repository.Model.User;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SharedUtils {
     public static final String TAG = SharedUtils.class.getSimpleName();
@@ -160,32 +166,32 @@ public class SharedUtils {
                 .apply();
     }
 
-    public void saveOftenMobile(Context context, String sMobile, String sNick, String sRemoveKey){
-        HashMap hashMap = getOftenMobile(context);
-        if(hashMap == null) hashMap = new HashMap();
-        if(!sRemoveKey.isEmpty()){
-            if(hashMap.containsKey(sRemoveKey)){
-                hashMap.remove(sRemoveKey);
-            }
-        }
-        hashMap.put(sMobile, sNick);
-
-        // 將 HashMap 轉換為 JSON 字符串
-        context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit()
-                .putString("OftenMobileJson", new Gson().toJson(hashMap))
-                .apply();
-    }
-
-    public void removeOftenMobile(Context context, String sMobile){
-        HashMap hashMap = getOftenMobile(context);
-        if(hashMap == null) hashMap = new HashMap();
-        hashMap.remove(sMobile);
-
-        // 將 HashMap 轉換為 JSON 字符串
-        context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit()
-                .putString("OftenMobileJson", new Gson().toJson(hashMap))
-                .apply();
-    }
+//    public void saveOftenMobile(Context context, String sMobile, String sNick, String sRemoveKey){
+//        HashMap hashMap = getOftenMobile(context);
+//        if(hashMap == null) hashMap = new HashMap();
+//        if(!sRemoveKey.isEmpty()){
+//            if(hashMap.containsKey(sRemoveKey)){
+//                hashMap.remove(sRemoveKey);
+//            }
+//        }
+//        hashMap.put(sMobile, sNick);
+//
+//        // 將 HashMap 轉換為 JSON 字符串
+//        context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit()
+//                .putString("OftenMobileJson", new Gson().toJson(hashMap))
+//                .apply();
+//    }
+//
+//    public void removeOftenMobile(Context context, String sMobile){
+//        HashMap hashMap = getOftenMobile(context);
+//        if(hashMap == null) hashMap = new HashMap();
+//        hashMap.remove(sMobile);
+//
+//        // 將 HashMap 轉換為 JSON 字符串
+//        context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit()
+//                .putString("OftenMobileJson", new Gson().toJson(hashMap))
+//                .apply();
+//    }
 
     public void removeAllLocalData(Context context) {
         context.getSharedPreferences(User.TAG, Context.MODE_PRIVATE).edit().clear().apply();
@@ -200,7 +206,7 @@ public class SharedUtils {
         context.getSharedPreferences("FRAGMENT_MAINTYPE", Context.MODE_PRIVATE).edit().clear().apply();
         context.getSharedPreferences("IMAGE_URL", Context.MODE_PRIVATE).edit().clear().apply();
         context.getSharedPreferences("SOURCE_ACTIVE", Context.MODE_PRIVATE).edit().clear().apply();
-        context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit().clear().apply();
+        //  context.getSharedPreferences("OftenMobileJson", Context.MODE_PRIVATE).edit().clear().apply();
     }
     public User getUser(Context context) {
         String json = context.getSharedPreferences(User.TAG, Context.MODE_PRIVATE).getString(User.TAG, "");
@@ -294,11 +300,117 @@ public class SharedUtils {
         return context.getSharedPreferences("SchemeOrderData", context.MODE_PRIVATE).getString("SchemeOrderData", "");
     }
 
-    public HashMap getOftenMobile(Context context){
-        String sJson = context.getSharedPreferences("OftenMobileJson", context.MODE_PRIVATE).getString("OftenMobileJson", "");
-        // 將 JSON 字串轉換為 HashMap
-        Type type = new TypeToken<HashMap<String, String>>() {}.getType();
-        HashMap<String, String> hashMap = new Gson().fromJson(sJson, type);
-        return hashMap;
+    // 新增或修改会员的手机号与昵称
+    public void saveOftenMobile(Context context, String sMemberID, String sMobile, String sNick, String sRemoveKey) {
+        Map<String, Map<String, String>> memberData = retrieveOftenMobileData(context, "OftenMobileJson");
+
+        Map<String, String> oftenMobileMap = memberData.get(sMemberID);
+        if (oftenMobileMap == null) {
+            oftenMobileMap = new HashMap<>();
+        }
+
+        if (!sRemoveKey.isEmpty() && oftenMobileMap.containsKey(sRemoveKey)) {
+            oftenMobileMap.remove(sRemoveKey);
+        }
+
+        oftenMobileMap.put(sMobile, sNick);
+        memberData.put(sMemberID, oftenMobileMap);
+
+        saveOftenMobileData(context, "OftenMobileJson", memberData);
+    }
+
+    // 移除会员的特定手机号
+    public void removeOftenMobile(Context context, String memberId, String sMobile) {
+        Map<String, Map<String, String>> memberData = retrieveOftenMobileData(context, "OftenMobileJson");
+
+        Map<String, String> oftenMobileMap = memberData.get(memberId);
+        if (oftenMobileMap != null) {
+            oftenMobileMap.remove(sMobile);
+            memberData.put(memberId, oftenMobileMap);
+            saveOftenMobileData(context, "OftenMobileJson", memberData);
+        }
+    }
+
+    // 移除整个会员的所有数据
+    public void removeMemberOftenMobile(Context context, String memberId) {
+        Map<String, Map<String, String>> OftenMobileMap = retrieveOftenMobileData(context, "OftenMobileJson");
+
+        OftenMobileMap.remove(memberId);
+
+        saveOftenMobileData(context, "OftenMobileJson", OftenMobileMap);
+    }
+
+    // 取得該会员 HashMap
+    public HashMap getOftenMobile(Context context, String memberId) {
+        Map<String, Map<String, String>> OftenMobileMap = retrieveOftenMobileData(context, "OftenMobileJson");
+
+        if (OftenMobileMap.containsKey(memberId)) {
+            return new HashMap(OftenMobileMap.get(memberId));
+        } else {
+            return new HashMap();
+        }
+    }
+
+    // 從 SharedPreferences 中提取資料
+    public Map<String, Map<String, String>> retrieveOftenMobileData(Context context, String key) {
+        Map<String, Map<String, String>> OftenMobileMap = new HashMap<>();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        String OftenMobileJson = sharedPreferences.getString(key, "");
+
+        if (!OftenMobileJson.isEmpty()) {
+            try {
+                JSONObject jsonObject = new JSONObject(OftenMobileJson);
+                JSONArray keys = jsonObject.names();
+
+                if (keys != null) {
+                    for (int i = 0; i < keys.length(); i++) {
+                        String memberId = keys.getString(i);
+                        JSONObject innerJsonObject = jsonObject.getJSONObject(memberId);
+                        Map<String, String> innerMap = new HashMap<>();
+
+                        JSONArray innerKeys = innerJsonObject.names();
+                        if (innerKeys != null) {
+                            for (int j = 0; j < innerKeys.length(); j++) {
+                                String innerKey = innerKeys.getString(j);
+                                String innerValue = innerJsonObject.getString(innerKey);
+                                innerMap.put(innerKey, innerValue);
+                            }
+                        }
+                        OftenMobileMap.put(memberId, innerMap);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return OftenMobileMap;
+    }
+
+    // 將資料存入 SharedPreferences
+    public void saveOftenMobileData(Context context, String key, Map<String, Map<String, String>> OftenMobile) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        JSONObject jsonObject = new JSONObject();
+
+        for (Map.Entry<String, Map<String, String>> entry : OftenMobile.entrySet()) {
+            try {
+                JSONObject innerJsonObject = new JSONObject();
+                Map<String, String> innerMap = entry.getValue();
+
+                for (Map.Entry<String, String> innerEntry : innerMap.entrySet()) {
+                    innerJsonObject.put(innerEntry.getKey(), innerEntry.getValue());
+                }
+
+                jsonObject.put(entry.getKey(), innerJsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Log.e(TAG, "OftenMobile => Key:" + key + " JSON:" + jsonObject.toString());
+
+        editor.putString(key, jsonObject.toString());
+        editor.apply();
     }
 }

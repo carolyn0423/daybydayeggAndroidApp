@@ -189,6 +189,7 @@
                         android:textColor="#FFF"
                         android:text="轉贈提貨券"
                         android:textSize="13dp"
+                        android:enabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_redemption_period_title" />

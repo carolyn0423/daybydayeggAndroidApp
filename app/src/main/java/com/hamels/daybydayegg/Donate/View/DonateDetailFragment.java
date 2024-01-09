@@ -201,6 +201,8 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         layout_left_arrow.setTag(R.id.layout_left_arrow, productDetail.get(0).getLastUid());
         layout_right_arrow.setTag(R.id.layout_right_arrow, productDetail.get(0).getNextUid());
         tv_eticket_due_date.setText(productDetail.get(0).getEticketDueDate());
+
+        btn_donatedetail2.setEnabled(true);
     }
 
     @Override

@@ -192,7 +192,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (EOrderApplication.CUSTOMER_ID == ""){
+                if (EOrderApplication.CUSTOMER_ID.equals("")){
                     showErrorAlert("請選擇商家");
                 }else{
                     if(chkMobile(etPhone.getText().toString())) {

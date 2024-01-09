@@ -49,6 +49,7 @@ public class MemberCenterPresenter extends BasePresenter<MemberCenterContract.Vi
         repositoryManager.callDeleteMemberApi(repositoryManager.getUserID(), new BaseContract.ValueCallback<String>() {
             @Override
             public void onValueCallback(int task, String type) {
+                repositoryManager.removeMemberOftenMobile();
                 String[] Message = type.split("\\|");
                 if(Message[0].equals("T_0X008")){
                     view.deleteError(Message[1]);

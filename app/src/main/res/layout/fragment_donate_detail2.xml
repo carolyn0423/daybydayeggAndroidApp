@@ -347,7 +347,8 @@
             android:background="@drawable/donate_btnbg_1"
             android:text="確定送出"
             android:textColor="#FFF"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:enabled="false"/>
 
     </LinearLayout>
 

@@ -232,6 +232,8 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         spinner.setSelection(0);
 
         left_number = Integer.parseInt(productDetail.get(0).getLeftNumber());
+
+        btn_submit.setEnabled(true);
     }
 
     @Override
