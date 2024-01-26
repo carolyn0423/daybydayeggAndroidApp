@@ -2,11 +2,13 @@ package com.hamels.daybydayegg.Main.View;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -172,7 +174,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             super.handleMessage(msg);
         }
     };
-
+    //  機台核銷限制提醒
+    private final BroadcastReceiver pushNotificationReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            showErrorAlert(intent.getStringExtra("body"));
+        }
+    };
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -207,6 +215,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         setCustomerData();
         initView();
         initAnimation(this);
+
+        // 在 onCreate 中注册广播接收器 -> 機台核銷限制提醒
+        registerReceiver(pushNotificationReceiver, new IntentFilter("WRITE_OFF_MESSAGE"));
     }
 
     @Override
