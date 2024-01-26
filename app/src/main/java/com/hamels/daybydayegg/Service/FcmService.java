@@ -36,7 +36,7 @@ public class FcmService extends FirebaseMessagingService {
         }
 
     }
-    private void showNotification(String title,String message){
+    private void showNotification(String title, String message){
         String channelId = getResources().getString(R.string.default_notification_channel_id);
         String channelName="ChannelName";
         Intent intent = new Intent(this, MainActivity.class);
@@ -83,6 +83,13 @@ public class FcmService extends FirebaseMessagingService {
                     .setChannelId(channelId);
 
             notificationManager.notify(0, notificationBuilder.build());
+        }
+
+        if(title.equals("機台核銷限制提醒")) {
+            // 发送本地广播，通知 MainActivity 处理推送通知
+            Intent intent2 = new Intent("WRITE_OFF_MESSAGE");
+            intent2.putExtra("body", message);
+            sendBroadcast(intent2);
         }
     }
 /*
