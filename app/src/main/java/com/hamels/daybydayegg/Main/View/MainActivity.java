@@ -178,7 +178,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private final BroadcastReceiver pushNotificationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            showErrorAlert(intent.getStringExtra("body"));
+            showAlert("兌換失敗", intent.getStringExtra("body"));
         }
     };
     @Override
@@ -1569,6 +1569,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public void showErrorAlert(String message) {
         if(!MainActivity.this.isFinishing()){
             new AlertDialog.Builder(this).setTitle(R.string.dialog_hint).setMessage(message).setPositiveButton(android.R.string.ok, null).show();
+        }
+    }
+
+    public void showAlert(String sTitle, String sMessage) {
+        if(!MainActivity.this.isFinishing()){
+            new AlertDialog.Builder(this).setTitle(sTitle).setMessage(sMessage).setPositiveButton(android.R.string.ok, null).show();
         }
     }
 
