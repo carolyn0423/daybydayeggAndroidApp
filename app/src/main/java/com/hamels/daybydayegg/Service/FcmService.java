@@ -36,16 +36,15 @@ public class FcmService extends FirebaseMessagingService {
         }
 
     }
-    private void showNotification(String title, String message){
+    private void showNotification(String title,String message){
         if(!title.equals("WRITE_OFF_MESSAGE")) {
             String channelId = getResources().getString(R.string.default_notification_channel_id);
             String channelName = "ChannelName";
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("NOTIFY_EXTRA", "NOTIFY");
-//        Intent intent=new Intent("NOTIFY_EXTRA");
+            //        Intent intent=new Intent("NOTIFY_EXTRA");
             //PendingIntent pi = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
             PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
 
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
@@ -82,10 +81,8 @@ public class FcmService extends FirebaseMessagingService {
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setChannelId(channelId);
-
-                notificationManager.notify(0, notificationBuilder.build());
             }
-        } else {
+        }else {
             // 发送本地广播，通知 MainActivity 处理推送通知
             Intent intent2 = new Intent("WRITE_OFF_MESSAGE");
             intent2.putExtra("body", message);
