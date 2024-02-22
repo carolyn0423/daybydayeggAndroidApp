@@ -546,6 +546,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             layout_shopping.setBackgroundResource(R.drawable.btn_black_rounded_bg);
         }else{
             layout_shopping.setEnabled(true);
+            layout_shopping.setBackgroundResource(R.drawable.btn_blue_rounded_bg);
         }
 
         location_id = productDetail.get(0).getLocation_id();
