@@ -19,7 +19,8 @@ public class NoReadMessageListPresenter extends BasePresenter<NoReadMessageListC
 
     @Override
     public void getMessageList() {
-        repositoryManager.callGetMessageListApi(new BaseContract.ValueCallback<List<Message>>() {
+        String sMemberID = repositoryManager.getUserID();
+        repositoryManager.callGetMessageListApi(sMemberID, new BaseContract.ValueCallback<List<Message>>() {
             @Override
             public void onValueCallback(int task, List<Message> type) {
                 Log.e(TAG,type.toString());

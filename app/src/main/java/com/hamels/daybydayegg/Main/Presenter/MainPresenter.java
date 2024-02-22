@@ -12,6 +12,7 @@ import com.hamels.daybydayegg.Main.View.MemberCardFragment;
 import com.hamels.daybydayegg.Main.View.MemberCenterFragment;
 
 import com.hamels.daybydayegg.Main.View.ShoppingCartFragment;
+import com.hamels.daybydayegg.MemberCenter.View.AdminMessageFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MailDetailFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MailFileFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MessageListFragment;
@@ -178,7 +179,11 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         }
 
         if (getUserLogin()) {
-            view.addFragment(MessageListFragment.getInstance());
+            if(repositoryManager.getShopkeeper().equals("Y")){
+                view.addFragment(AdminMessageFragment.getInstance());
+            }else{
+                view.addFragment(MessageListFragment.getInstance(""));
+            }
         } else {
             view.intentToLogin(REQUEST_MESSAGE);
         }
@@ -222,6 +227,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     public String getUserAccount() { return repositoryManager.getUserAccount(); }
 
     public String getUserPw() { return repositoryManager.getUserPassword(); }
+
+    public String getShopkeeper() { return repositoryManager.getShopkeeper(); }
 
     public void saveSourceActive(String sSourceActive) { repositoryManager.saveSourceActive(sSourceActive); }
 

@@ -12,7 +12,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -71,6 +73,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     private boolean isOneLatLon = false;
     private Map<Marker, Machine> markerMachineMap = new HashMap<>();
     private PopupWindow popupWindow;
+    private GoogleMap googleMap;
     public static MachineMapFragment getInstance() {
         if (fragment == null) {
             fragment = new MachineMapFragment();
@@ -101,20 +104,6 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.onResume(); // 必須在生命週期方法中管理地圖生命週期
-        // 請注意，您可能需要在這裡設置地圖相關的其他配置
-        mapView.getMapAsync(googleMap -> {
-            if (googleMap != null) {
-                // 在這裡處理地圖相關操作
-                // 將地圖設置為可交互
-                googleMap.getUiSettings().setAllGesturesEnabled(true);
-
-                // 在地圖上添加目前位置標記
-                if(EOrderApplication.lat != 0 && EOrderApplication.lon != 0){
-                    googleMap.addMarker(new MarkerOptions().position(currentLocation).title("目前位置"));
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f));
-                }
-            }
-        });
         return view;
     }
 
@@ -122,6 +111,15 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     public void onResume() {
         super.onResume();
         mapView.onResume(); // 確保管理地圖的生命週期
+
+        // 在需要使用 googleMap 的地方進行檢查
+        if (googleMap == null) {
+            // 如果 googleMap 為 null，則重新初始化
+            initMap();
+        }else {
+            // 請注意，您可能需要在這裡設置地圖相關的其他配置
+            goMap();
+        }
     }
 
     @Override
@@ -140,6 +138,38 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory(); // 確保管理地圖的生命週期
+    }
+    private void goMap(){
+        // 請注意，您可能需要在這裡設置地圖相關的其他配置
+        mapView.getMapAsync(googleMap -> {
+            if (googleMap != null) {
+                // 在這裡處理地圖相關操作
+                // 將地圖設置為可交互
+                googleMap.getUiSettings().setAllGesturesEnabled(true);
+
+                // 在地圖上添加目前位置標記
+                if (EOrderApplication.lat != 0 && EOrderApplication.lon != 0) {
+                    googleMap.addMarker(new MarkerOptions().position(currentLocation).title("目前位置"));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f));
+                }
+            } else {
+
+            }
+        });
+    }
+    // 初始化 Google Map 的方法
+    private void initMap() {
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap map) {
+                if (map != null) {
+                    // 在這裡處理地圖相關操作
+                    googleMap = map;
+                    goMap();
+                    // 可以在這裡添加任何你需要的地圖初始化操作
+                }
+            }
+        });
     }
     private void initView(View view) {
         ((MainActivity) getActivity()).refreshBadge();
@@ -211,46 +241,52 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         this.machines = machines;
 
         if(isOne) {
-            mapView.getMapAsync(googleMap -> {
-                double isMAx5000 = 0;
-                LatLng latLng = null;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // 在這裡執行任務
+                    mapView.getMapAsync(googleMap -> {
+                        double isMAx5000 = 0;
+                        LatLng latLng = null;
 
-                if (googleMap != null) {
-                    for (Machine machine : machines) {
-                        String sMarkerColor = "grey";
+                        if (googleMap != null) {
+                            for (Machine machine : machines) {
+                                String sMarkerColor = "grey";
 
-                        if (machine.getOnline().equals("N")) {
-                            sMarkerColor = "grey";
-                        } else {
-                            if (getTotalQuantity(machine) == 0) {
-                                sMarkerColor = "red";
+                                if (machine.getOnline().equals("N")) {
+                                    sMarkerColor = "grey";
+                                } else {
+                                    if (getTotalQuantity(machine) == 0) {
+                                        sMarkerColor = "red";
+                                    } else {
+                                        sMarkerColor = "green";
+                                    }
+                                }
+
+                                addCustomMarkerToMap(getContext(), sMarkerColor, googleMap, machine);
+                                //LatLng targetLocation = new LatLng(machine.getLat(), machine.getLon());
+                                double iDistance = machine.getDistance();
+                                if (iDistance < 5) {
+                                    if(isMAx5000 == 0 || isMAx5000 > iDistance){
+                                        isMAx5000 = iDistance;
+                                        latLng = new LatLng(machine.getLat(), machine.getLon());
+                                    }
+                                }
+                            }
+
+                            if (EOrderApplication.lat == 0 || EOrderApplication.lon == 0) {
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machines.get(0).getLat(), machines.get(0).getLon()), 15f));
                             } else {
-                                sMarkerColor = "green";
+                                if (isMAx5000 > 0) {
+                                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
+                                } else {
+                                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 8f));
+                                }
                             }
                         }
-
-                        addCustomMarkerToMap(getContext(), sMarkerColor, googleMap, machine);
-                        //LatLng targetLocation = new LatLng(machine.getLat(), machine.getLon());
-                        double iDistance = machine.getDistance();
-                        if (iDistance < 5) {
-                            if(isMAx5000 == 0 || isMAx5000 > iDistance){
-                                isMAx5000 = iDistance;
-                                latLng = new LatLng(machine.getLat(), machine.getLon());
-                            }
-                        }
-                    }
-
-                    if (EOrderApplication.lat == 0 || EOrderApplication.lon == 0) {
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(machines.get(0).getLat(), machines.get(0).getLon()), 15f));
-                    } else {
-                        if (isMAx5000 > 0) {
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
-                        } else {
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 8f));
-                        }
-                    }
+                    });
                 }
-            });
+            }, 100);
         }
     }
 

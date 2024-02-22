@@ -90,5 +90,7 @@ public interface MainContract {
         String getUserName();
 
         void GetShopCartLocationQuantity();
+
+        String getShopkeeper();
     }
 }

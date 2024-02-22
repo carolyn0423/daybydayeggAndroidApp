@@ -35,11 +35,15 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     private MessageListContract.Presenter messagePresenter;
     private Handler handler = new Handler();
     private int iMessageCount = 0;
-
-    public static MessageListFragment getInstance() {
+    private String sMemberID = "";
+    boolean isAdmin = false;
+    public static MessageListFragment getInstance(String parmMemberID) {
         if (fragment == null) {
             fragment = new MessageListFragment();
         }
+        Bundle bundle = new Bundle();
+        bundle.putString("MEMBERID", parmMemberID);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -47,6 +51,8 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_message_list, container, false);
+        sMemberID = getArguments().getString("MEMBERID", "");
+        isAdmin = sMemberID.equals("") ? false : true;
         initView(view);
 
         messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
@@ -68,7 +74,11 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     }
 
     private void initView(View view) {
-        ((MainActivity) getActivity()).setAppTitle(R.string.message_list);
+        if(isAdmin){
+            ((MainActivity) getActivity()).setAppTitleString("回覆留言");
+        }else {
+            ((MainActivity) getActivity()).setAppTitle(R.string.message_list);
+        }
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
@@ -85,7 +95,11 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
             public void onClick(View v) {
                 String msg = etMessage.getText().toString();
                 if (!msg.isEmpty()) {
-                    messagePresenter.sendMessage(msg);
+                    if(isAdmin){
+                        messagePresenter.reSendMessage(sMemberID, msg);
+                    }else {
+                        messagePresenter.sendMessage(sMemberID, msg);
+                    }
                     etMessage.setText("");
                 }
             }
@@ -105,7 +119,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
             @Override
             public void run() {
                 // 在此处执行API请求以刷新数据
-                messagePresenter.getMessageList();
+                messagePresenter.getMessageList(sMemberID);
                 // 完成后再次调度自动刷新
                 startAutoRefresh();
             }

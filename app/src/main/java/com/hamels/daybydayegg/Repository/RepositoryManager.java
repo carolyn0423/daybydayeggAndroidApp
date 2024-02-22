@@ -23,6 +23,7 @@ import com.hamels.daybydayegg.Repository.Model.Machine;
 import com.hamels.daybydayegg.Repository.Model.MemberMessage;
 import com.hamels.daybydayegg.Repository.Model.Merchant;
 import com.hamels.daybydayegg.Repository.Model.Message;
+import com.hamels.daybydayegg.Repository.Model.MessageGroup;
 import com.hamels.daybydayegg.Repository.Model.Often;
 import com.hamels.daybydayegg.Repository.Model.Order;
 import com.hamels.daybydayegg.Repository.Model.OrderProduct;
@@ -731,6 +732,18 @@ public class RepositoryManager {
         });
     }
 
+    public void callMessageListGroup(final BaseContract.ValueCallback<List<MessageGroup>> valueCallback) {
+        basePresenter.startCallApi();
+        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+        MemberRepository.getInstance().getMessageListGroup(member_id, new ApiCallback<BaseModel<List<MessageGroup>>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<List<MessageGroup>> response) {
+                super.onApiSuccess(response);
+                valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_LIST_GROUP, response.getItems());
+            }
+        });
+    }
+
     public void callAboutDataApi(final BaseContract.ValueCallback<List<About>> valueCallback) {
         basePresenter.startCallApi();
         String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
@@ -1036,10 +1049,9 @@ public class RepositoryManager {
         });
     }
 
-    public void callGetMessageListApi(final BaseContract.ValueCallback<List<Message>> valueCallback) {
+    public void callGetMessageListApi(String sMemberID, final BaseContract.ValueCallback<List<Message>> valueCallback) {
         basePresenter.startCallApi();
-        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().getMessageList(member_id, new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
+        MemberRepository.getInstance().getMessageList(sMemberID, new ApiCallback<BaseModel<List<Message>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<Message>> response) {
                 super.onApiSuccess(response);
@@ -1057,6 +1069,17 @@ public class RepositoryManager {
             public void onApiSuccess(BaseModel response) {
                 super.onApiSuccess(response);
                 valueCallback.onValueCallback(TASK_POST_ADD_MEMBER_CONTACT, true);
+            }
+        });
+    }
+
+    public void callAddNewReplyMessageApi(String sReMemberID, String sMessage, final BaseContract.ValueCallback<Boolean> valueCallback) {
+        basePresenter.startCallApi();
+        MemberRepository.getInstance().AddNewReplyMessage(sReMemberID, sMessage, new ApiCallback<BaseModel>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel response) {
+                super.onApiSuccess(response);
+                valueCallback.onValueCallback(TASK_POST_ADD_NEWREPLY_MESSAGE, true);
             }
         });
     }

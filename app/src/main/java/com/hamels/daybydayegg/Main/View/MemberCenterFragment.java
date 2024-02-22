@@ -19,6 +19,7 @@ import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.Contract.MemberCenterContract;
 import com.hamels.daybydayegg.Main.Presenter.MemberCenterPresenter;
 import com.hamels.daybydayegg.MemberCenter.View.AboutFragment;
+import com.hamels.daybydayegg.MemberCenter.View.AdminMessageFragment;
 import com.hamels.daybydayegg.MemberCenter.View.FaqFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MemberGiftFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MemberInfoChangeFragment;
@@ -36,7 +37,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
     public static final String TAG = MemberCenterFragment.class.getSimpleName();
 
     private LinearLayout btnChangePassword, btnTransRecord, btnPoint, btnCoupon, btnContactUs, btnPrivacy, btnTerms, btnCustomerservice, btnMemberGift, btnOften;
-    private TextView tvName, tvPoint, tvPhone;
+    private TextView tvName, tvPoint, tvPhone, tvCustomerservice;
     private ImageView btnMemberInfo;
     private PopupWindow popupWindow;
     private ConstraintLayout btnlogout, btndelete;
@@ -120,6 +121,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         btnTerms.setOnClickListener(this);
 
         btnCustomerservice = view.findViewById(R.id.btn_customerservice);
+        tvCustomerservice = view.findViewById(R.id.txt_customerservice);
         btnCustomerservice.setOnClickListener(this);
 
         btnMemberGift = view.findViewById(R.id.btn_member_gift);
@@ -131,6 +133,10 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         if(!memberPresenter.getUserLogin()){
             memberPresenter.saveSourceActive("");
             ((MainActivity) getActivity()).changeTabFragment(MainIndexFragment.getInstance());
+        }
+
+        if(memberPresenter.getShopkeeper().equals("Y")){
+            tvCustomerservice.setText("留言回覆");
         }
     }
 
@@ -156,8 +162,11 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
         }else if (id == R.id.btn_logout){
             Logout();
         }else if (id == R.id.btn_customerservice){
-            ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance());
-//                Toast.makeText(getActivity(), "此功能未開放", Toast.LENGTH_LONG).show();
+            if(memberPresenter.getShopkeeper().equals("Y")){
+                ((MainActivity) getActivity()).addFragment(AdminMessageFragment.getInstance());
+            }else{
+                ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance(""));
+            }
         }else if(id == R.id.btn_member_gift) {
             ((MainActivity) getActivity()).addFragment(MemberGiftFragment.getInstance());
         }else if(id == R.id.btn_often){

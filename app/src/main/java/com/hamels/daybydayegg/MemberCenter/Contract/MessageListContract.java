@@ -11,11 +11,13 @@ public interface MessageListContract {
     }
 
     interface Presenter extends BaseContract.Presenter {
-        void getMessageList();
+        void getMessageList(String sMemberID);
 
         void updateReadMessageApi();
 
-        void sendMessage(String message);
+        void sendMessage(String sMemberID, String message);
+
+        void reSendMessage(String sMemberID, String message);
 
         boolean getUserLogin();
     }

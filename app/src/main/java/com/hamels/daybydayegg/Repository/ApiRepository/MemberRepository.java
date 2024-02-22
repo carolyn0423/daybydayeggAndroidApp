@@ -766,6 +766,20 @@ public class MemberRepository extends ApiRepository {
         retrofit.create(MemberApiService.class).postGetMessageList(requestBody).enqueue(callback);
     }
 
+    public void getMessageListGroup(final String member_id, final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
+        map.put("isApp", "true");
+        map.put("modified_user", member_id);
+        map.put("customer_id", EOrderApplication.CUSTOMER_ID);
+        map.put("SortMode", "NO_RELPY_NEW");
+        map.put("onlyNotReply", "N");
+
+        Log.e(TAG, "API getMessageListGroup : " + map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).postGetMessageListGroup(requestBody).enqueue(callback);
+    }
+
     public void addMemberContact(final String customer_id,final String member_id, final String message, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
@@ -778,6 +792,19 @@ public class MemberRepository extends ApiRepository {
         Log.e(TAG, "API addMemberContact : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).postAddMemberContact(requestBody).enqueue(callback);
+    }
+
+    public void AddNewReplyMessage(final String reMemberID, final String message, final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
+        map.put("modified_user", "Admin");
+        map.put("isApp", "true");
+        map.put("member_id", reMemberID);
+        map.put("reply_content", message);
+
+        Log.e(TAG, "API AddNewReplyMessage : " + map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).postAddNewReplyMessage(requestBody).enqueue(callback);
     }
 
     public void updateReadMessage(final String member_id, final AbsApiCallback callback) {

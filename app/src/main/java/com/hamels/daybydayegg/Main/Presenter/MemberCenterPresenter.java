@@ -62,5 +62,7 @@ public class MemberCenterPresenter extends BasePresenter<MemberCenterContract.Vi
 
     public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }
 
+    public String getShopkeeper(){ return repositoryManager.getShopkeeper(); }
+
     public void saveSourceActive(String sSourceActive) { repositoryManager.saveSourceActive(sSourceActive); }
 }

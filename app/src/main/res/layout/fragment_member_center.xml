@@ -211,6 +211,7 @@
                                 app:srcCompat="@drawable/service2" />
 
                             <TextView
+                                android:id="@+id/txt_customerservice"
                                 style="@style/imgtext_text_0"
                                 android:text="客服中心"
                                 android:textSize="14dp"/>

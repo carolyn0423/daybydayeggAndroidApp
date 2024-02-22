@@ -71,6 +71,7 @@ import com.google.zxing.common.BitMatrix;
 import com.hamels.daybydayegg.Donate.View.DonateFragment;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.MemberCenter.View.AboutFragment;
+import com.hamels.daybydayegg.MemberCenter.View.AdminMessageFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MemberInfoChangeFragment;
 import com.hamels.daybydayegg.MemberCenter.View.PasswordChangeFragment;
 import com.hamels.daybydayegg.Product.View.ProductDetailDescFragment;
@@ -834,7 +835,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 addFragment(MailFileFragment.getInstance());
                 break;
             case REQUEST_MESSAGE:
-                addFragment(MessageListFragment.getInstance());
+                if(mainPresenter.getShopkeeper().equals("Y")){
+                    addFragment(AdminMessageFragment.getInstance());
+                }else{
+                    addFragment(MessageListFragment.getInstance(""));
+                }
                 break;
             case REQUEST_SHOPPING_CART:
                 changeTabFragment(ShoppingCartFragment.getInstance());

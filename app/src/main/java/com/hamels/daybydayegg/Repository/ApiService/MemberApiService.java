@@ -12,6 +12,7 @@ import com.hamels.daybydayegg.Repository.Model.Faq;
 import com.hamels.daybydayegg.Repository.Model.MemberMessage;
 import com.hamels.daybydayegg.Repository.Model.Merchant;
 import com.hamels.daybydayegg.Repository.Model.Message;
+import com.hamels.daybydayegg.Repository.Model.MessageGroup;
 import com.hamels.daybydayegg.Repository.Model.Often;
 import com.hamels.daybydayegg.Repository.Model.Order;
 import com.hamels.daybydayegg.Repository.Model.PointHistory;
@@ -176,17 +177,23 @@ public interface MemberApiService {
     @POST("Message/GetMessageUnReadNum")
     Call<BaseModel<List<Map<String , String>>>> postGetMessageBadge(@Body RequestBody body);
 
+    @POST("Message/GetMessageAndReplyData")
+    Call<BaseModel<List<Message>>> postGetMessageList(@Body RequestBody body);
+
+    @POST("Message/GetMessageListGroupByMember")
+    Call<BaseModel<List<MessageGroup>>> postGetMessageListGroup(@Body RequestBody body);
+
     @POST("Member/GetBadgeNumber")
     Call<BaseModel<List<Map<String , String>>>> postGetBadgeNumber(@Body RequestBody body);
 
     @POST("v1/member/returnOrder")
     Call<BaseModel<Map<String, String>>> postReturnOrder(@Body RequestBody body);
 
-    @POST("Message/GetMessageAndReplyData")
-    Call<BaseModel<List<Message>>> postGetMessageList(@Body RequestBody body);
-
     @POST("Message/AddNewMessage")
     Call<BaseModel> postAddMemberContact(@Body RequestBody body);
+
+    @POST("Message/AddNewReplyMessage")
+    Call<BaseModel> postAddNewReplyMessage(@Body RequestBody body);
 
     @POST("Message/UpdateMessageReadFlag")
     Call<BaseModel> updateReadMessage(@Body RequestBody body);

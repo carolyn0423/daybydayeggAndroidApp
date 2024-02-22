@@ -72,6 +72,8 @@ public class ApiConstant {
     public static final int TASK_POST_GET_OFTENPICKUP = 48;
     public static final int TASK_POST_GET_OFTENVATNUMBER = 48;
     public static final int TASK_POST_GET_FUNCTION_SAVE_DATA = 49;
+    public static final int TASK_POST_GET_MESSAGE_LIST_GROUP = 50;
+    public static final int TASK_POST_ADD_NEWREPLY_MESSAGE = 51;
 
     public static final int RESPONSE_CODE_LOGIN_VERIFIED_ERROR = 209;
     public static final int TOTAL_ERROR_CODE = 500;
