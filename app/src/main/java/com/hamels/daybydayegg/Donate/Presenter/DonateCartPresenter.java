@@ -81,6 +81,10 @@ public class DonateCartPresenter extends BasePresenter<DonateCartContract.View> 
         return repositoryManager.getOftenMobile();
     }
 
+    public String getUserID(){
+        return repositoryManager.getUserID();
+    }
+
     @Override
     public void updateTicketCartCode(String cart_ticket_code) {
         repositoryManager.callUpdateTicketCartCode(cart_ticket_code, new BaseContract.ValueCallback<Boolean>() {

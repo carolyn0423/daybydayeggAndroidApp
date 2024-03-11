@@ -51,11 +51,11 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
     public ImageView img_donate, img_barcode;
     private TextView tv_barcode_number, tv_product_name, tv_type_name_spec_name, tv_RowNo, tv_TotalNumber, tv_eticket_due_date;
     private ImageButton btn_close;
-    private Button btn_donatedetail2;
+    private Button btn_donatedetail2, btn_deliver;
     private ConstraintLayout layout_left_arrow, layout_right_arrow;
 
     private int uid = 0;
-    private String ticket_code = "";
+    private String ticket_code = "", sProductID = "", sSpecID = "", sGiveDate = "";
     private int brightnessNow = 0;
 
     public static DonateDetailFragment getInstance(int uid) {
@@ -108,6 +108,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         tv_TotalNumber = view.findViewById(R.id.tv_TotalNumber);
         btn_close = view.findViewById(R.id.btn_close);
         btn_donatedetail2 = view.findViewById(R.id.btn_donatedetail2);
+        btn_deliver = view.findViewById(R.id.btn_deliver);
         layout_left_arrow = view.findViewById(R.id.layout_left_arrow);
         layout_right_arrow = view.findViewById(R.id.layout_right_arrow);
         tv_eticket_due_date = view.findViewById(R.id.tv_eticket_due_date);
@@ -125,6 +126,14 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
                 getActivity().getSupportFragmentManager().popBackStack();
 
                 ((MainActivity) getActivity()).addFragment(DonateDetail2Fragment.getInstance(uid));
+            }
+        });
+
+        btn_deliver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                presenter.updateTicket("add", sProductID, sSpecID, sGiveDate);
             }
         });
 
@@ -171,6 +180,9 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         //Glide.with(DonateDetailFragment.getInstance(uid)).load(EOrderApplication.sApiUrl + productDetail.get(0).getPictureUrl()).into(img_donate);
 
         ticket_code = productDetail.get(0).getTicketCode();
+        sProductID = productDetail.get(0).getproduct_id();
+        sSpecID = productDetail.get(0).getspec_id();
+        sGiveDate = productDetail.get(0).getgive_date();
 
         if (ticket_code != null && !ticket_code.equals("")) {
             img_donate.setBackgroundColor(Color.WHITE);
@@ -275,6 +287,10 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         } catch (WriterException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goWebViewCart(){
+        ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance());
     }
 }
 

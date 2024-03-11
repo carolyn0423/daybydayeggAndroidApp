@@ -260,6 +260,11 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
     }
 
     @Override
+    public void goWebViewCart() {
+
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter = new DonateDetailPresenter(this, getRepositoryManager(getContext()));

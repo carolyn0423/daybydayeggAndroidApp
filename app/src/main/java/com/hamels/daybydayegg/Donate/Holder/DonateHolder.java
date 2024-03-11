@@ -308,9 +308,15 @@ public class DonateHolder extends RecyclerView.ViewHolder {
                 tv_giveflag_left.setVisibility(View.VISIBLE);
                 break;
             case "BU": //自購自用
-                tv_meal_no_title.setText("提貨卷核銷");
-                tv_giveflag_left.setVisibility(View.INVISIBLE);
-                tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
+                if(history.getWriteoff_order_id().indexOf("T") == -1) {
+                    tv_meal_no_title.setText("提貨卷核銷");
+                    tv_giveflag_left.setVisibility(View.INVISIBLE);
+                    tv_ref_content.setText("備註/編號：" + history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
+                } else {
+                    tv_meal_no_title.setText("轉宅配");
+                    tv_giveflag_left.setVisibility(View.INVISIBLE);
+                    tv_ref_content.setText("單號 : " + history.getWriteoff_order_id());
+                }
                 break;
             case "RU": //接收贈送兌換
                 tv_meal_no_title.setText("受贈核銷");

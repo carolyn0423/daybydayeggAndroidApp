@@ -1190,6 +1190,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             changeTabFragment(MainIndexFragment.getInstance());
         }
         @JavascriptInterface
+        public void jsCall_goTicketPage() {
+            changeTabFragment(DonateFragment.getInstance());
+        }
+        @JavascriptInterface
         public void jsCall_setShopCartNumToApp() {
             refreshBadge();
         }
