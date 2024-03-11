@@ -19,8 +19,8 @@ public class EOrderApplication extends Application {
     public static final String DOMAIN_ADMIN_UAT = "https://www.hamels.com.tw:9941/";
     public static final String DOMAIN_ADMIN_SIT = "https://eorder.hamels.com.tw:9940/";
 
-    public static String ADMIN_DOMAIN = sAppVersion.equals("prod") ? DOMAIN_ADMIN_PRO : isUat ? DOMAIN_ADMIN_UAT : DOMAIN_ADMIN_SIT;
-    //public static String ADMIN_DOMAIN = DOMAIN_ADMIN_SIT;
+    //public static String ADMIN_DOMAIN = sAppVersion.equals("prod") ? DOMAIN_ADMIN_PRO : isUat ? DOMAIN_ADMIN_UAT : DOMAIN_ADMIN_SIT;
+    public static String ADMIN_DOMAIN = DOMAIN_ADMIN_SIT;
 
     public static String CUSTOMER_ID = "111";
     public static String CUSTOMER_NAME = "日日好蛋";
@@ -32,6 +32,7 @@ public class EOrderApplication extends Application {
     public static String WEBVIEW_COUPONS_URL = "/coupon.html";
     public static String WEBVIEW_TERMS_URL = "/faq.html?id=1";
     public static String WEBVIEW_LOCATION_URL = "/location.html";
+    public static String WEBVIEW_DELIVER_CART_URL = "/delivercart_location.html";
     public static String WEBVIEW_SHOPPING_CART_URL = "/shoppingcart_list.html";
     public static String WEBVIEW_SHOPPING_CART_URL2 = "/shoppingcart_list.html?ordertype=E";
     public static String WEBVIEW_NEWS_URL = "/news_detail.html";

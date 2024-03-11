@@ -66,6 +66,16 @@ public class DonateDetailPresenter extends BasePresenter<DonateDetailContract.Vi
         }
     }
 
+    @Override
+    public void updateTicket(String action, String product_id, String spec_id, String give_date) {
+        repositoryManager.callUpdateTicketCartApi(action, product_id, spec_id, give_date, new BaseContract.ValueCallback<Boolean>() {
+            @Override
+            public void onValueCallback(int task, Boolean type) {
+                view.goWebViewCart();
+            }
+        });
+    }
+
     public HashMap getOftenMobile(){
         return repositoryManager.getOftenMobile();
     }

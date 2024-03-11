@@ -28,6 +28,8 @@ public interface DonateCartContract {
 
         HashMap<String, String> getOftenMobile();
 
+        String getUserID();
+
 //        void SavePush(String mobile, String title, String content);
     }
 }

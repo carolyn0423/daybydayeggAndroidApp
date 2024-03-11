@@ -49,7 +49,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
     private RecyclerView recyclerView;
     private DonateCartAdapter donateCartAdapter;
     private TabLayout tabLayout;
-    private Button btn_alldonate;
+    private Button btn_alldonate, btn_deliver;
     private TextView tv_product_cnt;
 
     private String type_id = "0";
@@ -99,6 +99,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
         tabLayout = view.findViewById(R.id.tab_layout);
         recyclerView = view.findViewById(R.id.donate_recycler_view);
         btn_alldonate = view.findViewById(R.id.btn_alldonate);
+        btn_deliver = view.findViewById(R.id.btn_deliver);
         //btn_submit = view.findViewById(R.id.btn_submit);
         tv_product_cnt = view.findViewById(R.id.tv_product_cnt);
 
@@ -106,6 +107,13 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
             @Override
             public void onClick(View v) {
                 ((MainActivity) getActivity()).addFragment(DonateCart2Fragment.getInstance());
+            }
+        });
+
+        btn_deliver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance());
             }
         });
 

@@ -111,9 +111,19 @@
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
+<!--            <Button-->
+<!--                android:id="@+id/btn_alldonate"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="55dp"-->
+<!--                android:background="@color/colorYunlinhn"-->
+<!--                android:text="全數轉贈"-->
+<!--                android:textColor="#FFF"-->
+<!--                android:textSize="16dp" />-->
+
             <Button
                 android:id="@+id/btn_alldonate"
-                android:layout_weight="1"
+                android:layout_weight=".5"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:background="@color/colorYunlinhn"
@@ -121,25 +131,15 @@
                 android:textColor="#FFF"
                 android:textSize="16dp" />
 
-<!--            <Button-->
-<!--                android:id="@+id/btn_alldonate"-->
-<!--                android:layout_weight=".5"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:background="@color/main"-->
-<!--                android:text="全數轉贈"-->
-<!--                android:textColor="#FFF"-->
-<!--                android:textSize="16dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/btn_submit"-->
-<!--                android:layout_weight=".5"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:background="@color/orangeText"-->
-<!--                android:text="一次兌換"-->
-<!--                android:textColor="#FFF"-->
-<!--                android:textSize="16dp" />-->
+            <Button
+                android:id="@+id/btn_deliver"
+                android:layout_weight=".5"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:background="@color/orangeText"
+                android:text="轉宅配"
+                android:textColor="#FFF"
+                android:textSize="16dp" />
 
         </LinearLayout>
 

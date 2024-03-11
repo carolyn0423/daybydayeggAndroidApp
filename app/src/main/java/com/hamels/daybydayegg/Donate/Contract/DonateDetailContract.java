@@ -15,6 +15,8 @@ public interface DonateDetailContract {
         void showErrorAlert(String message);
 
         void goBack();
+
+        void goWebViewCart();
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -23,6 +25,8 @@ public interface DonateDetailContract {
         void SaveTicketData(String mobile, String uid, String quantity, String nike);
 
         HashMap getOftenMobile();
+
+        void updateTicket(String action, String product_id, String spec_id, String give_date);
 
 //        void SavePush(String mobile, String title, String content);
     }
