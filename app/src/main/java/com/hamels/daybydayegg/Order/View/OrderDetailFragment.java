@@ -26,6 +26,7 @@ public class OrderDetailFragment extends BaseFragment {
     private static final String MEALNO = "meal_no";
     private String orderid = "";
     private String meal_no = "";
+    private String order_source = "";
 
     public static OrderDetailFragment getInstance() {
         if (fragment == null) {
@@ -35,7 +36,7 @@ public class OrderDetailFragment extends BaseFragment {
         return fragment;
     }
 
-    public static OrderDetailFragment getInstance(String orderid, String meal_no) {
+    public static OrderDetailFragment getInstance(String orderid, String meal_no, String order_source) {
         Log.e(TAG, "----------------------------" + orderid);
 
         if (fragment == null) {
@@ -45,6 +46,7 @@ public class OrderDetailFragment extends BaseFragment {
         Bundle bundle = new Bundle();
         bundle.putString(ORDERID, orderid);
         bundle.putString(MEALNO, meal_no);
+        bundle.putString("ORDERSOURCE", order_source);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -57,6 +59,7 @@ public class OrderDetailFragment extends BaseFragment {
 
         orderid = getArguments().getString(ORDERID, "");
         meal_no = getArguments().getString(MEALNO, "");
+        order_source = getArguments().getString("ORDERSOURCE", "");
 
         initView(view);
 
@@ -80,7 +83,7 @@ public class OrderDetailFragment extends BaseFragment {
         //Toast.makeText(getActivity(), "order_id: " + orderid, Toast.LENGTH_LONG).show();
         //Toast.makeText(getActivity(), "meal_no: " + meal_no, Toast.LENGTH_LONG).show();
 
-        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDERDETAIL_URL + "?order_id=" + orderid + "&meal_no=" + meal_no);
+        webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDERDETAIL_URL + "?order_id=" + orderid + "&meal_no=" + meal_no + "&order_source=" + order_source);
     }
 
     @Override

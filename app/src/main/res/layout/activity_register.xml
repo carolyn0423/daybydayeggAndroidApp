@@ -412,7 +412,7 @@
             style="@style/fontRegularTw.greyDoubleDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="20dp"
             android:button="@drawable/selec_check_login"
             android:paddingLeft="8dp"
             android:textSize="14dp"
