@@ -1,14 +1,18 @@
 package com.hamels.daybydayegg.Donate.View;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +33,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Donate.Presenter.DonateDetailPresenter;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.Donate.Contract.DonateDetailContract;
@@ -55,8 +60,9 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
     private ConstraintLayout layout_left_arrow, layout_right_arrow;
 
     private int uid = 0;
-    private String ticket_code = "", sProductID = "", sSpecID = "", sGiveDate = "";
+    private String ticket_code = "", sProductID = "", sSpecID = "", sGiveDate = "", sCode = "";
     private int brightnessNow = 0;
+    private boolean donateflag = true;
 
     public static DonateDetailFragment getInstance(int uid) {
         if (fragment == null) {
@@ -123,17 +129,28 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         btn_donatedetail2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                if(donateflag) {
+                    getActivity().getSupportFragmentManager().popBackStack();
 
-                ((MainActivity) getActivity()).addFragment(DonateDetail2Fragment.getInstance(uid));
+                    ((MainActivity) getActivity()).addFragment(DonateDetail2Fragment.getInstance(uid));
+                }else{
+                    final FragmentManager manager = getActivity().getSupportFragmentManager();
+                    new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("受贈提貨券不可再做轉贈")
+                            .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                }
             }
         });
 
         btn_deliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                presenter.updateTicket("add", sProductID, sSpecID, sGiveDate);
+                goWebViewCart();
+                //  presenter.updateTicket("add", sProductID, sSpecID, sGiveDate);
             }
         });
 
@@ -183,7 +200,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         sProductID = productDetail.get(0).getproduct_id();
         sSpecID = productDetail.get(0).getspec_id();
         sGiveDate = productDetail.get(0).getgive_date();
-
+        sCode = productDetail.get(0).getTicketCode();
         if (ticket_code != null && !ticket_code.equals("")) {
             img_donate.setBackgroundColor(Color.WHITE);
 
@@ -201,7 +218,11 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
 //        }
 
         if (productDetail.get(0).getTicketStatus().equals("R")) {
-            btn_donatedetail2.setVisibility(View.GONE);
+            donateflag = false;
+            btn_donatedetail2.setBackgroundResource(R.drawable.donate_btnbg_4);
+        }else{
+            donateflag = true;
+            btn_donatedetail2.setBackgroundResource(R.drawable.donate_btnbg_1);
         }
 
         tv_barcode_number.setText(ticket_code);
@@ -290,7 +311,8 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
     }
 
     public void goWebViewCart(){
-        ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance());
+        EOrderApplication.DeliverCodeUid = uid + "";
+        ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance(sCode));
     }
 }
 

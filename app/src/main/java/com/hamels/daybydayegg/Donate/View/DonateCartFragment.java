@@ -4,12 +4,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
@@ -32,6 +34,7 @@ import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Donate.Adapter.DonateCartAdapter;
 import com.hamels.daybydayegg.Donate.Contract.DonateCartContract;
 import com.hamels.daybydayegg.Donate.Presenter.DonateCartPresenter;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.R;
@@ -60,6 +63,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
     private int barcodeWidth = 350;
     private int barcodeHeight = 350;
     private int brightnessNow = 0;
+    private boolean donateflag = true;
 
     public static DonateCartFragment getInstance() {
         if (fragment == null) {
@@ -106,14 +110,26 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
         btn_alldonate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).addFragment(DonateCart2Fragment.getInstance());
+                if (!donateflag) {
+                    final FragmentManager manager = getActivity().getSupportFragmentManager();
+                    new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("受贈提貨券不可再做轉贈")
+                            .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                }else{
+                    ((MainActivity) getActivity()).addFragment(DonateCart2Fragment.getInstance());
+                }
             }
         });
 
         btn_deliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance());
+                EOrderApplication.DeliverCodeUid = "";
+                ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance(""));
             }
         });
 
@@ -218,8 +234,12 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
         donateCartAdapter.setDonate(donateList);
 
         int total_cart_count = 0;
+        donateflag = true;
         for (int i = 0; i < donateList.size(); i++) {
             total_cart_count += Integer.parseInt(donateList.get(i).getcart_count());
+            if (donateList.get(i).getTicketStatus().equals("R")) {
+                donateflag = false;
+            }
         }
         tv_product_cnt.setText(Integer.toString(total_cart_count));
 
@@ -230,12 +250,17 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
             btn_alldonate.setAlpha(.5f);
             //btn_submit.setEnabled(false);
             //btn_submit.setAlpha(.5f);
-        }
-        else {
+        } else {
             btn_alldonate.setEnabled(true);
             btn_alldonate.setAlpha(1f);
             //btn_submit.setEnabled(true);
             btn_alldonate.setAlpha(1f);
+        }
+
+        if(!donateflag){
+            btn_alldonate.setBackground(new ColorDrawable(getResources().getColor(R.color.greyLotList)));
+        }else{
+            btn_alldonate.setBackground(new ColorDrawable(getResources().getColor(R.color.colorYunlinhn)));
         }
     }
 

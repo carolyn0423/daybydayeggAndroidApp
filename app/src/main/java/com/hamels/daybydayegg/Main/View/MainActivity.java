@@ -68,6 +68,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.hamels.daybydayegg.Donate.View.DonateCartFragment;
+import com.hamels.daybydayegg.Donate.View.DonateDetailFragment;
 import com.hamels.daybydayegg.Donate.View.DonateFragment;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.MemberCenter.View.AboutFragment;
@@ -1290,8 +1292,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 changeTabFragment(MainIndexFragment.getInstance());
             } else if(currentPage.indexOf("shoppingcart_list_product.html") > 0){
                 mainPresenter.GetShopCartLocationQuantity();
-            } else if(currentPage.indexOf("AioCheckOut") > 0){
+            } else if(currentPage.indexOf("AioCheckOut") > 0) {
                 webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_PAY_COMPLETE_URL + "?isSuccess=false" + "");
+            } else if(currentPage.indexOf("delivercart") > 0 || currentPage.indexOf("delivercart_location") > 0){
+                if(EOrderApplication.DeliverCodeUid.equals("")){
+                    changeTabFragment(DonateCartFragment.getInstance());
+                }else{
+                    changeTabFragment(DonateDetailFragment.getInstance(Integer.parseInt(EOrderApplication.DeliverCodeUid)));
+                }
             } else {
                 webView.goBack();
             }

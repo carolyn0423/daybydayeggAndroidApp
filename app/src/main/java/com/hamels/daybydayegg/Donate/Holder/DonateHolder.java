@@ -313,7 +313,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
                     tv_giveflag_left.setVisibility(View.INVISIBLE);
                     tv_ref_content.setText("備註/編號：" + history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 } else {
-                    tv_meal_no_title.setText("轉宅配");
+                    tv_meal_no_title.setText("轉出貨");
                     tv_giveflag_left.setVisibility(View.INVISIBLE);
                     tv_ref_content.setText("單號 : " + history.getWriteoff_order_id());
                 }
