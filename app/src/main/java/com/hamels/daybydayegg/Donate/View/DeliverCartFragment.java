@@ -31,10 +31,14 @@ public class DeliverCartFragment extends BaseFragment {
     private WebView webView;
     protected AppToolbar appToolbar;
     private RepositoryManager repositoryManager;
-    public static DeliverCartFragment getInstance() {
+    private String sCode = "";
+    public static DeliverCartFragment getInstance(String sCode) {
         if (fragment == null) {
             fragment = new DeliverCartFragment();
         }
+        Bundle bundle = new Bundle();
+        bundle.putString("TOCKET_CODE", sCode);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -42,6 +46,9 @@ public class DeliverCartFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_webview, container, false);
+        if (getArguments() != null) {
+            sCode = getArguments().getString("TOCKET_CODE", "");
+        }
         initView(view);
 
         return view;
@@ -73,7 +80,7 @@ public class DeliverCartFragment extends BaseFragment {
                         }
                     }).show();
         }else {
-            webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_DELIVER_CART_URL);
+            webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_DELIVER_CART_URL + "?ticket_code=" + sCode);
         }
 
     }
