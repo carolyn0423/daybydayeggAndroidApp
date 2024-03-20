@@ -1161,6 +1161,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     case "connection_name":
                         sData = EOrderApplication.dbConnectName;
                         break;
+                    case "OrderListTag":
+                        sData = EOrderApplication.OrderListTag;
+                        break;
+                    case "OrderListScrollTop":
+                        sData = EOrderApplication.OrderListScrollTop;
+                        break;
                     default:
                         JSONObject oMemberData = new JSONObject(getUser().toString());
                         sData = oMemberData.getString(Info);
@@ -1242,6 +1248,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 clipboard.setPrimaryClip(clip);
                 Toast.makeText(getBaseContext(), "已複製", Toast.LENGTH_SHORT).show();
             }
+        }
+        @JavascriptInterface
+        public void jsCall_saveOrderListTag(String OrderListTag) {
+            EOrderApplication.OrderListTag = OrderListTag;
+        }
+        @JavascriptInterface
+        public void jsCall_saveOrderListScrollTop(String OrderListScrollTop) {
+            EOrderApplication.OrderListScrollTop = OrderListScrollTop;
         }
     }
 

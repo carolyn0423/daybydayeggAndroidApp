@@ -81,6 +81,9 @@ public class TransRecordFragment extends BaseFragment {
         ((MainActivity) getActivity()).bindWebView(webView);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         //setCookies();
+
+        EOrderApplication.OrderListTag = "";
+        EOrderApplication.OrderListScrollTop = "0";
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDER_URL + "?orderType=" + mOrderType + "&order_id=" + sOrderID + "&meal_no=" + sMealNo);
     }
 
