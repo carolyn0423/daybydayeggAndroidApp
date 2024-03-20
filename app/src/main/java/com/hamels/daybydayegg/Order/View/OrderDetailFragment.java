@@ -83,6 +83,8 @@ public class OrderDetailFragment extends BaseFragment {
         //Toast.makeText(getActivity(), "order_id: " + orderid, Toast.LENGTH_LONG).show();
         //Toast.makeText(getActivity(), "meal_no: " + meal_no, Toast.LENGTH_LONG).show();
 
+        EOrderApplication.OrderListTag = "";
+        EOrderApplication.OrderListScrollTop = "0";
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDERDETAIL_URL + "?order_id=" + orderid + "&meal_no=" + meal_no + "&order_source=" + order_source);
     }
 

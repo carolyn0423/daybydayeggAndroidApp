@@ -157,6 +157,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private int VersionCode = 0;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private String sPDFDir = "";
+    private String sUurrentURL = "";
     private static final int REQUEST_LOCATION_PERMISSION = 100;
     private static final int PERMISSION_REQUEST_LOCATION = 1;
     private FusedLocationProviderClient fusedLocationClient;
@@ -1125,6 +1126,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public boolean shouldOverrideUrlLoading(WebView webView, String url) {
                 try {
+                    sUurrentURL = url;
                     if (url.startsWith("https://maps.app.goo.gl/") || url.startsWith("https://www.google.com.tw/")) {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         startActivity(intent);
@@ -1160,6 +1162,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         break;
                     case "connection_name":
                         sData = EOrderApplication.dbConnectName;
+                        break;
+                    case "OrderListTag":
+                        sData = EOrderApplication.OrderListTag;
+                        break;
+                    case "OrderListScrollTop":
+                        sData = EOrderApplication.OrderListScrollTop;
                         break;
                     default:
                         JSONObject oMemberData = new JSONObject(getUser().toString());
@@ -1234,14 +1242,22 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             new DownloadFile().execute(sPDFUrl, "Download");
         }
         @JavascriptInterface
-        public void jsCall_copyToClipboard(String sAccount) {
+        public void jsCall_copyToClipboard(String sMessage) {
             ClipboardManager clipboard = (ClipboardManager) getBaseContext().getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Copied Text", sAccount);
+            ClipData clip = ClipData.newPlainText("Copied Text", sMessage);
 
             if (clipboard != null) {
                 clipboard.setPrimaryClip(clip);
                 Toast.makeText(getBaseContext(), "已複製", Toast.LENGTH_SHORT).show();
             }
+        }
+        @JavascriptInterface
+        public void jsCall_saveOrderListTag(String OrderListTag) {
+            EOrderApplication.OrderListTag = OrderListTag;
+        }
+        @JavascriptInterface
+        public void jsCall_saveOrderListScrollTop(String OrderListScrollTop) {
+            EOrderApplication.OrderListScrollTop = OrderListScrollTop;
         }
     }
 
@@ -1292,7 +1308,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 changeTabFragment(MainIndexFragment.getInstance());
             } else if(currentPage.indexOf("shoppingcart_list_product.html") > 0){
                 mainPresenter.GetShopCartLocationQuantity();
-            } else if(currentPage.indexOf("AioCheckOut") > 0) {
+            } else if(currentPage.indexOf("AioCheckOut") > 0 || sUurrentURL.indexOf("ecpay.com.tw") > 0) {
                 webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_PAY_COMPLETE_URL + "?isSuccess=false" + "");
             } else if(currentPage.indexOf("delivercart") > 0 || currentPage.indexOf("delivercart_location") > 0){
                 if(EOrderApplication.DeliverCodeUid.equals("")){
