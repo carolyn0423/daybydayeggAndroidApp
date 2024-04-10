@@ -14,6 +14,7 @@ public class Donate implements Parcelable {
     // donatelist
     private String picture_url = "";
     private String eticket_due_date = "";
+    private String limit_product_name = "";
     private String product_name = "";
     private String type_name = "";
     private String spec_name = "";
@@ -53,7 +54,7 @@ public class Donate implements Parcelable {
     private String ticket_enabled = "";
     private String ticket_due = "";
     private String contact_phone = "";
-
+    private String transaction_name = "";
 
     public String getGive_member_name() {
         return give_member_name;
@@ -102,6 +103,10 @@ public class Donate implements Parcelable {
 
     public void setEticketDueDate(String redemption_period) {
         this.eticket_due_date = redemption_period;
+    }
+
+    public String getLimitProductName() {
+        return limit_product_name;
     }
 
     public String getProductName() {
@@ -344,6 +349,10 @@ public class Donate implements Parcelable {
         return contact_phone;
     }
 
+    public String getTransactionName() {
+        return transaction_name;
+    }
+
     protected Donate(Parcel in) {
         uid = in.readInt();
 
@@ -357,6 +366,7 @@ public class Donate implements Parcelable {
         ticket_enabled = in.readString();
         ticket_due = in.readString();
         contact_phone = in.readString();
+        transaction_name = in.readString();
     }
 
     public static final Creator<Donate> CREATOR = new Creator<Donate>() {
@@ -390,6 +400,7 @@ public class Donate implements Parcelable {
         dest.writeString(ticket_enabled);
         dest.writeString(ticket_due);
         dest.writeString(contact_phone);
+        dest.writeString(transaction_name);
     }
 }
 

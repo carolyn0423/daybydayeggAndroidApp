@@ -51,7 +51,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
 
     private ScrollView sv_scrollview;
     private ImageView img_donate;
-    private TextView tv_product_name, tv_type_name_spec_name, tv_eticket_due_date, tv_left_number;
+    private TextView tv_product_name, tv_limit_product_name, tv_type_name_spec_name, tv_eticket_due_date, tv_left_number;
     private EditText edit_num, edit_phone, edit_nick;
     private Button btn_close, btn_minus, btn_plus, btn_submit;
     private Spinner spinner;
@@ -108,6 +108,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
 
         img_donate = view.findViewById(R.id.img_donate);
         tv_product_name = view.findViewById(R.id.tv_product_name);
+        tv_limit_product_name = view.findViewById(R.id.tv_limit_product_name);
         tv_type_name_spec_name = view.findViewById(R.id.tv_type_name_spec_name);
         tv_eticket_due_date = view.findViewById(R.id.tv_eticket_due_date);
         tv_left_number = view.findViewById(R.id.tv_left_number);
@@ -221,6 +222,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
 
         Glide.with(DonateDetail2Fragment.getInstance(uid)).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_donate);
         tv_product_name.setText(productDetail.get(0).getProductName());
+        tv_limit_product_name.setText(productDetail.get(0).getLimitProductName());
         tv_type_name_spec_name.setText(" ( " + productDetail.get(0).getTypeName() + " - " + productDetail.get(0).getSpecName() + " ) ");
         tv_eticket_due_date.setText(productDetail.get(0).getEticketDueDate());
         tv_left_number.setText(productDetail.get(0).getLeftNumber());

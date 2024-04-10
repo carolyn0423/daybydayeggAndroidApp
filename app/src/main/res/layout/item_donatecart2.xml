@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_product_name"
+            android:id="@+id/tv_limit_product_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -40,9 +40,21 @@
             android:textColor="#231815"
             android:textSize="18dp"
             android:textStyle="bold"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_picture_url"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textColor="#595757"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/img_picture_url"
+            app:layout_constraintTop_toBottomOf="@+id/tv_limit_product_name" />
 
         <TextView
             android:id="@+id/tv_type_name_spec_name"

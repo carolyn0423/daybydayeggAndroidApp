@@ -138,15 +138,18 @@ public class DonateHistoryDetailFragment extends BaseFragment implements DonateC
 
         switch (productDetail.get(0).getTicketStatus()){
             case "G": //贈出
-                tv_meal_no_title.setText("轉贈提貨券");
+                //  tv_meal_no_title.setText("轉贈提貨券");
+                tv_meal_no_title.setText(productDetail.get(0).getTransactionName());
                 tv_ref_content.setText("受贈者：" + productDetail.get(0).getGive_member_name() + " " + productDetail.get(0).getGive_member_mobile());
                 break;
             case "BU": //自購自用
-                tv_meal_no_title.setText("提貨卷核銷");
+                //  tv_meal_no_title.setText("提貨卷核銷");
+                tv_meal_no_title.setText(productDetail.get(0).getTransactionName());
                 tv_ref_content.setText("備註/編號："+ productDetail.get(0).getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 break;
             case "RU": //接收贈送兌換
-                tv_meal_no_title.setText("受贈核銷");
+                //  tv_meal_no_title.setText("受贈核銷");
+                tv_meal_no_title.setText(productDetail.get(0).getTransactionName());
                 tv_ref_content.setText("備註/編號："+ productDetail.get(0).getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 break;
         }

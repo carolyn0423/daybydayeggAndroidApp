@@ -13,6 +13,7 @@ public class DonateCart implements Parcelable {
 
     private String picture_url = "";
     private String product_name = "";
+    private String limit_product_name = "";
     private String eticket_due_date = "";
     private String left_number = "";
     private String cart_count = "";
@@ -54,6 +55,10 @@ public class DonateCart implements Parcelable {
 
     public void setProductName(String product_name) {
         this.product_name = product_name;
+    }
+
+    public String getLimitProductName() {
+        return limit_product_name;
     }
 
     public String getcart_count() {

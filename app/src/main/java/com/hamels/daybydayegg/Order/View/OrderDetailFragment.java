@@ -85,6 +85,7 @@ public class OrderDetailFragment extends BaseFragment {
 
         EOrderApplication.OrderListTag = "";
         EOrderApplication.OrderListScrollTop = "0";
+        Log.e(TAG, "WebView Url : " + EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDERDETAIL_URL + "?order_id=" + orderid + "&meal_no=" + meal_no + "&order_source=" + order_source);
         webView.loadUrl(EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_ORDERDETAIL_URL + "?order_id=" + orderid + "&meal_no=" + meal_no + "&order_source=" + order_source);
     }
 

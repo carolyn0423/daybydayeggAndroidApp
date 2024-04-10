@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tv_product_name_right"
+            android:id="@+id/tv_limit_product_name_right"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -58,9 +58,20 @@
             android:textColor="#231815"
             android:textSize="13dp"
             android:textStyle="bold"
-            android:text="商品名稱"
+            android:text=""
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_donate_right" />
+
+        <TextView
+            android:id="@+id/tv_product_name_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_limit_product_name_right" />
 
         <TextView
             android:id="@+id/tv_spec_name2_right"
@@ -277,7 +288,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tv_product_name_left"
+            android:id="@+id/tv_limit_product_name_left"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -288,9 +299,20 @@
             android:textColor="#231815"
             android:textSize="13dp"
             android:textStyle="bold"
-            android:text="商品名稱"
+            android:text=""
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_donate_left" />
+
+        <TextView
+            android:id="@+id/tv_product_name_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:textColor="#595757"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/img_donate_left"
+            app:layout_constraintTop_toBottomOf="@+id/tv_limit_product_name_left" />
 
         <TextView
             android:id="@+id/tv_spec_name2_left"

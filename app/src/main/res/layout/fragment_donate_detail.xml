@@ -150,7 +150,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/img_donate" />
 
                     <TextView
-                        android:id="@+id/tv_product_name"
+                        android:id="@+id/tv_limit_product_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
@@ -164,6 +164,19 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_barcode_number" />
+
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#595757"
+                        android:textSize="13dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_limit_product_name" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

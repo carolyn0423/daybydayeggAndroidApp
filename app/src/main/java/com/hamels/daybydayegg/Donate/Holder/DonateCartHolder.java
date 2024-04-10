@@ -22,7 +22,7 @@ import java.util.Date;
 public class DonateCartHolder extends RecyclerView.ViewHolder {
     public static final String TAG = DonateCartHolder.class.getSimpleName();
     public ImageView img_picture_url;
-    public TextView tv_product_name, tv_type_name_spec_name, tv_eticket_due_date, tv_left_number, tv_giveflag, tv_cart_count;
+    public TextView tv_product_name, tv_limit_product_name, tv_type_name_spec_name, tv_eticket_due_date, tv_left_number, tv_giveflag, tv_cart_count;
     public EditText edit_cart_count;
     public Button btn_minus, btn_plus;
 
@@ -31,6 +31,7 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
 
         tv_giveflag = itemView.findViewById(R.id.tv_giveflag);
         img_picture_url = itemView.findViewById(R.id.img_picture_url);
+        tv_limit_product_name = itemView.findViewById(R.id.tv_limit_product_name);
         tv_product_name = itemView.findViewById(R.id.tv_product_name);
         //tv_type_name_spec_name = itemView.findViewById(R.id.tv_type_name_spec_name);
         tv_eticket_due_date = itemView.findViewById(R.id.tv_eticket_due_date);
@@ -44,6 +45,7 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
     public void setImg_donatecart1(DonateCart history) {
         String sPictureUrl = history.getPictureUrl() == null || history.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : history.getPictureUrl();
         Glide.with(DonateCartFragment.getInstance()).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_picture_url);
+        tv_limit_product_name.setText(history.getLimitProductName());
         tv_product_name.setText(history.getProductName());
         //tv_type_name_spec_name.setText(" ( " + history.getTypeName() + " - " + history.getspec_name() + " ) ");
         //tv_spec_name.setText("");
@@ -78,6 +80,7 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
     public void setImg_donatecart2(DonateCart history) {
         String sPictureUrl = history.getPictureUrl() == null || history.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : history.getPictureUrl();
         Glide.with(DonateCart2Fragment.getInstance()).load(EOrderApplication.sApiUrl + sPictureUrl).into(img_picture_url);
+        tv_limit_product_name.setText(history.getLimitProductName());
         tv_product_name.setText(history.getProductName());
         //tv_type_name_spec_name.setText(" ( " + history.getTypeName() + " - " + history.getspec_name() + " ) ");
         tv_eticket_due_date.setText(history.getEticketDueDate());

@@ -54,7 +54,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
     private DonateDetailContract.Presenter presenter;
 
     public ImageView img_donate, img_barcode;
-    private TextView tv_barcode_number, tv_product_name, tv_type_name_spec_name, tv_RowNo, tv_TotalNumber, tv_eticket_due_date;
+    private TextView tv_barcode_number, tv_product_name, tv_limit_product_name, tv_type_name_spec_name, tv_RowNo, tv_TotalNumber, tv_eticket_due_date;
     private ImageButton btn_close;
     private Button btn_donatedetail2, btn_deliver;
     private ConstraintLayout layout_left_arrow, layout_right_arrow;
@@ -108,6 +108,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         //img_barcode = view.findViewById(R.id.img_barcode);
         tv_barcode_number = view.findViewById(R.id.tv_barcode_number);
         tv_product_name = view.findViewById(R.id.tv_product_name);
+        tv_limit_product_name = view.findViewById(R.id.tv_limit_product_name);
         //tv_type_name_spec_name = view.findViewById(R.id.tv_type_name_spec_name);
         //tv_spec_name = view.findViewById(R.id.tv_spec_name);
         tv_RowNo = view.findViewById(R.id.tv_RowNo);
@@ -227,6 +228,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
 
         tv_barcode_number.setText(ticket_code);
         tv_product_name.setText(productDetail.get(0).getProductName());
+        tv_limit_product_name.setText(productDetail.get(0).getLimitProductName());
         //tv_type_name_spec_name.setText(" ( " + productDetail.get(0).getTypeName() + " - " + productDetail.get(0).getSpecName() + " ) ");
         //tv_spec_name.setText(productDetail.get(0).getSpecName());
         tv_RowNo.setText(productDetail.get(0).getRowNo());

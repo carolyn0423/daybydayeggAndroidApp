@@ -27,14 +27,14 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     // donatelist
     public ImageView img_donate_left, img_donate_right, tv_cart_left, tv_cart_right;
     public TextView tv_type_name_left_title, tv_type_name_right_title, tv_spec_name_left_title, tv_spec_name_right_title, tv_give_quantity_left_title, tv_give_quantity_right_title, tv_buy_quantity_left_title, tv_buy_quantity_right_title;
-    public TextView tv_product_name_left, tv_spec_name2_left, tv_eticket_due_date_left, tv_type_name_left, tv_spec_name_left, tv_buy_quantity_left, tv_give_quantity_left, tv_left_number_left;
-    public TextView tv_product_name_right, tv_spec_name2_right, tv_eticket_due_date_right, tv_type_name_right, tv_spec_name_right, tv_buy_quantity_right, tv_give_quantity_right, tv_left_number_right;
+    public TextView tv_product_name_left, tv_limit_product_name_left, tv_spec_name2_left, tv_eticket_due_date_left, tv_type_name_left, tv_spec_name_left, tv_buy_quantity_left, tv_give_quantity_left, tv_left_number_left;
+    public TextView tv_product_name_right, tv_limit_product_name_right, tv_spec_name2_right, tv_eticket_due_date_right, tv_type_name_right, tv_spec_name_right, tv_buy_quantity_right, tv_give_quantity_right, tv_left_number_right;
     public TextView tv_giveflag_left, tv_giveflag_right;
     public ConstraintLayout layout_left, layout_right, donatehistory_constraintLayout, donatehistory_constraintLayout2;
 
     // donatehistorylist no meal_no
     public TextView tv_meal_no_title, tv_meal_no, tv_tickets_count_title, tv_tickets_count, tv_ref_content, tv_writeoff_due_date, tv_expiredflag_left;
-    public TextView tv_product_name, tv_spec_name;
+    public TextView tv_product_name, tv_limit_product_name, tv_spec_name;
 
     // meal_no
     public ImageView img_product;
@@ -47,6 +47,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         img_donate_left = itemView.findViewById(R.id.img_donate_left);
         img_donate_right = itemView.findViewById(R.id.img_donate_right);
 
+        tv_limit_product_name_left = itemView.findViewById(R.id.tv_limit_product_name_left);
+        tv_limit_product_name_right = itemView.findViewById(R.id.tv_limit_product_name_right);
         tv_product_name_left = itemView.findViewById(R.id.tv_product_name_left);
         tv_product_name_right = itemView.findViewById(R.id.tv_product_name_right);
         //tv_spec_name2_left = itemView.findViewById(R.id.tv_spec_name2_left);
@@ -90,7 +92,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
 
         donatehistory_constraintLayout = itemView.findViewById(R.id.donatehistory_constraintLayout);
 
-        tv_product_name = itemView.findViewById(R.id.tv_product_name);
+        //tv_product_name = itemView.findViewById(R.id.tv_product_name);
+        tv_limit_product_name = itemView.findViewById(R.id.tv_limit_product_name);
         tv_spec_name = itemView.findViewById(R.id.tv_spec_name);
 
         donatehistory_constraintLayout2 = itemView.findViewById(R.id.donatehistory_constraintLayout2);
@@ -120,6 +123,10 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         tv_eticket_due_date_left.setText(productleft.getEticketDueDate());
         tv_eticket_due_date_right.setText(productright.getEticketDueDate());
         tv_eticket_due_date_right.setVisibility(View.VISIBLE);
+
+        tv_limit_product_name_left.setText(productleft.getLimitProductName());
+        tv_limit_product_name_right.setText(productright.getLimitProductName());
+        tv_limit_product_name_right.setVisibility(View.VISIBLE);
 
         tv_product_name_left.setText(productleft.getProductName());
         tv_product_name_right.setText(productright.getProductName());
@@ -199,6 +206,9 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         String sLeftPictureUrl = productleft.getPictureUrl() == null || productleft.getPictureUrl().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : productleft.getPictureUrl();
 
         Glide.with(DonateFragment.getInstance()).load(EOrderApplication.sApiUrl + sLeftPictureUrl).into(img_donate_left);
+
+        tv_limit_product_name_left.setText(productleft.getLimitProductName());
+        tv_limit_product_name_right.setVisibility(View.INVISIBLE);
 
         tv_product_name_left.setText(productleft.getProductName());
         tv_product_name_right.setVisibility(View.INVISIBLE);
@@ -300,7 +310,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
                 tv_giveflag_left.setVisibility(View.INVISIBLE);
                 break;
             case "G": //贈出
-                tv_meal_no_title.setText("轉贈提貨券");
+                //  tv_meal_no_title.setText("轉贈提貨券");
+                tv_meal_no_title.setText(history.getTransactionName());
                 tv_giveflag_left.setVisibility(View.INVISIBLE);
                 tv_ref_content.setText("受贈者：" + history.getGive_member_name() + " " + history.getGive_member_mobile());
                 break;
@@ -309,17 +320,20 @@ public class DonateHolder extends RecyclerView.ViewHolder {
                 break;
             case "BU": //自購自用
                 if(history.getWriteoff_order_id().indexOf("T") == -1) {
-                    tv_meal_no_title.setText("提貨卷核銷");
+                    //  tv_meal_no_title.setText("提貨卷核銷");
+                    tv_meal_no_title.setText(history.getTransactionName());
                     tv_giveflag_left.setVisibility(View.INVISIBLE);
                     tv_ref_content.setText("備註/編號：" + history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 } else {
-                    tv_meal_no_title.setText("轉出貨");
+                    //  tv_meal_no_title.setText("轉出貨");
+                    tv_meal_no_title.setText(history.getTransactionName());
                     tv_giveflag_left.setVisibility(View.INVISIBLE);
                     tv_ref_content.setText("單號 : " + history.getWriteoff_order_id());
                 }
                 break;
             case "RU": //接收贈送兌換
-                tv_meal_no_title.setText("受贈核銷");
+                //  tv_meal_no_title.setText("受贈核銷");
+                tv_meal_no_title.setText(history.getTransactionName());
                 tv_giveflag_left.setVisibility(View.INVISIBLE);
                 tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 break;
@@ -376,7 +390,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
     }
 
     public void sethistorydetail2(Donate history) {
-        tv_product_name.setText(history.getProductName());
+        //tv_product_name.setText(history.getProductName());
+        tv_limit_product_name.setText(history.getLimitProductName());
         //tv_product_name.setText(history.getProductName() + " (" + history.getTypeName() + "-" + history.getSpecName() + ")");
         //tv_spec_name.setText(" (" + history.getTypeName() + "-" + history.getSpecName() + ")");
         tv_tickets_count.setText(history.getquantity());
