@@ -138,6 +138,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/tv_writeoff_due_date2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingEnd="10dp"
+            android:textSize="14dp"
+            android:text="2021-05-25 14:26"
+            app:layout_constraintTop_toTopOf="@+id/tv_title2"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
             android:id="@+id/tv_meal_no_title2"
             android:layout_width="70dp"
             android:layout_height="50dp"
@@ -150,8 +160,9 @@
             android:text="外送"
             android:textStyle="bold"
             android:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_writeoff_due_date2"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <TextView
             android:id="@+id/tv_meal_no2"
             android:layout_width="70dp"
@@ -166,7 +177,7 @@
             android:textStyle="bold"
             android:visibility="visible"
             android:background="@drawable/donate_bg_4"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_writeoff_due_date2"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
@@ -299,16 +310,6 @@
             android:text="待取餐"
             app:layout_constraintStart_toEndOf="@+id/tv_order_status_title2"
             app:layout_constraintTop_toTopOf="@+id/tv_order_status_title2" />
-
-        <TextView
-            android:id="@+id/tv_writeoff_due_date2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingEnd="10dp"
-            android:textSize="14dp"
-            android:text="2021-05-25 14:26"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_order_date_title2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
