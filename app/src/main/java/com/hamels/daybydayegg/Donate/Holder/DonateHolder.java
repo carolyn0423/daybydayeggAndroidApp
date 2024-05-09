@@ -353,7 +353,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         }
             */
     }
-
+    //  提貨卷核銷、一般兌換時顯示Detail 使用
     public void sethistorydetail(Donate history) {
         //tv_meal_no.setText(history.getmeal_no());
         tv_tickets_count_title.setText(history.getshowText() + "：");
@@ -389,6 +389,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
 
     }
 
+    //  轉贈提貨卷時 Detail 使用
     public void sethistorydetail2(Donate history) {
         //tv_product_name.setText(history.getProductName());
         tv_limit_product_name.setText(history.getLimitProductName());
