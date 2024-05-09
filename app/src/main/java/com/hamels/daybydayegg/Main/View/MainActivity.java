@@ -708,9 +708,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private void changeShopColor(boolean isClicked) {
         if (isClicked) {
-            imgShop.setImageDrawable(getResources().getDrawable(R.drawable.bag_fill));
+            imgShop.setImageDrawable(getResources().getDrawable(R.drawable.ticket_fill));
         } else {
-            imgShop.setImageDrawable(getResources().getDrawable(R.drawable.bag_line));
+            imgShop.setImageDrawable(getResources().getDrawable(R.drawable.ticket_line));
         }
         txtShop.setTextColor(getResources().getColor(R.color.colorYunlinhn));
     }

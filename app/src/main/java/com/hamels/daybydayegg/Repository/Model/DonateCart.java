@@ -15,6 +15,7 @@ public class DonateCart implements Parcelable {
     private String product_name = "";
     private String limit_product_name = "";
     private String eticket_due_date = "";
+    private String eticket_shipping = "";
     private String left_number = "";
     private String cart_count = "";
     private String give_date = "";
@@ -47,6 +48,13 @@ public class DonateCart implements Parcelable {
 
     public void setEticketDueDate(String redemption_period) {
         this.eticket_due_date = redemption_period;
+    }
+
+    public String getTicketShipping() {
+        return eticket_shipping;
+    }
+    public void setTicketShipping(String eticket_shipping) {
+        this.eticket_shipping = eticket_shipping;
     }
 
     public String getProductName() {

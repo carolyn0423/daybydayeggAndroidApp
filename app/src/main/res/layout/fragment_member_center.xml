@@ -315,6 +315,7 @@
 
                     <LinearLayout
                         android:id="@+id/btn_often"
+                        android:visibility="invisible"
                         style="@style/user_function_formcontent_col">
 
                         <LinearLayout

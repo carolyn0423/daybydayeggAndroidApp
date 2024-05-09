@@ -16,6 +16,7 @@ public class Donate implements Parcelable {
     private String eticket_due_date = "";
     private String limit_product_name = "";
     private String product_name = "";
+    private String limit_unit_text = "";
     private String type_name = "";
     private String spec_name = "";
     private String buy_quantity = "";
@@ -32,6 +33,7 @@ public class Donate implements Parcelable {
     private String spec_id = "";
     private String give_date = "";
     private String location_name = "";
+    private String eticket_shipping = "";
 
     // history
     private String give_member_name = "";
@@ -117,6 +119,14 @@ public class Donate implements Parcelable {
         this.product_name = product_name;
     }
 
+    public String getLimitUnitText() {
+        return limit_unit_text;
+    }
+
+    public void setLimitUnitText(String limit_unit_text) {
+        this.limit_unit_text = limit_unit_text;
+    }
+
     public String getTypeName() {
         return type_name;
     }
@@ -165,9 +175,7 @@ public class Donate implements Parcelable {
         this.ticket_code = ticket_code;
     }
 
-    public String getTicketStatus() {
-        return ticket_status;
-    }
+    public String getTicketStatus() { return ticket_status; }
 
     public void setTicketStatus(String ticket_status) {
         this.ticket_status = ticket_status;
@@ -317,6 +325,13 @@ public class Donate implements Parcelable {
         this.order_id = order_id;
     }
 
+    public String getTicketShipping() {
+        return eticket_shipping;
+    }
+    public void setTicketShipping(String eticket_shipping) {
+        this.eticket_shipping = eticket_shipping;
+    }
+
     public String getpickup_way_name() {
         return pickup_way_name;
     }
@@ -367,6 +382,8 @@ public class Donate implements Parcelable {
         ticket_due = in.readString();
         contact_phone = in.readString();
         transaction_name = in.readString();
+        eticket_shipping = in.readString();
+        limit_unit_text = in.readString();
     }
 
     public static final Creator<Donate> CREATOR = new Creator<Donate>() {
@@ -401,6 +418,8 @@ public class Donate implements Parcelable {
         dest.writeString(ticket_due);
         dest.writeString(contact_phone);
         dest.writeString(transaction_name);
+        dest.writeString(eticket_shipping);
+        dest.writeString(limit_unit_text);
     }
 }
 

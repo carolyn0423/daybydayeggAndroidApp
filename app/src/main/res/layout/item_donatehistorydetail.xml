@@ -20,10 +20,11 @@
 
         <TextView
             android:id="@+id/tv_limit_product_name"
+            style="@style/fontRegularTw.greyDoubleDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textSize="13dp"
+            android:textSize="14dp"
             android:text=""
             android:paddingTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,11 +43,12 @@
 
         <TextView
             android:id="@+id/tv_tickets_count_title"
+            style="@style/fontRegularTw.greyDoubleDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textColor="#595757"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:text="轉贈數量："
             app:layout_constraintStart_toStartOf="@+id/tv_limit_product_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_limit_product_name" />
@@ -56,7 +58,7 @@
             style="@style/fontRegularTw.greyDoubleDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:text="1"
             app:layout_constraintStart_toEndOf="@+id/tv_tickets_count_title"
             app:layout_constraintTop_toTopOf="@+id/tv_tickets_count_title" />

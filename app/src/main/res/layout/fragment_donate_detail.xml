@@ -205,7 +205,7 @@
                         android:background="@drawable/donate_btnbg_1"
                         android:textColor="#FFF"
                         android:text="轉贈提貨券"
-                        android:textSize="13dp"
+                        android:textSize="14dp"
                         app:layout_constraintTop_toBottomOf="@+id/tv_redemption_period_title"
                         app:layout_constraintEnd_toEndOf="@+id/guideline50" />
 
@@ -218,7 +218,7 @@
                         android:background="@drawable/donate_btnbg_3"
                         android:textColor="#FFF"
                         android:text="轉出貨"
-                        android:textSize="13dp"
+                        android:textSize="14dp"
                         app:layout_constraintTop_toBottomOf="@+id/tv_redemption_period_title"
                         app:layout_constraintStart_toEndOf="@+id/guideline50" />
 

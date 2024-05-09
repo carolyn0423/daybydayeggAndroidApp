@@ -189,8 +189,20 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         } else {
             tv_cart_right.setImageResource(R.drawable.sga);
         }
-        tv_cart_right.setVisibility(View.VISIBLE);
 
+        //
+        if (productleft.getTicketEnabled()=="N" || productleft.getTicketDue() == "Y" ||  productleft.getTicketShipping().equals("N")) {
+            tv_cart_left.setVisibility(View.GONE);
+        } else {
+            tv_cart_left.setVisibility(View.VISIBLE);
+        }
+
+        if (productright.getTicketEnabled()=="N" || productright.getTicketDue() == "Y" ||  productright.getTicketShipping().equals("N")) {
+            tv_cart_right.setVisibility(View.GONE);
+        } else {
+            tv_cart_right.setVisibility(View.VISIBLE);
+        }
+    //
         layout_left.setTag(R.id.donate_constraintLayout_left, productleft.getUid());
         layout_right.setTag(R.id.donate_constraintLayout_right, productright.getUid());
 
@@ -251,7 +263,15 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         } else {
             tv_cart_left.setImageResource(R.drawable.sga);
         }
-        tv_cart_right.setVisibility(View.INVISIBLE);
+
+        //
+        if (productleft.getTicketEnabled()=="N" || productleft.getTicketDue() == "Y" ||  productleft.getTicketShipping().equals("N")) {
+            tv_cart_left.setVisibility(View.GONE);
+        } else {
+            tv_cart_left.setVisibility(View.VISIBLE);
+        }
+        tv_cart_right.setVisibility(View.GONE);
+        //
 
         layout_left.setTag(R.id.donate_constraintLayout_left, productleft.getUid());
         layout_right.setVisibility(View.INVISIBLE);
@@ -298,81 +318,59 @@ public class DonateHolder extends RecyclerView.ViewHolder {
 //            tv_writeoff_due_date2.setText(history.getwriteoff_due_date());
 //        }
 
-        tv_tickets_count_title.setText(history.getshowText());
-        tv_tickets_count.setText(history.getquantity());
+        tv_tickets_count_title.setText(history.getshowText() + "：");
+        tv_tickets_count.setText(history.getquantity() + " " + history.getLimitUnitText());
         tv_writeoff_due_date.setText(history.getwriteoff_due_date());
         tv_meal_no.setText("");
-        donatehistory_constraintLayout.setVisibility(View.VISIBLE);
-        donatehistory_constraintLayout2.setVisibility(View.GONE);
-
+        donatehistory_constraintLayout.setVisibility(View.VISIBLE); //history.getmeal_no().equals("")時使用
+        donatehistory_constraintLayout2.setVisibility(View.GONE);//history.getmeal_no() !=""時使用，目前不實作
+        tv_giveflag_left.setVisibility(View.INVISIBLE); //此欄位目前無用
+        tv_meal_no_title.setText(history.getTransactionName());
         switch (history.getTicketStatus()){
             case "B": //購買
-                tv_giveflag_left.setVisibility(View.INVISIBLE);
+            case "R": //自購自用
                 break;
             case "G": //贈出
-                //  tv_meal_no_title.setText("轉贈提貨券");
-                tv_meal_no_title.setText(history.getTransactionName());
-                tv_giveflag_left.setVisibility(View.INVISIBLE);
                 tv_ref_content.setText("受贈者：" + history.getGive_member_name() + " " + history.getGive_member_mobile());
                 break;
-            case "R": //接收
-                tv_giveflag_left.setVisibility(View.VISIBLE);
-                break;
-            case "BU": //自購自用
-                if(history.getWriteoff_order_id().indexOf("T") == -1) {
-                    //  tv_meal_no_title.setText("提貨卷核銷");
-                    tv_meal_no_title.setText(history.getTransactionName());
-                    tv_giveflag_left.setVisibility(View.INVISIBLE);
+            case "BU": //
+            case "RU": //接收贈送兌換
+
+                if(history.getWriteoff_order_id().indexOf("|||") >=0) {
                     tv_ref_content.setText("備註/編號：" + history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 } else {
-                    //  tv_meal_no_title.setText("轉出貨");
-                    tv_meal_no_title.setText(history.getTransactionName());
-                    tv_giveflag_left.setVisibility(View.INVISIBLE);
-                    tv_ref_content.setText("單號 : " + history.getWriteoff_order_id());
+                    tv_ref_content.setText("備註/編號 : " + history.getWriteoff_order_id());
                 }
-                break;
-            case "RU": //接收贈送兌換
-                //  tv_meal_no_title.setText("受贈核銷");
-                tv_meal_no_title.setText(history.getTransactionName());
-                tv_giveflag_left.setVisibility(View.INVISIBLE);
-                tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
+
                 break;
         }
 
-//        if (history.getTicketStatus().equals("R")) {
-//            tv_giveflag_left.setVisibility(View.VISIBLE);
-//        } else {
-//            tv_giveflag_left.setVisibility(View.INVISIBLE);
-//        }
-
+        /*
         if (history.getdue_flag().equals("Y")) {
             tv_expiredflag_left.setVisibility(View.VISIBLE);
         } else {
             tv_expiredflag_left.setVisibility(View.INVISIBLE);
         }
+            */
     }
 
     public void sethistorydetail(Donate history) {
-        tv_meal_no.setText(history.getmeal_no());
+        //tv_meal_no.setText(history.getmeal_no());
         tv_tickets_count_title.setText(history.getshowText() + "：");
-        tv_tickets_count.setText(history.getquantity());
-        tv_writeoff_due_date.setText(history.getwriteoff_due_date());
+        tv_tickets_count.setText(history.getquantity() + " " + history.getLimitUnitText());
+        //tv_writeoff_due_date.setText(history.getwriteoff_due_date());
+        //tv_giveflag_left.setVisibility(View.INVISIBLE);//此欄位目前無用
 
         switch (history.getTicketStatus()){
             case "B": //購買
-                tv_giveflag_left.setVisibility(View.INVISIBLE);
+            case "R": //接收
                 break;
             case "G": //贈出
-                tv_giveflag_left.setVisibility(View.INVISIBLE);
-                tv_ref_content.setText("受贈者：" + history.getGive_member_name() + " " + history.getGive_member_mobile());
-                break;
-            case "R": //接收
-                tv_giveflag_left.setVisibility(View.VISIBLE);
+                //tv_ref_content.setText("受贈者：" + history.getGive_member_name() + " " + history.getGive_member_mobile());
                 break;
             case "BU": //自購自用
             case "RU": //接收贈送兌換
-                tv_giveflag_left.setVisibility(View.INVISIBLE);
-                tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
+               // tv_ref_content.setText("備註/編號："+ history.getWriteoff_order_id().split("\\|\\|\\|")[0]);
                 break;
         }
 
@@ -381,12 +379,14 @@ public class DonateHolder extends RecyclerView.ViewHolder {
 //        } else {
 //            tv_giveflag_left.setVisibility(View.INVISIBLE);
 //        }
-
+    /*
         if (history.getdue_flag().equals("Y")) {
             tv_expiredflag_left.setVisibility(View.VISIBLE);
         } else {
             tv_expiredflag_left.setVisibility(View.INVISIBLE);
         }
+        */
+
     }
 
     public void sethistorydetail2(Donate history) {
@@ -394,7 +394,7 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         tv_limit_product_name.setText(history.getLimitProductName());
         //tv_product_name.setText(history.getProductName() + " (" + history.getTypeName() + "-" + history.getSpecName() + ")");
         //tv_spec_name.setText(" (" + history.getTypeName() + "-" + history.getSpecName() + ")");
-        tv_tickets_count.setText(history.getquantity());
+        tv_tickets_count.setText(history.getquantity() + " " + history.getLimitUnitText());
     }
 
     private void chkImgDrawable(ImageView imageView, Donate donate){

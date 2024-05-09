@@ -22,7 +22,7 @@ import java.util.Date;
 public class DonateCartHolder extends RecyclerView.ViewHolder {
     public static final String TAG = DonateCartHolder.class.getSimpleName();
     public ImageView img_picture_url;
-    public TextView tv_product_name, tv_limit_product_name, tv_type_name_spec_name, tv_eticket_due_date, tv_left_number, tv_giveflag, tv_cart_count;
+    public TextView tv_product_name, tv_limit_product_name, tv_type_name_spec_name, tv_eticket_due_date, tv_left_number, tv_giveflag, tv_cart_count,tv_remark;
     public EditText edit_cart_count;
     public Button btn_minus, btn_plus;
 
@@ -33,6 +33,7 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
         img_picture_url = itemView.findViewById(R.id.img_picture_url);
         tv_limit_product_name = itemView.findViewById(R.id.tv_limit_product_name);
         tv_product_name = itemView.findViewById(R.id.tv_product_name);
+        tv_remark = itemView.findViewById(R.id.tv_remark);
         //tv_type_name_spec_name = itemView.findViewById(R.id.tv_type_name_spec_name);
         tv_eticket_due_date = itemView.findViewById(R.id.tv_eticket_due_date);
         tv_left_number = itemView.findViewById(R.id.tv_left_number);
@@ -74,6 +75,14 @@ public class DonateCartHolder extends RecyclerView.ViewHolder {
             tv_giveflag.setVisibility(View.VISIBLE);
         } else {
             tv_giveflag.setVisibility(View.INVISIBLE);
+        }
+
+        if (history.getTicketShipping().equals("Y")) {
+            tv_remark.setText("");
+            tv_remark.setVisibility(View.INVISIBLE);
+        } else {
+            tv_remark.setText("尚未開放轉出貨");
+            tv_remark.setVisibility(View.VISIBLE);
         }
     }
 

@@ -16,7 +16,7 @@
         android:paddingTop="1dp"
         android:paddingEnd="8dp"
         android:background="@drawable/bg_shadow_corner_white"
-        android:visibility="gone"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
             android:textSize="8dp"
             android:text="過期"
             android:textStyle="bold"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:background="@drawable/donate_flagbg_3"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textColor="@color/main"
-            android:textSize="14dp"
+            android:textSize="15dp"
             android:text="取餐編號："
             android:paddingTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
             android:textSize="14dp"
             android:text="2021-05-25 14:26"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tickets_count" />
+            app:layout_constraintTop_toTopOf="@+id/tv_meal_no_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,6 +132,7 @@
         android:paddingTop="1dp"
         android:paddingEnd="8dp"
         android:background="@drawable/bg_shadow_corner_white"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

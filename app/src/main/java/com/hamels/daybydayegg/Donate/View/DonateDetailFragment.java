@@ -60,7 +60,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
     private ConstraintLayout layout_left_arrow, layout_right_arrow;
 
     private int uid = 0;
-    private String ticket_code = "", sProductID = "", sSpecID = "", sGiveDate = "", sCode = "";
+    private String ticket_code = "", sProductID = "", sSpecID = "", sGiveDate = "", sCode = "",eticket_shipping = "";
     private int brightnessNow = 0;
     private boolean donateflag = true;
 
@@ -145,13 +145,22 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
                             }).show();
                 }
             }
-        });
+         });
 
         btn_deliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goWebViewCart();
-                //  presenter.updateTicket("add", sProductID, sSpecID, sGiveDate);
+                 if(eticket_shipping.equals("Y")){
+                    goWebViewCart();
+                }else{
+                     new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("此商品尚未開放轉出貨")
+                             .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                                 @Override
+                                 public void onClick(DialogInterface dialog, int which) {
+
+                                 }
+                             }).show();
+                }
             }
         });
 
@@ -202,6 +211,8 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         sSpecID = productDetail.get(0).getspec_id();
         sGiveDate = productDetail.get(0).getgive_date();
         sCode = productDetail.get(0).getTicketCode();
+        eticket_shipping = productDetail.get(0).getTicketShipping();
+
         if (ticket_code != null && !ticket_code.equals("")) {
             img_donate.setBackgroundColor(Color.WHITE);
 
@@ -225,6 +236,12 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
             donateflag = true;
             btn_donatedetail2.setBackgroundResource(R.drawable.donate_btnbg_1);
         }
+        if(eticket_shipping.equals("Y")){
+            btn_deliver.setBackgroundResource(R.drawable.donate_btnbg_3);
+        }else{
+            btn_deliver.setBackgroundResource(R.drawable.donate_btnbg_4);
+        }
+
 
         tv_barcode_number.setText(ticket_code);
         tv_product_name.setText(productDetail.get(0).getProductName());

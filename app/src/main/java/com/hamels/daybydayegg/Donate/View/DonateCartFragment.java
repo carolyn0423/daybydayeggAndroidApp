@@ -64,6 +64,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
     private int barcodeHeight = 350;
     private int brightnessNow = 0;
     private boolean donateflag = true;
+    private boolean isAllowToShipping = false;
 
     public static DonateCartFragment getInstance() {
         if (fragment == null) {
@@ -112,7 +113,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
             public void onClick(View v) {
                 if (!donateflag) {
                     final FragmentManager manager = getActivity().getSupportFragmentManager();
-                    new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("受贈提貨券不可再做轉贈")
+                    new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle("受贈提貨券不可再做轉贈").setMessage("請先移除受贈的提貨券")
                             .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -129,7 +130,18 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
             @Override
             public void onClick(View v) {
                 EOrderApplication.DeliverCodeUid = "";
-                ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance(""));
+                if(isAllowToShipping){
+                    ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance(""));
+                }else{
+                    new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle("部份商品不開放轉出貨").setMessage("請先移除尚未開放轉出貨的提貨券商品")
+                            .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                }
+
             }
         });
 
@@ -232,13 +244,16 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
 //        }
 
         donateCartAdapter.setDonate(donateList);
-
+        int iCartShippingAllowCount = 0;
         int total_cart_count = 0;
         donateflag = true;
         for (int i = 0; i < donateList.size(); i++) {
             total_cart_count += Integer.parseInt(donateList.get(i).getcart_count());
             if (donateList.get(i).getTicketStatus().equals("R")) {
                 donateflag = false;
+            }
+            if (donateList.get(i).getTicketShipping().equals("Y")){
+                iCartShippingAllowCount +=1;
             }
         }
         tv_product_cnt.setText(Integer.toString(total_cart_count));
@@ -258,9 +273,17 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
         }
 
         if(!donateflag){
-            btn_alldonate.setBackground(new ColorDrawable(getResources().getColor(R.color.greyLotList)));
+            btn_alldonate.setBackground(new ColorDrawable(getResources().getColor(R.color.darkGreyLine)));
         }else{
             btn_alldonate.setBackground(new ColorDrawable(getResources().getColor(R.color.colorYunlinhn)));
+        }
+
+        if(iCartShippingAllowCount == donateList.size()){
+            isAllowToShipping = true;
+            btn_deliver.setBackground(new ColorDrawable(getResources().getColor(R.color.orangeText)));
+        }else{
+            isAllowToShipping = false;
+            btn_deliver.setBackground(new ColorDrawable(getResources().getColor(R.color.darkGreyLine)));
         }
     }
 

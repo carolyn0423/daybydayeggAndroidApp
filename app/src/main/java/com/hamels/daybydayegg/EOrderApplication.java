@@ -10,7 +10,7 @@ public class EOrderApplication extends Application {
     public static final String TAG = EOrderApplication.class.getSimpleName();
 
     public static final String sAppVersion = BuildConfig.FLAVOR;
-    public static final boolean isUat = true;
+    public static final boolean isUat = false;
 
     //public static final String DOMAIN_SIT = "https://eorder.hamels.com.tw:9903/";
     //public static final String DOMAIN_UAT = "https://eorder.hamels.com.tw:9920/";
@@ -21,8 +21,8 @@ public class EOrderApplication extends Application {
     public static final String DOMAIN_ADMIN_UAT = "https://www.hamels.com.tw:9941/";
     public static final String DOMAIN_ADMIN_SIT = "https://eorder.hamels.com.tw:9940/";
 
-    public static String ADMIN_DOMAIN = sAppVersion.equals("prod") ? DOMAIN_ADMIN_PRO : isUat ? DOMAIN_ADMIN_UAT : DOMAIN_ADMIN_SIT;
-    //public static String ADMIN_DOMAIN = DOMAIN_ADMIN_UAT;
+    //public static String ADMIN_DOMAIN = sAppVersion.equals("prod") ? DOMAIN_ADMIN_PRO : isUat ? DOMAIN_ADMIN_UAT : DOMAIN_ADMIN_SIT;
+    public static String ADMIN_DOMAIN = DOMAIN_ADMIN_PRO;
     public static String CUSTOMER_ID = "111";
     public static String CUSTOMER_NAME = "日日好蛋";
     public static String sApiUrl = "";
