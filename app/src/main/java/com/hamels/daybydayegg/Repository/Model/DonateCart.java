@@ -51,7 +51,7 @@ public class DonateCart implements Parcelable {
     }
 
     public String getTicketShipping() {
-        return eticket_shipping;
+        return eticket_shipping == null ? "" : eticket_shipping;
     }
     public void setTicketShipping(String eticket_shipping) {
         this.eticket_shipping = eticket_shipping;

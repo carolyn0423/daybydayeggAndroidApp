@@ -202,9 +202,8 @@
                             android:textSize="16dp" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="180dp"
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/tv_number_exchanges_title"
                             app:layout_constraintTop_toTopOf="@+id/tv_number_exchanges_title">
 
@@ -213,7 +212,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="35dp"
                                 android:background="@null"
-                                android:ems="3"
+                                android:ems="1"
                                 android:gravity="center"
                                 android:inputType="number"
                                 android:text="1"

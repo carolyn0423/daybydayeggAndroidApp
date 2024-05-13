@@ -150,7 +150,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         btn_deliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 if(eticket_shipping.equals("Y")){
+                 if(eticket_shipping != null && eticket_shipping.equals("Y")){
                     goWebViewCart();
                 }else{
                      new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("此商品尚未開放轉出貨")
@@ -236,7 +236,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
             donateflag = true;
             btn_donatedetail2.setBackgroundResource(R.drawable.donate_btnbg_1);
         }
-        if(eticket_shipping.equals("Y")){
+        if(eticket_shipping != null && eticket_shipping.equals("Y")){
             btn_deliver.setBackgroundResource(R.drawable.donate_btnbg_3);
         }else{
             btn_deliver.setBackgroundResource(R.drawable.donate_btnbg_4);
