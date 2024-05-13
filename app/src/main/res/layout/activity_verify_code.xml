@@ -126,6 +126,18 @@
         app:layout_constraintStart_toEndOf="@id/et_third"
         app:layout_constraintTop_toTopOf="@id/et_first" />
 
+    <ImageButton
+        android:id="@+id/btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/oval_yunlinhn"
+        android:padding="12dp"
+        android:src="@drawable/ic_arrow_right_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_first" />
+
     <TextView
         android:id="@+id/tv_not_get_verify_code"
         style="@style/fontDefaultTw.Grey"
@@ -136,7 +148,7 @@
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_first" />
+        app:layout_constraintTop_toBottomOf="@id/btn_send" />
 
     <TextView
         android:id="@+id/tv_resend"
@@ -150,15 +162,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_not_get_verify_code" />
 
-    <ImageButton
-        android:id="@+id/btn_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/oval_yunlinhn"
-        android:padding="12dp"
-        android:src="@drawable/ic_arrow_right_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_resend" />
 </androidx.constraintlayout.widget.ConstraintLayout>
