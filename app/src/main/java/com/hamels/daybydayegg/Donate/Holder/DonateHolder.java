@@ -191,13 +191,15 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         }
 
         //
-        if (productleft.getTicketEnabled() == null || productleft.getTicketEnabled() == "N" || productleft.getTicketDue() == "Y" || productleft.getTicketShipping() == null || productleft.getTicketShipping().equals("N")) {
+        //if (productleft.getTicketEnabled() == null || productleft.getTicketEnabled() == "N" || productleft.getTicketDue() == "Y" || productleft.getTicketShipping() == null || productleft.getTicketShipping().equals("N")) {
+        if (productleft.getTicketEnabled() == null || productleft.getTicketEnabled() == "N" || productleft.getTicketDue() == "Y" ) {
             tv_cart_left.setVisibility(View.GONE);
         } else {
             tv_cart_left.setVisibility(View.VISIBLE);
         }
 
-        if (productright.getTicketEnabled() == null || productright.getTicketEnabled() == "N" || productright.getTicketDue() == "Y" || productright.getTicketShipping() == null | productright.getTicketShipping().equals("N")) {
+        //if (productright.getTicketEnabled() == null || productright.getTicketEnabled() == "N" || productright.getTicketDue() == "Y" || productright.getTicketShipping() == null | productright.getTicketShipping().equals("N")) {
+        if (productright.getTicketEnabled() == null || productright.getTicketEnabled() == "N" || productright.getTicketDue() == "Y" ) {
             tv_cart_right.setVisibility(View.GONE);
         } else {
             tv_cart_right.setVisibility(View.VISIBLE);
@@ -265,7 +267,8 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         }
 
         //
-        if (productleft.getTicketEnabled() == null || productleft.getTicketEnabled()== "N" || productleft.getTicketDue() == "Y" || productleft.getTicketShipping() == null || productleft.getTicketShipping().equals("N")) {
+        //if (productleft.getTicketEnabled() == null || productleft.getTicketEnabled()== "N" || productleft.getTicketDue() == "Y" || productleft.getTicketShipping() == null || productleft.getTicketShipping().equals("N")) {
+        if (productleft.getTicketEnabled() == null || productleft.getTicketEnabled()== "N" || productleft.getTicketDue() == "Y" ) {
             tv_cart_left.setVisibility(View.GONE);
         } else {
             tv_cart_left.setVisibility(View.VISIBLE);

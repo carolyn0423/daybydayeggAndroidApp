@@ -25,6 +25,13 @@
     <item
         style="@style/fontRegularTw.GreyDark"
         android:textSize="10dp"
+        android:id="@+id/item_shop2"
+        android:icon="@drawable/bag_line"
+        android:title="商城" />
+
+    <item
+        style="@style/fontRegularTw.GreyDark"
+        android:textSize="10dp"
         android:id="@+id/item_cart"
         android:icon="@drawable/cart_line"
         android:title="購物車" />

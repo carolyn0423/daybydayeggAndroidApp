@@ -327,6 +327,35 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/shop2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_shop2"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:duplicateParentState="true"
+                            android:src="@drawable/bag_line" />
+
+                        <TextView
+                            android:id="@+id/txt_shop2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="商城"
+                            android:textSize="14dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:textColor="@color/colorYunlinhn" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/shopping_cart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -430,7 +459,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.39" />
+            app:layout_constraintGuide_percent="0.35" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

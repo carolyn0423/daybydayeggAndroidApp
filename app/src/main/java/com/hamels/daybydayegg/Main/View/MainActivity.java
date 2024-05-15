@@ -139,9 +139,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     // navigation
     //private FloatingActionButton btnShopping;
-    private LinearLayout layoutHome, layoutEgg, layoutShop, layoutShoppingCart;
-    private ImageView imgHome, imgEgg, imgShop, imgShoppingCart;
-    private TextView txtHome, txtEgg, txtShop, txtShoppingCart;
+    private LinearLayout layoutHome, layoutEgg, layoutShop, layoutShop2, layoutShoppingCart;
+    private ImageView imgHome, imgEgg, imgShop, imgShop2, imgShoppingCart;
+    private TextView txtHome, txtEgg, txtShop, txtShop2, txtShoppingCart;
 
     // qrcode
     private PopupWindow popupWindow;
@@ -306,21 +306,25 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         layoutHome = findViewById(R.id.home);
         layoutEgg = findViewById(R.id.egg);
         layoutShop = findViewById(R.id.shop);
+        layoutShop2 = findViewById(R.id.shop2);
         layoutShoppingCart = findViewById(R.id.shopping_cart);
 
         layoutHome.setOnClickListener(onClickListener);
         layoutEgg.setOnClickListener(onClickListener);
         layoutShop.setOnClickListener(onClickListener);
+        layoutShop2.setOnClickListener(onClickListener);
         layoutShoppingCart.setOnClickListener(onClickListener);
 
         imgHome = findViewById(R.id.img_home);
         imgEgg = findViewById(R.id.img_egg);
         imgShop = findViewById(R.id.img_shop);
+        imgShop2 = findViewById(R.id.img_shop2);
         imgShoppingCart = findViewById(R.id.img_shopping_cart);
 
         txtHome = findViewById(R.id.txt_home);
         txtEgg = findViewById(R.id.txt_egg);
         txtShop = findViewById(R.id.txt_shop);
+        txtShop2 = findViewById(R.id.txt_shop2);
         txtShoppingCart = findViewById(R.id.txt_shopping_cart);
 
         LinearLayout qrcode = findViewById(R.id.qrcode);
@@ -523,7 +527,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     mainPresenter.checkLoginForDonate();
                 }else if (id == R.id.item_shop){
                     setMainIndexMessageUnreadVisibility(false);
-                    checkMerchantCount("PRODUCT", "Y"); //非電子商品
+                    checkMerchantCount("PRODUCT", "Y"); //電子商品
+                }else if (id == R.id.item_shop2){
+                    setMainIndexMessageUnreadVisibility(false);
+                    checkMerchantCount("PRODUCT", "N"); //非電子商品
                 }else if (id == R.id.item_cart){
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.checkLoginForMemberCenter();
@@ -604,6 +611,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 changeNavigationColor(v.getId());
                 mainPresenter.saveSourceActive("");
                 checkMerchantCount("PRODUCT", "Y");
+            }else if (id == R.id.shop2){
+                changeNavigationColor(v.getId());
+                mainPresenter.saveSourceActive("");
+                checkMerchantCount("PRODUCT", "N");
             }else if (id == R.id.shopping_cart){
                 changeNavigationColor(v.getId());
                 mainPresenter.checkLoginForShoppingCart("E");
@@ -666,24 +677,35 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             changeHomeColor(true);
             changeEggColor(false);
             changeShopColor(false);
+            changeShop2Color(false);
             changeShoppingCartColor(false);
         }else if (layoutID == R.id.egg){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(true);
             changeShopColor(false);
+            changeShop2Color(false);
             changeShoppingCartColor(true);
         }else if (layoutID == R.id.shop){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(false);
             changeShopColor(true);
+            changeShop2Color(false);
+            changeShoppingCartColor(false);
+        }else if (layoutID == R.id.shop2){
+            setMainIndexMessageUnreadVisibility(false);
+            changeHomeColor(false);
+            changeEggColor(false);
+            changeShopColor(false);
+            changeShop2Color(true);
             changeShoppingCartColor(false);
         }else if (layoutID == R.id.shopping_cart){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(false);
             changeShopColor(false);
+            changeShop2Color(false);
             changeShoppingCartColor(true);
         }
     }
@@ -713,6 +735,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             imgShop.setImageDrawable(getResources().getDrawable(R.drawable.ticket_line));
         }
         txtShop.setTextColor(getResources().getColor(R.color.colorYunlinhn));
+    }
+
+    private void changeShop2Color(boolean isClicked) {
+        if (isClicked) {
+            imgShop2.setImageDrawable(getResources().getDrawable(R.drawable.bag_fill));
+        } else {
+            imgShop2.setImageDrawable(getResources().getDrawable(R.drawable.bag_line));
+        }
+        txtShop2.setTextColor(getResources().getColor(R.color.colorYunlinhn));
     }
 
     private void changeShoppingCartColor(boolean isClicked) {
@@ -1489,50 +1520,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         mainPresenter.saveFragmentMainType("", isETicket);
         changeTabFragment(ProductMainTypeFragment.getInstance());
-
-//        if (isETicket.equals("Y")) {
-//            //  買提貨卷
-//            mainPresenter.saveFragmentMainType("", isETicket);
-//            changeTabFragment(ProductMainTypeFragment.getInstance());
-//        } else {
-//            //  外帶外送
-//            mainPresenter.saveFragmentLocation("");
-//            addFragment(LocationFragment.getInstance());
-//        }
-
-
-//        BasePresenter basePresenter = new BasePresenter(this, getRepositoryManager(this));
-
-//        MemberRepository.getInstance().getMerchantList(sCustomerID, new ApiCallback<BaseModel<List<Merchant>>>(basePresenter) {
-//            @Override
-//            public void onApiSuccess(BaseModel<List<Merchant>> response) {
-//                super.onApiSuccess(response);
-//                List<Merchant> merchantList = response.getItems();
-//                if (merchantList != null) {
-//                    switch (type) {
-//                        case "PRODUCT":
-//                            if(isETicket.equals("Y")){
-//                                changeTabFragment(ProductMainTypeFragment.getInstance(0, isETicket));
-//                            }else{
-//                                if (merchantList.size() == 1) {
-//                                    //int merchantID = merchantList.get(0).getId();
-//                                    changeTabFragment(ProductMainTypeFragment.getInstance(merchantList.get(0).getId(), isETicket));
-//                                } else {
-//                                    changeTabFragment(ProductMerchantFragment.getInstance("PRODUCT", isETicket));
-//                                }
-//                            }
-//                            break;
-//                        case "STORE":
-//                            if (merchantList.size() == 1) {
-//                                addFragment(LocationFragment.getInstance(merchantList.get(0).getId()));
-//                            } else {
-//                                addFragment(ProductMerchantFragment.getInstance("STORE", isETicket));
-//                            }
-//                            break;
-//                    }
-//                }
-//            }
-//        });
     }
 
     private void createQRcodeImage(String qrcodeNum, ImageView qrcode_img) {
