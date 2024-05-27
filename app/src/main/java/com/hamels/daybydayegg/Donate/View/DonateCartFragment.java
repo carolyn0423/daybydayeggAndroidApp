@@ -130,7 +130,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
             @Override
             public void onClick(View v) {
                 EOrderApplication.DeliverCodeUid = "";
-                if(isAllowToShipping){
+                if(donateflag){
                     ((MainActivity) getActivity()).addFragment(DeliverCartFragment.getInstance(""));
                 }else{
                     new androidx.appcompat.app.AlertDialog.Builder(fragment.getActivity()).setTitle("部份商品不開放轉出貨").setMessage("請先移除尚未開放轉出貨的提貨券商品")
