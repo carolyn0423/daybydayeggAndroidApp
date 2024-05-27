@@ -245,21 +245,22 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                             // 加入購物車
                             addCart();
                         }else{
+                            //  2024-05-27 完售項目不動作
                             // 若有完售項目，POP
-                            new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("今日完售商品僅適用預約取餐，是否確定？")
-                                    .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            addConf(v);
-                                            // 加入購物車
-                                            addCart();
-                                        }
-                                    })
-                                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            // User cancelled the dialog
-                                        }
-                                    }).show();
+//                            new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("今日完售商品僅適用預約取餐，是否確定？")
+//                                    .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            addConf(v);
+//                                            // 加入購物車
+//                                            addCart();
+//                                        }
+//                                    })
+//                                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int id) {
+//                                            // User cancelled the dialog
+//                                        }
+//                                    }).show();
                         }
                     } else {
                         // 若數量不為1，pop
@@ -519,7 +520,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         List<ProductPicture> productPictureList = productDetail.get(0).getPicture_url_list();
         List<CustomViewsInfo> data = new ArrayList<>();
         iLimitQuantity = productDetail.get(0).getLimitQuantity();
-        iAllSoldout = productDetail.get(0).getSoldoutToday().equals("Y") ? 1 : 0;
+        iAllSoldout = !productDetail.get(0).getSoldoutToday().equals("N") ? 1 : 0;
         for (int i = 0; i < productPictureList.size(); i++) {
             data.add(new CustomViewsInfo(EOrderApplication.sApiUrl + productPictureList.get(i).getPictureurl(), productPictureList.get(i).getId()));
         }
@@ -542,7 +543,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             tv_water_mask.setBackground(new WaterMaskUtils(getContext(),labels,-30,18));
             //  關閉加入購物車按鍵
             layout_shopping.setEnabled(false);
-            // 設定按鍵背景為灰色
+            //  設定按鍵背景為灰色
             layout_shopping.setBackgroundResource(R.drawable.btn_black_rounded_bg);
         }else{
             layout_shopping.setEnabled(true);
