@@ -327,6 +327,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         txtShop2 = findViewById(R.id.txt_shop2);
         txtShoppingCart = findViewById(R.id.txt_shopping_cart);
 
+        layoutShop2.setVisibility(View.GONE);
+
         LinearLayout qrcode = findViewById(R.id.qrcode);
         qrcode.setOnClickListener(onClickListener);
         LinearLayout message = findViewById(R.id.message);
@@ -346,7 +348,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
                 if(fragment instanceof MachineMapFragment){
                     //  城市探索特規，關閉 popwindow
-                    MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                    if(MachineMapFragment.getInstance().getPopupWindow() != null) {
+                        MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                    }
                 }
 
                 mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
@@ -358,7 +362,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
                 if(fragment instanceof MachineMapFragment){
                     //  城市探索特規，關閉 popwindow
-                    MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                    if(MachineMapFragment.getInstance().getPopupWindow() != null) {
+                        MachineMapFragment.getInstance().getPopupWindow().dismiss();
+                    }
                 }
 
                 mainPresenter.checkLoginForMessage(fragment.getClass().getSimpleName());
@@ -623,7 +629,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             /*首頁上方menu*/
             else if (id == R.id.qrcode){
                 if (mainPresenter.getUserLogin()) {
-                    View view = LayoutInflater.from(willChangeFragment.getActivity()).inflate(R.layout.dialog_qrcode, null);
+                    View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_qrcode, null);
 
                     popupWindow = new PopupWindow(view);
                     popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -1093,6 +1099,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void addFragment(BaseFragment baseFragment) {
+        this.willChangeFragment = baseFragment;
         Fragment fragment = getSupportFragmentManager().findFragmentById(baseFragment.getId());
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().remove(fragment).commitNow();
@@ -1525,32 +1532,30 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private void createQRcodeImage(String qrcodeNum, ImageView qrcode_img) {
         if (qrcodeNum != null && !qrcodeNum.equals("")) {
             qrcode_img.setBackgroundColor(Color.WHITE);
-            if (willChangeFragment.isAdded()) {
-                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                try {
-                    BitMatrix bitMatrix = new MultiFormatWriter().encode(qrcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
+            MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+            try {
+                BitMatrix bitMatrix = new MultiFormatWriter().encode(qrcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
 
-                    int newWidth = 250;
-                    int newHeight = 250;
+                int newWidth = 250;
+                int newHeight = 250;
 
-                    Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-                    float scaleX = (float) newWidth / barcodeWidth;
-                    float scaleY = (float) newHeight / barcodeHeight;
-                    for (int x = 0; x < barcodeWidth; x++) {
-                        for (int y = 0; y < barcodeHeight; y++) {
-                            if (bitMatrix.get(x, y)) {
-                                for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
-                                    for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
-                                        bitmap.setPixel(scaledX, scaledY, Color.BLACK);
-                                    }
+                Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+                float scaleX = (float) newWidth / barcodeWidth;
+                float scaleY = (float) newHeight / barcodeHeight;
+                for (int x = 0; x < barcodeWidth; x++) {
+                    for (int y = 0; y < barcodeHeight; y++) {
+                        if (bitMatrix.get(x, y)) {
+                            for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
+                                for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
+                                    bitmap.setPixel(scaledX, scaledY, Color.BLACK);
                                 }
                             }
                         }
                     }
-                    qrcode_img.setImageBitmap(bitmap);
-                } catch (WriterException e) {
-                    e.printStackTrace();
                 }
+                qrcode_img.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
             }
 
             brightnessNow = getSystemBrightness();
@@ -1561,7 +1566,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private int getSystemBrightness() {
         int systemBrightness = 0;
         try {
-            systemBrightness = Settings.System.getInt(willChangeFragment.getActivity().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+            systemBrightness = Settings.System.getInt(getBaseContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
         } catch (Settings.SettingNotFoundException e) {
             e.printStackTrace();
         }
@@ -1569,7 +1574,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void changeAppBrightness(int brightness) {
-        Window window = willChangeFragment.getActivity().getWindow();
+        Window window = MainActivity.this.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         if (brightness == -1) {
             lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
