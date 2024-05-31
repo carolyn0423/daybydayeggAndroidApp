@@ -327,8 +327,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         txtShop2 = findViewById(R.id.txt_shop2);
         txtShoppingCart = findViewById(R.id.txt_shopping_cart);
 
-        layoutShop2.setVisibility(View.GONE);
-
         LinearLayout qrcode = findViewById(R.id.qrcode);
         qrcode.setOnClickListener(onClickListener);
         LinearLayout message = findViewById(R.id.message);
@@ -935,8 +933,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 break;
             case 2:
                 for (Fragment f : fragmentList) {
-                    if (f.equals(MainIndexFragment.getInstance())) {
+                    if (f instanceof MainIndexFragment) {
                         isMainIndex = true;
+                        break;
                     }
                 }
                 break;
@@ -972,7 +971,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public void setAllBadge(String count) {
         // messageUnreadNum_pushUnreadNum_cartTotalQuantity
         String[] array = count.split("_");
-
         // 訊息夾未讀、客服留言未讀
         if (array.length >= 2) {
             appToolbar.setMessageBadgeCount(Integer.parseInt(array[0]));
@@ -1486,7 +1484,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             tvMessageUnread.setVisibility(View.GONE);
         }
     }
-
     public void goNewsDetail(String news_id) {
         mainPresenter.goNewsDetail(news_id);
     }

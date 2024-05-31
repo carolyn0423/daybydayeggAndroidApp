@@ -71,6 +71,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     public void onPause() {
         super.onPause();
         handler.removeCallbacksAndMessages(null); // 取消所有待执行的任务
+        handler.removeCallbacks(autoRefreshRunnable);  // 停止自动刷新
     }
 
     private void initView(View view) {
@@ -79,6 +80,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         }else {
             ((MainActivity) getActivity()).setAppTitle(R.string.message_list);
         }
+        ((MainActivity) getActivity()).setAppTitle(R.string.message_list);
         ((MainActivity) getActivity()).setBackButtonVisibility(true);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
@@ -115,16 +117,21 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     }
 
     private void startAutoRefresh() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // 在此处执行API请求以刷新数据
-                messagePresenter.getMessageList(sMemberID);
-                // 完成后再次调度自动刷新
-                startAutoRefresh();
-            }
-        }, 1000);
+        // 先取消先前调度的任务
+        handler.removeCallbacks(autoRefreshRunnable);
+        // 然后调度新的任务
+        handler.postDelayed(autoRefreshRunnable, 1000);
     }
+
+    private Runnable autoRefreshRunnable = new Runnable() {
+        @Override
+        public void run() {
+            // 在此处执行API请求以刷新数据
+            messagePresenter.getMessageList(sMemberID);
+            // 完成后再次调度自动刷新
+            handler.postDelayed(this, 1000);
+        }
+    };
 
     @Override
     public void setMessageList(List<Message> list) {

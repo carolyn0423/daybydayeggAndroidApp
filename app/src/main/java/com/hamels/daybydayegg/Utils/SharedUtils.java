@@ -115,6 +115,12 @@ public class SharedUtils {
                 .apply();
     }
 
+    public void saveMessageUnreadCount(Context context, String count){
+        context.getSharedPreferences("MessageUnreadCount", Context.MODE_PRIVATE).edit()
+                .putString("MessageUnreadCount", count)
+                .apply();
+    }
+
     public void saveUser(Context context, User user) {
         SharedPreferences.Editor editor = context.getSharedPreferences(User.TAG, Context.MODE_PRIVATE).edit();
         Gson gson = new Gson();
@@ -255,6 +261,10 @@ public class SharedUtils {
 
     public String getShoppingCartCount(Context context) {
         return context.getSharedPreferences("ShoppingCartCount", Context.MODE_PRIVATE).getString("ShoppingCartCount", "");
+    }
+
+    public String getMessageUnreadCount(Context context) {
+        return context.getSharedPreferences("MessageUnreadCount", Context.MODE_PRIVATE).getString("MessageUnreadCount", "");
     }
 
     public String getUserPassword(Context context) {

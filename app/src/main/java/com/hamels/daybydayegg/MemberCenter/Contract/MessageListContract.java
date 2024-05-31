@@ -20,5 +20,7 @@ public interface MessageListContract {
         void reSendMessage(String sMemberID, String message);
 
         boolean getUserLogin();
+
+        String getUserID();
     }
 }

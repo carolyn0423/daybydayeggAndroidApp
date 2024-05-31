@@ -1199,6 +1199,8 @@ public class RepositoryManager {
 
     public void saveShoppingCartCount(String Count) { SharedUtils.getInstance().saveShoppingCartCount(context, Count); }
 
+    public void saveMessageUnreadCount(String Count) { SharedUtils.getInstance().saveMessageUnreadCount(context, Count); }
+
     public void saveVerifyCode(String verifyCode) { SharedUtils.getInstance().saveVerifyCode(context, verifyCode); }
 
     public void saveInvitationCode(String InvitationCode) { SharedUtils.getInstance().saveInvitationCode(context, InvitationCode); }
@@ -1246,6 +1248,8 @@ public class RepositoryManager {
     public String getBusinessSaleID() { return SharedUtils.getInstance().getBusinessSaleID(context); }
 
     public String getShoppingCartCount() { return SharedUtils.getInstance().getShoppingCartCount(context); }
+
+    public String getMessageUnreadCount() { return SharedUtils.getInstance().getMessageUnreadCount(context); }
 
     public String getUserPassword() { return ApiUtils.decryption(SharedUtils.getInstance().getUserPassword(context)).trim(); }
 

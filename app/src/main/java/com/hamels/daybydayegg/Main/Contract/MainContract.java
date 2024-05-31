@@ -92,5 +92,7 @@ public interface MainContract {
         void GetShopCartLocationQuantity();
 
         String getShopkeeper();
+
+        String getMessageUnreadCount();
     }
 }

@@ -83,6 +83,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     view.setAllBadge(type);
                     String[] array= type.split("_");
                     repositoryManager.saveShoppingCartCount(array[3]);
+                    repositoryManager.saveMessageUnreadCount(array[1]);
 //                    if(array.length==4){
 //                        repositoryManager.saveShoppingCartCount(array[3]);
 //                    }else{
@@ -229,6 +230,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     public String getUserPw() { return repositoryManager.getUserPassword(); }
 
     public String getShopkeeper() { return repositoryManager.getShopkeeper(); }
+
+    public String getMessageUnreadCount() { return repositoryManager.getMessageUnreadCount(); }
 
     public void saveSourceActive(String sSourceActive) { repositoryManager.saveSourceActive(sSourceActive); }
 

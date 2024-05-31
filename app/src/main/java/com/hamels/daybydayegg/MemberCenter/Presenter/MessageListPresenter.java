@@ -20,6 +20,7 @@ public class MessageListPresenter extends BasePresenter<MessageListContract.View
 
     @Override
     public void getMessageList(String sMemberID) {
+        sMemberID = sMemberID.equals("") ? repositoryManager.getUserID() : sMemberID;
         repositoryManager.callGetMessageListApi(sMemberID, new BaseContract.ValueCallback<List<Message>>() {
             @Override
             public void onValueCallback(int task, List<Message> type) {
