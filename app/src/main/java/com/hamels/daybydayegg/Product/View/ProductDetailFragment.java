@@ -84,7 +84,6 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     private int product_id = 0;
     private int quantity = 0;
     private int iAllConfPrice = 0;
-    private  int iAllSoldout = 0;
     private final String[] Spec_ID = {""};
     private final String[] SpecQty = {""};
     private final String[] Stock = {""};
@@ -98,6 +97,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
     public int SoldOutQty = 0;
     private int iLimitQuantity = 1;
     private Product product;
+    private String sSaleType = "";
+    private String sSoldoutFlag = "";
+    boolean isSoldout = false;
 
     public static ProductDetailFragment getInstance(int product_id, String mIsETicket) {
         if (fragment == null) {
@@ -239,7 +241,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                 if(!conf_qty.getText().toString().equals("") && !conf_qty.getText().toString().equals("0") && 0 < SelectConf.size())
                 {
                     if(Integer.parseInt(conf_qty.getText().toString()) == 1) {
-                        if(iAllSoldout == 0) {
+                        if(!isSoldout) {
                             // 若數量為1，直接加入
                             addConf(v);
                             // 加入購物車
@@ -268,7 +270,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                                 .setPositiveButton(R.string.verify, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        if(iAllSoldout == 0) {
+                                        if(!isSoldout) {
                                             // 若數量為1，直接加入
                                             addConf(v);
                                             // 加入購物車
@@ -299,7 +301,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                                 }).show();
                     }
                 } else {
-                    if(iAllSoldout == 0) {
+                    if(!isSoldout) {
                         // 加入購物車
                         addCart();
                     }else{
@@ -417,8 +419,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
 
         String sQuantity = "" + (Integer.parseInt(edit_num.getText().toString()) * iLimitQuantity);
-
-        presenter.addShoppingCart(Integer.toString(product_id), Spec_ID[0], location_id, SpecQty[0], Stock[0], sQuantity, isETicket.equals("Y") ? "E" : "G", conf_list, iQtySum);
+        presenter.addShoppingCart(Integer.toString(product_id), Spec_ID[0], location_id, sSaleType, SpecQty[0], Stock[0], sQuantity, isETicket.equals("Y") ? "E" : "G", conf_list, iQtySum);
 
         // set default
         //edit_num.setText(Integer.toString(1 * iLimitQuantity));
@@ -455,9 +456,9 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
                     //iTmpAllPrice += SelectConf.get(i).getprice() * iLimitQuantity;
                     iTmpAllPrice += SelectConf.get(i).getprice() ;
 
-                    if(SelectConf.get(i).getSoldOutQty().equals("Y")){
-                        iAllSoldout += SelectConf.get(i).getSoldOutQty().equals("Y") ? 1 : 0;
-                    }
+//                    if(SelectConf.get(i).getSoldOutQty().equals("Y")){
+//                        iAllSoldout += SelectConf.get(i).getSoldOutQty().equals("Y") ? 1 : 0;
+//                    }
                 }
                 iTmpAllPrice = iTmpAllPrice * Integer.parseInt(conf_qty.getText().toString()) * iTmpAllPrice;
                 // Leslie 增加總客製數量
@@ -520,7 +521,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         List<ProductPicture> productPictureList = productDetail.get(0).getPicture_url_list();
         List<CustomViewsInfo> data = new ArrayList<>();
         iLimitQuantity = productDetail.get(0).getLimitQuantity();
-        iAllSoldout = !productDetail.get(0).getSoldoutToday().equals("N") ? 1 : 0;
+        sSoldoutFlag = productDetail.get(0).getSoldoutFlag();
         for (int i = 0; i < productPictureList.size(); i++) {
             data.add(new CustomViewsInfo(EOrderApplication.sApiUrl + productPictureList.get(i).getPictureurl(), productPictureList.get(i).getId()));
         }
@@ -537,7 +538,20 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             }
         });
 
-        if (iAllSoldout > 0){
+        switch (isETicket){
+            case "N":
+                if(sSoldoutFlag.equals("P") || sSoldoutFlag.equals("Y")){
+                    isSoldout = true;
+                }
+                break;
+            case "Y":
+                if(sSoldoutFlag.equals("E") || sSoldoutFlag.equals("Y")){
+                    isSoldout = true;
+                }
+                break;
+        }
+
+        if (isSoldout){
             List<String> labels = new ArrayList<>();
             labels.add("今日完售");
             tv_water_mask.setBackground(new WaterMaskUtils(getContext(),labels,-30,18));
@@ -551,6 +565,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
         }
 
         location_id = productDetail.get(0).getLocation_id();
+        sSaleType = productDetail.get(0).getSalesType();
         product_type_main_id = productDetail.get(0).getProductTypeMainID();
         tv_product_type.setText(productDetail.get(0).getProduct_name());
         tv_store_name.setText(productDetail.get(0).getProductTypeMainName() + " - " + productDetail.get(0).getTypeName());

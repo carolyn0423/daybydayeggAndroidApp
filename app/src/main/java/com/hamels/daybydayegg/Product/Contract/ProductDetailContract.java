@@ -19,6 +19,6 @@ public interface ProductDetailContract {
     interface Presenter extends BaseContract.Presenter {
         void getProductDetailByID(String product_ID, String e_ticket);
 
-        void addShoppingCart(String product_id, String spec_id, String location_id, String spec_qty, String stock, String quantity, String order_type, String conf_list, int conf_quantity);
+        void addShoppingCart(String product_id, String spec_id, String location_id, String sSaleType, String spec_qty, String stock, String quantity, String order_type, String conf_list, int conf_quantity);
     }
 }

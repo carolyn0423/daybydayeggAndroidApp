@@ -29,7 +29,7 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailContract.
     }
 
     @Override
-    public void addShoppingCart(String product_id, String spec_id, String location_id, String spec_qty, String stock, String quantity, String order_type, String conf_list, int conf_quantity) {
+    public void addShoppingCart(String product_id, String spec_id, String location_id, String sSaleType, String spec_qty, String stock, String quantity, String order_type, String conf_list, int conf_quantity) {
         if (repositoryManager.getUserLogin()) {
             if (spec_id.equals("0") || spec_id.isEmpty()) {
                 view.showErrorAlert("請填寫商品規格");
@@ -40,7 +40,7 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailContract.
             } else if(Integer.parseInt(quantity) < conf_quantity){
                 view.showErrorAlert("購買數量不可小於客製份數");
             } else {
-                repositoryManager.callAddShoppingCattApi("0", "G", product_id, spec_id, location_id, quantity, order_type, conf_list,
+                repositoryManager.callAddShoppingCattApi("0", sSaleType, product_id, spec_id, location_id, quantity, order_type, conf_list,
                         new BaseContract.ValueCallback<String>() {
                             @Override
                             public void onValueCallback(int task, String type) {
@@ -52,4 +52,6 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailContract.
             view.intentToLogin(REQUEST_PRODUCT_DETAIL);
         }
     }
+
+    public String getFragmentMainType(String sParam) { return repositoryManager.getFragmentMainType(sParam); }
 }

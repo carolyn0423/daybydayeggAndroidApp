@@ -60,6 +60,7 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
     private ArrayAdapter<String> ProductSpinnerArray;
     private static final String IS_E_TICKET = "isETicket";
     private String isETicket = "N";
+    private String sSaleType = "";
 
     public static BusinessProductDetailFragment getInstance(int product_id) {
         if (fragment == null) {
@@ -150,7 +151,7 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
         layout_shopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addShoppingCart(business_sale_id, Integer.toString(product_id), location_id, Spec_ID[0], SpecQty[0], Stock[0], edit_num.getText().toString(), isETicket.equals("Y") ? "E" : "G", "");
+                presenter.addShoppingCart(business_sale_id, Integer.toString(product_id), location_id, sSaleType, Spec_ID[0], SpecQty[0], Stock[0], edit_num.getText().toString(), isETicket.equals("Y") ? "E" : "G", "");
                 edit_num.setText("1");
             }
         });
@@ -201,6 +202,7 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         edit_num.setText("1");
         tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
+        sSaleType = productDetail.get(0).getSalesType();
 
         List<ProductSpec> specArrayList = productDetail.get(0).getSpec_list();
 

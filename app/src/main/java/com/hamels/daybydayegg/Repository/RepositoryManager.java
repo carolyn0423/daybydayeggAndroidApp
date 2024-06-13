@@ -374,9 +374,9 @@ public class RepositoryManager {
         });
     }
 
-    public void callGetProductMainTypeListApi(final String location_id, final String customer_id, final BaseContract.ValueCallback<List<ProductMainType>> valueCallback) {
+    public void callGetProductMainTypeListApi(final String location_id, final String customer_id, final String sETicket, final BaseContract.ValueCallback<List<ProductMainType>> valueCallback) {
         basePresenter.startCallApi();
-        MemberRepository.getInstance().getProductMainTypeList(location_id, customer_id, new ApiCallback<BaseModel<List<ProductMainType>>>(basePresenter) {
+        MemberRepository.getInstance().getProductMainTypeList(location_id, customer_id, sETicket, new ApiCallback<BaseModel<List<ProductMainType>>>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel<List<ProductMainType>> response) {
                 super.onApiSuccess(response);
@@ -644,11 +644,11 @@ public class RepositoryManager {
         });
     }
 
-    public void callAddShoppingCattApi(final String business_sale_id, final String sale_type, final String product_id, final String spec_id, final String location_id, final String quantity, final String order_type, final String conf_list, final BaseContract.ValueCallback<String> valueCallback) {
+    public void callAddShoppingCattApi(final String business_sale_id, final String sSaleType, final String product_id, final String spec_id, final String location_id, final String quantity, final String order_type, final String conf_list, final BaseContract.ValueCallback<String> valueCallback) {
         basePresenter.startCallApi();
-        String customer_id = context.getSharedPreferences("CustomerID", Context.MODE_PRIVATE).getString("CustomerID", "");
+        String customer_id = EOrderApplication.CUSTOMER_ID;
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().addShoppingCart(customer_id,business_sale_id, sale_type, member_id, product_id, spec_id, location_id, quantity, order_type, conf_list, new ApiCallback<BaseModel>(basePresenter) {
+        MemberRepository.getInstance().addShoppingCart(customer_id, business_sale_id, sSaleType, member_id, product_id, spec_id, location_id, quantity, order_type, conf_list, new ApiCallback<BaseModel>(basePresenter) {
             @Override
             public void onApiSuccess(BaseModel response) {
                 super.onApiSuccess(response);

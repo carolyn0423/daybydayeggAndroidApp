@@ -281,9 +281,11 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
         if(iCartShippingAllowCount == donateList.size()){
             isAllowToShipping = true;
             btn_deliver.setBackground(new ColorDrawable(getResources().getColor(R.color.orangeText)));
+            btn_deliver.setEnabled(true);
         }else{
             isAllowToShipping = false;
             btn_deliver.setBackground(new ColorDrawable(getResources().getColor(R.color.darkGreyLine)));
+            btn_deliver.setEnabled(false);
         }
     }
 

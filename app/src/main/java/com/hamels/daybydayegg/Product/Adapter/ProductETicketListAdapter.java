@@ -1,6 +1,12 @@
 package com.hamels.daybydayegg.Product.Adapter;
 
 import androidx.annotation.NonNull;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -167,14 +167,16 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         layout_left_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sNewUID = v.getTag(v.getId()).toString();
-                if (!sNewUID.isEmpty()) {
-                    int iNewUID = Integer.parseInt(sNewUID);
-                    getInstance(iNewUID);
-                    final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    ft.detach(fragment);
-                    ft.attach(fragment);
-                    ft.commit();
+                if(v != null && v.getTag() != null) {
+                    String sNewUID = v.getTag(v.getId()).toString();
+                    if (!sNewUID.isEmpty()) {
+                        int iNewUID = Integer.parseInt(sNewUID);
+                        getInstance(iNewUID);
+                        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.detach(fragment);
+                        ft.attach(fragment);
+                        ft.commit();
+                    }
                 }
             }
         });
@@ -182,14 +184,16 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         layout_right_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sNewUID = v.getTag(v.getId()).toString();
-                if (!sNewUID.isEmpty()) {
-                    int iNewUID = Integer.parseInt(sNewUID);
-                    getInstance(iNewUID);
-                    final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    ft.detach(fragment);
-                    ft.attach(fragment);
-                    ft.commit();
+                if(v != null && v.getTag() != null){
+                    String sNewUID = v.getTag(v.getId()).toString();
+                    if (!sNewUID.isEmpty()) {
+                        int iNewUID = Integer.parseInt(sNewUID);
+                        getInstance(iNewUID);
+                        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.detach(fragment);
+                        ft.attach(fragment);
+                        ft.commit();
+                    }
                 }
             }
         });

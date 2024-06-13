@@ -83,10 +83,12 @@ public class ProductMainTypeAdapter extends BaseAdapter<ProductMainTypeHolder> {
     View.OnClickListener img_OnClick_Evt = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            int id = v.getId();
-            if (id == R.id.img_productMainType_left || id == R.id.img_productMainType_right
-                 || id == R.id.constraintLayout_left || id == R.id.constraintLayout_right){
-                presenter.getProductList(Integer.parseInt(v.getTag(v.getId()).toString()));
+            if(v != null && v.getTag() != null) {
+                int id = v.getId();
+                if (id == R.id.img_productMainType_left || id == R.id.img_productMainType_right
+                        || id == R.id.constraintLayout_left || id == R.id.constraintLayout_right) {
+                    presenter.getProductList(Integer.parseInt(v.getTag(v.getId()).toString()));
+                }
             }
         }
     };
