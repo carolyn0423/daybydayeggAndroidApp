@@ -37,3 +37,7 @@ gen/
 local.properties
 # Log Files
 *.log
+/app/uat/debug/
+/app/prod/release/app-prod-release.aab
+/app/release/日日正式_1103.zip
+/app/release/日日正式版_1031.zip
