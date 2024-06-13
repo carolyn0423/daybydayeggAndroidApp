@@ -17,6 +17,6 @@ public interface BusinessProductDetailContract {
     interface Presenter extends BaseContract.Presenter {
         void getProductDetailByID(String product_ID , String e_ticket, String business_sale_id);
 
-        void addShoppingCart(String business_sale_id ,String product_id, String spec_id, String location_id, String spec_qty, String stock, String quantity, String order_type, String conf_list);
+        void addShoppingCart(String business_sale_id ,String product_id, String spec_id, String location_id, String sSaleType, String spec_qty, String stock, String quantity, String order_type, String conf_list);
     }
 }

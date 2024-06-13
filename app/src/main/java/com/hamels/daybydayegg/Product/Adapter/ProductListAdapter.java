@@ -66,23 +66,4 @@ public class ProductListAdapter extends BaseAdapter<ProductHolder> {
             }
         }
     };
-
-    public static Bitmap mark(Bitmap src, String watermark, Point location, Color color, int alpha, int size, boolean underline) {
-        int w = src.getWidth();
-        int h = src.getHeight();
-        Bitmap result = Bitmap.createBitmap(w, h, src.getConfig());
-
-        Canvas canvas = new Canvas(result);
-        canvas.drawBitmap(src, 0, 0, null);
-
-        Paint paint = new Paint();
-        paint.setColor(color.parseColor("#709868"));
-        paint.setAlpha(alpha);
-        paint.setTextSize(size);
-        paint.setAntiAlias(true);
-        paint.setUnderlineText(underline);
-        canvas.drawText(watermark, location.x, location.y, paint);
-
-        return result;
-    }
 }

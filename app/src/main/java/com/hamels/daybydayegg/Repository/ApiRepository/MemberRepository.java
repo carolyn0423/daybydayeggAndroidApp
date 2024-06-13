@@ -216,7 +216,7 @@ public class MemberRepository extends ApiRepository {
         retrofit.create(MemberApiService.class).GetOftenVatNumber(requestBody).enqueue(callback);
     }
 
-    public void getProductMainTypeList(final String location_id, final String customer_id, final AbsApiCallback callback) {
+    public void getProductMainTypeList(final String location_id, final String customer_id, final String sETicket, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
         String sLocationID = location_id.equals("0") ? "" : location_id;
@@ -226,6 +226,7 @@ public class MemberRepository extends ApiRepository {
         map.put("enabled", "Y");
         map.put("customer_id", customer_id);
         map.put("location_id", sLocationID);
+        map.put("e_ticket", sETicket);
         Log.e(TAG, "API getProductMainTypeList : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).GetProductMainTypeList(requestBody).enqueue(callback);

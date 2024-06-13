@@ -30,7 +30,7 @@ public class ProductMainTypePresenter extends BasePresenter<ProductMainTypeContr
                     if(type.get(0).getHeadLocationFlag().equals("Y")){
                         //  總店判斷是否有 線上購物
                         if(type.get(0).getOrderSource().indexOf("1") != -1){
-                            callGetProductMainTypeListApi(location_id, sCustomerID);
+                            callGetProductMainTypeListApi(location_id, sCustomerID, isETicket);
                         }else{
                             //  無線上購物功能
                             view.setOnlineShoppingFlag(false);
@@ -39,14 +39,14 @@ public class ProductMainTypePresenter extends BasePresenter<ProductMainTypeContr
                 }
             });
         }else{
-            callGetProductMainTypeListApi(location_id, sCustomerID);
+            callGetProductMainTypeListApi(location_id, sCustomerID, isETicket);
         }
     }
 
-    public void callGetProductMainTypeListApi(String location_id, String sCustomerID){
+    public void callGetProductMainTypeListApi(String location_id, String sCustomerID, String sETicket){
         view.setOnlineShoppingFlag(true);
 
-        repositoryManager.callGetProductMainTypeListApi(location_id, sCustomerID, new BaseContract.ValueCallback<List<ProductMainType>>() {
+        repositoryManager.callGetProductMainTypeListApi(location_id, sCustomerID, sETicket, new BaseContract.ValueCallback<List<ProductMainType>>() {
             @Override
             public void onValueCallback(int task, List<ProductMainType> type) {
                 view.setProductMainTypeList(type);
