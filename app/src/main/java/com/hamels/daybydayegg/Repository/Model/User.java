@@ -18,7 +18,6 @@ public class User {
 
     @SerializedName("member_id")
     private int member_id;
-
     private String account;
     private String name;
     private String birthday;

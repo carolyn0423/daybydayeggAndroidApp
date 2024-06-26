@@ -308,16 +308,6 @@ public class MemberRepository extends ApiRepository {
         retrofit.create(MemberApiService.class).GetDonateList(requestBody).enqueue(callback);
     }
 
-    public void getTicketCart(final String member_id, final AbsApiCallback callback) {
-        Map<String, String> map = new HashMap<>();
-        map.put("connection_name", EOrderApplication.dbConnectName);
-        map.put("isApp", "true");
-        map.put("member_id", member_id);
-        Log.e(TAG, "API getTicketCart : " + map);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
-        retrofit.create(MemberApiService.class).GetTicketCart(requestBody).enqueue(callback);
-    }
-
     public void writeOffTicketByCart(final String member_id, String cart_ticket_code, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();
         map.put("connection_name", EOrderApplication.dbConnectName);
@@ -344,6 +334,16 @@ public class MemberRepository extends ApiRepository {
         Log.e(TAG, "API updateTicketCart : " + map);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
         retrofit.create(MemberApiService.class).UpdateTicketCart(requestBody).enqueue(callback);
+    }
+
+    public void getTicketCart(final String member_id, final AbsApiCallback callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("connection_name", EOrderApplication.dbConnectName);
+        map.put("isApp", "true");
+        map.put("member_id", member_id);
+        Log.e(TAG, "API getTicketCart : " + map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+        retrofit.create(MemberApiService.class).GetTicketCart(requestBody).enqueue(callback);
     }
 
     public void updateTicketCartCode(final String member_id, final String cart_ticket_code, final AbsApiCallback callback) {
@@ -704,16 +704,16 @@ public class MemberRepository extends ApiRepository {
         retrofit.create(MemberApiService.class).postGetMailBadge(requestBody).enqueue(callback);
     }
 
-    public void getMessageBadge(final String mebmer_id , final AbsApiCallback callback) {
-        Map<String, String> map = new HashMap<>();
-        map.put("connection_name", EOrderApplication.dbConnectName);
-        map.put("modified_user",mebmer_id);
-        map.put("member_id",mebmer_id);
-        map.put("isApp","true");
-
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
-        retrofit.create(MemberApiService.class).postGetMessageBadge(requestBody).enqueue(callback);
-    }
+//    public void getMessageBadge(final String mebmer_id , final AbsApiCallback callback) {
+//        Map<String, String> map = new HashMap<>();
+//        map.put("connection_name", EOrderApplication.dbConnectName);
+//        map.put("modified_user",mebmer_id);
+//        map.put("member_id",mebmer_id);
+//        map.put("isApp","true");
+//
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), ApiUtils.getEncodeStringParams(map));
+//        retrofit.create(MemberApiService.class).postGetMessageBadge(requestBody).enqueue(callback);
+//    }
 
     public void getBadgeNumber(final String customer_id,final String mebmer_id, final AbsApiCallback callback) {
         Map<String, String> map = new HashMap<>();

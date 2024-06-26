@@ -135,4 +135,9 @@ dependencies {
 
     //  Location
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    //  WebSocket
+    implementation 'org.java-websocket:Java-WebSocket:1.5.2'
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+    implementation 'org.greenrobot:eventbus:3.2.0'
 }

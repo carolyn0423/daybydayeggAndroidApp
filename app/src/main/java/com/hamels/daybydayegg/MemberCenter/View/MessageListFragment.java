@@ -1,5 +1,6 @@
 package com.hamels.daybydayegg.MemberCenter.View;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,14 +14,26 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.hamels.daybydayegg.Base.BaseFragment;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.MemberCenter.Adapter.MessageListAdapter;
 import com.hamels.daybydayegg.MemberCenter.Contract.MessageListContract;
 import com.hamels.daybydayegg.MemberCenter.Presenter.MessageListPresenter;
 import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.Message;
+import com.hamels.daybydayegg.Repository.Model.MessageEvent;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class MessageListFragment extends BaseFragment implements MessageListContract.View {
@@ -46,32 +59,46 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         fragment.setArguments(bundle);
         return fragment;
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_message_list, container, false);
         sMemberID = getArguments().getString("MEMBERID", "");
-        isAdmin = sMemberID.equals("") ? false : true;
+        isAdmin = !sMemberID.isEmpty();
         initView(view);
 
-        messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
+        if(messagePresenter == null) {
+            messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
+        }
+
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(messagePresenter.getUserLogin()){
-            startAutoRefresh();
-        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        handler.removeCallbacksAndMessages(null); // 取消所有待执行的任务
-        handler.removeCallbacks(autoRefreshRunnable);  // 停止自动刷新
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        queryCustomerServiceAPI();
     }
 
     private void initView(View view) {
@@ -114,31 +141,27 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         messageListAdapter = new MessageListAdapter();
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(messageListAdapter);
+
+        queryCustomerServiceAPI();
     }
 
-    private void startAutoRefresh() {
-        // 先取消先前调度的任务
-        handler.removeCallbacks(autoRefreshRunnable);
-        // 然后调度新的任务
-        handler.postDelayed(autoRefreshRunnable, 1000);
-    }
-
-    private Runnable autoRefreshRunnable = new Runnable() {
-        @Override
-        public void run() {
-            // 在此处执行API请求以刷新数据
+    public void queryCustomerServiceAPI() {
+        // 调用查询客服中心API的代码
+        // 更新消息列表
+        if(messagePresenter != null) {
             messagePresenter.getMessageList(sMemberID);
-            // 完成后再次调度自动刷新
-            handler.postDelayed(this, 1000);
+        }else{
+            messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
+            messagePresenter.getMessageList(sMemberID);
         }
-    };
+    }
 
     @Override
     public void setMessageList(List<Message> list) {
         messageListAdapter.setMessages(list);
         messagePresenter.updateReadMessageApi();
 
-        if(iMessageCount != list.size()){
+        if (iMessageCount != list.size()) {
             iMessageCount = list.size();
             recyclerView.scrollToPosition(list.size() - 1);
         }

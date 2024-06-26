@@ -16,6 +16,8 @@ public interface MainIndexContract {
         void intentToLogin(int page);
 
         void getNoVerift();
+
+        void CallActive();
     }
 
     interface Presenter extends BaseContract.Presenter {

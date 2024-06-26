@@ -54,10 +54,11 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void getMessageBadgeFromApi() {
         if (getUserLogin()) {
-            repositoryManager.callGetMessageBadgeApi(new BaseContract.ValueCallback<String>() {
+            repositoryManager.callGetBadgeNumberApi(new BaseContract.ValueCallback<String>() {
                 @Override
                 public void onValueCallback(int task, String type) {
-                    view.setMessageBadge(type);
+                    String[] array= type.split("_");
+                    view.setMessageBadge(array[1]);
                 }
             });
         } else {
@@ -220,6 +221,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     public String getInvitationCode() {
         return repositoryManager.getInvitationCode();
     }
+
+    public String getUserID() { return repositoryManager.getUserID(); }
 
     public String getUserName() {
         return repositoryManager.getUserName();

@@ -266,10 +266,13 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         });
 
         mainindexPresenter.checkMemberData();
+    }
 
+    public void CallActive(){
         Activity activity = getActivity();
         if (activity instanceof MainActivity) {
             ((MainActivity) activity).refreshBadge();
+            ((MainActivity) activity).CreateWebSocket();
         }
     }
 }

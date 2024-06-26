@@ -4,6 +4,7 @@ import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BasePresenter;
 import com.hamels.daybydayegg.Donate.Contract.DonateContract;
 import com.hamels.daybydayegg.Repository.Model.Donate;
+import com.hamels.daybydayegg.Repository.Model.DonateCart;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
 
 import java.util.List;
@@ -47,9 +48,9 @@ public class DonatePresenter extends BasePresenter<DonateContract.View> implemen
 
     @Override
     public void updateTicket(String action, String product_id, String spec_id, String give_date) {
-        repositoryManager.callUpdateTicketCartApi(action, product_id, spec_id, give_date, new BaseContract.ValueCallback<Boolean>() {
+        repositoryManager.callUpdateTicketCartApi(action, product_id, spec_id, give_date, new BaseContract.ValueCallback<List<DonateCart>>() {
             @Override
-            public void onValueCallback(int task, Boolean type) {
+            public void onValueCallback(int task, List<DonateCart> type) {
                 view.goPageDonateCart();
             }
         });

@@ -94,5 +94,7 @@ public interface MainContract {
         String getShopkeeper();
 
         String getMessageUnreadCount();
+
+        String getUserID();
     }
 }

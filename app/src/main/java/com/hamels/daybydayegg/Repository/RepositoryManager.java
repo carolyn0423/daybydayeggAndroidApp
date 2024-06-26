@@ -460,18 +460,6 @@ public class RepositoryManager {
         });
     }
 
-    public void callGetTicketCartApi(final BaseContract.ValueCallback<List<DonateCart>> valueCallback) {
-        basePresenter.startCallApi();
-        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().getTicketCart(member_id, new ApiCallback<BaseModel<List<DonateCart>>>(basePresenter) {
-            @Override
-            public void onApiSuccess(BaseModel<List<DonateCart>> response) {
-                super.onApiSuccess(response);
-                valueCallback.onValueCallback(TASK_POST_GET_DONATE_LIST, response.getItems());
-            }
-        });
-    }
-
     public void callUpdateTicketCartCode(String cart_ticket_code, final BaseContract.ValueCallback<Boolean> valueCallback) {
         basePresenter.startCallApi();
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
@@ -485,15 +473,27 @@ public class RepositoryManager {
         });
     }
 
-    public void callUpdateTicketCartApi(final String action, final String product_id, final String spec_id, final String give_date, final BaseContract.ValueCallback<Boolean> valueCallback) {
+    public void callUpdateTicketCartApi(final String action, final String product_id, final String spec_id, final String give_date, final BaseContract.ValueCallback<List<DonateCart>> valueCallback) {
         basePresenter.startCallApi();
         String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().updateTicketCart(member_id, action, product_id, spec_id, give_date, new ApiCallback<BaseModel<Boolean>>(basePresenter) {
+        MemberRepository.getInstance().updateTicketCart(member_id, action, product_id, spec_id, give_date, new ApiCallback<BaseModel<List<DonateCart>>>(basePresenter) {
             @Override
-            public void onApiSuccess(BaseModel<Boolean> response) {
+            public void onApiSuccess(BaseModel<List<DonateCart>> response) {
                 super.onApiSuccess(response);
                 Log.e(TAG, response.toString());
-                valueCallback.onValueCallback(TASK_POST_GET_DONATE_LIST, response.getSuccess());
+                valueCallback.onValueCallback(TASK_POST_GET_DONATE_LIST, response.getItems());
+            }
+        });
+    }
+
+    public void callGetTicketCartApi(final BaseContract.ValueCallback<List<DonateCart>> valueCallback) {
+        basePresenter.startCallApi();
+        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+        MemberRepository.getInstance().getTicketCart(member_id, new ApiCallback<BaseModel<List<DonateCart>>>(basePresenter) {
+            @Override
+            public void onApiSuccess(BaseModel<List<DonateCart>> response) {
+                super.onApiSuccess(response);
+                valueCallback.onValueCallback(TASK_POST_GET_DONATE_LIST, response.getItems());
             }
         });
     }
@@ -812,28 +812,28 @@ public class RepositoryManager {
         });
     }
 
-    public void callGetMessageBadgeApi(final BaseContract.ValueCallback<String> valueCallback) {
-//        basePresenter.startCallApi();
-        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
-        MemberRepository.getInstance().getMessageBadge(member_id,new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
-            @Override
-            public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
-                super.onApiSuccess(response);
-//                if (response.getCode() == 200) {
-                if (response.getSuccess()) {
-                    List<Map<String, String>> map = response.getItems();
-                    if (map.get(0).containsKey("unReadNum")) {
-                        valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, response.getItems().get(0).get("unReadNum"));
-//                        valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, "");
-                    } else {
-                        valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0");
-                    }
-                } else {
-                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0");
-                }
-            }
-        });
-    }
+//    public void callGetMessageBadgeApi(final BaseContract.ValueCallback<String> valueCallback) {
+////        basePresenter.startCallApi();
+//        String member_id = context.getSharedPreferences("MemberID", Context.MODE_PRIVATE).getString("MemberID", "");
+//        MemberRepository.getInstance().getMessageBadge(member_id,new ApiCallback<BaseModel<List<Map<String, String>>>>(basePresenter) {
+//            @Override
+//            public void onApiSuccess(BaseModel<List<Map<String, String>>> response) {
+//                super.onApiSuccess(response);
+////                if (response.getCode() == 200) {
+//                if (response.getSuccess()) {
+//                    List<Map<String, String>> map = response.getItems();
+//                    if (map.get(0).containsKey("unReadNum")) {
+//                        valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, response.getItems().get(0).get("unReadNum"));
+////                        valueCallback.onValueCallback(TASK_POST_GET_MAIL_BADGE, "");
+//                    } else {
+//                        valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0");
+//                    }
+//                } else {
+//                    valueCallback.onValueCallback(TASK_POST_GET_MESSAGE_BADGE, "0");
+//                }
+//            }
+//        });
+//    }
 
 
     public void callGetBadgeNumberApi(final BaseContract.ValueCallback<String> valueCallback) {

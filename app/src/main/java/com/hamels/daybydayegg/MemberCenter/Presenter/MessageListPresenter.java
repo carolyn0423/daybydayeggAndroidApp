@@ -44,7 +44,7 @@ public class MessageListPresenter extends BasePresenter<MessageListContract.View
         repositoryManager.callSendMessageApi(sMessage, new BaseContract.ValueCallback<Boolean>() {
             @Override
             public void onValueCallback(int task, Boolean type) {
-                getMessageList(sMemberID);
+                view.queryCustomerServiceAPI();
             }
         });
     }
@@ -54,7 +54,7 @@ public class MessageListPresenter extends BasePresenter<MessageListContract.View
         repositoryManager.callAddNewReplyMessageApi(sReMemberID, sMessage, new BaseContract.ValueCallback<Boolean>() {
             @Override
             public void onValueCallback(int task, Boolean type) {
-                getMessageList(sReMemberID);
+                view.queryCustomerServiceAPI();
             }
         });
     }

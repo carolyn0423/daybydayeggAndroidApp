@@ -22,10 +22,12 @@ public class EOrderApplication extends Application {
     public static final String DOMAIN_ADMIN_SIT = "https://eorder.hamels.com.tw:9940/";
 
     //public static String ADMIN_DOMAIN = sAppVersion.equals("prod") ? DOMAIN_ADMIN_PRO : isUat ? DOMAIN_ADMIN_UAT : DOMAIN_ADMIN_SIT;
-    public static String ADMIN_DOMAIN = DOMAIN_ADMIN_UAT;
+    public static String ADMIN_DOMAIN = DOMAIN_ADMIN_SIT;
     public static String CUSTOMER_ID = "111";
     public static String CUSTOMER_NAME = "日日好蛋";
     public static String sApiUrl = "";
+    public static String WEB_SOCKET_PATH = "";
+    public static String WEB_SOCKET_PATH_NAME = "WebSocketHandler.ashx";
     public static boolean isLogin = false;
     public static String dbConnectName = "";
     public static String cartBadgeCount = "0";

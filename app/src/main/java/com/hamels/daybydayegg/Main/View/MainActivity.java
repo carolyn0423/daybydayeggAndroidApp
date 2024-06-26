@@ -39,6 +39,8 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -64,6 +66,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -82,6 +86,7 @@ import com.hamels.daybydayegg.Product.View.ProductMainTypeFragment;
 import com.hamels.daybydayegg.Repository.ApiRepository.ApiRepository;
 import com.hamels.daybydayegg.Repository.ApiRepository.MemberRepository;
 import com.hamels.daybydayegg.Repository.Model.Customer;
+import com.hamels.daybydayegg.Repository.Model.MessageEvent;
 import com.hamels.daybydayegg.Utils.SharedUtils;
 import com.hamels.daybydayegg.Widget.AppToolbar;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -100,6 +105,7 @@ import com.hamels.daybydayegg.R;
 import com.hamels.daybydayegg.Repository.Model.User;
 import com.hamels.daybydayegg.Utils.IntentUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -120,6 +126,13 @@ import static com.hamels.daybydayegg.Constant.Constant.REQUEST_SHOPPING_CART;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_BUSINESS;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_LOT_LIST;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_DONATE;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+import okio.ByteString;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -185,6 +198,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             showAlert("兌換失敗", intent.getStringExtra("body"));
         }
     };
+    private Gson gson = new Gson();
+    //  WebSocket
+    private WebSocket webSocket;
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -222,6 +239,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         // 在 onCreate 中注册广播接收器 -> 機台核銷限制提醒
         registerReceiver(pushNotificationReceiver, new IntentFilter("WRITE_OFF_MESSAGE"));
+        //  創立 WebSocket
+        CreateWebSocket();
     }
 
     @Override
@@ -1645,6 +1664,50 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         if(compareVersion(VersionCode + "", sOnlineVision)){
             isUpdate = true;
+        }
+    }
+
+    public void CreateWebSocket(){
+        if(!EOrderApplication.WEB_SOCKET_PATH.equals("")){
+            String sWssUrl = EOrderApplication.WEB_SOCKET_PATH.replace("https", "wss");
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url(sWssUrl).build();
+            webSocket = client.newWebSocket(request, new WebSocketListener() {
+                @Override
+                public void onOpen(WebSocket webSocket, Response response) {
+                    Log.d(TAG, "WebSocket Connected");
+                }
+
+                @Override
+                public void onMessage(WebSocket webSocket, String message) {
+                    Log.d(TAG, "Message Received: " + message);
+                    JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
+                    if (jsonObject.has("function_name")) {
+                        String functionName = jsonObject.get("function_name").getAsString();
+                        if ("leave_message".equals(functionName)) {
+                            EventBus.getDefault().post(new MessageEvent(message));
+                        }
+                    }
+                }
+
+                @Override
+                public void onClosing(WebSocket webSocket, int code, String reason) {
+                    webSocket.close(1000, null);
+                    Log.d(TAG, "WebSocket Closing: " + reason);
+                }
+
+                @Override
+                public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+                    Log.d(TAG, "WebSocket Failure: " + t.getMessage());
+                }
+            });
+        }
+    }
+
+    private void sendMessageToWebSocket(String message) {
+        if (webSocket != null) {
+            webSocket.send(message);
+            Log.d("WebSocket", "Message Sent: " + message);
         }
     }
 

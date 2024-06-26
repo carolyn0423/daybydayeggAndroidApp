@@ -112,7 +112,7 @@ public interface MemberApiService {
     Call<BaseModel<List<DonateCart>>> WriteOffTicketByCart(@Body RequestBody body);
 
     @POST("Order/UpdateTicketCart")
-    Call<BaseModel<DonateCart>> UpdateTicketCart(@Body RequestBody body);
+    Call<BaseModel<List<DonateCart>>> UpdateTicketCart(@Body RequestBody body);
 
     @POST("Order/GetTicketUsedHistory")
     Call<BaseModel<List<Donate>>> GetTicketUsedHistory(@Body RequestBody body);

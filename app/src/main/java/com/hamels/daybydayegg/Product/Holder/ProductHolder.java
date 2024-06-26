@@ -63,30 +63,19 @@ public class ProductHolder extends RecyclerView.ViewHolder {
 
         if (1 < product.getspec_cnt()) {
             tv_sale_price.setText("$" + sSalePrice + " 起");
-
-            if (product.getSale_price() != product.getPrice()) {
-                tv_price.setVisibility(View.VISIBLE);
-                tv_price.setText("$" + sPrice);
-                tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-
-                tv_price.setPadding(0, 50, 0, 0);
-                tv_sale_price.setPadding(0, 50, 0, 0);
-            } else {
-                tv_price.setVisibility(View.GONE);
-            }
         } else {
             tv_sale_price.setText("$" + sSalePrice);
+        }
 
-            if (product.getSale_price() != product.getPrice()) {
-                tv_price.setVisibility(View.VISIBLE);
-                tv_price.setText("$" + sPrice);
-                tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        if (product.getSale_price() != product.getPrice()) {
+            tv_price.setVisibility(View.VISIBLE);
+            tv_price.setText("$" + sPrice);
+            tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
-                tv_price.setPadding(0, 50, 0, 0);
-                tv_sale_price.setPadding(0, 50, 0, 0);
-            } else {
-                tv_price.setVisibility(View.GONE);
-            }
+            tv_price.setPadding(0, 50, 0, 0);
+            tv_sale_price.setPadding(0, 50, 0, 0);
+        } else {
+            tv_price.setVisibility(View.GONE);
         }
     }
 
