@@ -13,8 +13,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -39,7 +37,6 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -114,6 +111,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_COUPON;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIL;
@@ -132,7 +130,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
-import okio.ByteString;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -198,9 +195,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             showAlert("兌換失敗", intent.getStringExtra("body"));
         }
     };
-    private Gson gson = new Gson();
     //  WebSocket
     private WebSocket webSocket;
+    private OkHttpClient client;
+    private Gson gson;
+
+    public void WebSocketManager() {
+        gson = new Gson();
+        client = new OkHttpClient.Builder()
+                .readTimeout(0, TimeUnit.MILLISECONDS)
+                .build();
+        handler = new Handler(Looper.getMainLooper());
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -239,8 +245,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         // 在 onCreate 中注册广播接收器 -> 機台核銷限制提醒
         registerReceiver(pushNotificationReceiver, new IntentFilter("WRITE_OFF_MESSAGE"));
-        //  創立 WebSocket
-        CreateWebSocket();
+
+        WebSocketManager();
     }
 
     @Override
@@ -291,6 +297,16 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         }, 3000);
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        // 關閉 WebSocket 連接
+//        if (webSocketManager != null) {
+//            webSocketManager.closeWebSocket();
+//        }
+//    }
+
     private void notifyChangeToMail() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
         if (fragment != null) {
@@ -895,7 +911,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 if(mainPresenter.getShopkeeper().equals("Y")){
                     addFragment(AdminMessageFragment.getInstance());
                 }else{
-                    addFragment(MessageListFragment.getInstance(""));
+                    addFragment(MessageListFragment.getInstance(mainPresenter.getUserID(), mainPresenter.getMobile(), "N"));
                 }
                 break;
             case REQUEST_SHOPPING_CART:
@@ -1113,6 +1129,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         this.willChangeFragment = willChangeFragment;
         Log.e(TAG, "changeTabFragment" + willChangeFragment + "");
         removeAllStackFragment();
+        addFragment(willChangeFragment);
     }
 
     @Override
@@ -1667,10 +1684,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
     }
 
-    public void CreateWebSocket(){
-        if(!EOrderApplication.WEB_SOCKET_PATH.equals("")){
-            String sWssUrl = EOrderApplication.WEB_SOCKET_PATH.replace("https", "wss");
-            OkHttpClient client = new OkHttpClient();
+    public void CreateWebSocket() {
+        boolean isCreate = false;
+        if((EOrderApplication.WEB_SOCKET_MOBILE_CHK != EOrderApplication.WEB_SOCKET_MOBILE) || webSocket == null){
+            isCreate = true;
+            EOrderApplication.WEB_SOCKET_MOBILE_CHK = EOrderApplication.WEB_SOCKET_MOBILE;
+        }
+
+        if (!EOrderApplication.WEB_SOCKET_PATH.equals("") && !EOrderApplication.WEB_SOCKET_MOBILE.equals("") && isCreate) {
+            String sWssUrl = EOrderApplication.WEB_SOCKET_PATH.replace("https", "wss") + "?connector_id=" + EOrderApplication.WEB_SOCKET_MOBILE;
             Request request = new Request.Builder().url(sWssUrl).build();
             webSocket = client.newWebSocket(request, new WebSocketListener() {
                 @Override
@@ -1692,22 +1714,51 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
                 @Override
                 public void onClosing(WebSocket webSocket, int code, String reason) {
-                    webSocket.close(1000, null);
                     Log.d(TAG, "WebSocket Closing: " + reason);
+                    closeWebSocket();
+                    EOrderApplication.WEB_SOCKET_MOBILE_CHK = "";
+                    scheduleReconnect(); // 安排重連
                 }
 
                 @Override
                 public void onFailure(WebSocket webSocket, Throwable t, Response response) {
                     Log.d(TAG, "WebSocket Failure: " + t.getMessage());
+                    closeWebSocket();
+                    EOrderApplication.WEB_SOCKET_MOBILE_CHK = "";
+                    scheduleReconnect(); // 安排重連
                 }
             });
         }
     }
 
-    private void sendMessageToWebSocket(String message) {
+    private void scheduleReconnect() {
+        // 延遲重連，避免過於頻繁的重連導致伺服器過載
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                closeWebSocket();
+                CreateWebSocket();
+            }
+        }, 5000);
+    }
+
+    public void closeWebSocket() {
         if (webSocket != null) {
-            webSocket.send(message);
-            Log.d("WebSocket", "Message Sent: " + message);
+            webSocket.close(1000, "Client closed");
+            webSocket = null;
+        }
+    }
+
+    public void sendMessageToWebSocket(String sMemberID) {
+        if (webSocket != null) {
+            JsonObject notification = new JsonObject();
+            notification.addProperty("connection_name", EOrderApplication.dbConnectName);
+            notification.addProperty("customer_id", EOrderApplication.CUSTOMER_ID);
+            notification.addProperty("member_id", sMemberID);
+            notification.addProperty("function_name", "leave_message");
+            String notificationMessage = gson.toJson(notification);
+            webSocket.send(notificationMessage);
+            Log.d("WebSocket", "Sent: " + notificationMessage);
         }
     }
 

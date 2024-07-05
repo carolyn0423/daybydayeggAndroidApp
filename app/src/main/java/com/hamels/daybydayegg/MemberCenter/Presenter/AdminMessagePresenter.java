@@ -26,7 +26,7 @@ public class AdminMessagePresenter extends BasePresenter<AdminMessageContract.Vi
     }
 
     public void goMessageList(MessageGroup messageGroup){
-        view.goMessageList(messageGroup.getMemberID());
+        view.goMessageList(messageGroup.getMemberID(), messageGroup.getMobile());
     }
 
     public boolean getUserLogin(){ return repositoryManager.getUserLogin(); }

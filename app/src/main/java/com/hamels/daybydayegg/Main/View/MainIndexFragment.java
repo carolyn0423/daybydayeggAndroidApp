@@ -272,6 +272,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         Activity activity = getActivity();
         if (activity instanceof MainActivity) {
             ((MainActivity) activity).refreshBadge();
+            EOrderApplication.WEB_SOCKET_MOBILE = mainindexPresenter.getMobile();
             ((MainActivity) activity).CreateWebSocket();
         }
     }

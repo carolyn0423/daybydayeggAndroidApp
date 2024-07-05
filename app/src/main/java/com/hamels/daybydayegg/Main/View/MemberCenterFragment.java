@@ -165,7 +165,7 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
             if(memberPresenter.getShopkeeper().equals("Y")){
                 ((MainActivity) getActivity()).addFragment(AdminMessageFragment.getInstance());
             }else{
-                ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance(""));
+                ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance(memberPresenter.getUserID(), memberPresenter.getMobile(), "N"));
             }
         }else if(id == R.id.btn_member_gift) {
             ((MainActivity) getActivity()).addFragment(MemberGiftFragment.getInstance());

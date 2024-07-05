@@ -30,5 +30,7 @@ public interface MainIndexContract {
         void getMemberBadge();
 
         void logout();
+
+        String getMobile();
     }
 }

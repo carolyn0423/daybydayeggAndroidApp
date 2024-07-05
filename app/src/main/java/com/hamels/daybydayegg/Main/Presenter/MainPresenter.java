@@ -184,7 +184,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
             if(repositoryManager.getShopkeeper().equals("Y")){
                 view.addFragment(AdminMessageFragment.getInstance());
             }else{
-                view.addFragment(MessageListFragment.getInstance(""));
+                view.addFragment(MessageListFragment.getInstance(repositoryManager.getUserID(), repositoryManager.getMobile(), "N"));
             }
         } else {
             view.intentToLogin(REQUEST_MESSAGE);
@@ -229,6 +229,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     }
 
     public String getUserAccount() { return repositoryManager.getUserAccount(); }
+
+    public String getMobile() { return repositoryManager.getMobile(); }
 
     public String getUserPw() { return repositoryManager.getUserPassword(); }
 
@@ -296,6 +298,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                                     repositoryManager.saveVerifyCode(user.getVerifyCode());
                                     repositoryManager.saveInvitationCode(user.getInvitationCode());
                                     repositoryManager.saveUserName(user.getName());
+                                    repositoryManager.saveMobile(user.getMobile());
                                     repositoryManager.saveShopkeeper(user.getShopkeeper());
                                     repositoryManager.saveApiUrl(customers.getApiUrl());
                                 }
@@ -307,6 +310,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                                     repositoryManager.saveVerifyCode("");
                                     repositoryManager.saveInvitationCode("");
                                     repositoryManager.saveUserName("");
+                                    repositoryManager.saveMobile("");
                                     repositoryManager.saveShopkeeper("");
                                     getCustomer();
                                 }
@@ -317,6 +321,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                             repositoryManager.saveVerifyCode("");
                             repositoryManager.saveInvitationCode("");
                             repositoryManager.saveUserName("");
+                            repositoryManager.saveMobile("");
                             repositoryManager.saveShopkeeper("");
                             getCustomer();
                         }

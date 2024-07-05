@@ -96,5 +96,7 @@ public interface MainContract {
         String getMessageUnreadCount();
 
         String getUserID();
+
+        String getMobile();
     }
 }

@@ -9,7 +9,7 @@ public interface AdminMessageContract {
     interface View extends BaseContract.View {
         void setMessageList(List<MessageGroup> messageGroups);
 
-        void goMessageList(String sReMemberID);
+        void goMessageList(String sReMemberID, String sMobile);
     }
 
     interface Presenter extends BaseContract.Presenter {

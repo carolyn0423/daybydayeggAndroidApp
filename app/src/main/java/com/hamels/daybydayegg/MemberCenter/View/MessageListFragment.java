@@ -1,6 +1,5 @@
 package com.hamels.daybydayegg.MemberCenter.View;
 
-import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Main.View.MainActivity;
@@ -29,11 +26,7 @@ import com.hamels.daybydayegg.Repository.Model.MessageEvent;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.handshake.ServerHandshake;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 public class MessageListFragment extends BaseFragment implements MessageListContract.View {
@@ -48,14 +41,17 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     private MessageListContract.Presenter messagePresenter;
     private Handler handler = new Handler();
     private int iMessageCount = 0;
-    private String sMemberID = "";
+    private String sMemberID = "", sMobile = "";
     boolean isAdmin = false;
-    public static MessageListFragment getInstance(String parmMemberID) {
+    //  WebSocket
+    public static MessageListFragment getInstance(String parmMemberID, String sMobile, String isAdmin) {
         if (fragment == null) {
             fragment = new MessageListFragment();
         }
         Bundle bundle = new Bundle();
         bundle.putString("MEMBERID", parmMemberID);
+        bundle.putString("MOBILE", sMobile);
+        bundle.putString("ISADMIN", isAdmin);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -64,13 +60,16 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_message_list, container, false);
         sMemberID = getArguments().getString("MEMBERID", "");
-        isAdmin = !sMemberID.isEmpty();
+        sMobile = getArguments().getString("MOBILE", "");
+        isAdmin = getArguments().getString("ISADMIN", "").equals("Y") ? true : false;
         initView(view);
 
         if(messagePresenter == null) {
             messagePresenter = new MessageListPresenter(this, getRepositoryManager(getContext()));
         }
 
+        EOrderApplication.WEB_SOCKET_MOBILE = sMobile;
+        ((MainActivity) getActivity()).CreateWebSocket();
         return view;
     }
 
@@ -129,6 +128,8 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
                     }else {
                         messagePresenter.sendMessage(sMemberID, msg);
                     }
+
+                    ((MainActivity) getActivity()).sendMessageToWebSocket(sMemberID);
                     etMessage.setText("");
                 }
             }
@@ -161,9 +162,10 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         messageListAdapter.setMessages(list);
         messagePresenter.updateReadMessageApi();
 
-        if (iMessageCount != list.size()) {
-            iMessageCount = list.size();
-            recyclerView.scrollToPosition(list.size() - 1);
-        }
+//        if (iMessageCount != messageListAdapter.getItemCount()) {
+//            iMessageCount = messageListAdapter.getItemCount();
+//            recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
+//        }
+        recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
     }
 }
