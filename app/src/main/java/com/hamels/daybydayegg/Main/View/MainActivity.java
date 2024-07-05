@@ -200,8 +200,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     };
     private Gson gson = new Gson();
     //  WebSocket
+    String sReMemberID = "";
     private WebSocket webSocket;
-
+    private WebSocket webSocketBackstage;
+    private static final int RECONNECT_DELAY = 3000; // 重連延遲時間（毫秒）
+    private Handler reconnectHandler = new Handler();
+    private Runnable reconnectRunnable = new Runnable() {
+        @Override
+        public void run() {
+            CreateWebSocket();
+            CreateBackstageWebSocket(sReMemberID);
+        }
+    };
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -1667,9 +1677,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
     }
 
-    public void CreateWebSocket(){
-        if(!EOrderApplication.WEB_SOCKET_PATH.equals("")){
-            String sWssUrl = EOrderApplication.WEB_SOCKET_PATH.replace("https", "wss");
+    public void CreateWebSocket() {
+        if(!EOrderApplication.WEB_SOCKET_PATH.equals("") && !mainPresenter.getMobile().equals("")) {
+            String sWssUrl = EOrderApplication.WEB_SOCKET_PATH.replace("https", "wss") + "?connector_id=" + mainPresenter.getMobile();
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder().url(sWssUrl).build();
             webSocket = client.newWebSocket(request, new WebSocketListener() {
@@ -1694,20 +1704,86 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 public void onClosing(WebSocket webSocket, int code, String reason) {
                     webSocket.close(1000, null);
                     Log.d(TAG, "WebSocket Closing: " + reason);
+                    scheduleReconnect(); // 安排重連
                 }
 
                 @Override
                 public void onFailure(WebSocket webSocket, Throwable t, Response response) {
                     Log.d(TAG, "WebSocket Failure: " + t.getMessage());
+                    scheduleReconnect(); // 安排重連
                 }
             });
         }
     }
 
-    private void sendMessageToWebSocket(String message) {
+    public void CreateBackstageWebSocket(String sMemberID){
+        if(!EOrderApplication.WEB_SOCKET_PATH.equals("") && !sMemberID.equals("")){
+            sReMemberID = sMemberID;
+            String sWssUrl = EOrderApplication.WEB_SOCKET_PATH.replace("https", "wss") + "?connector_id=backstage_" + sMemberID;
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url(sWssUrl).build();
+            webSocketBackstage = client.newWebSocket(request, new WebSocketListener() {
+                @Override
+                public void onOpen(WebSocket webSocket, Response response) {
+                    Log.d(TAG, "webSocketBackstage Connected");
+                }
+
+                @Override
+                public void onMessage(WebSocket webSocket, String message) {
+                    Log.d(TAG, "webSocketBackstage Received: " + message);
+                    JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
+                    if (jsonObject.has("function_name")) {
+                        String functionName = jsonObject.get("function_name").getAsString();
+                        if ("leave_message".equals(functionName)) {
+                            EventBus.getDefault().post(new MessageEvent(message));
+                        }
+                    }
+                }
+
+                @Override
+                public void onClosing(WebSocket webSocket, int code, String reason) {
+                    webSocket.close(1000, null);
+                    Log.d(TAG, "webSocketBackstage Closing: " + reason);
+                    scheduleReconnect(); // 安排重連
+                }
+
+                @Override
+                public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+                    Log.d(TAG, "webSocketBackstage Failure: " + t.getMessage());
+                    scheduleReconnect(); // 安排重連
+                }
+            });
+        }
+    }
+
+    private void scheduleReconnect() {
+        reconnectHandler.removeCallbacks(reconnectRunnable); // 移除之前安排的重連任務
+        reconnectHandler.postDelayed(reconnectRunnable, RECONNECT_DELAY); // 安排新的重連任務
+    }
+
+    public void sendMessageToWebSocket() {
         if (webSocket != null) {
-            webSocket.send(message);
-            Log.d("WebSocket", "Message Sent: " + message);
+            JsonObject notification = new JsonObject();
+            notification.addProperty("connection_name", EOrderApplication.dbConnectName);
+            notification.addProperty("customer_id", EOrderApplication.CUSTOMER_ID);
+            notification.addProperty("member_id", mainPresenter.getUserID());
+            notification.addProperty("function_name", "leave_message");
+            String notificationMessage = gson.toJson(notification);
+            webSocket.send(notificationMessage);
+            Log.d("WebSocket", "Sent: " + notificationMessage);
+        }
+    }
+
+    public void sendMessageToWebSocketBackstage(String sReMemberID) {
+        if (webSocketBackstage != null) {
+            JsonObject notification = new JsonObject();
+            notification.addProperty("connection_name", EOrderApplication.dbConnectName);
+            notification.addProperty("customer_id", EOrderApplication.CUSTOMER_ID);
+            notification.addProperty("member_id", sReMemberID);
+            notification.addProperty("function_name", "leave_message");
+            String notificationMessage = gson.toJson(notification);
+            webSocketBackstage.send(notificationMessage);
+            Log.d("webSocketBackstage", "Sent: " + notificationMessage);
         }
     }
 

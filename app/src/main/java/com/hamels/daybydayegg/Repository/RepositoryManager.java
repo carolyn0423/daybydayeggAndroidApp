@@ -1153,6 +1153,8 @@ public class RepositoryManager {
 
     public void saveUserName(String member_name) { SharedUtils.getInstance().saveUserName(context, member_name); }
 
+    public void saveMobile(String sMobile) { SharedUtils.getInstance().saveMobile(context, sMobile); }
+
     public void saveShopkeeper(String Shopkeeper) { SharedUtils.getInstance().saveShopkeeper(context, Shopkeeper); }
 
     public Boolean saveLoveCustomer(String customer_id) {
@@ -1234,6 +1236,8 @@ public class RepositoryManager {
     public String getUserID() { return SharedUtils.getInstance().getUserID(context); }
 
     public String getUserName() { return SharedUtils.getInstance().getUserName(context); }
+
+    public String getMobile() { return SharedUtils.getInstance().getMobile(context); }
 
     public String getShopkeeper() { return SharedUtils.getInstance().getShopkeeper(context); }
 

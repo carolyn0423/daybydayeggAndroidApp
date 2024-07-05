@@ -17,8 +17,14 @@ import com.hamels.daybydayegg.Main.View.MainActivity;
 import com.hamels.daybydayegg.MemberCenter.Adapter.AdminMessageAdapter;
 import com.hamels.daybydayegg.MemberCenter.Contract.AdminMessageContract;
 import com.hamels.daybydayegg.MemberCenter.Presenter.AdminMessagePresenter;
+import com.hamels.daybydayegg.MemberCenter.Presenter.MessageListPresenter;
 import com.hamels.daybydayegg.R;
+import com.hamels.daybydayegg.Repository.Model.MessageEvent;
 import com.hamels.daybydayegg.Repository.Model.MessageGroup;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,28 +63,33 @@ public class AdminMessageFragment extends BaseFragment implements AdminMessageCo
         super.onViewCreated(view, savedInstanceState);
 
         if(mPresenter.getUserLogin()) {
-            mPresenter.getMessageList();
+            queryCustomerServiceAPI();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(mPresenter.getUserLogin()){
-            startAutoRefresh();
+        if(mPresenter.getUserLogin()) {
+            queryCustomerServiceAPI();
         }
     }
 
-    private void startAutoRefresh() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // 在此处执行API请求以刷新数据
-                mPresenter.getMessageList();
-                // 完成后再次调度自动刷新
-                startAutoRefresh();
-            }
-        }, 2000);
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        queryCustomerServiceAPI();
     }
 
     private void initView(View view) {
@@ -108,7 +119,21 @@ public class AdminMessageFragment extends BaseFragment implements AdminMessageCo
 //        ((MainActivity) getActivity()).addFragment(MailDetailFragment.getInstance(memberMessage));
 //    }
 
+    public void queryCustomerServiceAPI() {
+        // 调用查询客服中心API的代码
+        // 更新消息列表
+        if(mPresenter != null) {
+            mPresenter.getMessageList();
+        }else{
+            mPresenter = new AdminMessagePresenter(this, getRepositoryManager(getContext()));
+            mPresenter.getMessageList();
+        }
+    }
+
     public void goMessageList(String sReMemberID){
+        //  建立 WebSocket
+        ((MainActivity) getActivity()).CreateBackstageWebSocket(sReMemberID);
+        //  跳轉
         ((MainActivity) getActivity()).addFragment(MessageListFragment.getInstance(sReMemberID));
     }
 

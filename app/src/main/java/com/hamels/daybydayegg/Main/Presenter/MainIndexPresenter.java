@@ -56,7 +56,7 @@ public class MainIndexPresenter extends BasePresenter<MainIndexContract.View> im
                     public void onValueCallback(int task, User user) {
                         if (user != null) {
                             if (user.getOnlineEnabled() != null && user.getOnlineEnabled().equals("Y")) {
-                                EOrderApplication.WEB_SOCKET_PATH = EOrderApplication.sApiUrl + "/" + EOrderApplication.WEB_SOCKET_PATH_NAME + "?connector_id=" + user.getMobile();
+                                EOrderApplication.WEB_SOCKET_PATH = EOrderApplication.sApiUrl + "/" + EOrderApplication.WEB_SOCKET_PATH_NAME;
                                 repositoryManager.saveUser(user);
                                 view.CallActive();
                             }

@@ -75,6 +75,11 @@ public class SharedUtils {
                 .putString("MemberName", member_name)
                 .apply();
     }
+    public void saveMobile(Context context, String sMobile){
+        context.getSharedPreferences("Mobile", Context.MODE_PRIVATE).edit()
+                .putString("Mobile", sMobile)
+                .apply();
+    }
     public void saveShopkeeper(Context context, String sShopkeeper){
         context.getSharedPreferences("Shopkeeper", Context.MODE_PRIVATE).edit()
                 .putString("Shopkeeper", sShopkeeper)
@@ -233,6 +238,10 @@ public class SharedUtils {
 
     public String getUserName(Context context) {
         return context.getSharedPreferences("MemberName", Context.MODE_PRIVATE).getString("MemberName", "");
+    }
+
+    public String getMobile(Context context) {
+        return context.getSharedPreferences("Mobile", Context.MODE_PRIVATE).getString("Mobile", "");
     }
 
     public String getShopkeeper(Context context) {

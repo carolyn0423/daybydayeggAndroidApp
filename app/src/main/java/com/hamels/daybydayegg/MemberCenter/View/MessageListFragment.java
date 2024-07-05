@@ -126,8 +126,10 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
                 if (!msg.isEmpty()) {
                     if(isAdmin){
                         messagePresenter.reSendMessage(sMemberID, msg);
+                        ((MainActivity) getActivity()).sendMessageToWebSocketBackstage(sMemberID);
                     }else {
                         messagePresenter.sendMessage(sMemberID, msg);
+                        ((MainActivity) getActivity()).sendMessageToWebSocket();
                     }
                     etMessage.setText("");
                 }
