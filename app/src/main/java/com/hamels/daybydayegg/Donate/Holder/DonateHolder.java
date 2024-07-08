@@ -179,15 +179,15 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         tv_left_number_right.setVisibility(View.VISIBLE);
 
         if (productleft.getcart_flag().equals("Y")) {
-            tv_cart_left.setImageResource(R.drawable.sge);
+            tv_cart_left.setImageResource(R.drawable.icons8_cart_fill);
         } else {
-            tv_cart_left.setImageResource(R.drawable.sga);
+            tv_cart_left.setImageResource(R.drawable.icons8_add_shopping_cart_line);
         }
 
         if (productright.getcart_flag().equals("Y")) {
-            tv_cart_right.setImageResource(R.drawable.sge);
+            tv_cart_right.setImageResource(R.drawable.icons8_cart_fill);
         } else {
-            tv_cart_right.setImageResource(R.drawable.sga);
+            tv_cart_right.setImageResource(R.drawable.icons8_add_shopping_cart_line);
         }
 
         //
@@ -261,9 +261,9 @@ public class DonateHolder extends RecyclerView.ViewHolder {
         tv_left_number_right.setVisibility(View.INVISIBLE);
 
         if (productleft.getcart_flag().equals("Y")) {
-            tv_cart_left.setImageResource(R.drawable.sge);
+            tv_cart_left.setImageResource(R.drawable.icons8_cart_fill);
         } else {
-            tv_cart_left.setImageResource(R.drawable.sga);
+            tv_cart_left.setImageResource(R.drawable.icons8_add_shopping_cart_line);
         }
 
         //

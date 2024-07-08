@@ -60,6 +60,14 @@ public class DonateCartAdapter extends BaseAdapter<DonateCartHolder> {
                     }
                 }
             });
+            donatecartHolder.delete_icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (donatecartHolder.setcart_count(donatecart.get(position), "minus_all")) {
+                        presenter.updateTicket("minus_all", donatecart.get(position).getproduct_id(), donatecart.get(position).getspec_id(), donatecart.get(position).getgive_date());
+                    }
+                }
+            });
         }else if (layouttype == R.layout.item_donatecart2){
             donatecartHolder.setImg_donatecart2(donatecart.get(position));
         }

@@ -22,194 +22,215 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="1.0"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <ImageView
-                android:id="@+id/img_picture_url"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerInside" />
+                android:weightSum="1.0"
+                android:orientation="horizontal">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/donatecart_constraintLayout_info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8">
-                <TextView
-                    android:id="@+id/tv_remark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/img_picture_url"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:textColor="#595757"
-                    android:textSize="12dp"
-                    android:text=""
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <TextView
-                    android:id="@+id/tv_limit_product_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:text=""
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_product_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#595757"
-                    android:textSize="14dp"
-                    android:text=""
-                    app:layout_constraintStart_toStartOf="@+id/tv_limit_product_name"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_limit_product_name"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/tv_type_name_spec_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    android:text="(標準)"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="@+id/tv_product_name"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
-
-                <TextView
-                    android:id="@+id/tv_eticket_due_date_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#595757"
-                    android:textSize="14dp"
-                    android:text="兌換期限："
-                    app:layout_constraintStart_toStartOf="@+id/tv_type_name_spec_name"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_type_name_spec_name"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/tv_eticket_due_date"
-                    style="@style/fontRegularTw.greyDoubleDark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    app:layout_constraintStart_toEndOf="@+id/tv_eticket_due_date_title"
-                    app:layout_constraintTop_toTopOf="@+id/tv_eticket_due_date_title" />
-
-                <TextView
-                    android:id="@+id/tv_left_number_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#595757"
-                    android:textSize="14dp"
-                    android:text="剩餘數量："
-                    app:layout_constraintStart_toStartOf="@+id/tv_eticket_due_date_title"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_eticket_due_date_title"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/tv_left_number"
-                    style="@style/fontRegularTw.greyDoubleDark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    app:layout_constraintStart_toEndOf="@+id/tv_left_number_title"
-                    app:layout_constraintTop_toTopOf="@+id/tv_left_number_title" />
+                    android:layout_marginStart="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/test"
-                    android:layout_width="130dp"
+                    android:id="@+id/donatecart_constraintLayout_info"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    android:layout_weight="0.8">
 
-                    <EditText
-                        android:id="@+id/edit_cart_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:background="@null"
-                        android:ems="3"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="1"
-                        android:textColor="#3AAD37"
+                    <TextView
+                        android:id="@+id/tv_limit_product_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:textSize="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/layout_plus"
-                        app:layout_constraintStart_toEndOf="@+id/layout_minus"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_plus"
-                        android:layout_width="50dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <Button
-                            android:id="@+id/btn_plus"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:background="@drawable/circle"
-                            android:text="＋"
-                            android:textColor="#3AAD37"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_minus"
-                        android:layout_width="50dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textStyle="bold"
+                        android:text=""
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <Button
-                            android:id="@+id/btn_minus"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:background="@drawable/circle"
-                            android:text="－"
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#595757"
+                        android:textSize="14dp"
+                        android:text=""
+                        app:layout_constraintStart_toStartOf="@+id/tv_limit_product_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_limit_product_name"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/tv_type_name_spec_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:text="(標準)"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="@+id/tv_product_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
+
+                    <TextView
+                        android:id="@+id/tv_eticket_due_date_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#595757"
+                        android:textSize="14dp"
+                        android:text="兌換期限："
+                        app:layout_constraintStart_toStartOf="@+id/tv_type_name_spec_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_type_name_spec_name"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/tv_eticket_due_date"
+                        style="@style/fontRegularTw.greyDoubleDark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toEndOf="@+id/tv_eticket_due_date_title"
+                        app:layout_constraintTop_toTopOf="@+id/tv_eticket_due_date_title" />
+
+                    <TextView
+                        android:id="@+id/tv_left_number_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#595757"
+                        android:textSize="14dp"
+                        android:text="剩餘數量："
+                        app:layout_constraintStart_toStartOf="@+id/tv_eticket_due_date_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_eticket_due_date_title"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/tv_left_number"
+                        style="@style/fontRegularTw.greyDoubleDark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toEndOf="@+id/tv_left_number_title"
+                        app:layout_constraintTop_toTopOf="@+id/tv_left_number_title" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/test"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <EditText
+                            android:id="@+id/edit_cart_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:background="@null"
+                            android:ems="3"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:text="1"
                             android:textColor="#3AAD37"
+                            android:textSize="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/layout_plus"
+                            app:layout_constraintStart_toEndOf="@+id/layout_minus"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_plus"
+                            android:layout_width="50dp"
+                            android:layout_height="0dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <Button
+                                android:id="@+id/btn_plus"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/circle"
+                                android:text="＋"
+                                android:textColor="#3AAD37"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_minus"
+                            android:layout_width="50dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <Button
+                                android:id="@+id/btn_minus"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/circle"
+                                android:text="－"
+                                android:textColor="#3AAD37"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp">
+
+                <ImageView
+                    android:id="@+id/delete_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/close_delete_remove_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                android:id="@+id/tv_remark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="#595757"
+                android:textSize="12dp"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@id/delete_icon"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/tv_giveflag"
@@ -225,21 +246,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_delete"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:padding="5dp"-->
-<!--            android:gravity="right"-->
-<!--            android:textSize="8dp"-->
-<!--            android:text="過期"-->
-<!--            android:textStyle="bold"-->
-<!--            android:visibility="visible"-->
-<!--            android:background="@drawable/donate_flagbg_3"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent" />-->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
