@@ -29,7 +29,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -66,9 +69,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.hamels.daybydayegg.Donate.View.DonateCartFragment;
 import com.hamels.daybydayegg.Donate.View.DonateDetailFragment;
 import com.hamels.daybydayegg.Donate.View.DonateFragment;
@@ -84,9 +90,9 @@ import com.hamels.daybydayegg.Repository.ApiRepository.ApiRepository;
 import com.hamels.daybydayegg.Repository.ApiRepository.MemberRepository;
 import com.hamels.daybydayegg.Repository.Model.Customer;
 import com.hamels.daybydayegg.Repository.Model.MessageEvent;
+import com.hamels.daybydayegg.Utils.CustomBottomNavigationView;
 import com.hamels.daybydayegg.Utils.SharedUtils;
 import com.hamels.daybydayegg.Widget.AppToolbar;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Business.View.BusinessFragment;
@@ -110,7 +116,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_COUPON;
@@ -137,17 +145,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private final int FRAGMENT_REMOVE = 1;
 
     private BaseFragment willChangeFragment;
-    private BottomNavigationViewEx bottomNavigationViewEx;
     private MainContract.Presenter mainPresenter;
     private WebView webView;
     //private static TextView tvShoppingCart, tvShoppingCartETicket, tvMessageUnread;
-    private static TextView  tvBadgeShoppingCartETicket, tvMessageUnread, tvBadgeMemberTicket;
+    private static TextView  tvBadgeShoppingCart, tvMessageUnread, tvBadgeMemberTicket;
 
     // toolbar
     private ConstraintLayout constClose, constBackground, constBase;
     private LinearLayout llOpen, llItemButton;
 
     // navigation
+    private CustomBottomNavigationView bottomNavigationView;
     //private FloatingActionButton btnShopping;
     private LinearLayout layoutHome, layoutEgg, layoutShop, layoutShop2, layoutShoppingCart;
     private ImageView imgHome, imgEgg, imgShop, imgShop2, imgShoppingCart;
@@ -244,7 +252,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         initAnimation(this);
 
         // 在 onCreate 中注册广播接收器 -> 機台核銷限制提醒
-        registerReceiver(pushNotificationReceiver, new IntentFilter("WRITE_OFF_MESSAGE"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(pushNotificationReceiver, new IntentFilter("WRITE_OFF_MESSAGE"), Context.RECEIVER_EXPORTED);
+        }
 
         WebSocketManager();
     }
@@ -296,16 +306,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
             }
         }, 3000);
-    }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        // 關閉 WebSocket 連接
-//        if (webSocketManager != null) {
-//            webSocketManager.closeWebSocket();
-//        }
-//    }
+
+    }
 
     private void notifyChangeToMail() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
@@ -329,7 +332,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         constBase = findViewById(R.id.const_base);
 
         //tvShoppingCart = findViewById(R.id.tv_shopping_cart);
-        tvBadgeShoppingCartETicket = findViewById(R.id.tv_shopping_cart_e_ticket);
+        tvBadgeShoppingCart = findViewById(R.id.tv_shopping_cart_num);
         tvBadgeMemberTicket = findViewById(R.id.tv_ticket_num);
         tvMessageUnread = findViewById(R.id.tv_message_unread);
 
@@ -373,7 +376,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         setAppToolbar(R.id.toolbar);
         //setCartBadge(R.id.tv_shopping_cart, R.id.tv_shopping_cart_e_ticket);
-        setCartBadge(0, R.id.tv_shopping_cart_e_ticket);
+        setCartBadge(0, R.id.tv_shopping_cart_num);
 
         appToolbar.getBtnMail().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -404,7 +407,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 appToolbar.setMessageBadgeCount(Integer.parseInt("0"));
             }
         });
-
         appToolbar.getBtnSort().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -547,41 +549,41 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         });
         refreshBadge();
-        bottomNavigationViewEx = findViewById(R.id.navigation);
-        bottomNavigationViewEx.enableAnimation(false);
-        bottomNavigationViewEx.setIconSize(20, 20);
-        for (int i = 0; i < bottomNavigationViewEx.getItemCount(); i++) {
-            bottomNavigationViewEx.getIconAt(i).setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
+        bottomNavigationView = findViewById(R.id.navigation);
+        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+            MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
+            bottomNavigationView.setIconScaleType(menuItem);
         }
 
-        bottomNavigationViewEx.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if (id == R.id.item_home){
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            // Handle navigation item clicks here
+            switch (item.getItemId()) {
+                case R.id.item_home:
                     setMainIndexMessageUnreadVisibility(true);
                     changeTabFragment(MainIndexFragment.getInstance());
-                }else if (id == R.id.item_egg){
+                    return true;
+                case R.id.item_egg:
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.checkLoginForDonate();
-                }else if (id == R.id.item_shop){
+                    return true;
+                case R.id.item_shop:
                     setMainIndexMessageUnreadVisibility(false);
                     checkMerchantCount("PRODUCT", "Y"); //電子商品
-                }else if (id == R.id.item_shop2){
+                    return true;
+                case R.id.item_shop2:
                     setMainIndexMessageUnreadVisibility(false);
                     checkMerchantCount("PRODUCT", "N"); //非電子商品
-                }else if (id == R.id.item_cart){
+                    return true;
+                case R.id.item_cart:
                     setMainIndexMessageUnreadVisibility(false);
-                    mainPresenter.checkLoginForMemberCenter();
-                }
-                return true;
+                    mainPresenter.checkLoginForShoppingCart("");
+                    return true;
             }
+            return false;
         });
 
-
-
-        //bottomNavigationViewEx.setCurrentItem(0);
-        //====for notification 當此MainActivity是由FcmService呼叫帶起時,要直接將畫面轉至訊息中心========
         Intent intent = getIntent();
         String notifyExtra = intent.getStringExtra("NOTIFY_EXTRA"); //前景才會有值
         String notifyExtraBg = getIntent().getExtras().getString("click_action");  // 背景才會有值
@@ -591,20 +593,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         } else {
             switch (sSourceActive){
                 case "PRODUCT_WELCOME":
-                    /*
-                case "LOCATION_WELCOME":
-                    //  外帶外送 未登入的情況
-                    if(sSourceActive.equals("PRODUCT_WELCOME")){
-                        changeNavigationColor(R.id.order);
-                    }else{
-                        changeNavigationColor(R.id.home);
-                    }
-                    mainPresenter.saveSourceActive("");
-                    mainPresenter.saveFragmentLocation("");
-                    changeTabFragment(LocationFragment.getInstance());
-                    break;
-
-                     */
                 case "ETICKET_WELCOME":
                     //  買提貨卷 未登入的情況
                     changeNavigationColor(R.id.shop);
@@ -617,14 +605,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame, fragment);
                     transaction.commit();
-
-                    //  addFragment(MainIndexFragment.getInstance());
-
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            bottomNavigationViewEx.getIconAt(0).callOnClick();
+                            MenuItem menuItem = bottomNavigationView.getMenu().getItem(0);
+                            bottomNavigationView.setIconScaleType(menuItem);
                         }
                     }, 500);
                     break;
@@ -656,7 +642,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 checkMerchantCount("PRODUCT", "N");
             }else if (id == R.id.shopping_cart){
                 changeNavigationColor(v.getId());
-                mainPresenter.checkLoginForShoppingCart("E");
+                mainPresenter.checkLoginForShoppingCart("");
             }
 
             /*首頁上方menu*/
@@ -1034,16 +1020,16 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             int iCartQuantity = Integer.parseInt(EOrderApplication.cartTicketBadgeCount) + Integer.parseInt(EOrderApplication.cartBadgeCount);
 
             if (iCartQuantity == 0) {
-                tvBadgeShoppingCartETicket.setVisibility(View.GONE);
+                tvBadgeShoppingCart.setVisibility(View.GONE);
             } else {
-                tvBadgeShoppingCartETicket.setVisibility(View.VISIBLE);
-                tvBadgeShoppingCartETicket.setText(iCartQuantity + "");
+                tvBadgeShoppingCart.setVisibility(View.VISIBLE);
+                tvBadgeShoppingCart.setText(iCartQuantity + "");
             }
         }
         // 購物車沒東西時未讀數量會收到空字串
         else {
             //tvShoppingCart.setVisibility(View.GONE);
-            tvBadgeShoppingCartETicket.setVisibility(View.GONE);
+            tvBadgeShoppingCart.setVisibility(View.GONE);
         }
 
         //  提貨卷數量
@@ -1099,8 +1085,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     public void intentToVerifyCode() { IntentUtils.intentToVerifyCode(this, true); }
 
-    public BottomNavigationViewEx getBottomNavigationViewEx() {
-        return bottomNavigationViewEx;
+    public CustomBottomNavigationView getBottomNavigationView() {
+        return bottomNavigationView;
     }
 
     private void removeAllStackFragment() {
@@ -1343,7 +1329,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void setTabPage(int page) {
-        bottomNavigationViewEx.setCurrentItem(page);
+        MenuItem menuItem = bottomNavigationView.getMenu().getItem(page);
+        bottomNavigationView.setIconScaleType(menuItem);
     }
 
     public void resetPassword() {
@@ -1351,13 +1338,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mainPresenter.logout();
     }
 
-    public void hideBottomNavigation() {
-        bottomNavigationViewEx.setVisibility(View.GONE);
-    }
-
-    public void showBottomNavigation() {
-        bottomNavigationViewEx.setVisibility(View.VISIBLE);
-    }
+//    public void hideBottomNavigation() {
+//        bottomNavigationViewEx.setVisibility(View.GONE);
+//    }
+//
+//    public void showBottomNavigation() {
+//        bottomNavigationViewEx.setVisibility(View.VISIBLE);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -1411,29 +1398,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     changeNavigationColor(R.id.home);
                     changeTabFragment(MainIndexFragment.getInstance());
                 }
-
-//                boolean isAlert= false;
-//                for(Fragment f: getSupportFragmentManager().getFragments()){
-//                    // 首頁才顯示回上一頁
-//                    if(f.equals(MainIndexFragment.getInstance())){
-//                        new AlertDialog.Builder(this).setTitle(null).setMessage(R.string.close_hint)
-//                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        System.exit(0);
-//                                    }
-//                                })
-//                                .setNegativeButton(android.R.string.no, null)
-//                                .show();
-//                        isAlert= true;
-//                        break;
-//                    }
-//                }
-//                // 其他就顯示首頁
-//                if(!isAlert){
-//                    changeNavigationColor(R.id.home);
-//                    changeTabFragment(MainIndexFragment.getInstance());
-//                }
             } else {
                 // 點推播通知進來的
                 if (getSupportFragmentManager().getBackStackEntryCount() == 1
@@ -1507,10 +1471,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     public void setShoppingCartCount(String Count) {
         if (!Count.equals("")) {
-            tvBadgeShoppingCartETicket.setVisibility(View.VISIBLE);
-            tvBadgeShoppingCartETicket.setText(Count);
+            tvBadgeShoppingCart.setVisibility(View.VISIBLE);
+            tvBadgeShoppingCart.setText(Count);
         } else {
-            tvBadgeShoppingCartETicket.setVisibility(View.GONE);
+            tvBadgeShoppingCart.setVisibility(View.GONE);
         }
     }
 
@@ -1560,40 +1524,33 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public void checkMerchantCount(final String type, final String isETicket) {
 
         mainPresenter.saveFragmentMainType("", isETicket);
-        changeTabFragment(ProductMainTypeFragment.getInstance());
+        addFragment(ProductMainTypeFragment.getInstance());
     }
 
-    private void createQRcodeImage(String qrcodeNum, ImageView qrcode_img) {
-        if (qrcodeNum != null && !qrcodeNum.equals("")) {
-            qrcode_img.setBackgroundColor(Color.WHITE);
-            MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-            try {
-                BitMatrix bitMatrix = new MultiFormatWriter().encode(qrcodeNum, BarcodeFormat.QR_CODE, barcodeWidth, barcodeHeight);
+    private void createQRcodeImage(String content, ImageView qrcode_img) {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H); // 设置纠错级别为最高
+        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 
-                int newWidth = 250;
-                int newHeight = 250;
+        try {
+            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
 
-                Bitmap bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-                float scaleX = (float) newWidth / barcodeWidth;
-                float scaleY = (float) newHeight / barcodeHeight;
-                for (int x = 0; x < barcodeWidth; x++) {
-                    for (int y = 0; y < barcodeHeight; y++) {
-                        if (bitMatrix.get(x, y)) {
-                            for (int scaledX = (int) (x * scaleX); scaledX < (int) ((x + 1) * scaleX); scaledX++) {
-                                for (int scaledY = (int) (y * scaleY); scaledY < (int) ((y + 1) * scaleY); scaledY++) {
-                                    bitmap.setPixel(scaledX, scaledY, Color.BLACK);
-                                }
-                            }
-                        }
-                    }
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+
+            Bitmap qrBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    qrBitmap.setPixel(x, y, bitMatrix.get(x, y) ? getResources().getColor(R.color.Black) : getResources().getColor(R.color.white));
                 }
-                qrcode_img.setImageBitmap(bitmap);
-            } catch (WriterException e) {
-                e.printStackTrace();
             }
 
-            brightnessNow = getSystemBrightness();
-            changeAppBrightness(255);
+            qrcode_img.setImageBitmap(qrBitmap);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
         }
     }
 

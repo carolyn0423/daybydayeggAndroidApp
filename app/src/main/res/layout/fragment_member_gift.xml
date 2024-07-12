@@ -133,7 +133,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/fontBoldTw.White"
             android:id="@+id/shareButton"
             android:layout_width="126dp"

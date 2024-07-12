@@ -54,8 +54,8 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
         String sPictureUrl = mainTypeleft.getPicture_url() == null || mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
         Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
 
-        img_productMainType_left.setTag(R.id.img_productMainType_left,mainTypeleft.getId());
-        constraintLayout_left.setTag(R.id.constraintLayout_left,mainTypeleft.getId());
+        img_productMainType_left.setTag(R.id.img_productMainType_left, mainTypeleft.getId());
+        constraintLayout_left.setTag(R.id.constraintLayout_left, mainTypeleft.getId());
 
         tv_productMainType_name_left.setText(mainTypeleft.getProduct_Type_Main_Name());
         tv_productMainType_name_right.setText("");

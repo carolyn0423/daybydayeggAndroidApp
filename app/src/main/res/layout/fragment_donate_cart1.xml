@@ -12,7 +12,6 @@
         android:layout_height="45dp"
         android:background="@color/white"
         app:tabBackground="@drawable/selec_tab_green2"
-
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/main"
         app:tabIndicatorFullWidth="true"
@@ -46,35 +45,16 @@
         android:background="@color/darkGreyLine"
         android:layout_below="@+id/tab_layout" />
 
-    <ScrollView
-        android:id="@+id/ScrollView1"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/donate_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="90dp"
-        android:overScrollMode="never"
-        android:layout_below="@+id/view_tab_line">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/donate_recycler_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
+        android:layout_height="0dp"
+        android:layout_below="@+id/view_tab_line"
+        android:layout_above="@+id/Bottom_Linear"
+        android:paddingTop="10dp" />
 
     <LinearLayout
+        android:id="@+id/Bottom_Linear"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:weightSum="1.0"
@@ -99,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:text="0"/>
+                android:text="0" />
 
         </LinearLayout>
 
@@ -111,17 +91,7 @@
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
-<!--            <Button-->
-<!--                android:id="@+id/btn_alldonate"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="55dp"-->
-<!--                android:background="@color/colorYunlinhn"-->
-<!--                android:text="全數轉贈"-->
-<!--                android:textColor="#FFF"-->
-<!--                android:textSize="16dp" />-->
-
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_alldonate"
                 android:layout_weight=".5"
                 android:layout_width="0dp"
@@ -131,7 +101,7 @@
                 android:textColor="#FFF"
                 android:textSize="16dp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_deliver"
                 android:layout_weight=".5"
                 android:layout_width="0dp"

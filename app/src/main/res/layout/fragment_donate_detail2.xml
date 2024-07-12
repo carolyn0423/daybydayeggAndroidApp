@@ -47,7 +47,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_close"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
@@ -232,7 +232,7 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
 
-                                <Button
+                                <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/btn_plus"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
@@ -254,7 +254,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
 
-                                <Button
+                                <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/btn_minus"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
@@ -350,7 +350,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_submit"
             android:layout_width="150dp"
             android:layout_height="45dp"

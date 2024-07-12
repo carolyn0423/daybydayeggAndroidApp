@@ -158,8 +158,7 @@ public class MemberPointFragment extends BaseFragment implements MemberPointCont
     public void setPoint(List<PointHistory> pointHistoryList) {
         if(pointHistoryList.size() != 0 ){
             tv_no_histort.setVisibility(View.GONE);
-        }
-        else{
+        } else{
             tv_no_histort.setVisibility(View.VISIBLE);
         }
         pointRecordAdapter.setList(pointHistoryList);

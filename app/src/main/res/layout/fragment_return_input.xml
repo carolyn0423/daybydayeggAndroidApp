@@ -170,7 +170,7 @@
                 android:textSize="14dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_confirm"
             style="@style/fontDefaultTw.White"
             android:layout_width="126dp"

@@ -55,11 +55,13 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
 
     public ImageView img_donate, img_barcode;
     private TextView tv_barcode_number, tv_product_name, tv_limit_product_name, tv_type_name_spec_name, tv_RowNo, tv_TotalNumber, tv_eticket_due_date;
-    private ImageButton btn_close;
+    private ImageButton btn_close, btn_left_arrow, btn_right_arrow;
     private Button btn_donatedetail2, btn_deliver;
+    private TextView tv_left_arrow, tv_right_arrow;
     private ConstraintLayout layout_left_arrow, layout_right_arrow;
 
     private int uid = 0;
+    private List<Donate> productDetail = null;
     private String ticket_code = "", sProductID = "", sSpecID = "", sGiveDate = "", sCode = "",eticket_shipping = "";
     private int brightnessNow = 0;
     private boolean donateflag = true;
@@ -120,6 +122,11 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         layout_right_arrow = view.findViewById(R.id.layout_right_arrow);
         tv_eticket_due_date = view.findViewById(R.id.tv_eticket_due_date);
 
+        btn_left_arrow = view.findViewById(R.id.btn_left_arrow);
+        btn_right_arrow = view.findViewById(R.id.btn_right_arrow);
+        tv_left_arrow = view.findViewById(R.id.tv_left_arrow);
+        tv_right_arrow = view.findViewById(R.id.tv_right_arrow);
+
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,16 +174,17 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         layout_left_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v != null && v.getTag() != null) {
-                    String sNewUID = v.getTag(v.getId()).toString();
-                    if (!sNewUID.isEmpty()) {
-                        int iNewUID = Integer.parseInt(sNewUID);
-                        getInstance(iNewUID);
-                        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.detach(fragment);
-                        ft.attach(fragment);
-                        ft.commit();
-                    }
+                String sNewUID = v.getTag(v.getId()).toString();
+                if (!sNewUID.isEmpty()) {
+                    int iNewUID = Integer.parseInt(sNewUID);
+                    uid = iNewUID;
+                    getInstance(iNewUID);
+                    presenter.getDonateDetailByID(sNewUID);
+//                    final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//                    ft.replace(R.id.fragment_location, fragment);
+//                    ft.commit();
+//                    getActivity().getSupportFragmentManager().executePendingTransactions();
+
                 }
             }
         });
@@ -184,16 +192,16 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         layout_right_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v != null && v.getTag() != null){
-                    String sNewUID = v.getTag(v.getId()).toString();
-                    if (!sNewUID.isEmpty()) {
-                        int iNewUID = Integer.parseInt(sNewUID);
-                        getInstance(iNewUID);
-                        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.detach(fragment);
-                        ft.attach(fragment);
-                        ft.commit();
-                    }
+                String sNewUID = v.getTag(v.getId()).toString();
+                if (!sNewUID.isEmpty()) {
+                    int iNewUID = Integer.parseInt(sNewUID);
+                    uid = iNewUID;
+                    getInstance(iNewUID);
+                    presenter.getDonateDetailByID(sNewUID);
+//                    final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//                    ft.detach(fragment);
+//                    ft.attach(fragment);
+//                    ft.commitNow();
                 }
             }
         });
@@ -208,6 +216,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
 
     @Override
     public void setDonateDetail(List<Donate> productDetail) {
+        this.productDetail = productDetail;
         //Glide.with(DonateDetailFragment.getInstance(uid)).load(EOrderApplication.sApiUrl + productDetail.get(0).getPictureUrl()).into(img_donate);
 
         ticket_code = productDetail.get(0).getTicketCode();
@@ -254,9 +263,23 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         //tv_spec_name.setText(productDetail.get(0).getSpecName());
         tv_RowNo.setText(productDetail.get(0).getRowNo());
         tv_TotalNumber.setText(productDetail.get(0).getTotalNumber());
-        layout_left_arrow.setTag(R.id.layout_left_arrow, productDetail.get(0).getLastUid());
-        layout_right_arrow.setTag(R.id.layout_right_arrow, productDetail.get(0).getNextUid());
         tv_eticket_due_date.setText(productDetail.get(0).getEticketDueDate());
+        if(productDetail.get(0).getLastUid().equals("")){
+            btn_left_arrow.setVisibility(View.INVISIBLE);
+            tv_left_arrow.setVisibility(View.INVISIBLE);
+        }else{
+            btn_left_arrow.setVisibility(View.VISIBLE);
+            tv_left_arrow.setVisibility(View.VISIBLE);
+            layout_left_arrow.setTag(R.id.layout_left_arrow, productDetail.get(0).getLastUid());
+        }
+        if(productDetail.get(0).getNextUid().equals("")){
+            btn_right_arrow.setVisibility(View.INVISIBLE);
+            tv_right_arrow.setVisibility(View.INVISIBLE);
+        }else{
+            btn_right_arrow.setVisibility(View.VISIBLE);
+            tv_right_arrow.setVisibility(View.VISIBLE);
+            layout_right_arrow.setTag(R.id.layout_right_arrow, productDetail.get(0).getNextUid());
+        }
 
         btn_donatedetail2.setEnabled(true);
     }

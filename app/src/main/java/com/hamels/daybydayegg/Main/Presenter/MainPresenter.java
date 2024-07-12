@@ -146,7 +146,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void checkLoginForMemberCenter() {
         if (getUserLogin()) {
-            view.changeTabFragment(MemberCenterFragment.getInstance());
+            view.addFragment(MemberCenterFragment.getInstance());
         } else {
             view.intentToLogin(REQUEST_MEMBER_CENTER);
         }
@@ -155,7 +155,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void checkLoginForShoppingCart(String orderType) {
         if (getUserLogin()) {
-            view.changeTabFragment(ShoppingCartFragment.getInstance(orderType));
+            view.addFragment(ShoppingCartFragment.getInstance(orderType));
         } else {
             view.intentToLogin(REQUEST_SHOPPING_CART);
         }

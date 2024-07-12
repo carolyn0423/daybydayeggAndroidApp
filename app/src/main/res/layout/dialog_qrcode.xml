@@ -8,11 +8,11 @@
     <ImageView
         android:id="@+id/bg_shadow_corner"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="550dp"
         android:layout_centerInParent="true"
         android:background="@drawable/bg_shadow_corner" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/dialog_btn_close"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -21,7 +21,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/circle2"
-        android:text="╳"
+        android:text="X"
         android:textColor="#000" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/dialog_btn_close"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:text="會員編碼"
         android:textSize="16dp" />
 
@@ -38,9 +38,8 @@
         android:id="@+id/dialog_img_qrcode"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_alignTop="@id/bg_shadow_corner"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp" />
+        android:layout_centerInParent="true"
+        android:elevation="10dp"/>
 
     <TextView
         android:id="@+id/text_invite_code_label"

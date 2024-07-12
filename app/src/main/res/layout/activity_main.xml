@@ -390,10 +390,23 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <com.hamels.daybydayegg.Utils.CustomBottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/gray"
+        app:itemIconTint="@color/selec_navigation"
+        app:itemTextColor="@color/selec_navigation"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigation" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:elevation="8dp">
 
         <TextView
             android:visibility="gone"
@@ -415,7 +428,7 @@
 
         <TextView
             android:visibility="gone"
-            android:id="@+id/tv_shopping_cart_e_ticket"
+            android:id="@+id/tv_shopping_cart_num"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginBottom="37dp"
@@ -470,19 +483,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
-        android:visibility="gone"
-        android:id="@+id/navigation"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="@color/gray"
-        app:itemIconTint="@color/selec_navigation"
-        app:itemTextColor="@color/selec_navigation"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

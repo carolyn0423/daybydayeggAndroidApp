@@ -90,19 +90,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
 
-            <TextView
-                android:id="@+id/tv_no_histort"
-                style="@style/fontRegularTw.greyDoubleDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="本月無點數紀錄"
-                android:textSize="14dp"
-                android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/recyclerview"
-                app:layout_constraintEnd_toEndOf="@+id/recyclerview"
-                app:layout_constraintStart_toStartOf="@+id/recyclerview"
-                app:layout_constraintTop_toTopOf="@+id/recyclerview" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
@@ -110,6 +97,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_no_histort"
+                style="@style/fontRegularTw.greyDoubleDark"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="本月無點數紀錄"
+                android:textSize="14dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/bg_expire_point"
+                app:layout_constraintEnd_toEndOf="@+id/bg_expire_point"
+                app:layout_constraintStart_toStartOf="@+id/bg_expire_point"
+                app:layout_constraintTop_toTopOf="@+id/bg_expire_point" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

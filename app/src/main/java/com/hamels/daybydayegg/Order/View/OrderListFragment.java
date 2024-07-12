@@ -7,10 +7,12 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.hamels.daybydayegg.Utils.CustomBottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BaseFragment;
@@ -112,9 +114,11 @@ public class OrderListFragment extends BaseFragment implements OrderListContract
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.tv_send){
-            BottomNavigationViewEx bottomNavigationViewEx = ((MainActivity) Objects.requireNonNull(getActivity())).getBottomNavigationViewEx();
-            if (bottomNavigationViewEx != null) {
-                bottomNavigationViewEx.setCurrentItem(1);
+            CustomBottomNavigationView bottomNavigationView = ((MainActivity) getActivity()).getBottomNavigationView();
+            if (bottomNavigationView != null) {
+                MenuItem menuItem = bottomNavigationView.getMenu().getItem(1);
+                bottomNavigationView.setIconScaleType(menuItem);
+                //bottomNavigationView.setCurrentItem(1);
             }
         }
     }

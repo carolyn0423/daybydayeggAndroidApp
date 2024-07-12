@@ -222,7 +222,7 @@ public class DonateCartFragment extends BaseFragment implements DonateCartContra
                         break;
                     case "1":
                         DonateFragment.getInstance().type_idMode("1");
-                        ((MainActivity) getActivity()).changeTabFragment(DonateFragment.getInstance());
+                        ((MainActivity) getActivity()).addFragment(DonateFragment.getInstance());
                         break;
                 }
             }

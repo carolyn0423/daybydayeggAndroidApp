@@ -205,8 +205,9 @@ public class MemberCenterFragment extends BaseFragment implements View.OnClickLi
 
     @Override
     public void redirectToMainPage() {
-        ((MainActivity) Objects.requireNonNull(getActivity())).setTabPage(0);
-        ((MainActivity) Objects.requireNonNull(getActivity())).refreshBadge();
+        ((MainActivity) requireActivity()).setTabPage(0);
+        ((MainActivity) requireActivity()).refreshBadge();
+        ((MainActivity) requireActivity()).changeTabFragment(MainIndexFragment.getInstance());
     }
 
     @Override

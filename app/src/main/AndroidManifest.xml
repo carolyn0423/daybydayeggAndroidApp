@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hamels.daybydayegg">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -61,10 +68,11 @@
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="false"
         android:largeHeap="true"
-        tools:replace="android:icon, android:label, android:theme">
+        tools:replace="android:icon, android:label, android:theme"
+        tools:targetApi="n">
         <activity
             android:name="com.hamels.daybydayegg.Init.SplashActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -91,24 +99,25 @@
         </activity>
         <activity
             android:name="com.hamels.daybydayegg.Init.NotificationControlActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false"/>
         <activity
             android:name="com.hamels.daybydayegg.Login.VIew.CustomerActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false"/>
         <activity
             android:name="com.hamels.daybydayegg.Login.VIew.LoginActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false"/>
         <activity
             android:name="com.hamels.daybydayegg.Login.VIew.TermsOfUseActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false"/>
         <activity
             android:name="com.hamels.daybydayegg.Main.View.MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:screenOrientation="fullSensor"
+            android:exported="false"
+            android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="NOTIFY_EXTRA" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -116,19 +125,19 @@
         </activity>
         <activity
             android:name="com.hamels.daybydayegg.Base.WebViewActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true"/>
         <activity
             android:name="com.hamels.daybydayegg.Login.VIew.ForgetPasswordActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false"/>
         <activity
             android:name="com.hamels.daybydayegg.Login.VIew.RegisterActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false"/>
         <activity
             android:name="com.hamels.daybydayegg.Login.VIew.VerifyCodeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
 
         <service android:name="com.hamels.daybydayegg.Service.FcmService" android:exported="true">
             <intent-filter>
