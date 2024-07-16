@@ -61,7 +61,7 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_message_list, container, false);
         sMemberID = getArguments().getString("MEMBERID", "");
         sMobile = getArguments().getString("MOBILE", "");
-        isAdmin = getArguments().getString("ISADMIN", "").equals("Y") ? true : false;
+        isAdmin = getArguments().getString("ISADMIN", "").equals("Y");
         initView(view);
 
         if(messagePresenter == null) {

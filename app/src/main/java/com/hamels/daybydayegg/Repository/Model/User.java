@@ -293,20 +293,13 @@ public class User {
             jsonObject.put("mobile", mobile);
             jsonObject.put("gender", gender);
             jsonObject.put("email", email);
-
             jsonObject.put("city_code", citycode);
             jsonObject.put("area_code", areacode);
             jsonObject.put("address", address);
-
             jsonObject.put("prepaid_amount", prepaid_amount);
-//            jsonObject.put("group", group);
-//            jsonObject.put("createDateTime", createDateTime);
             jsonObject.put("point", bonus_points);
             jsonObject.put("membership_code", pos_membercard_code);
             jsonObject.put("bonus_expired_soon", bonusexpiredsoon);
-//            jsonObject.put("membership_src", membershipSrc);
-//            jsonObject.put("membership_card_src", membershipCardSrc);
-//            jsonObject.put("topic", topic);
             jsonObject.put("verify_code", verify_code);
             jsonObject.put("Online_Enabled", OnlineEnabled);
             jsonObject.put("invitation_code", InvitationCode);

@@ -1113,7 +1113,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void changeTabFragment(BaseFragment willChangeFragment) {
         this.willChangeFragment = willChangeFragment;
-        Log.e(TAG, "changeTabFragment" + willChangeFragment + "");
+        Log.e(TAG, "changeTabFragment" + willChangeFragment);
         removeAllStackFragment();
         addFragment(willChangeFragment);
     }
@@ -1337,14 +1337,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         setTabPage(0);
         mainPresenter.logout();
     }
-
-//    public void hideBottomNavigation() {
-//        bottomNavigationViewEx.setVisibility(View.GONE);
-//    }
-//
-//    public void showBottomNavigation() {
-//        bottomNavigationViewEx.setVisibility(View.VISIBLE);
-//    }
 
     @Override
     public void onBackPressed() {

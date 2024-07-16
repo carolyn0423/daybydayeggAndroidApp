@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hamels.daybydayegg.Utils.CustomBottomNavigationView;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BaseFragment;
 import com.hamels.daybydayegg.Main.View.MainActivity;
@@ -99,10 +98,10 @@ public class OrderListFragment extends BaseFragment implements OrderListContract
             public void onValueCallback(int task, Order order) {
                 switch (task) {
                     case TASK_RETURN:
-                        ((TransRecordFragment) Objects.requireNonNull(getParentFragment())).addReturnFragment(order, STATUS_RETURN);
+                        ((TransRecordFragment) requireParentFragment()).addReturnFragment(order, STATUS_RETURN);
                         break;
                     case TASK_EXCHANGE:
-                        ((TransRecordFragment) Objects.requireNonNull(getParentFragment())).addReturnFragment(order, STATUS_EXCHANGE);
+                        ((TransRecordFragment) requireParentFragment()).addReturnFragment(order, STATUS_EXCHANGE);
                         break;
                 }
             }
