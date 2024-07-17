@@ -21,6 +21,7 @@ public class NotificationControlActivity extends BaseActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_notification_control);
         initView();
         showAlert();

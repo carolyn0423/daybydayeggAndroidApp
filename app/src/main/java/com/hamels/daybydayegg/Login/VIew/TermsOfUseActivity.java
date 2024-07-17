@@ -33,6 +33,7 @@ public class TermsOfUseActivity extends BaseActivity implements FaqContract.View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_faq);
 
         initView();

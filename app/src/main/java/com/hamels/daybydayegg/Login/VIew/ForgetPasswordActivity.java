@@ -29,6 +29,7 @@ public class ForgetPasswordActivity extends BaseActivity implements ForgetPasswo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_forget_password);
         cellphone = Objects.requireNonNull(getIntent().getExtras()).getString(PHONE, "");
         initView();

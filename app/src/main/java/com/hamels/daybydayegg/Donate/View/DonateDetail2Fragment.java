@@ -166,6 +166,7 @@ public class DonateDetail2Fragment extends BaseFragment implements DonateDetailC
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btn_submit.setEnabled(false);
                 presenter.SaveTicketData(edit_phone.getText().toString(), Integer.toString(uid), edit_num.getText().toString(), edit_nick.getText().toString());
             }
         });

@@ -30,10 +30,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -234,6 +230,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 移除标题栏
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
         // 初始化 FusedLocationProviderClient
@@ -561,22 +559,27 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             // Handle navigation item clicks here
             switch (item.getItemId()) {
                 case R.id.item_home:
+                    changeNavigationColor(item.getItemId());
                     setMainIndexMessageUnreadVisibility(true);
                     changeTabFragment(MainIndexFragment.getInstance());
                     return true;
                 case R.id.item_egg:
+                    changeNavigationColor(item.getItemId());
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.checkLoginForDonate();
                     return true;
                 case R.id.item_shop:
+                    changeNavigationColor(item.getItemId());
                     setMainIndexMessageUnreadVisibility(false);
                     checkMerchantCount("PRODUCT", "Y"); //電子商品
                     return true;
                 case R.id.item_shop2:
+                    changeNavigationColor(item.getItemId());
                     setMainIndexMessageUnreadVisibility(false);
                     checkMerchantCount("PRODUCT", "N"); //非電子商品
                     return true;
                 case R.id.item_cart:
+                    changeNavigationColor(item.getItemId());
                     setMainIndexMessageUnreadVisibility(false);
                     mainPresenter.checkLoginForShoppingCart("");
                     return true;
@@ -626,27 +629,27 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         public void onClick(View v) {
             int id = v.getId();
             /*下方menu*/
-            if (id == R.id.home) {
-                changeNavigationColor(v.getId());
-                changeTabFragment(MainIndexFragment.getInstance());
-            }else if(id == R.id.egg){
-                changeNavigationColor(v.getId());
-                mainPresenter.checkLoginForDonate();
-            }else if (id == R.id.shop){
-                changeNavigationColor(v.getId());
-                mainPresenter.saveSourceActive("");
-                checkMerchantCount("PRODUCT", "Y");
-            }else if (id == R.id.shop2){
-                changeNavigationColor(v.getId());
-                mainPresenter.saveSourceActive("");
-                checkMerchantCount("PRODUCT", "N");
-            }else if (id == R.id.shopping_cart){
-                changeNavigationColor(v.getId());
-                mainPresenter.checkLoginForShoppingCart("");
-            }
+//            if (id == R.id.home) {
+//                changeNavigationColor(v.getId());
+//                changeTabFragment(MainIndexFragment.getInstance());
+//            }else if(id == R.id.egg){
+//                changeNavigationColor(v.getId());
+//                mainPresenter.checkLoginForDonate();
+//            }else if (id == R.id.shop){
+//                changeNavigationColor(v.getId());
+//                mainPresenter.saveSourceActive("");
+//                checkMerchantCount("PRODUCT", "Y");
+//            }else if (id == R.id.shop2){
+//                changeNavigationColor(v.getId());
+//                mainPresenter.saveSourceActive("");
+//                checkMerchantCount("PRODUCT", "N");
+//            }else if (id == R.id.shopping_cart){
+//                changeNavigationColor(v.getId());
+//                mainPresenter.checkLoginForShoppingCart("");
+//            }
 
             /*首頁上方menu*/
-            else if (id == R.id.qrcode){
+            if (id == R.id.qrcode){
                 if (mainPresenter.getUserLogin()) {
                     View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_qrcode, null);
 
@@ -697,35 +700,35 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     public void changeNavigationColor(int layoutID) {
 
-        if (layoutID == R.id.home){
+        if (layoutID == R.id.home || layoutID == R.id.item_home){
             setMainIndexMessageUnreadVisibility(true);
             changeHomeColor(true);
             changeEggColor(false);
             changeShopColor(false);
             changeShop2Color(false);
             changeShoppingCartColor(false);
-        }else if (layoutID == R.id.egg){
+        }else if (layoutID == R.id.egg || layoutID == R.id.item_egg){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(true);
             changeShopColor(false);
             changeShop2Color(false);
-            changeShoppingCartColor(true);
-        }else if (layoutID == R.id.shop){
+            changeShoppingCartColor(false);
+        }else if (layoutID == R.id.shop || layoutID == R.id.item_shop){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(false);
             changeShopColor(true);
             changeShop2Color(false);
             changeShoppingCartColor(false);
-        }else if (layoutID == R.id.shop2){
+        }else if (layoutID == R.id.shop2 || layoutID == R.id.item_shop2){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(false);
             changeShopColor(false);
             changeShop2Color(true);
             changeShoppingCartColor(false);
-        }else if (layoutID == R.id.shopping_cart){
+        }else if (layoutID == R.id.shopping_cart || layoutID == R.id.item_cart){
             setMainIndexMessageUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(false);
@@ -736,45 +739,60 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void changeHomeColor(boolean isClicked) {
+        MenuItem menuItem = bottomNavigationView.getMenu().getItem(0);
         if (isClicked) {
+            menuItem.setIcon(R.drawable.home_fill);
             imgHome.setImageDrawable(getResources().getDrawable(R.drawable.home_fill));
         } else {
+            menuItem.setIcon(R.drawable.home_line);
             imgHome.setImageDrawable(getResources().getDrawable(R.drawable.home_line));
         }
         txtHome.setTextColor(getResources().getColor(R.color.colorYunlinhn));
     }
 
     private void changeEggColor(boolean isClicked) {
+        MenuItem menuItem = bottomNavigationView.getMenu().getItem(1);
         if (isClicked) {
+            menuItem.setIcon(R.drawable.egg3_fill);
             imgEgg.setImageDrawable(getResources().getDrawable(R.drawable.egg3_fill));
         } else {
+            menuItem.setIcon(R.drawable.egg3_line);
             imgEgg.setImageDrawable(getResources().getDrawable(R.drawable.egg3_line));
         }
         txtEgg.setTextColor(getResources().getColor(R.color.colorYunlinhn));
     }
 
     private void changeShopColor(boolean isClicked) {
+        MenuItem menuItem = bottomNavigationView.getMenu().getItem(2);
         if (isClicked) {
+            menuItem.setIcon(R.drawable.ticket_fill);
             imgShop.setImageDrawable(getResources().getDrawable(R.drawable.ticket_fill));
         } else {
+            menuItem.setIcon(R.drawable.ticket_line);
             imgShop.setImageDrawable(getResources().getDrawable(R.drawable.ticket_line));
         }
         txtShop.setTextColor(getResources().getColor(R.color.colorYunlinhn));
     }
 
     private void changeShop2Color(boolean isClicked) {
+        MenuItem menuItem = bottomNavigationView.getMenu().getItem(3);
         if (isClicked) {
+            menuItem.setIcon(R.drawable.bag_fill);
             imgShop2.setImageDrawable(getResources().getDrawable(R.drawable.bag_fill));
         } else {
+            menuItem.setIcon(R.drawable.bag_line);
             imgShop2.setImageDrawable(getResources().getDrawable(R.drawable.bag_line));
         }
         txtShop2.setTextColor(getResources().getColor(R.color.colorYunlinhn));
     }
 
     private void changeShoppingCartColor(boolean isClicked) {
+        MenuItem menuItem = bottomNavigationView.getMenu().getItem(4);
         if (isClicked) {
+            menuItem.setIcon(R.drawable.cart_fill);
             imgShoppingCart.setImageDrawable(getResources().getDrawable(R.drawable.cart_fill));
         } else {
+            menuItem.setIcon(R.drawable.cart_line);
             imgShoppingCart.setImageDrawable(getResources().getDrawable(R.drawable.cart_line));
         }
         txtShoppingCart.setTextColor(getResources().getColor(R.color.colorYunlinhn));

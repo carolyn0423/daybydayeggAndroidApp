@@ -9,17 +9,17 @@
         android:icon="@drawable/icons8_home"
         android:title="@string/tab_main" />
     <item
-        style="@style/fontBoldTw.GreyDoubleDark"
+        style="@style/fontRegularTw.GreyDark"
         android:textSize="10dp"
         android:id="@+id/item_egg"
         android:icon="@drawable/egg3_line"
-        android:title="買好蛋" />
+        android:title="領好蛋" />
 
     <item
         style="@style/fontRegularTw.GreyDark"
         android:textSize="10dp"
         android:id="@+id/item_shop"
-        android:icon="@drawable/bag_line"
+        android:icon="@drawable/ticket_line"
         android:title="買好蛋" />
 
     <item

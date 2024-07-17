@@ -18,6 +18,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_splash);
 //        FirebaseInstanceId.getInstance().getInstanceId()
 //                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {

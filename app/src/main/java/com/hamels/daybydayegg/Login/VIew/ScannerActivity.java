@@ -24,6 +24,7 @@ public class ScannerActivity extends BaseActivity implements ScannerContract.Vie
     @Nullable
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_scanner);
         initView();
     }
