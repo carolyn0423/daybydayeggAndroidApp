@@ -67,6 +67,7 @@ public class CustomerActivity extends BaseActivity implements CustomerListContra
     @Nullable
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_customer);
         sMode = Objects.requireNonNull(getIntent().getExtras()).getString("MODE", "");
         //sSourceActive = Objects.requireNonNull(getIntent().getExtras()).getString("SOURCE_ACTIVE", "");

@@ -234,6 +234,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 移除标题栏
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
         // 初始化 FusedLocationProviderClient
