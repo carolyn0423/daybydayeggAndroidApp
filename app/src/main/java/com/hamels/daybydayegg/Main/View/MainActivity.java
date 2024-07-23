@@ -175,6 +175,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private static final int REQUEST_LOCATION_PERMISSION = 100;
     private static final int PERMISSION_REQUEST_LOCATION = 1;
     private FusedLocationProviderClient fusedLocationClient;
+    private float originalBrightness = -1; // 保存原始亮度值
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -986,6 +987,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void OpenShared(){
+        // 保存当前屏幕亮度
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        originalBrightness = lp.screenBrightness;
+
         // 获取剪贴板管理器
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         String copiedText = mainPresenter.getUserName() + " 邀請您下載 " + EOrderApplication.CUSTOMER_NAME + " APP，註冊時輸入邀請碼，即可獲得新會員獎勵";
@@ -1005,6 +1010,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, copiedText);
         startActivity(Intent.createChooser(shareIntent, "分享到"));
+
+        // 恢复屏幕亮度
+        getWindow().getAttributes().screenBrightness = originalBrightness;
+        getWindow().setAttributes(getWindow().getAttributes());
     }
 
     @Override
@@ -1575,7 +1584,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void changeAppBrightness(int brightness) {
-        Window window = MainActivity.this.getWindow();
+        Window window = getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         if (brightness == -1) {
             lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
@@ -1583,6 +1592,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             lp.screenBrightness = (brightness <= 0 ? 1 : brightness) / 255f;
         }
         window.setAttributes(lp);
+
+        // 恢复屏幕亮度
+        getWindow().getAttributes().screenBrightness = originalBrightness;
+        getWindow().setAttributes(getWindow().getAttributes());
     }
 
     public void getPermissionsCamera(){
