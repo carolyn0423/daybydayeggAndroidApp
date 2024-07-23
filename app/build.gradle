@@ -23,7 +23,7 @@ android {
     }
     defaultConfig {
         applicationId "com.hamels.daybydayegg"
-        minSdk 34
+        minSdk 25
         targetSdkVersion 34
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }

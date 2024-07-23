@@ -186,6 +186,7 @@ public class BaseActivity extends AppCompatActivity implements BaseContract.View
     public void setMessageButtonVisibility(boolean isVisible) {
         appToolbar.getBtnMessage().setVisibility(isVisible ? View.VISIBLE : View.GONE);
         if (appToolbar.getMessageBadge().getVisibility() == View.VISIBLE) {
+            appToolbar.getMessageBadge().setText(EOrderApplication.messageBadgeCount);
             appToolbar.getMessageBadge().setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
     }

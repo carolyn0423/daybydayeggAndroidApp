@@ -86,7 +86,7 @@ public class DonateFragment extends BaseFragment implements DonateContract.View{
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         tv_history_remark = view.findViewById(R.id.tv_history_remark);
         tabLayout = view.findViewById(R.id.tab_layout);

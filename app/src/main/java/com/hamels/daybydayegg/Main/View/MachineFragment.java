@@ -3,6 +3,7 @@ package com.hamels.daybydayegg.Main.View;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -83,7 +84,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
 
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         //  清除API 暫存, 重新取得URL
         ApiRepository.repository = null;
@@ -94,6 +95,7 @@ public class MachineFragment extends BaseFragment implements MachineContract.Vie
         machinePresenter = new MachinePresenter(this, getRepositoryManager(getContext()));
         machineAdapter = new MachineAdapter(this, machinePresenter);
 
+        tabLayout.setBackgroundColor(getResources().getColor(R.color.greyDoubleHint));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

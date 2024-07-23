@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.hamels.daybydayegg.Base.BaseAdapter;
 import com.hamels.daybydayegg.Base.BaseContract;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.MemberCenter.Contract.MailFileContract;
 import com.hamels.daybydayegg.MemberCenter.Holder.MailFileHolder;
 import com.hamels.daybydayegg.R;
@@ -56,6 +57,9 @@ public class MailFileAdapter extends BaseAdapter<MailFileHolder> {
         mailFileHolder.mailLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(memberMessages.get(position).getRead_flag().equals("N")) {
+                    EOrderApplication.mailBadgeCount = (Integer.parseInt(EOrderApplication.mailBadgeCount) - 1) + "";
+                }
                 presenter.readMessage(memberMessages.get(position));
             }
         });

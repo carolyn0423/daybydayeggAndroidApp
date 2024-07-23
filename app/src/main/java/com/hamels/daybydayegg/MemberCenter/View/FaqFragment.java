@@ -67,7 +67,7 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         webView = view.findViewById(R.id.web_view);

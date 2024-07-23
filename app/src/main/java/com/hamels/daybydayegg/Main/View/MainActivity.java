@@ -175,6 +175,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private static final int REQUEST_LOCATION_PERMISSION = 100;
     private static final int PERMISSION_REQUEST_LOCATION = 1;
     private FusedLocationProviderClient fusedLocationClient;
+    private float originalBrightness = -1; // 保存原始亮度值
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -560,27 +561,27 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             switch (item.getItemId()) {
                 case R.id.item_home:
                     changeNavigationColor(item.getItemId());
-                    setMainIndexMessageUnreadVisibility(true);
-                    changeTabFragment(MainIndexFragment.getInstance());
+                    setMainIndexMailUnreadVisibility(true);
+                    addFragment(MainIndexFragment.getInstance());
                     return true;
                 case R.id.item_egg:
                     changeNavigationColor(item.getItemId());
-                    setMainIndexMessageUnreadVisibility(false);
+                    setMainIndexMailUnreadVisibility(false);
                     mainPresenter.checkLoginForDonate();
                     return true;
                 case R.id.item_shop:
                     changeNavigationColor(item.getItemId());
-                    setMainIndexMessageUnreadVisibility(false);
+                    setMainIndexMailUnreadVisibility(false);
                     checkMerchantCount("PRODUCT", "Y"); //電子商品
                     return true;
                 case R.id.item_shop2:
                     changeNavigationColor(item.getItemId());
-                    setMainIndexMessageUnreadVisibility(false);
+                    setMainIndexMailUnreadVisibility(false);
                     checkMerchantCount("PRODUCT", "N"); //非電子商品
                     return true;
                 case R.id.item_cart:
                     changeNavigationColor(item.getItemId());
-                    setMainIndexMessageUnreadVisibility(false);
+                    setMainIndexMailUnreadVisibility(false);
                     mainPresenter.checkLoginForShoppingCart("");
                     return true;
             }
@@ -686,7 +687,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     intentToLogin(REQUEST_MAIN_INDEX);
                 }
             }else if (id == R.id.message){
-                setMainIndexMessageUnreadVisibility(false);
+                setMainIndexMailUnreadVisibility(false);
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
                 mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
             }else if (id == R.id.machine){
@@ -701,35 +702,35 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public void changeNavigationColor(int layoutID) {
 
         if (layoutID == R.id.home || layoutID == R.id.item_home){
-            setMainIndexMessageUnreadVisibility(true);
+            setMainIndexMailUnreadVisibility(true);
             changeHomeColor(true);
             changeEggColor(false);
             changeShopColor(false);
             changeShop2Color(false);
             changeShoppingCartColor(false);
         }else if (layoutID == R.id.egg || layoutID == R.id.item_egg){
-            setMainIndexMessageUnreadVisibility(false);
+            setMainIndexMailUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(true);
             changeShopColor(false);
             changeShop2Color(false);
             changeShoppingCartColor(false);
         }else if (layoutID == R.id.shop || layoutID == R.id.item_shop){
-            setMainIndexMessageUnreadVisibility(false);
+            setMainIndexMailUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(false);
             changeShopColor(true);
             changeShop2Color(false);
             changeShoppingCartColor(false);
         }else if (layoutID == R.id.shop2 || layoutID == R.id.item_shop2){
-            setMainIndexMessageUnreadVisibility(false);
+            setMainIndexMailUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(false);
             changeShopColor(false);
             changeShop2Color(true);
             changeShoppingCartColor(false);
         }else if (layoutID == R.id.shopping_cart || layoutID == R.id.item_cart){
-            setMainIndexMessageUnreadVisibility(false);
+            setMainIndexMailUnreadVisibility(false);
             changeHomeColor(false);
             changeEggColor(false);
             changeShopColor(false);
@@ -813,7 +814,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public void onAnimationEnd(Animation animation) {
                 llOpen.setVisibility(View.VISIBLE);
-                setMainIndexMessageUnreadVisibility(true);
+                setMainIndexMailUnreadVisibility(true);
                 constClose.setVisibility(View.GONE);
                 constBackground.setVisibility(View.GONE);
             }
@@ -826,7 +827,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         upAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                setMainIndexMessageUnreadVisibility(false);
+                setMainIndexMailUnreadVisibility(false);
             }
 
             @Override
@@ -958,34 +959,21 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
     // 判斷畫面上顯示的是否為MainIndexFragment
     public boolean isMainIndex() {
-        boolean isMainIndex = false;
         List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
 
-        switch (fragmentList.size()) {
-            case 0:
-                isMainIndex = false;
-                break;
-            case 1:
-                if (getSupportFragmentManager().getFragments().get(0).equals(MainIndexFragment.getInstance())) {
-                    isMainIndex = true;
-                }
-                break;
-            case 2:
-                for (Fragment f : fragmentList) {
-                    if (f instanceof MainIndexFragment) {
-                        isMainIndex = true;
-
-                        break;
-                    }
-                }
-                break;
-            default:
-                isMainIndex = false;
+        for (Fragment fragment : fragmentList) {
+            if (fragment != null && fragment.isVisible() && fragment instanceof MainIndexFragment) {
+                return true;
+            }
         }
-        return isMainIndex;
+        return false;
     }
 
     public void OpenShared(){
+        // 保存当前屏幕亮度
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        originalBrightness = lp.screenBrightness;
+
         // 获取剪贴板管理器
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         String copiedText = mainPresenter.getUserName() + " 邀請您下載 " + EOrderApplication.CUSTOMER_NAME + " APP，註冊時輸入邀請碼，即可獲得新會員獎勵";
@@ -1005,29 +993,33 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, copiedText);
         startActivity(Intent.createChooser(shareIntent, "分享到"));
+
+        // 恢复屏幕亮度
+        getWindow().getAttributes().screenBrightness = originalBrightness;
+        getWindow().setAttributes(getWindow().getAttributes());
     }
 
     @Override
     public void setAllBadge(String count) {
-        // messageUnreadNum_pushUnreadNum_cartTotalQuantity
         String[] array = count.split("_");
-        // 訊息夾未讀、客服留言未讀
-        if (array.length >= 2) {
-            appToolbar.setMessageBadgeCount(Integer.parseInt(array[0]));
-            appToolbar.setMailBadgeCount(Integer.parseInt(array[1]));
 
-            if (array[1].equals("0") || !isMainIndex()) {
-                tvMessageUnread.setText("0");
-                setMainIndexMessageUnreadVisibility(false);
-            } else {
-                tvMessageUnread.setText(array[1]);
-                setMainIndexMessageUnreadVisibility(true);
+        //  客服留言未讀
+        if(array.length > 0){
+            EOrderApplication.messageBadgeCount = array[0];
+            appToolbar.setMessageBadgeCount(Integer.parseInt(array[0]));
+        }else{
+            appToolbar.setMessageBadgeCount(0);
+        }
+
+        // 訊息夾未讀
+        if (array.length > 1) {
+            EOrderApplication.mailBadgeCount = array[1];
+            appToolbar.setMailBadgeCount(Integer.parseInt(array[1]));
+            if(isMainIndex()){
+                setMainIndexMailUnreadVisibility(true);
             }
-        } else {
-            appToolbar.setMessageBadgeCount(Integer.parseInt("0"));
-            appToolbar.setMailBadgeCount(Integer.parseInt("0"));
-            tvMessageUnread.setText("0");
-            setMainIndexMessageUnreadVisibility(false);
+        }else{
+            appToolbar.setMailBadgeCount(0);
         }
 
         // 購物車商品數量
@@ -1052,6 +1044,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         //  提貨卷數量
         if (array.length >= 5) {
+            EOrderApplication.memberTicketBadgeCount = array[4];
             if (array[4].equals("0")) {
                 tvBadgeMemberTicket.setVisibility(View.GONE);
             } else {
@@ -1488,8 +1481,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
     }
 
-    public void setMainIndexMessageUnreadVisibility(boolean isVisible) {
-        if (isVisible && (!tvMessageUnread.getText().toString().equals("") && !tvMessageUnread.getText().toString().equals("0"))) {
+    public void setMainIndexMailUnreadVisibility(boolean isVisible) {
+        if (isVisible && (!EOrderApplication.mailBadgeCount.equals("") && !EOrderApplication.mailBadgeCount.equals("0"))) {
+            tvMessageUnread.setText(EOrderApplication.mailBadgeCount);
             tvMessageUnread.setVisibility(View.VISIBLE);
         } else {
             tvMessageUnread.setVisibility(View.GONE);
@@ -1575,7 +1569,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void changeAppBrightness(int brightness) {
-        Window window = MainActivity.this.getWindow();
+        Window window = getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         if (brightness == -1) {
             lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
@@ -1583,6 +1577,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             lp.screenBrightness = (brightness <= 0 ? 1 : brightness) / 255f;
         }
         window.setAttributes(lp);
+
+        // 恢复屏幕亮度
+        getWindow().getAttributes().screenBrightness = originalBrightness;
+        getWindow().setAttributes(getWindow().getAttributes());
     }
 
     public void getPermissionsCamera(){

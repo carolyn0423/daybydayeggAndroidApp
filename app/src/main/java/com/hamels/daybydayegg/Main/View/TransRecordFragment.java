@@ -77,7 +77,7 @@ public class TransRecordFragment extends BaseFragment {
         ((MainActivity) getActivity()).setSortButtonVisibility(true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).bindWebView(webView);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         //setCookies();

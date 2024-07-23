@@ -101,7 +101,7 @@ public class AdminMessageFragment extends BaseFragment implements AdminMessageCo
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         mPresenter = new AdminMessagePresenter(this, getRepositoryManager(getContext()));

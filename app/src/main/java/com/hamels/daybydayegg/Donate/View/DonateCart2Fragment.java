@@ -97,7 +97,7 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setMessageButtonVisibility(true);
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         btn_close = view.findViewById(R.id.btn_close);
         recyclerView = view.findViewById(R.id.donate_recycler_view);

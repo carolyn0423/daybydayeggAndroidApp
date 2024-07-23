@@ -58,6 +58,7 @@ import com.hamels.daybydayegg.Widget.AppToolbar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MachineMapFragment extends BaseFragment implements MachineMapContract.View {
     public static final String TAG = MachineMapFragment.class.getSimpleName();
@@ -84,7 +85,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_machine_map, container, false);
-        appToolbar = ((MainActivity) getActivity()).getAppToolbarObj();
+        appToolbar = ((MainActivity) requireActivity()).getAppToolbarObj();
         tabLayout = view.findViewById(R.id.tab_machine_layout);
         tabItem1 = view.findViewById(R.id.tabItem1);
         //  tabItem2 = view.findViewById(R.id.tabItem2);
@@ -93,9 +94,8 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
 
         initView(view);
 
-
         if(EOrderApplication.lat == 0 && EOrderApplication.lon == 0){
-            ((MainActivity) getActivity()).checkLocationPermission();
+            ((MainActivity) requireActivity()).checkLocationPermission();
         }else{
             currentLocation = new LatLng(EOrderApplication.lat, EOrderApplication.lon);
         }
@@ -180,7 +180,7 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
 
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         //  清除API 暫存, 重新取得URL
         ApiRepository.repository = null;
@@ -188,11 +188,11 @@ public class MachineMapFragment extends BaseFragment implements MachineMapContra
         ApiRepository.getInstance();
         MemberRepository.getInstance();
 
-        tabLayout.getTabAt(2).select();
-
         machineMapPresenter = new MachineMapPresenter(this, getRepositoryManager(getContext()));
         machineMapAdapter = new MachineMapAdapter(this, machineMapPresenter);
 
+        tabLayout.getTabAt(2).select();
+        tabLayout.setBackgroundColor(getResources().getColor(R.color.greyDoubleHint));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

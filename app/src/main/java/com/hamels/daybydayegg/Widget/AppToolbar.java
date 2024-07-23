@@ -80,7 +80,6 @@ public class AppToolbar extends Toolbar {
 
     public int getiMessageCount(){return iMessageCount;}
 
-
     public void setMailBadgeCount(int mailBadgeCount) {
         iMailCount = mailBadgeCount;
         if(btnMail.getVisibility() == VISIBLE){
@@ -94,8 +93,13 @@ public class AppToolbar extends Toolbar {
 
     public void setMessageBadgeCount(int messageBadgeCount) {
         iMessageCount = messageBadgeCount;
-        tvMessageBadge.setVisibility(messageBadgeCount > 0 ? VISIBLE : GONE);
-        tvMessageBadge.setText(Integer.toString(messageBadgeCount));
+        if(btnMessage.getVisibility() == VISIBLE){
+            tvMessageBadge.setVisibility(iMessageCount > 0 ? VISIBLE : GONE);
+            tvMessageBadge.setText(Integer.toString(iMessageCount));
+        }
+        else{
+            tvMessageBadge.setVisibility(GONE);
+        }
     }
 
     public void setTvTitle(String sAppTitle){

@@ -105,7 +105,7 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         mXBanner = view.findViewById(R.id.xbanner);
         //tv_dealer_product_id = view.findViewById(R.id.tv_dealer_product_id);

@@ -58,7 +58,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                 @Override
                 public void onValueCallback(int task, String type) {
                     String[] array= type.split("_");
-                    view.setMessageBadge(array[1]);
+                    view.setMessageBadge(array[0]);
                 }
             });
         } else {

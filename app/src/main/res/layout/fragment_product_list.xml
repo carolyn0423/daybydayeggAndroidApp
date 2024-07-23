@@ -22,6 +22,7 @@
         app:tabMaxWidth="100000dp"          間距設定
         app:tabMinWidth="35dp"              間距設定
         app:tabIndicatorFullWidth="false"   選擇Tab下方的選擇條是否滿版
+        app:tabGravity="center"
     -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -29,7 +30,6 @@
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        app:tabGravity="center"
         app:tabMaxWidth="100000dp"
         app:tabMinWidth="65dp"
         app:tabIndicatorFullWidth="true"

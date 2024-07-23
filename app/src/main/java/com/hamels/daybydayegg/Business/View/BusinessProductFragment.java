@@ -87,7 +87,7 @@ public class BusinessProductFragment extends BaseFragment implements BusinessPro
         ((MainActivity) getActivity()).setSortButtonVisibility(true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         Log.e(TAG,"product_type_main_id : " + product_type_main_id + "business_sale_id : " + business_sale_id);
         tabLayout = view.findViewById(R.id.tab_layout);

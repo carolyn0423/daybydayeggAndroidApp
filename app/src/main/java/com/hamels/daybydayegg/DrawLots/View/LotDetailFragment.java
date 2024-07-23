@@ -81,7 +81,7 @@ public class LotDetailFragment extends BaseFragment implements LotDetailContract
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         radioGroupProd = view.findViewById(R.id.radio_group_prod);
         radioGroupSpec = view.findViewById(R.id.radio_group_spec);

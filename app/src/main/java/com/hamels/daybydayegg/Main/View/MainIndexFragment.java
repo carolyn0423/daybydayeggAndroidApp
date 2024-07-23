@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,6 +46,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
     private ConstraintLayout layout_coupon, layout_point, layout_aboutegg, layout_man, layout_eggfood;
     private MainIndexContract.Presenter mainindexPresenter;
     private TextView tvCouponNum, tvPointNum;
+    private List<Carousel> vCarousel;
     public static MainIndexFragment getInstance() {
         if (fragment == null) {
             fragment = new MainIndexFragment();
@@ -58,9 +61,44 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         mainindexPresenter = new MainIndexPresenter(this, getRepositoryManager(getContext()));
 
         ((MainActivity) getActivity()).setCustomerData();
-
+        mXBanner = null;
         initView(view);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+//        mXBanner = view.findViewById(R.id.xbanner);
+//        setCarouselList(vCarousel);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mXBanner != null) {
+            mXBanner.stopAutoPlay();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mXBanner != null) {
+            mXBanner.stopAutoPlay(); // 停止自动播放
+            mXBanner.removeAllViews(); // 移除所有子视图
+            mXBanner.setBannerData(null); // 清空数据
+            mXBanner = null; // 将引用设为 null
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mXBanner != null) {
+            setCarouselList(vCarousel);
+            mXBanner.startAutoPlay();
+        }
     }
 
     private void initView(View view) {
@@ -72,7 +110,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(true);
         ((MainActivity) getActivity()).setAppToolbarVisibility(false);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(true);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         mXBanner = view.findViewById(R.id.xbanner);
@@ -156,20 +194,6 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         mainindexPresenter.getCarouselList(CUSTOMER_ID);
     }
 
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onResume() {
-        initView(getView());
-
-        super.onResume();
-        //mainindexPresenter.getCarouselList(CUSTOMER_ID);
-    }
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -204,7 +228,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 
     public void CustomerOnlineISFalse() {
         new AlertDialog.Builder(fragment.getActivity()).setTitle(R.string.dialog_hint).setMessage("此商家無開放APP購物").setPositiveButton(android.R.string.ok, null).show();
-        ((MainActivity) Objects.requireNonNull(getActivity())).resetPassword();
+        ((MainActivity) requireActivity()).resetPassword();
     }
 
     @Override
@@ -238,30 +262,52 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
 
     @Override
     public void setCarouselList(final List<Carousel> carouselList) {
+        this.vCarousel = carouselList;
+        if (mXBanner == null || carouselList == null || carouselList.isEmpty()) {
+            return;
+        }
+
+        mXBanner.stopAutoPlay(); // 停止之前的自动播放
+
         List<CustomViewsInfo> data = new ArrayList<>();
         String sDoMain = EOrderApplication.sApiUrl.equals("") ? ADMIN_DOMAIN : EOrderApplication.sApiUrl;
-        for(int i = 0 ; i < carouselList.size();i++){
-            data.add(new CustomViewsInfo(sDoMain + carouselList.get(i).getPicture_url(),carouselList.get(i).getId()));
+        for (int i = 0; i < carouselList.size(); i++) {
+            data.add(new CustomViewsInfo(sDoMain + carouselList.get(i).getPicture_url(), carouselList.get(i).getId()));
         }
-        mXBanner.setBannerData(R.layout.layout_main_activity_center_crop, data);
-        mXBanner.loadImage(new XBanner.XBannerAdapter() {
-            @Override
-            public void loadBanner(XBanner banner, Object model, View view, int position) {
-                ImageView img_carousel = (ImageView) view.findViewById(R.id.img_carousel);
-                Glide
-                    .with(getActivity())
-                        .load(((CustomViewsInfo) model).getXBannerUrl())
-                        // .load(R.drawable.e_order)
-                    .into(img_carousel);
-            }
+
+        requireActivity().runOnUiThread(() -> {
+            mXBanner.setBannerData(R.layout.layout_main_activity_center_crop, data);
+            mXBanner.loadImage(new XBanner.XBannerAdapter() {
+                @Override
+                public void loadBanner(XBanner banner, Object model, View view, int position) {
+                    ImageView img_carousel = view.findViewById(R.id.img_carousel);
+                    Glide.with(getActivity())
+                            .load(((CustomViewsInfo) model).getXBannerUrl())
+                            .into(img_carousel);
+                }
+            });
         });
+
+//        mXBanner.setBannerData(R.layout.layout_main_activity_center_crop, data);
+//        mXBanner.loadImage(new XBanner.XBannerAdapter() {
+//            @Override
+//            public void loadBanner(XBanner banner, Object model, View view, int position) {
+//                ImageView img_carousel = (ImageView) view.findViewById(R.id.img_carousel);
+//                Glide
+//                        .with(getActivity())
+//                        .load(((CustomViewsInfo) model).getXBannerUrl())
+//                        // .load(R.drawable.e_order)
+//                        .into(img_carousel);
+//            }
+//        });
+
+        mXBanner.startAutoPlay(); // 重新开始自动播放
+
         mXBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
             public void onItemClick(XBanner banner, Object model, View view, int position) {
-                Log.e(TAG,carouselList.get(position).getTitle());
+                Log.e(TAG, carouselList.get(position).getTitle());
                 ((MainActivity) getActivity()).addFragment(NewsFragment.getInstance(carouselList.get(position)));
-//                ((MainActivity) getActivity()).addFragment(NewsFragment.getInstance(((CustomViewsInfo)model).getXBannerTitle()));
-//                ((MainActivity) getActivity()).goNewsDetail(((CustomViewsInfo)model).getXBannerTitle());
             }
         });
 

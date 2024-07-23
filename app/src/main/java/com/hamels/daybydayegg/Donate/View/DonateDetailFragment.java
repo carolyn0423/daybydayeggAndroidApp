@@ -100,7 +100,7 @@ public class DonateDetailFragment extends BaseFragment implements DonateDetailCo
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setMessageButtonVisibility(false);
         ((MainActivity) getActivity()).setMailButtonVisibility(false);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         // 亮度
         brightnessNow = getSystemBrightness();

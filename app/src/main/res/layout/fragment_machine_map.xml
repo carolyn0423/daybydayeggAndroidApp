@@ -23,19 +23,22 @@
         android:layout_marginBottom="5dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:background="#f2f2f2"
         app:tabIndicatorHeight="0dp"
         app:tabMaxWidth="100000dp"
         app:tabIndicatorFullWidth="true"
-        app:tabTextAppearance="@style/TabLayoutTextSizeStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_01"
-        app:tabIndicatorColor="@color/colorYunlinhn"
+
         app:tabMode="fixed"
         app:tabGravity="fill"
+
+        app:tabBackground="@drawable/selec_tab_green"
+        app:tabIndicatorColor="@color/main"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/colorYunlinhn"
-        app:tabBackground="@drawable/selec_tab_green">
+        app:tabTextAppearance="@style/TabLayoutTextSizeStyle"
+        app:tabTextColor="@color/colorYunlinhn">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"

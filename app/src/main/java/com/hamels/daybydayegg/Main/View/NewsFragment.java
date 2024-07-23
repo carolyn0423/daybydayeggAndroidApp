@@ -57,7 +57,7 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
         setMessageButtonVisibility(true);
         setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
-        ((MainActivity) getActivity()).setMainIndexMessageUnreadVisibility(false);
+        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         setAppToolbarVisibility(true);
 
         webView = view.findViewById(R.id.web_view);
