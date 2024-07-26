@@ -652,6 +652,16 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             /*首頁上方menu*/
             if (id == R.id.qrcode){
                 if (mainPresenter.getUserLogin()) {
+                    try {
+                        originalBrightness = Settings.System.getInt(getContentResolver(),
+                                Settings.System.SCREEN_BRIGHTNESS);
+                    } catch (Settings.SettingNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    // 设置屏幕亮度为最亮
+                    setScreenBrightnessToMax();
+
                     View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_qrcode, null);
 
                     popupWindow = new PopupWindow(view);
@@ -970,10 +980,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     public void OpenShared(){
-        // 保存当前屏幕亮度
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        originalBrightness = lp.screenBrightness;
-
         // 获取剪贴板管理器
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         String copiedText = mainPresenter.getUserName() + " 邀請您下載 " + EOrderApplication.CUSTOMER_NAME + " APP，註冊時輸入邀請碼，即可獲得新會員獎勵";
@@ -1858,7 +1864,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             getLocation();
         }
     }
-
+    private void setScreenBrightnessToMax() {
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.screenBrightness = 1.0f; // 亮度值范围是 0.0 到 1.0
+        getWindow().setAttributes(layoutParams);
+    }
     // 处理权限请求结果
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,

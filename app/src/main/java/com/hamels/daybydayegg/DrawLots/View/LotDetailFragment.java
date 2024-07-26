@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.text.HtmlCompat;
+
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -137,7 +139,10 @@ public class LotDetailFragment extends BaseFragment implements LotDetailContract
         tv_lot_date.setText(lotDetail.getStart_date() + " ~ " + lotDetail.getEnd_date());
         tv_announce_date.setText(lotDetail.getAnnounce_date());
         tv_pickup_date.setText(lotDetail.getPickup_date());
-        tv_content.setText(Html.fromHtml(lotDetail.getContent()));
+        // 使用 HtmlCompat.fromHtml
+        CharSequence formattedText = HtmlCompat.fromHtml(lotDetail.getContent(), HtmlCompat.FROM_HTML_MODE_LEGACY);
+        tv_content.setText(formattedText);
+        //tv_content.setText(Html.fromHtml(lotDetail.getContent()));
         List<ProductPicture> productPictureList = lotDetail.getLot_picture_url_list();
         List<CustomViewsInfo> data = new ArrayList<>();
         for(int i = 0 ; i < productPictureList.size();i++){

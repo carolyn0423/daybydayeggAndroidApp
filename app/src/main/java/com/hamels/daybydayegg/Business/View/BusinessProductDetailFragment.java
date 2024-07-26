@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.text.HtmlCompat;
+
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -198,7 +200,10 @@ public class BusinessProductDetailFragment extends BaseFragment implements Busin
         tv_price.setText("NT$" + mDecimalFormat.format((double) productDetail.get(0).getPrice()));
         tv_dealer_product_id.setText(productDetail.get(0).getDealer_product_id());
         //btn_freight_title.setText(productDetail.get(0).getFreight_title());
-        tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
+        // 使用 HtmlCompat.fromHtml
+        CharSequence formattedText = HtmlCompat.fromHtml(productDetail.get(0).getDesc(), HtmlCompat.FROM_HTML_MODE_LEGACY);
+        tv_desc.setText(formattedText);
+        //tv_desc.setText(Html.fromHtml(productDetail.get(0).getDesc()));
         tv_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         edit_num.setText("1");
         tv_subtotal.setText("$" + mDecimalFormat.format((double) productDetail.get(0).getSale_price()));
