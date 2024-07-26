@@ -2,6 +2,7 @@ package com.hamels.daybydayegg.MemberCenter.Holder;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
@@ -43,7 +44,10 @@ public class MailFileHolder extends RecyclerView.ViewHolder {
         swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 
         tvMailTitle.setText(message.getTitle());
-        tvMailContent.setText(Html.fromHtml(message.getContent()));
+        // 使用 HtmlCompat.fromHtml
+        CharSequence formattedText = HtmlCompat.fromHtml(message.getContent(), HtmlCompat.FROM_HTML_MODE_LEGACY);
+        tvMailContent.setText(formattedText);
+        //tvMailContent.setText(Html.fromHtml(message.getContent()));
         Log.e(TAG,"Time : "+message.getCompletedAt());
 //        tvMailDate.setText(getFormatDate(message.getCompletedAt()));
         tvMailDate.setText(message.getCompletedAt());

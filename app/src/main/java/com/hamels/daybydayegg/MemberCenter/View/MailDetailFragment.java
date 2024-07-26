@@ -3,6 +3,8 @@ package com.hamels.daybydayegg.MemberCenter.View;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
+
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +52,9 @@ public class MailDetailFragment extends BaseFragment {
 
         if (memberMessage != null) {
             tvMailTitle.setText(memberMessage.getTitle());
-            tvMailContent.setText(Html.fromHtml(memberMessage.getContent()));
+            // 使用 HtmlCompat.fromHtml
+            CharSequence formattedText = HtmlCompat.fromHtml(memberMessage.getContent(), HtmlCompat.FROM_HTML_MODE_LEGACY);
+            tvMailContent.setText(formattedText);
         }
     }
 
