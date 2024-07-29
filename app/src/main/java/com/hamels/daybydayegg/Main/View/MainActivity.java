@@ -34,6 +34,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AlertDialog;
 
@@ -562,6 +563,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 case R.id.item_home:
                     changeNavigationColor(item.getItemId());
                     setMainIndexMailUnreadVisibility(true);
+                    MainIndexFragment fragment = new MainIndexFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame, fragment);
+                    transaction.commit();
                     addFragment(MainIndexFragment.getInstance());
                     return true;
                 case R.id.item_egg:
@@ -694,6 +699,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
                     popupWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL, 0, 0);
                 } else {
+                    EOrderApplication.REQUEST_PAGE = REQUEST_MAIN_INDEX;
                     intentToLogin(REQUEST_MAIN_INDEX);
                 }
             }else if (id == R.id.message){
@@ -905,7 +911,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_MAIN_INDEX:
-                changeTabFragment(MainIndexFragment.getInstance());
+                MainIndexFragment fragment = new MainIndexFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame, fragment);
+                transaction.commit();
+                addFragment(MainIndexFragment.getInstance());
                 break;
             case REQUEST_MEMBER_CARD:
                 changeTabFragment(MemberCardFragment.getInstance());
@@ -1532,8 +1542,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     // 商店清單: 當商店數量小於一時，直接顯示商品清單
     public void checkMerchantCount(final String type, final String isETicket) {
-
         mainPresenter.saveFragmentMainType("", isETicket);
+        ProductMainTypeFragment fragment = new ProductMainTypeFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, fragment);
+        transaction.commit();
         addFragment(ProductMainTypeFragment.getInstance());
     }
 

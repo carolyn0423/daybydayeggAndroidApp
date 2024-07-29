@@ -1,5 +1,7 @@
 package com.hamels.daybydayegg.Login.VIew;
 
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIN_INDEX;
+
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -183,11 +185,15 @@ public class VerifyCodeActivity extends BaseActivity implements VerifyCodeContra
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
+        EOrderApplication.REQUEST_PAGE = REQUEST_MAIN_INDEX;
+        IntentUtils.intentToMain(this, false, EOrderApplication.CUSTOMER_ID, false, true);
     }
 
     @Override
     public void finishActivity() {
-        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, true);
+        EOrderApplication.REQUEST_PAGE = REQUEST_MAIN_INDEX;
+        IntentUtils.intentToMain(this, false, EOrderApplication.CUSTOMER_ID, false, true);
     }
 
     class AutoFocusWatchLayout implements TextWatcher {

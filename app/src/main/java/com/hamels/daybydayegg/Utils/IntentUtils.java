@@ -9,6 +9,7 @@ import android.provider.Settings;
 import androidx.annotation.StringRes;
 import com.hamels.daybydayegg.Base.BaseActivity;
 import com.hamels.daybydayegg.Base.WebViewActivity;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Init.NotificationControlActivity;
 import com.hamels.daybydayegg.Login.VIew.ForgetPasswordActivity;
 import com.hamels.daybydayegg.Login.VIew.LoginActivity;
@@ -20,6 +21,7 @@ import com.hamels.daybydayegg.Login.VIew.VerifyCodeActivity;
 import com.hamels.daybydayegg.Main.View.MainActivity;
 
 import static com.hamels.daybydayegg.Constant.Constant.PHONE;
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIL;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIN_INDEX;
 import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MEMBER_CENTER;
 import static com.hamels.daybydayegg.Constant.Constant.TITLE;
@@ -102,6 +104,7 @@ public class IntentUtils {
         Bundle bundle = new Bundle();
         bundle.putString("CUSTOMER_ID", sCustomerID);
         intent.putExtras(bundle);
+
         if (needClearStack) {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.putExtra(MainActivity.TAG, true);

@@ -140,6 +140,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
                 if(mainindexPresenter.getUserLogin()) {
                     ((MainActivity) getActivity()).addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
                 }else{
+                    EOrderApplication.REQUEST_PAGE = REQUEST_MAIN_INDEX;
                     ((MainActivity) getActivity()).intentToLogin(REQUEST_MAIN_INDEX);
                 }
             }
@@ -153,6 +154,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
                 if(mainindexPresenter.getUserLogin()) {
                     ((MainActivity) getActivity()).addFragment(MemberPointFragment.getInstance());
                 }else{
+                    EOrderApplication.REQUEST_PAGE = REQUEST_MAIN_INDEX;
                     ((MainActivity) getActivity()).intentToLogin(REQUEST_MAIN_INDEX);
                 }
             }
