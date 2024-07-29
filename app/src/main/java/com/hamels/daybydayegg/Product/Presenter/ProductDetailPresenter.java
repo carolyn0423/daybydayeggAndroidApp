@@ -2,6 +2,7 @@ package com.hamels.daybydayegg.Product.Presenter;
 
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BasePresenter;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Product.Contract.ProductDetailContract;
 import com.hamels.daybydayegg.Repository.Model.Product;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
@@ -49,6 +50,7 @@ public class ProductDetailPresenter extends BasePresenter<ProductDetailContract.
                         });
             }
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_PRODUCT_DETAIL;
             view.intentToLogin(REQUEST_PRODUCT_DETAIL);
         }
     }

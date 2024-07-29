@@ -38,6 +38,8 @@ public class EOrderApplication extends Application {
     public static String mailBadgeCount = "0";
     //  客服
     public static String messageBadgeCount = "0";
+    //  登入前頁面
+    public static int REQUEST_PAGE = 0;
 
     public static String DeliverCodeUid = "";
     public static String OrderListTag = "";

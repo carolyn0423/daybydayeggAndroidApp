@@ -1,5 +1,7 @@
 package com.hamels.daybydayegg.Init;
 
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIL;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
@@ -52,7 +54,8 @@ public class NotificationControlActivity extends BaseActivity implements View.On
             IntentUtils.intentToSystemPermissionSetting(this);
 
         }else if (id == R.id.btn_close){
-            IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, false);
+            EOrderApplication.REQUEST_PAGE = REQUEST_MAIL;
+            IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID, false, false);
             finish();
         }
     }

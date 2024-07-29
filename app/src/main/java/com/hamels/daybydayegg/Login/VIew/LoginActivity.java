@@ -1,5 +1,7 @@
 package com.hamels.daybydayegg.Login.VIew;
 
+import static com.hamels.daybydayegg.Constant.Constant.REQUEST_MAIN_INDEX;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -211,7 +213,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     @Override
     public void onBackPressed() {
-        IntentUtils.intentToMain(this, false, EOrderApplication.CUSTOMER_ID,false, true);
+        super.onBackPressed();
+        EOrderApplication.REQUEST_PAGE = REQUEST_MAIN_INDEX;
+        IntentUtils.intentToMain(this, false, EOrderApplication.CUSTOMER_ID, false, true);
         setResult(RESULT_OK);
         finish();
     }
@@ -227,24 +231,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
             }
             else
             {
-//                Message msg = new Message();
-//                msg.what = 1;
-//                msg.obj = result.getContents();
-//                uiHandler.sendMessage(msg);
-
-                //Toast.makeText(this, "掃描結果 : " + result.getContents(), Toast.LENGTH_SHORT).show();
                 getCheckCustomerNo(result.getContents());
-
-//                new AlertDialog.Builder(this).setTitle(R.string.dialog_hint).setMessage("掃描結果 : " + result.getContents())
-//                        .setPositiveButton("將此商家加入最愛", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                loginPresenter.checkCustomerNo(result.getContents());
-//
-//                                intentToLogin();
-//                            }
-//                        })
-//                        .show();
             }
         }
         else
@@ -449,7 +436,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     public void setResultOkFinishActivity() {
         //  防止登入後自動跳轉到交易明細頁
         getRepositoryManager(this).savePaySchemeOrderData("");
-        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID,false, true);
+        IntentUtils.intentToMain(this, true, EOrderApplication.CUSTOMER_ID, false, true);
         setResult(RESULT_OK);
         finish();
     }

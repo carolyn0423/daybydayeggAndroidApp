@@ -5,6 +5,7 @@ import android.util.Log;
 import com.hamels.daybydayegg.Base.BaseContract;
 import com.hamels.daybydayegg.Base.BasePresenter;
 import com.hamels.daybydayegg.Business.Contract.BusinessProductDetailContract;
+import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.Repository.Model.Product;
 import com.hamels.daybydayegg.Repository.RepositoryManager;
 
@@ -52,6 +53,7 @@ public class BusinessProductDetailPresenter extends BasePresenter<BusinessProduc
                         });
             }
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_PRODUCT_DETAIL;
             view.intentToLogin(REQUEST_PRODUCT_DETAIL);
         }
     }

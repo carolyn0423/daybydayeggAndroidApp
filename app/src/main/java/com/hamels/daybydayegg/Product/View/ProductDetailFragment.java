@@ -537,7 +537,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
 
             }
         });
-
+        isSoldout = false;
         switch (isETicket){
             case "N":
                 if(sSoldoutFlag.equals("P") || sSoldoutFlag.equals("Y")){
@@ -560,6 +560,7 @@ public class ProductDetailFragment extends BaseFragment implements ProductDetail
             //  設定按鍵背景為灰色
             layout_shopping.setBackgroundResource(R.drawable.btn_black_rounded_bg);
         }else{
+            tv_water_mask.setVisibility(View.GONE);
             layout_shopping.setEnabled(true);
             layout_shopping.setBackgroundResource(R.drawable.btn_blue_rounded_bg);
         }

@@ -102,6 +102,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         if (getUserLogin()) {
             view.addFragment(MemberCardFragment.getInstance());
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_MEMBER_CARD;
             view.intentToLogin(REQUEST_MEMBER_CARD);
         }
     }
@@ -111,6 +112,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         if (getUserLogin()) {
             view.addFragment(WebViewFragment.getInstance(R.string.coupon, EOrderApplication.sApiUrl + EOrderApplication.WEBVIEW_COUPONS_URL));
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_COUPON;
             view.intentToLogin(REQUEST_COUPON);
         }
     }
@@ -120,6 +122,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         if (getUserLogin()) {
             view.addFragment(DrawLotsFragment.getInstance());
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_LOT_LIST;
             view.intentToLogin(REQUEST_LOT_LIST);
         }
     }
@@ -129,6 +132,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         if (getUserLogin()) {
             view.addFragment(BusinessFragment.getInstance());
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_BUSINESS;
             view.intentToLogin(REQUEST_BUSINESS);
         }
     }
@@ -148,6 +152,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         if (getUserLogin()) {
             view.addFragment(MemberCenterFragment.getInstance());
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_MEMBER_CENTER;
             view.intentToLogin(REQUEST_MEMBER_CENTER);
         }
     }
@@ -157,6 +162,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         if (getUserLogin()) {
             view.addFragment(ShoppingCartFragment.getInstance(orderType));
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_SHOPPING_CART;
             view.intentToLogin(REQUEST_SHOPPING_CART);
         }
     }
@@ -170,6 +176,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
             view.addFragment(MailFileFragment.getInstance());
             //view.addFragment(MainIndexFragment.getInstance());
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_MAIL;
             view.intentToLogin(REQUEST_MAIL);
         }
     }
@@ -187,6 +194,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                 view.addFragment(MessageListFragment.getInstance(repositoryManager.getUserID(), repositoryManager.getMobile(), "N"));
             }
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_MESSAGE;
             view.intentToLogin(REQUEST_MESSAGE);
         }
     }
@@ -197,6 +205,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
             DonateFragment.getInstance().type_idMode("0");
             view.addFragment(DonateFragment.getInstance());
         } else {
+            EOrderApplication.REQUEST_PAGE = REQUEST_DONATE;
             view.intentToLogin(REQUEST_DONATE);
         }
     }
