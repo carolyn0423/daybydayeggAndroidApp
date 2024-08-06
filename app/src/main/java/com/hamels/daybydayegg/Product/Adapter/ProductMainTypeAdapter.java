@@ -1,6 +1,8 @@
 package com.hamels.daybydayegg.Product.Adapter;
 
 import androidx.annotation.NonNull;
+
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +24,11 @@ public class ProductMainTypeAdapter extends BaseAdapter<ProductMainTypeHolder> {
 
     private List<ProductMainType> mainTypeleft = new ArrayList<>();
     private List<ProductMainType> mainTyperight = new ArrayList<>();
-
+    private Context context;
     String isETicket = "";
 
-    public ProductMainTypeAdapter(ProductMainTypeContract.Presenter presenter, String isETicket) {
+    public ProductMainTypeAdapter(Context context, ProductMainTypeContract.Presenter presenter, String isETicket) {
+        this.context = context;
         this.presenter = presenter;
         this.isETicket = isETicket;
     }
@@ -34,8 +37,8 @@ public class ProductMainTypeAdapter extends BaseAdapter<ProductMainTypeHolder> {
     @Override
     public ProductMainTypeHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Log.e(TAG,"onCreateViewHolder");
-        View viewProduct= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_product_main_type, viewGroup, false);
-        return new ProductMainTypeHolder(viewProduct);
+        View viewProduct = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_product_main_type, viewGroup, false);
+        return new ProductMainTypeHolder(viewProduct, context);
     }
 
     @Override

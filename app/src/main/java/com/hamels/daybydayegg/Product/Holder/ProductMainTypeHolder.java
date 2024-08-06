@@ -3,6 +3,8 @@ package com.hamels.daybydayegg.Product.Holder;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,11 +24,13 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
     public ImageView img_productMainType_left , img_productMainType_right;
     public ImageView img_merchant_left , img_merchant_right;
     public TextView tv_productMainType_name_left, tv_productMainType_name_right;
-
+    private Context context;
     public ConstraintLayout constraintLayout_right, constraintLayout_left;
 
-    public ProductMainTypeHolder(@NonNull View itemView) {
+    public ProductMainTypeHolder(@NonNull View itemView, Context context) {
         super(itemView);
+
+        this.context = context;
 
         img_productMainType_right = itemView.findViewById(R.id.img_productMainType_right);
         img_productMainType_left = itemView.findViewById(R.id.img_productMainType_left);
@@ -52,7 +56,9 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
                 .transform(new RoundedCorners(20));
 
         String sPictureUrl = mainTypeleft.getPicture_url() == null || mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
+        if(context != null) {
+            Glide.with(context).load(sImageUrl + sPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
+        }
 
         img_productMainType_left.setTag(R.id.img_productMainType_left, mainTypeleft.getId());
         constraintLayout_left.setTag(R.id.constraintLayout_left, mainTypeleft.getId());
@@ -73,9 +79,10 @@ public class ProductMainTypeHolder extends RecyclerView.ViewHolder {
 
         String sLeftPictureUrl = mainTypeleft.getPicture_url() == null || mainTypeleft.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTypeleft.getPicture_url();
         String sRightPictureUrl = mainTyperight.getPicture_url() == null || mainTyperight.getPicture_url().equals("") ? EOrderApplication.DEFAULT_PICTURE_URL : mainTyperight.getPicture_url();
-
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sLeftPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
-        Glide.with(ProductMainTypeFragment.getInstance()).load(sImageUrl + sRightPictureUrl).apply(requestOptions_right).into(img_productMainType_right);
+        if(context != null) {
+            Glide.with(context).load(sImageUrl + sLeftPictureUrl).apply(requestOptions_left).into(img_productMainType_left);
+            Glide.with(context).load(sImageUrl + sRightPictureUrl).apply(requestOptions_right).into(img_productMainType_right);
+        }
 
         img_productMainType_left.setTag(R.id.img_productMainType_left, mainTypeleft.getId());
         img_productMainType_right.setTag(R.id.img_productMainType_right, mainTyperight.getId());

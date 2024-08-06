@@ -87,7 +87,7 @@ public class ProductMainTypeFragment extends BaseFragment implements ProductMain
         MemberRepository.getInstance();
 
         productMainTypePresenter = new ProductMainTypePresenter(this, getRepositoryManager(getContext()));
-        productMainTypeAdapter = new ProductMainTypeAdapter(productMainTypePresenter, isETicket);
+        productMainTypeAdapter = new ProductMainTypeAdapter(requireContext(), productMainTypePresenter, isETicket);
 
         String sLocationID = productMainTypePresenter.getFragmentMainType("LOCATIONID");
 

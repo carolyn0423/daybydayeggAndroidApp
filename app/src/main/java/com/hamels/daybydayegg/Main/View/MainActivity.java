@@ -563,11 +563,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 case R.id.item_home:
                     changeNavigationColor(item.getItemId());
                     setMainIndexMailUnreadVisibility(true);
-                    MainIndexFragment fragment = new MainIndexFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame, fragment);
-                    transaction.commit();
-                    addFragment(MainIndexFragment.getInstance());
+                    GetMainIndexFragment();
                     return true;
                 case R.id.item_egg:
                     changeNavigationColor(item.getItemId());
@@ -911,11 +907,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_MAIN_INDEX:
-                MainIndexFragment fragment = new MainIndexFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame, fragment);
-                transaction.commit();
-                addFragment(MainIndexFragment.getInstance());
+                GetMainIndexFragment();
                 break;
             case REQUEST_MEMBER_CARD:
                 changeTabFragment(MemberCardFragment.getInstance());
@@ -1282,8 +1274,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             goProductPage("Y");
         }
         @JavascriptInterface
-        public void jsCall_goHomePage() {
-            changeTabFragment(MainIndexFragment.getInstance());
+        public void jsCall_goHomePage()  {
+            GetMainIndexFragment();
+            //changeTabFragment(MainIndexFragment.getInstance());
         }
         @JavascriptInterface
         public void jsCall_goTicketPage() {
@@ -1384,7 +1377,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 changeTabFragment(MemberCenterFragment.getInstance());
                 webView = null;
             } else if(currentPage.indexOf("ebook.html") > 0){
-                changeTabFragment(MainIndexFragment.getInstance());
+                GetMainIndexFragment();
+                //changeTabFragment(MainIndexFragment.getInstance());
             } else if(currentPage.indexOf("shoppingcart_list_product.html") > 0){
                 mainPresenter.GetShopCartLocationQuantity();
             } else if(currentPage.indexOf("AioCheckOut") > 0 || sUurrentURL.indexOf("ecpay.com.tw") > 0) {
@@ -1414,8 +1408,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
                 } else {
                     // 其他就顯示首頁
-                    changeNavigationColor(R.id.home);
-                    changeTabFragment(MainIndexFragment.getInstance());
+                    GetMainIndexFragment();
+                    //changeTabFragment(MainIndexFragment.getInstance());
                 }
             } else {
                 // 點推播通知進來的
@@ -1423,8 +1417,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         && ( getSupportFragmentManager().getFragments().size() == 0
                         || getSupportFragmentManager().getFragments().get(0).equals(MailFileFragment.getInstance()))
                 ) {
-                    changeNavigationColor(R.id.home);
-                    changeTabFragment(MainIndexFragment.getInstance());
+                    GetMainIndexFragment();
+                    //changeTabFragment(MainIndexFragment.getInstance());
                 } else {
                     Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
 
@@ -1445,15 +1439,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }else if(currentFragment instanceof ProductFragment){               //  商品列表
                         addFragment(ProductMainTypeFragment.getInstance());
                     }else if(
+                            currentFragment instanceof MemberCenterFragment ||
                             currentFragment instanceof ProductMainTypeFragment ||
                             currentFragment instanceof DonateFragment ||
                             currentFragment instanceof MachineFragment){
-                        changeTabFragment(MainIndexFragment.getInstance());
+                        GetMainIndexFragment();
+                        //changeTabFragment(MainIndexFragment.getInstance());
                     }else if(currentFragment instanceof MachineMapFragment){
                         if(MachineMapFragment.getInstance().getPopupWindow() != null) {
                             MachineMapFragment.getInstance().getPopupWindow().dismiss();
                         }
-                        changeTabFragment(MainIndexFragment.getInstance());
+                        GetMainIndexFragment();
+                        //changeTabFragment(MainIndexFragment.getInstance());
                     }else if(currentFragment instanceof MemberInfoChangeFragment
                             || currentFragment instanceof PasswordChangeFragment
                             || currentFragment instanceof AboutFragment
@@ -1474,6 +1471,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }else{
             changeTabFragment(ShoppingCartFragment.getInstance());
         }
+    }
+
+    public void GetMainIndexFragment(){
+        changeNavigationColor(R.id.home);
+        MainIndexFragment fragment = new MainIndexFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, fragment);
+        transaction.commit();
+        addFragment(MainIndexFragment.getInstance());
     }
 
     public void goMemberCard() {
