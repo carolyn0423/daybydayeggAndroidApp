@@ -348,7 +348,7 @@
                             android:id="@+id/txt_shop2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="商城"
+                            android:text="福利站"
                             android:textSize="14dp"
                             android:layout_marginTop="5dp"
                             android:gravity="center"

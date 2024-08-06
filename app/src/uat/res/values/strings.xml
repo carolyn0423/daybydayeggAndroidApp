@@ -154,7 +154,7 @@
     <!-- bottomNavigation -->
     <string name="tab_index">首頁</string>
     <string name="tab_news">最新消息</string>
-    <string name="tab_shop">商城</string>
+    <string name="tab_shop">福利站</string>
     <string name="tab_ticket">買好蛋</string>
     <string name="tab_lot">抽獎抽籤</string>
     <string name="tab_member_card">會員卡資料</string>

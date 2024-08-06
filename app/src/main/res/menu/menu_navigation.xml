@@ -27,7 +27,7 @@
         android:textSize="10dp"
         android:id="@+id/item_shop2"
         android:icon="@drawable/bag_line"
-        android:title="商城" />
+        android:title="福利站" />
 
     <item
         style="@style/fontRegularTw.GreyDark"

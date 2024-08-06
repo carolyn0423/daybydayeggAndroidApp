@@ -1,18 +1,20 @@
 {
-  "version": 2,
+  "version": 3,
   "artifactType": {
     "type": "APK",
     "kind": "Directory"
   },
   "applicationId": "com.hamels.daybydayegg.uat",
-  "variantName": "processUatDebugResources",
+  "variantName": "uatDebug",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
+      "attributes": [],
       "versionCode": 5,
       "versionName": "5.0-uat",
       "outputFile": "com.hamels.daybydayegg.uat-5.0-uat.apk"
     }
-  ]
+  ],
+  "elementType": "File"
 }
