@@ -8,8 +8,8 @@ android {
     productFlavors {
         prod {
             dimension "version"
-            versionCode 15
-            versionName "15.0"
+            versionCode 17
+            versionName "17.0"
             // 其他配置
         }
         uat {
