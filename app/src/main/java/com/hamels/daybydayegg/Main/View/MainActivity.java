@@ -78,6 +78,7 @@ import com.hamels.daybydayegg.Donate.View.DonateFragment;
 import com.hamels.daybydayegg.EOrderApplication;
 import com.hamels.daybydayegg.MemberCenter.View.AboutFragment;
 import com.hamels.daybydayegg.MemberCenter.View.AdminMessageFragment;
+import com.hamels.daybydayegg.MemberCenter.View.MailDetailFragment;
 import com.hamels.daybydayegg.MemberCenter.View.MemberInfoChangeFragment;
 import com.hamels.daybydayegg.MemberCenter.View.PasswordChangeFragment;
 import com.hamels.daybydayegg.Product.View.ProductDetailDescFragment;
@@ -1454,9 +1455,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }else if(currentFragment instanceof MemberInfoChangeFragment
                             || currentFragment instanceof PasswordChangeFragment
                             || currentFragment instanceof AboutFragment
-                            || currentFragment instanceof TransRecordFragment){
+                            || currentFragment instanceof TransRecordFragment) {
                         addFragment(MemberCenterFragment.getInstance());
-                    } else{
+                    } else if(currentFragment instanceof MailDetailFragment ){
+                        addFragment(MailFileFragment.getInstance());
+                    } else {
                         super.onBackPressed();
                     }
                 }

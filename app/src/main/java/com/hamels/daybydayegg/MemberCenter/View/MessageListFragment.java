@@ -166,6 +166,10 @@ public class MessageListFragment extends BaseFragment implements MessageListCont
 //            iMessageCount = messageListAdapter.getItemCount();
 //            recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
 //        }
-        recyclerView.smoothScrollToPosition(messageListAdapter.getItemCount() - 1);
+
+        int itemCount = messageListAdapter.getItemCount();
+        if (itemCount > 0) {
+            recyclerView.smoothScrollToPosition(itemCount - 1);
+        }
     }
 }
