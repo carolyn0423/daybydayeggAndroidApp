@@ -93,7 +93,7 @@ public class WebViewFragment extends BaseFragment {
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
+                new AlertDialog.Builder(requireActivity())
                         .setMessage(message)
                         .setPositiveButton(android.R.string.ok, null)
                         .show();

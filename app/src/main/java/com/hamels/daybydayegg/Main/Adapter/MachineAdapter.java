@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hamels.daybydayegg.Base.BaseAdapter;
 import com.hamels.daybydayegg.Main.Contract.MachineContract;
@@ -36,42 +37,81 @@ public class MachineAdapter extends BaseAdapter<MachineHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MachineHolder machineHolder, final int position) {
+    public void onBindViewHolder(@NonNull final MachineHolder machineHolder, int position) {
         machineHolder.setStore(machines.get(position));
 
-        if(presenter.getUserLogin()) {
-            if (machines.get(position).geOftenID().equals("")) {
+        if (presenter.getUserLogin()) {
+            if ("".equals(machines.get(position).geOftenID())) {
                 machineHolder.tv_favorite.setImageResource(R.drawable.favoritesgr);
             } else {
                 machineHolder.tv_favorite.setImageResource(R.drawable.favorites_1);
             }
-
             machineHolder.tv_favorite.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             machineHolder.tv_favorite.setVisibility(View.GONE);
         }
 
         machineHolder.tv_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uid = "";
-                String machine_id = machines.get(position).getMachineID();
+                int pos = machineHolder.getAdapterPosition();
+                if (pos == RecyclerView.NO_POSITION) return;
 
-                if (!machines.get(position).geOftenID().equals("")) {
-                    uid = machines.get(position).geOftenID();
-                }
-
-                presenter.setStoreOften(machine_id, uid);
+                Machine machine = machines.get(pos);
+                String uid = "".equals(machine.geOftenID()) ? "" : machine.geOftenID();
+                presenter.setStoreOften(machine.getMachineID(), uid);
             }
         });
 
         machineHolder.tv_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                view.intentToGoogleMap(machines.get(position).getAddress());
+                int pos = machineHolder.getAdapterPosition();
+                if (pos == RecyclerView.NO_POSITION) return;
+
+                Machine machine = machines.get(pos);
+                view.intentToGoogleMap(machine.getAddress());
             }
         });
     }
+
+//    @Override
+//    public void onBindViewHolder(@NonNull final MachineHolder machineHolder, final int position) {
+//        machineHolder.setStore(machines.get(position));
+//
+//        if(presenter.getUserLogin()) {
+//            if (machines.get(position).geOftenID().equals("")) {
+//                machineHolder.tv_favorite.setImageResource(R.drawable.favoritesgr);
+//            } else {
+//                machineHolder.tv_favorite.setImageResource(R.drawable.favorites_1);
+//            }
+//
+//            machineHolder.tv_favorite.setVisibility(View.VISIBLE);
+//        }else{
+//            machineHolder.tv_favorite.setVisibility(View.GONE);
+//        }
+//
+//        machineHolder.tv_favorite.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String uid = "";
+//                String machine_id = machines.get(position).getMachineID();
+//
+//                if (!machines.get(position).geOftenID().equals("")) {
+//                    uid = machines.get(position).geOftenID();
+//                }
+//
+//                presenter.setStoreOften(machine_id, uid);
+//            }
+//        });
+//
+//        machineHolder.tv_address.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                view.intentToGoogleMap(machines.get(position).getAddress());
+//            }
+//        });
+//    }
 
     @Override
     public int getItemCount() {

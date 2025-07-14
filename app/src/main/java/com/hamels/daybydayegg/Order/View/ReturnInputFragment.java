@@ -74,7 +74,7 @@ public class ReturnInputFragment extends BaseFragment implements ReturnInputCont
             }
         }
 
-        ((MainActivity) Objects.requireNonNull(getActivity())).setAppTitle(status == STATUS_RETURN ? R.string.return_apply_title : R.string.exchange_apply_title);
+        ((MainActivity) requireActivity()).setAppTitle(status == STATUS_RETURN ? R.string.return_apply_title : R.string.exchange_apply_title);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvName = view.findViewById(R.id.tv_name);
@@ -107,7 +107,7 @@ public class ReturnInputFragment extends BaseFragment implements ReturnInputCont
 
     private void addSpanColor(TextView textView) {
         SpannableString spannableString = new SpannableString(textView.getText().toString());
-        spannableString.setSpan(new ForegroundColorSpan(Objects.requireNonNull(getContext()).getResources().getColor(R.color.redHint)),
+        spannableString.setSpan(new ForegroundColorSpan(requireContext().getResources().getColor(R.color.redHint)),
                 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(spannableString);
     }
@@ -119,7 +119,7 @@ public class ReturnInputFragment extends BaseFragment implements ReturnInputCont
 
     @Override
     public void showAlert(String message) {
-        new AlertDialog.Builder(Objects.requireNonNull(getContext())).setTitle(R.string.dialog_hint).setMessage(message)
+        new AlertDialog.Builder(requireActivity()).setTitle(R.string.dialog_hint).setMessage(message)
                 .setPositiveButton(android.R.string.ok, null).show();
     }
 
@@ -130,7 +130,7 @@ public class ReturnInputFragment extends BaseFragment implements ReturnInputCont
         }
 
         showAlert(message);
-        Objects.requireNonNull(getActivity()).onBackPressed();
+        requireActivity().onBackPressed();
     }
 
     public void setFinishCallback(BaseContract.ValueCallback<Boolean> finishCallback) {

@@ -1,6 +1,8 @@
 package com.hamels.daybydayegg.Login.Adapter;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,42 +42,53 @@ public class CustomerListAdapter extends BaseAdapter<CustomerListHolder> {
 
         return new CustomerListHolder(view);
     }
-    public void onBindViewHolder(@NonNull CustomerListHolder customerListHolder,  int position) {
 
-        if(sMode.equals(("isSelectLoveCustomer"))){
-            //  選擇商家
+    @Override
+    public void onBindViewHolder(@NonNull CustomerListHolder customerListHolder, int position) {
+        int customerId = Integer.parseInt(customers.get(position).getCustomerID());
+        String customerName = customers.get(position).getCustomerName();
+        String apiUrl = customers.get(position).getApiUrl();
+
+        if (sMode.equals("isSelectLoveCustomer")) {
+            // 選擇商家
             customerListHolder.tvCustomerSelect.setVisibility(View.VISIBLE);
             customerListHolder.tvCustomerFavorite.setVisibility(View.GONE);
 
             customerListHolder.tvCustomerSelect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int pos = customerListHolder.getAdapterPosition();
+                    if (pos == RecyclerView.NO_POSITION) return;
 
+                    Customer customer = customers.get(pos);
                     EOrderApplication.isLogin = false;
-                    //EOrderApplication.sApiUel = customers.get(position).getApiUrl();
-
-                    presenter.goCustomer(customers.get(position).getCustomerID(), customers.get(position).getCustomerName(), customers.get(position).getApiUrl());
+                    presenter.goCustomer(customer.getCustomerID(), customer.getCustomerName(), customer.getApiUrl());
                 }
             });
+
         } else {
-            //  將商家加入最愛
+            // 將商家加入最愛
             customerListHolder.tvCustomerSelect.setVisibility(View.GONE);
             customerListHolder.tvCustomerFavorite.setVisibility(View.VISIBLE);
 
-            if(sLoveCustomer.indexOf("|" + customers.get(position).getCustomerID() + "|") == -1){
+            if (sLoveCustomer.indexOf("|" + customerId + "|") == -1) {
                 customerListHolder.tvCustomerFavorite.setImageResource(R.drawable.favoritesgr);
-            }else{
+            } else {
                 customerListHolder.tvCustomerFavorite.setImageResource(R.drawable.favorites_1);
             }
 
             customerListHolder.tvCustomerFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Boolean isLove = presenter.saveLoveCustomerID(customers.get(position).getCustomerID());
+                    int pos = customerListHolder.getAdapterPosition();
+                    if (pos == RecyclerView.NO_POSITION) return;
 
-                    if(isLove){
+                    int id = Integer.parseInt(customers.get(pos).getCustomerID());
+                    Boolean isLove = presenter.saveLoveCustomerID(String.valueOf(id));
+
+                    if (isLove) {
                         customerListHolder.tvCustomerFavorite.setImageResource(R.drawable.favorites_1);
-                    }else{
+                    } else {
                         customerListHolder.tvCustomerFavorite.setImageResource(R.drawable.favoritesgr);
                     }
                 }
@@ -84,6 +97,51 @@ public class CustomerListAdapter extends BaseAdapter<CustomerListHolder> {
 
         customerListHolder.setCustomer(customers.get(position), sLoveCustomer);
     }
+
+//    public void onBindViewHolder(@NonNull CustomerListHolder customerListHolder,  int position) {
+//
+//        if(sMode.equals(("isSelectLoveCustomer"))){
+//            //  選擇商家
+//            customerListHolder.tvCustomerSelect.setVisibility(View.VISIBLE);
+//            customerListHolder.tvCustomerFavorite.setVisibility(View.GONE);
+//
+//            customerListHolder.tvCustomerSelect.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    EOrderApplication.isLogin = false;
+//                    //EOrderApplication.sApiUel = customers.get(position).getApiUrl();
+//
+//                    presenter.goCustomer(customers.get(position).getCustomerID(), customers.get(position).getCustomerName(), customers.get(position).getApiUrl());
+//                }
+//            });
+//        } else {
+//            //  將商家加入最愛
+//            customerListHolder.tvCustomerSelect.setVisibility(View.GONE);
+//            customerListHolder.tvCustomerFavorite.setVisibility(View.VISIBLE);
+//
+//            if(sLoveCustomer.indexOf("|" + customers.get(position).getCustomerID() + "|") == -1){
+//                customerListHolder.tvCustomerFavorite.setImageResource(R.drawable.favoritesgr);
+//            }else{
+//                customerListHolder.tvCustomerFavorite.setImageResource(R.drawable.favorites_1);
+//            }
+//
+//            customerListHolder.tvCustomerFavorite.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Boolean isLove = presenter.saveLoveCustomerID(customers.get(position).getCustomerID());
+//
+//                    if(isLove){
+//                        customerListHolder.tvCustomerFavorite.setImageResource(R.drawable.favorites_1);
+//                    }else{
+//                        customerListHolder.tvCustomerFavorite.setImageResource(R.drawable.favoritesgr);
+//                    }
+//                }
+//            });
+//        }
+//
+//        customerListHolder.setCustomer(customers.get(position), sLoveCustomer);
+//    }
 
     @Override
     public int getItemCount() {

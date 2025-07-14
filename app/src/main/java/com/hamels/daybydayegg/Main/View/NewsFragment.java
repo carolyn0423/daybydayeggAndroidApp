@@ -80,6 +80,6 @@ public class NewsFragment extends BaseFragment implements NewsContract.View {
     @Override
     public void onDetach() {
         super.onDetach();
-        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
+        ((MainActivity) requireActivity()).detachWebView();
     }
 }

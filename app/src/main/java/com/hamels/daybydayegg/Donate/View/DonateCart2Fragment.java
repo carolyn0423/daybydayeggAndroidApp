@@ -279,8 +279,11 @@ public class DonateCart2Fragment extends BaseFragment implements DonateCartContr
                         cursor = contentResolver.query(uri, new String[]{"display_name", "data1"}, null, null, null);
                     }
                     while (cursor.moveToNext()) {
-                        phoneNum = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        edit_phone.setText(phoneNum);
+                        int columnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                        if (columnIndex >= 0) {
+                            phoneNum = cursor.getString(columnIndex);
+                            edit_phone.setText(phoneNum);
+                        }
                     }
                 }
                 break;

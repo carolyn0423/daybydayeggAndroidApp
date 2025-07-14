@@ -91,7 +91,7 @@ public class TransRecordFragment extends BaseFragment implements TransRecordCont
     public void addReturnFragment(Order order, int status) {
         ReturnListFragment fragment = ReturnListFragment.getInstance(order, status);
         fragment.setTransRecordTabCallback(this);
-        ((MainActivity) Objects.requireNonNull(getActivity())).addFragment(fragment);
+        ((MainActivity) requireActivity()).addFragment(fragment);
     }
 
     @Override

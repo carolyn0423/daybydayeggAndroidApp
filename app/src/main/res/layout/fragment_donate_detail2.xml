@@ -199,7 +199,10 @@
                             android:paddingHorizontal="20dp"
                             android:text="兌換數量"
                             android:textColor="#595757"
-                            android:textSize="16dp" />
+                            android:textSize="16dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="115dp"

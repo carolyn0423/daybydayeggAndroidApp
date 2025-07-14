@@ -83,6 +83,6 @@ public class FaqFragment extends BaseFragment implements FaqContract.View{
     @Override
     public void onDetach() {
         super.onDetach();
-        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
+        ((MainActivity) requireActivity()).detachWebView();
     }
 }

@@ -1,6 +1,8 @@
 package com.hamels.daybydayegg.Main.Adapter;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,50 +40,10 @@ public class CustomerAdapter extends BaseAdapter<CustomerHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CustomerHolder customerHolder,  int position) {
+    public void onBindViewHolder(@NonNull final CustomerHolder customerHolder, int position) {
         customerHolder.setCustomer(customers.get(position));
 
-        switch (sSourceActive){
-//            case "isSelectLoveCustomer":
-//                //  選擇商家 (從最愛)
-//                customerHolder.tvCustomerSelect.setVisibility(View.VISIBLE);
-//                customerHolder.tvCustomerFavorite.setVisibility(View.GONE);
-//
-//                presenter.saveSourceActive("");
-//
-//                customerHolder.tvCustomerSelect.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        presenter.goCustomer(customers.get(position).getCustomerID(), customers.get(position).getCustomerName(), customers.get(position).getApiUrl());
-//                    }
-//                });
-//                break;
-//            case "isSetLove":
-//                //  選擇商家
-//                customerHolder.tvCustomerSelect.setVisibility(View.VISIBLE);
-//                customerHolder.tvCustomerFavorite.setVisibility(View.VISIBLE);
-//
-//                presenter.saveSourceActive("");
-//
-//                if(sLoveCustomer.indexOf("|" + customers.get(position).getCustomerID() + "|") == -1){
-//                    customerHolder.tvCustomerFavorite.setImageResource(R.drawable.favoritesgr);
-//                }else{
-//                    customerHolder.tvCustomerFavorite.setImageResource(R.drawable.favorites_1);
-//                }
-//
-//                customerHolder.tvCustomerFavorite.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Boolean isLove = presenter.saveLoveCustomerID(customers.get(position).getCustomerID());
-//
-//                        if(isLove){
-//                            customerHolder.tvCustomerFavorite.setImageResource(R.drawable.favorites_1);
-//                        }else{
-//                            customerHolder.tvCustomerFavorite.setImageResource(R.drawable.favoritesgr);
-//                        }
-//                    }
-//                });
-//                break;
+        switch (sSourceActive) {
             case "PRODUCT_WELCOME":
             case "ETICKET_WELCOME":
             case "LOCATION_WELCOME":
@@ -91,27 +53,29 @@ public class CustomerAdapter extends BaseAdapter<CustomerHolder> {
                 customerHolder.clItemCustomer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        switch (sSourceActive){
+                        int pos = customerHolder.getAdapterPosition();
+                        if (pos == RecyclerView.NO_POSITION) return;
+
+                        switch (sSourceActive) {
                             case "PRODUCT_WELCOME":
                             case "LOCATION_WELCOME":
-                                // 未登入 -> 外帶外送 && 門市查詢
-                                presenter.saveCustomerID(customers.get(position).getCustomerID());
-                                presenter.saveApiUrl(customers.get(position).getApiUrl());
-                                presenter.goLocationList(customers.get(position).getCustomerID());
+                                presenter.saveCustomerID(customers.get(pos).getCustomerID());
+                                presenter.saveApiUrl(customers.get(pos).getApiUrl());
+                                presenter.goLocationList(customers.get(pos).getCustomerID());
 
-                                EOrderApplication.CUSTOMER_ID = customers.get(position).getCustomerID();
+                                EOrderApplication.CUSTOMER_ID = customers.get(pos).getCustomerID();
                                 EOrderApplication.isLogin = false;
-                                EOrderApplication.sApiUrl = customers.get(position).getApiUrl();
+                                EOrderApplication.sApiUrl = customers.get(pos).getApiUrl();
                                 break;
-                            case "ETICKET_WELCOME":
-                                // 未登入 -> 買提貨卷
-                                presenter.saveCustomerID(customers.get(position).getCustomerID());
-                                presenter.saveApiUrl(customers.get(position).getApiUrl());
-                                presenter.goETicketProductMainType(customers.get(position).getCustomerID());
 
-                                EOrderApplication.CUSTOMER_ID = customers.get(position).getCustomerID();
+                            case "ETICKET_WELCOME":
+                                presenter.saveCustomerID(customers.get(pos).getCustomerID());
+                                presenter.saveApiUrl(customers.get(pos).getApiUrl());
+                                presenter.goETicketProductMainType(customers.get(pos).getCustomerID());
+
+                                EOrderApplication.CUSTOMER_ID = customers.get(pos).getCustomerID();
                                 EOrderApplication.isLogin = false;
-                                EOrderApplication.sApiUrl = customers.get(position).getApiUrl();
+                                EOrderApplication.sApiUrl = customers.get(pos).getApiUrl();
                                 break;
                         }
                     }
@@ -119,6 +83,49 @@ public class CustomerAdapter extends BaseAdapter<CustomerHolder> {
                 break;
         }
     }
+
+//    @Override
+//    public void onBindViewHolder(@NonNull final CustomerHolder customerHolder,  int position) {
+//        customerHolder.setCustomer(customers.get(position));
+//
+//        switch (sSourceActive){
+//            case "PRODUCT_WELCOME":
+//            case "ETICKET_WELCOME":
+//            case "LOCATION_WELCOME":
+//                customerHolder.tvCustomerSelect.setVisibility(View.GONE);
+//                customerHolder.tvCustomerFavorite.setVisibility(View.GONE);
+//
+//                customerHolder.clItemCustomer.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        switch (sSourceActive){
+//                            case "PRODUCT_WELCOME":
+//                            case "LOCATION_WELCOME":
+//                                // 未登入 -> 外帶外送 && 門市查詢
+//                                presenter.saveCustomerID(customers.get(position).getCustomerID());
+//                                presenter.saveApiUrl(customers.get(position).getApiUrl());
+//                                presenter.goLocationList(customers.get(position).getCustomerID());
+//
+//                                EOrderApplication.CUSTOMER_ID = customers.get(position).getCustomerID();
+//                                EOrderApplication.isLogin = false;
+//                                EOrderApplication.sApiUrl = customers.get(position).getApiUrl();
+//                                break;
+//                            case "ETICKET_WELCOME":
+//                                // 未登入 -> 買提貨卷
+//                                presenter.saveCustomerID(customers.get(position).getCustomerID());
+//                                presenter.saveApiUrl(customers.get(position).getApiUrl());
+//                                presenter.goETicketProductMainType(customers.get(position).getCustomerID());
+//
+//                                EOrderApplication.CUSTOMER_ID = customers.get(position).getCustomerID();
+//                                EOrderApplication.isLogin = false;
+//                                EOrderApplication.sApiUrl = customers.get(position).getApiUrl();
+//                                break;
+//                        }
+//                    }
+//                });
+//                break;
+//        }
+//    }
 
     @Override
     public int getItemCount() {

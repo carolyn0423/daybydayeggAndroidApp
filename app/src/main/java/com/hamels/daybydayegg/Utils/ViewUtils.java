@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
@@ -33,20 +34,22 @@ public class ViewUtils {
     }
 
     private static void setDividerColor(NumberPicker picker) {
-        if (picker == null)
-            return;
+        if (picker == null) return;
 
-        final int count = picker.getChildCount();
-        for (int i = 0; i < count; i++) {
-            try {
-                Field dividerField = picker.getClass().getDeclaredField("mSelectionDivider");
-                dividerField.setAccessible(true);
-                ColorDrawable colorDrawable = new ColorDrawable(Color.BLACK);
-                dividerField.set(picker, colorDrawable);
-                picker.invalidate();
-            } catch (Exception e) {
-                Log.w("setDividerColor", e);
-            }
+        // ✅ API 34+ 禁止反射，避免崩潰
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            // Android 15+（API 34 以上）不能改 divider，直接 return
+            Log.w("setDividerColor", "Skipping divider color change on Android 15+");
+            return;
+        }
+
+        try {
+//            Field dividerField = picker.getClass().getDeclaredField("mSelectionDivider");
+//            dividerField.setAccessible(true);
+//            dividerField.set(picker, new ColorDrawable(Color.BLACK));
+            picker.invalidate();
+        } catch (Exception e) {
+            Log.w("setDividerColor", "Failed to set divider color", e);
         }
     }
 

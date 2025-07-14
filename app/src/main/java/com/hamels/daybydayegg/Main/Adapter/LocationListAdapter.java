@@ -2,6 +2,8 @@ package com.hamels.daybydayegg.Main.Adapter;
 
 import android.Manifest;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +38,11 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final LocationListHolder storeListHolder, final int position) {
+    public void onBindViewHolder(@NonNull final LocationListHolder storeListHolder, int position) {
         storeListHolder.setStore(stores.get(position));
 
-        if(presenter.getUserLogin()) {
-            if (stores.get(position).getIsOften().equals("1")) {
+        if (presenter.getUserLogin()) {
+            if ("1".equals(stores.get(position).getIsOften())) {
                 storeListHolder.tv_storefavorite.setImageResource(R.drawable.favorites_1);
             } else {
                 storeListHolder.tv_storefavorite.setImageResource(R.drawable.favoritesgr);
@@ -49,7 +51,7 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
             storeListHolder.btn_storemap.setVisibility(View.GONE);
             storeListHolder.btn_storecall.setVisibility(View.GONE);
             storeListHolder.tv_storefavorite.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             storeListHolder.tv_storefavorite.setVisibility(View.GONE);
             storeListHolder.btn_storemap.setVisibility(View.GONE);
             storeListHolder.btn_storecall.setVisibility(View.GONE);
@@ -58,35 +60,43 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
         storeListHolder.btn_storemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stores.get(position).getEnabled().equals("Y") && stores.get(position).getOnline().equals("Y")) {
-                    view.intentToGoogleMap(stores.get(position).getAddress());
+                int pos = storeListHolder.getAdapterPosition();
+                if (pos == RecyclerView.NO_POSITION) return;
+
+                Store store = stores.get(pos);
+                if ("Y".equals(store.getEnabled()) && "Y".equals(store.getOnline())) {
+                    view.intentToGoogleMap(store.getAddress());
                 }
             }
         });
+
         storeListHolder.btn_storecall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int pos = storeListHolder.getAdapterPosition();
+                if (pos == RecyclerView.NO_POSITION) return;
+
+                Store store = stores.get(pos);
                 view.checkPermission(new BaseContract.ValueCallback<Boolean>() {
                     @Override
                     public void onValueCallback(int task, Boolean type) {
-                        if (type) {
-                            if(stores.get(position).getEnabled().equals("Y") && stores.get(position).getOnline().equals("Y")) {
-                                view.intentToPhoneCall(stores.get(position).getPhone().replace("-", ""));
-                            }
+                        if (type && "Y".equals(store.getEnabled()) && "Y".equals(store.getOnline())) {
+                            view.intentToPhoneCall(store.getPhone().replace("-", ""));
                         }
                     }
                 }, Manifest.permission.CALL_PHONE);
             }
         });
+
         storeListHolder.tv_storefavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String location_id = stores.get(position).getLocationID();;
-                String uid = "";
+                int pos = storeListHolder.getAdapterPosition();
+                if (pos == RecyclerView.NO_POSITION) return;
 
-                if (stores.get(position).getIsOften().equals("1")) {
-                    uid = stores.get(position).getOften_uid();
-                }
+                Store store = stores.get(pos);
+                String location_id = store.getLocationID();
+                String uid = "1".equals(store.getIsOften()) ? store.getOften_uid() : "";
 
                 presenter.setStoreOften(location_id, uid);
             }
@@ -95,12 +105,84 @@ public class LocationListAdapter extends BaseAdapter<LocationListHolder> {
         storeListHolder.clItemStoreList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stores.get(position).getEnabled().equals("Y") && stores.get(position).getOnline().equals("Y")) {
-                    presenter.goProductMainType(stores.get(position).getLocationID());
+                int pos = storeListHolder.getAdapterPosition();
+                if (pos == RecyclerView.NO_POSITION) return;
+
+                Store store = stores.get(pos);
+                if ("Y".equals(store.getEnabled()) && "Y".equals(store.getOnline())) {
+                    presenter.goProductMainType(store.getLocationID());
                 }
             }
         });
     }
+
+
+//    @Override
+//    public void onBindViewHolder(@NonNull final LocationListHolder storeListHolder, final int position) {
+//        storeListHolder.setStore(stores.get(position));
+//
+//        if(presenter.getUserLogin()) {
+//            if (stores.get(position).getIsOften().equals("1")) {
+//                storeListHolder.tv_storefavorite.setImageResource(R.drawable.favorites_1);
+//            } else {
+//                storeListHolder.tv_storefavorite.setImageResource(R.drawable.favoritesgr);
+//            }
+//
+//            storeListHolder.btn_storemap.setVisibility(View.GONE);
+//            storeListHolder.btn_storecall.setVisibility(View.GONE);
+//            storeListHolder.tv_storefavorite.setVisibility(View.VISIBLE);
+//        }else{
+//            storeListHolder.tv_storefavorite.setVisibility(View.GONE);
+//            storeListHolder.btn_storemap.setVisibility(View.GONE);
+//            storeListHolder.btn_storecall.setVisibility(View.GONE);
+//        }
+//
+//        storeListHolder.btn_storemap.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(stores.get(position).getEnabled().equals("Y") && stores.get(position).getOnline().equals("Y")) {
+//                    view.intentToGoogleMap(stores.get(position).getAddress());
+//                }
+//            }
+//        });
+//        storeListHolder.btn_storecall.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                view.checkPermission(new BaseContract.ValueCallback<Boolean>() {
+//                    @Override
+//                    public void onValueCallback(int task, Boolean type) {
+//                        if (type) {
+//                            if(stores.get(position).getEnabled().equals("Y") && stores.get(position).getOnline().equals("Y")) {
+//                                view.intentToPhoneCall(stores.get(position).getPhone().replace("-", ""));
+//                            }
+//                        }
+//                    }
+//                }, Manifest.permission.CALL_PHONE);
+//            }
+//        });
+//        storeListHolder.tv_storefavorite.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String location_id = stores.get(position).getLocationID();;
+//                String uid = "";
+//
+//                if (stores.get(position).getIsOften().equals("1")) {
+//                    uid = stores.get(position).getOften_uid();
+//                }
+//
+//                presenter.setStoreOften(location_id, uid);
+//            }
+//        });
+//
+//        storeListHolder.clItemStoreList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(stores.get(position).getEnabled().equals("Y") && stores.get(position).getOnline().equals("Y")) {
+//                    presenter.goProductMainType(stores.get(position).getLocationID());
+//                }
+//            }
+//        });
+//    }
 
     @Override
     public int getItemCount() {

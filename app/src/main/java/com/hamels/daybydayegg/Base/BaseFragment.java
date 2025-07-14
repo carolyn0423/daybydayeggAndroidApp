@@ -16,79 +16,79 @@ public class BaseFragment extends Fragment implements BaseContract.View {
 
     @Override
     public void setAppToolbar(@IdRes int appToolbarId) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setAppToolbar(appToolbarId);
+        ((BaseActivity) requireActivity()).setAppToolbar(appToolbarId);
     }
 
     @Override
     public void setAppTitle(int resString) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setAppTitle(resString);
+        ((BaseActivity) requireActivity()).setAppTitle(resString);
     }
 
     @Override
     public void setCartBadge(int CartBadgeID, int CartBadgeTicketID) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setCartBadge(CartBadgeID, CartBadgeTicketID);
+        ((BaseActivity) requireActivity()).setCartBadge(CartBadgeID, CartBadgeTicketID);
     }
 
     public void setAppTitleString(String sAppTitle) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setAppTitleString(sAppTitle);
+        ((BaseActivity) requireActivity()).setAppTitleString(sAppTitle);
     }
 
     @Override
     public void setAppBadge() {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setAppBadge();
+        ((BaseActivity) requireActivity()).setAppBadge();
     }
 
     @Override
     public void setAppToolbarVisibility(boolean isVisible) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setAppToolbarVisibility(isVisible);
+        ((BaseActivity) requireActivity()).setAppToolbarVisibility(isVisible);
     }
 
     @Override
     public void setCartBadgeVisibility(boolean isVisible) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setCartBadgeVisibility(isVisible);
+        ((BaseActivity) requireActivity()).setCartBadgeVisibility(isVisible);
     }
 
     @Override
     public void setBackButtonVisibility(boolean isVisible) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setBackButtonVisibility(isVisible);
+        ((BaseActivity) requireActivity()).setBackButtonVisibility(isVisible);
     }
 
     @Override
     public void setMailButtonVisibility(boolean isVisible) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setMailButtonVisibility(isVisible);
+        ((BaseActivity) requireActivity()).setMailButtonVisibility(isVisible);
     }
 
     @Override
     public void setMessageButtonVisibility(boolean isVisible) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setMessageButtonVisibility(isVisible);
+        ((BaseActivity) requireActivity()).setMessageButtonVisibility(isVisible);
     }
 
     @Override
     public void setSortButtonVisibility(boolean isVisible) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).setSortButtonVisibility(isVisible);
+        ((BaseActivity) requireActivity()).setSortButtonVisibility(isVisible);
     }
 
     @Override
     public void showToast(String message) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).showToast(message);
+        ((BaseActivity) requireActivity()).showToast(message);
     }
 
     @Override
     public void checkPermission(BaseContract.ValueCallback<Boolean> callback, String... permission) {
-        ((BaseActivity) Objects.requireNonNull(getActivity())).checkPermission(callback, permission);
+        ((BaseActivity) requireActivity()).checkPermission(callback, permission);
     }
 
     @Override
     public void showLoadingDialog() {
         if (isAdded()) {
-            ((BaseActivity) Objects.requireNonNull(getActivity())).showLoadingDialog();
+            ((BaseActivity) requireActivity()).showLoadingDialog();
         }
     }
 
     @Override
     public void hideLoadingDialog() {
         if (isAdded()) {
-            ((BaseActivity) Objects.requireNonNull(getActivity())).hideLoadingDialog();
+            ((BaseActivity) requireActivity()).hideLoadingDialog();
         }
     }
 }

@@ -92,6 +92,6 @@ public class OrderDetailFragment extends BaseFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
+        ((MainActivity) requireActivity()).detachWebView();
     }
 }

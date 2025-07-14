@@ -124,6 +124,6 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_message"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/sort"
-            android:tint="@color/Black"/>
+            app:tint="@color/Black"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </Toolbar>

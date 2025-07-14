@@ -116,7 +116,7 @@ public class ShoppingCartFragment extends BaseFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        ((MainActivity) Objects.requireNonNull(getActivity())).detachWebView();
+        ((MainActivity) requireActivity()).detachWebView();
     }
 
     public void setShoppingCartAppTitle(String sAppTitle){

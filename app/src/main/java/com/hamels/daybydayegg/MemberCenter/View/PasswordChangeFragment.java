@@ -84,7 +84,7 @@ public class PasswordChangeFragment extends BaseFragment implements PasswordChan
                 etExistPassword.setText("");
                 etPassword.setText("");
                 etPasswordAgain.setText("");
-                ((MainActivity) Objects.requireNonNull(getActivity())).resetPassword();
+                ((MainActivity) requireActivity()).resetPassword();
             }
         }).show();
     }

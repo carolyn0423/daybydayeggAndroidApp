@@ -66,7 +66,7 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
             status = getArguments().getInt(TAG, STATUS_RETURN);
         }
 
-        ((MainActivity) Objects.requireNonNull(getActivity())).setAppTitle(status == STATUS_RETURN ? R.string.return_title : R.string.exchange_title);
+        ((MainActivity) requireActivity()).setAppTitle(status == STATUS_RETURN ? R.string.return_title : R.string.exchange_title);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvOrderNo = view.findViewById(R.id.tv_order_no);
@@ -92,7 +92,7 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
     public void onResume() {
         super.onResume();
         if (getArguments() != null && getArguments().containsKey(Order.TAG)) {
-            setOrders((Order) Objects.requireNonNull(getArguments().getParcelable(Order.TAG)));
+            setOrders((Order) Objects.requireNonNull(requireArguments().getParcelable(Order.TAG)));
         }
     }
 
@@ -116,9 +116,9 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
             if (returnListAdapter.getSelectProducts().size() > 0) {
                 ReturnInputFragment fragment = ReturnInputFragment.getInstance(returnListAdapter.getSelectProducts(), status);
                 fragment.setFinishCallback(this);
-                ((MainActivity) Objects.requireNonNull(getActivity())).addFragment(fragment);
+                ((MainActivity) requireActivity()).addFragment(fragment);
             } else {
-                new AlertDialog.Builder(Objects.requireNonNull(getContext())).setMessage(R.string.empty_order_hint).setPositiveButton(android.R.string.ok, null).show();
+                new AlertDialog.Builder(requireActivity()).setMessage(R.string.empty_order_hint).setPositiveButton(android.R.string.ok, null).show();
             }
         }
     }
@@ -137,7 +137,7 @@ public class ReturnListFragment extends BaseFragment implements View.OnClickList
                         transRecordTabCallback.onValueCallback(0, status == STATUS_RETURN ? Constant.ORDER_STATUS_RETURNING : Constant.ORDER_STATUS_EXCHANGING);
                     }
 
-                    Objects.requireNonNull(getActivity()).onBackPressed();
+                    requireActivity().onBackPressed();
                 }
             });
         }
