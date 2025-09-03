@@ -96,7 +96,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     // bottom navigation view
-    implementation "com.android.support:design:28.0.0"
+    //implementation "com.android.support:design:28.0.0"
 
     // permissions
     implementation 'com.github.permissions-dispatcher:permissionsdispatcher:4.8.0'
