@@ -13,6 +13,7 @@ public class EOrderApplication extends Application {
     //public static final String DOMAIN_PRD = "https://eorder.hamels.com.tw:9920/";
     public static final String sPecialCustomerNo = "JCINN";
 
+    //test
     public static final String DOMAIN_ADMIN_PRO = "https://newmanagement.maverick.com.tw";
     //public static final String DOMAIN_ADMIN_UAT = "https://www.hamels.com.tw:9941/";
     public static final String DOMAIN_ADMIN_SIT = "https://eorder.hamels.com.tw:9940/";
