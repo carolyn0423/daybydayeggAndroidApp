@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
@@ -63,6 +64,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
@@ -206,6 +209,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private WebSocket webSocket;
     private OkHttpClient client;
     private Gson gson;
+    private TextView tvMessageBadge;
+
 
     public void WebSocketManager() {
         gson = new Gson();
@@ -233,32 +238,39 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 移除标题栏
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        tvMessageBadge = findViewById(R.id.tvMessageBadge);
 
-        // 初始化 FusedLocationProviderClient
+        appToolbar = findViewById(R.id.toolbar);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
         mainPresenter = new MainPresenter(this, getRepositoryManager(this));
 
-        //mainPresenter.saveSourceActive("");
-
         sSourceActive = mainPresenter.getSourceActive();
-
         sCustomerID = EOrderApplication.CUSTOMER_ID;
 
         setCustomerData();
         initView();
         initAnimation(this);
 
-        // 在 onCreate 中注册广播接收器 -> 機台核銷限制提醒
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(pushNotificationReceiver, new IntentFilter("WRITE_OFF_MESSAGE"), Context.RECEIVER_EXPORTED);
         }
 
         WebSocketManager();
+
+        // 🚀 一進來就載入首頁 Fragment（輪播圖 + 按鈕）
+        if (savedInstanceState == null) {
+            GetMainIndexFragment();
+
+            // 同步選中首頁 tab
+            CustomBottomNavigationView navView = findViewById(R.id.navigation);
+            if (navView != null) {
+                navView.setSelectedItemId(R.id.item_home);
+            }
+        }
     }
+
 
     @Override
     protected void onStart() {
@@ -322,309 +334,108 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     private void initView() {
-        SharedUtils.getInstance().saveCustomerID(EOrderApplication.getInstance(), EOrderApplication.CUSTOMER_ID);
-        sSourceActive = mainPresenter.getSourceActive();
+        // --- 1. 從父 layout 拿子 view ---
+        ConstraintLayout constraintLayout3 = findViewById(R.id.constraintLayout3);
+        llOpen = constraintLayout3.findViewById(R.id.ll_title_open);
+        llItemButton = constraintLayout3.findViewById(R.id.ll_item_button);
+        constClose = constraintLayout3.findViewById(R.id.const_title_close);
+        constBackground = constraintLayout3.findViewById(R.id.const_background);
+        constBase = constraintLayout3.findViewById(R.id.const_base);
 
-        //  toolbar
-        llOpen = findViewById(R.id.ll_title_open);
-        llItemButton = findViewById(R.id.ll_item_button);
-        constClose = findViewById(R.id.const_title_close);
-        constBackground = findViewById(R.id.const_background);
-        constBase = findViewById(R.id.const_base);
-
-        //tvShoppingCart = findViewById(R.id.tv_shopping_cart);
-        tvBadgeShoppingCart = findViewById(R.id.tv_shopping_cart_num);
-        tvBadgeMemberTicket = findViewById(R.id.tv_ticket_num);
-        tvMessageUnread = findViewById(R.id.tv_message_unread);
-
-        // floating_action_bar
-        //btnShopping = (FloatingActionButton) findViewById(R.id.floating_action_bar);
-        //btnShopping.setOnClickListener(onClickListener);
-
-        // navigation
-        layoutHome = findViewById(R.id.home);
-        layoutEgg = findViewById(R.id.egg);
-        layoutShop = findViewById(R.id.shop);
-        layoutShop2 = findViewById(R.id.shop2);
-        layoutShoppingCart = findViewById(R.id.shopping_cart);
-
-        layoutHome.setOnClickListener(onClickListener);
-        layoutEgg.setOnClickListener(onClickListener);
-        layoutShop.setOnClickListener(onClickListener);
-        layoutShop2.setOnClickListener(onClickListener);
-        layoutShoppingCart.setOnClickListener(onClickListener);
-
-        imgHome = findViewById(R.id.img_home);
-        imgEgg = findViewById(R.id.img_egg);
-        imgShop = findViewById(R.id.img_shop);
-        imgShop2 = findViewById(R.id.img_shop2);
-        imgShoppingCart = findViewById(R.id.img_shopping_cart);
-
-        txtHome = findViewById(R.id.txt_home);
-        txtEgg = findViewById(R.id.txt_egg);
-        txtShop = findViewById(R.id.txt_shop);
-        txtShop2 = findViewById(R.id.txt_shop2);
-        txtShoppingCart = findViewById(R.id.txt_shopping_cart);
-
-        LinearLayout qrcode = findViewById(R.id.qrcode);
+// --- 2. 其他 view ---
+        LinearLayout qrcode = constraintLayout3.findViewById(R.id.qrcode);
         qrcode.setOnClickListener(onClickListener);
-        LinearLayout message = findViewById(R.id.message);
+        LinearLayout message = constraintLayout3.findViewById(R.id.message);
+        setMailBadgeCount(EOrderApplication.mailBadgeCount); // 取代原本的 tvMessageUnread
         message.setOnClickListener(onClickListener);
-        LinearLayout machine = findViewById(R.id.machine);
+        LinearLayout machine = constraintLayout3.findViewById(R.id.machine);
         machine.setOnClickListener(onClickListener);
-        LinearLayout member = findViewById(R.id.member);
+        LinearLayout member = constraintLayout3.findViewById(R.id.member);
         member.setOnClickListener(onClickListener);
 
-        setAppToolbar(R.id.toolbar);
-        //setCartBadge(R.id.tv_shopping_cart, R.id.tv_shopping_cart_e_ticket);
-        setCartBadge(0, R.id.tv_shopping_cart_num);
-
-        appToolbar.getBtnMail().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
-                if(fragment instanceof MachineMapFragment){
-                    //  城市探索特規，關閉 popwindow
-                    if(MachineMapFragment.getInstance().getPopupWindow() != null) {
-                        MachineMapFragment.getInstance().getPopupWindow().dismiss();
-                    }
-                }
-
-                mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
-            }
+        appToolbar.getBtnMessage().setOnClickListener(v -> {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+            mainPresenter.checkLoginForMessage(fragment.getClass().getSimpleName());
+            appToolbar.setMessageBadgeCount(0); // 點擊後清除 badge
         });
-        appToolbar.getBtnMessage().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
-                if(fragment instanceof MachineMapFragment){
-                    //  城市探索特規，關閉 popwindow
-                    if(MachineMapFragment.getInstance().getPopupWindow() != null) {
-                        MachineMapFragment.getInstance().getPopupWindow().dismiss();
-                    }
-                }
 
-                mainPresenter.checkLoginForMessage(fragment.getClass().getSimpleName());
-                appToolbar.setMessageBadgeCount(Integer.parseInt("0"));
-            }
+        appToolbar.getBtnMail().setOnClickListener(v -> {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+            mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
         });
-        appToolbar.getBtnSort().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int page = -1;
-                PopupMenu popupMenu = new PopupMenu(MainActivity.this, v);
-                // 交易紀錄
-                if (TransRecordFragment.getInstance().isVisible()) {
-                    popupMenu.getMenuInflater().inflate(R.menu.menu_sort_order, popupMenu.getMenu());
-                    page = 1;
-                }
-                // 商品列表
-                else if (ProductFragment.getInstance().isVisible()) {
-                    popupMenu.getMenuInflater().inflate(R.menu.menu_sort, popupMenu.getMenu());
-                    page = 2;
-                }
-                // 企業商品列表
-                else if (BusinessProductFragment.getInstance().isVisible()) {
-                    popupMenu.getMenuInflater().inflate(R.menu.menu_sort, popupMenu.getMenu());
-                    page = 3;
-                }
-                else if(MachineMapFragment.getInstance().isVisible()){
-                    popupMenu.getMenuInflater().inflate(R.menu.menu_city, popupMenu.getMenu());
-                    page = 4;
-                }
-                final int mPage = page;
-                popupMenu.show();
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        String sort = "NEW";
-                        String filter = "";
-                        int id = item.getItemId();
-
-                        switch (id){
-                            //  product
-                            case R.id.item_CHEAP:
-                                sort = "CHEAP";
-                                break;
-                            case R.id.item_EXPENSIVE:
-                                sort = "EXPENSIVE";
-                                break;
-                            case R.id.item_NEW:
-                                sort = "NEW";
-                                break;
-
-                            //  order
-                            case R.id.item_order_status_all:
-                                filter = "";
-                                break;
-                            case R.id.item_order_status_1:
-                                filter = "1";
-                                break;
-                            case R.id.item_order_status_2:
-                                filter = "2";
-                                break;
-                            case R.id.item_order_status_3:
-                                filter = "3";
-                                break;
-                            case R.id.item_order_status_4:
-                                filter = "4";
-                                break;
-
-                            //  Google Map
-                            case R.id.KEE:
-                                filter = "KEE";
-                                break;
-                            case R.id.NWT:
-                                filter = "NWT";
-                                break;
-                            case R.id.TPE:
-                                filter = "TPE";
-                                break;
-                            case R.id.TAO:
-                                filter = "TAO";
-                                break;
-                            case R.id.HSQ:
-                                filter = "HSQ";
-                                break;
-                            case R.id.HSZ:
-                                filter = "HSZ";
-                                break;
-                            case R.id.MIA:
-                                filter = "MIA";
-                                break;
-                            case R.id.TXG:
-                                filter = "TXG";
-                                break;
-                            case R.id.CHA:
-                                filter = "CHA";
-                                break;
-                            case R.id.NAN:
-                                filter = "NAN";
-                                break;
-                            case R.id.YUN:
-                                filter = "YUN";
-                                break;
-                            case R.id.CYQ:
-                                filter = "CYQ";
-                                break;
-                            case R.id.CYI:
-                                filter = "CYI";
-                                break;
-                            case R.id.TNN:
-                                filter = "TNN";
-                                break;
-                            case R.id.KHH:
-                                filter = "KHH";
-                                break;
-                            case R.id.PIF:
-                                filter = "PIF";
-                                break;
-                            case R.id.ILA:
-                                filter = "ILA";
-                                break;
-                            case R.id.HUA:
-                                filter = "HUA";
-                                break;
-                            case R.id.TTT:
-                                filter = "TTT";
-                                break;
-                        }
-
-                        switch (mPage) {
-                            case 1: //  order
-                                TransRecordFragment.getInstance().orderFilterMode(filter);
-                                break;
-                            case 2: //  product
-                                ProductFragment.getInstance().SortMode(sort);
-                                break;
-                            case 3: //  business product
-                                BusinessProductFragment.getInstance().SortMode(sort);
-                                break;
-                            case 4: //  Google Map
-                                MachineMapFragment.getInstance().getCityZoom(filter);
-                                break;
-                        }
-                        return true;
-                    }
-                });
-            }
-        });
-        refreshBadge();
 
 
+
+// --- 3. 初始化動畫 ---
+        initAnimation(this);
+
+// --- 4. BottomNavigationView ---
         bottomNavigationView = findViewById(R.id.navigation);
-        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
-            MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
-            bottomNavigationView.setIconScaleType(menuItem);
-        }
+        if (bottomNavigationView != null) {
+            bottomNavigationView.setOnItemSelectedListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.item_home:
+                        changeNavigationColor(item.getItemId());
+                        setMailBadgeCount("0");
+                        GetMainIndexFragment();
+                        return true;
+                    case R.id.item_egg:
+                        changeNavigationColor(item.getItemId());
+                        setMailBadgeCount("0"); // 清除 badge
+                        mainPresenter.checkLoginForDonate();
+                        return true;
+                    case R.id.item_shop:
+                        changeNavigationColor(item.getItemId());
+                        setMailBadgeCount("0"); // 清除 badge
+                        checkMerchantCount("PRODUCT", "Y");
+                        return true;
+                    case R.id.item_shop2:
+                        changeNavigationColor(item.getItemId());
+                        setMailBadgeCount("0"); // 清除 badge
+                        checkMerchantCount("PRODUCT", "N");
+                        return true;
+                    case R.id.item_cart:
+                        changeNavigationColor(item.getItemId());
+                        setMailBadgeCount("0"); // 清除 badge
+                        mainPresenter.checkLoginForShoppingCart("");
+                        return true;
+                }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            // Handle navigation item clicks here
-            switch (item.getItemId()) {
-                case R.id.item_home:
-                    changeNavigationColor(item.getItemId());
-                    setMainIndexMailUnreadVisibility(true);
-                    GetMainIndexFragment();
-                    return true;
-                case R.id.item_egg:
-                    changeNavigationColor(item.getItemId());
-                    setMainIndexMailUnreadVisibility(false);
-                    mainPresenter.checkLoginForDonate();
-                    return true;
-                case R.id.item_shop:
-                    changeNavigationColor(item.getItemId());
-                    setMainIndexMailUnreadVisibility(false);
-                    checkMerchantCount("PRODUCT", "Y"); //電子商品
-                    return true;
-                case R.id.item_shop2:
-                    changeNavigationColor(item.getItemId());
-                    setMainIndexMailUnreadVisibility(false);
-                    checkMerchantCount("PRODUCT", "N"); //非電子商品
-                    return true;
-                case R.id.item_cart:
-                    changeNavigationColor(item.getItemId());
-                    setMainIndexMailUnreadVisibility(false);
-                    mainPresenter.checkLoginForShoppingCart("");
-                    return true;
-            }
-            return false;
-        });
+                return false;
+            });
 
-        Intent intent = getIntent();
-        String notifyExtra = intent.getStringExtra("NOTIFY_EXTRA"); //前景才會有值
-        String notifyExtraBg = getIntent().getExtras().getString("click_action");  // 背景才會有值
+            // --- 5. 初始化 Badge ---
+            BadgeDrawable cartBadge = bottomNavigationView.getOrCreateBadge(R.id.item_cart);
+            cartBadge.setVisible(false);
+            cartBadge.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
 
-        if ((notifyExtra != null && notifyExtra.equals("NOTIFY")) || (null != notifyExtraBg && notifyExtraBg.equals("NOTIFY_EXTRA"))) {
-            notifyChangeToMail();
+            BadgeDrawable msgBadge = bottomNavigationView.getOrCreateBadge(R.id.item_egg);
+            msgBadge.setVisible(false);
+            msgBadge.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
         } else {
-            switch (sSourceActive){
-                case "PRODUCT_WELCOME":
-                case "ETICKET_WELCOME":
-                    //  買提貨卷 未登入的情況
-                    changeNavigationColor(R.id.shop);
-                    mainPresenter.saveSourceActive("");
-                    mainPresenter.saveFragmentMainType("", "Y");
-                    changeTabFragment(ProductMainTypeFragment.getInstance());
-                    break;
-                default:
-                    MainIndexFragment fragment = new MainIndexFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame, fragment);
-                    transaction.commit();
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            MenuItem menuItem = bottomNavigationView.getMenu().getItem(0);
-                            bottomNavigationView.setIconScaleType(menuItem);
-                        }
-                    }, 500);
-                    break;
-            }
+            Log.e("MainActivity", "bottomNavigationView is null!");
         }
 
-        //  取得座標
-        checkLocationPermission();
+    }
+
+    private void updateCartBadge(int count) {
+        BadgeDrawable badge = bottomNavigationView.getOrCreateBadge(R.id.item_cart);
+        if (count > 0) {
+            badge.setVisible(true);
+            badge.setNumber(count);
+        } else {
+            badge.setVisible(false);
+        }
+    }
+
+    private void updateMessageBadge(int count) {
+        BadgeDrawable badge = bottomNavigationView.getOrCreateBadge(R.id.item_egg);
+        if (count > 0) {
+            badge.setVisible(true);
+            badge.setNumber(count);
+        } else {
+            badge.setVisible(false);
+        }
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -700,7 +511,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     intentToLogin(REQUEST_MAIN_INDEX);
                 }
             }else if (id == R.id.message){
-                setMainIndexMailUnreadVisibility(false);
+                //setMainIndexMailUnreadVisibility(false);
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
                 mainPresenter.checkLoginForMail(fragment.getClass().getSimpleName());
             }else if (id == R.id.machine){
@@ -712,106 +523,23 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
     };
 
-    public void changeNavigationColor(int layoutID) {
+    public void changeNavigationColor(int menuId) {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+        if (bottomNavigationView == null) return;
 
-        if (layoutID == R.id.home || layoutID == R.id.item_home){
-            setMainIndexMailUnreadVisibility(true);
-            changeHomeColor(true);
-            changeEggColor(false);
-            changeShopColor(false);
-            changeShop2Color(false);
-            changeShoppingCartColor(false);
-        }else if (layoutID == R.id.egg || layoutID == R.id.item_egg){
-            setMainIndexMailUnreadVisibility(false);
-            changeHomeColor(false);
-            changeEggColor(true);
-            changeShopColor(false);
-            changeShop2Color(false);
-            changeShoppingCartColor(false);
-        }else if (layoutID == R.id.shop || layoutID == R.id.item_shop){
-            setMainIndexMailUnreadVisibility(false);
-            changeHomeColor(false);
-            changeEggColor(false);
-            changeShopColor(true);
-            changeShop2Color(false);
-            changeShoppingCartColor(false);
-        }else if (layoutID == R.id.shop2 || layoutID == R.id.item_shop2){
-            setMainIndexMailUnreadVisibility(false);
-            changeHomeColor(false);
-            changeEggColor(false);
-            changeShopColor(false);
-            changeShop2Color(true);
-            changeShoppingCartColor(false);
-        }else if (layoutID == R.id.shopping_cart || layoutID == R.id.item_cart){
-            setMainIndexMailUnreadVisibility(false);
-            changeHomeColor(false);
-            changeEggColor(false);
-            changeShopColor(false);
-            changeShop2Color(false);
-            changeShoppingCartColor(true);
-        }
+        // 只更新 drawable，不改選中狀態
+        MenuItem homeItem = bottomNavigationView.getMenu().findItem(R.id.item_home);
+        MenuItem eggItem = bottomNavigationView.getMenu().findItem(R.id.item_egg);
+        MenuItem shopItem = bottomNavigationView.getMenu().findItem(R.id.item_shop);
+        MenuItem shop2Item = bottomNavigationView.getMenu().findItem(R.id.item_shop2);
+        MenuItem cartItem = bottomNavigationView.getMenu().findItem(R.id.item_cart);
+
+        homeItem.setIcon(menuId == R.id.item_home ? R.drawable.home_fill : R.drawable.home_line);
+        eggItem.setIcon(menuId == R.id.item_egg ? R.drawable.egg3_fill : R.drawable.egg3_line);
+        shopItem.setIcon(menuId == R.id.item_shop ? R.drawable.ticket_fill : R.drawable.ticket_line);
+        shop2Item.setIcon(menuId == R.id.item_shop2 ? R.drawable.bag_fill : R.drawable.bag_line);
+        cartItem.setIcon(menuId == R.id.item_cart ? R.drawable.cart_fill : R.drawable.cart_line);
     }
-
-    private void changeHomeColor(boolean isClicked) {
-        MenuItem menuItem = bottomNavigationView.getMenu().getItem(0);
-        if (isClicked) {
-            menuItem.setIcon(R.drawable.home_fill);
-            imgHome.setImageDrawable(getResources().getDrawable(R.drawable.home_fill));
-        } else {
-            menuItem.setIcon(R.drawable.home_line);
-            imgHome.setImageDrawable(getResources().getDrawable(R.drawable.home_line));
-        }
-        txtHome.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-    }
-
-    private void changeEggColor(boolean isClicked) {
-        MenuItem menuItem = bottomNavigationView.getMenu().getItem(1);
-        if (isClicked) {
-            menuItem.setIcon(R.drawable.egg3_fill);
-            imgEgg.setImageDrawable(getResources().getDrawable(R.drawable.egg3_fill));
-        } else {
-            menuItem.setIcon(R.drawable.egg3_line);
-            imgEgg.setImageDrawable(getResources().getDrawable(R.drawable.egg3_line));
-        }
-        txtEgg.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-    }
-
-    private void changeShopColor(boolean isClicked) {
-        MenuItem menuItem = bottomNavigationView.getMenu().getItem(2);
-        if (isClicked) {
-            menuItem.setIcon(R.drawable.ticket_fill);
-            imgShop.setImageDrawable(getResources().getDrawable(R.drawable.ticket_fill));
-        } else {
-            menuItem.setIcon(R.drawable.ticket_line);
-            imgShop.setImageDrawable(getResources().getDrawable(R.drawable.ticket_line));
-        }
-        txtShop.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-    }
-
-    private void changeShop2Color(boolean isClicked) {
-        MenuItem menuItem = bottomNavigationView.getMenu().getItem(3);
-        if (isClicked) {
-            menuItem.setIcon(R.drawable.bag_fill);
-            imgShop2.setImageDrawable(getResources().getDrawable(R.drawable.bag_fill));
-        } else {
-            menuItem.setIcon(R.drawable.bag_line);
-            imgShop2.setImageDrawable(getResources().getDrawable(R.drawable.bag_line));
-        }
-        txtShop2.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-    }
-
-    private void changeShoppingCartColor(boolean isClicked) {
-        MenuItem menuItem = bottomNavigationView.getMenu().getItem(4);
-        if (isClicked) {
-            menuItem.setIcon(R.drawable.cart_fill);
-            imgShoppingCart.setImageDrawable(getResources().getDrawable(R.drawable.cart_fill));
-        } else {
-            menuItem.setIcon(R.drawable.cart_line);
-            imgShoppingCart.setImageDrawable(getResources().getDrawable(R.drawable.cart_line));
-        }
-        txtShoppingCart.setTextColor(getResources().getColor(R.color.colorYunlinhn));
-    }
-
     private void initAnimation(Context context) {
         final Animation openAnimation = AnimationUtils.loadAnimation(context, R.anim.anim_down);
         final Animation open2Animation = AnimationUtils.loadAnimation(context, R.anim.anim_down2);
@@ -827,7 +555,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public void onAnimationEnd(Animation animation) {
                 llOpen.setVisibility(View.VISIBLE);
-                setMainIndexMailUnreadVisibility(true);
+                //setMainIndexMailUnreadVisibility(true);
                 constClose.setVisibility(View.GONE);
                 constBackground.setVisibility(View.GONE);
             }
@@ -840,7 +568,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         upAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                setMainIndexMailUnreadVisibility(false);
+                //setMainIndexMailUnreadVisibility(false);
             }
 
             @Override
@@ -970,6 +698,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public AppToolbar getAppToolbarObj(){
         return appToolbar;
     }
+
     // 判斷畫面上顯示的是否為MainIndexFragment
     public boolean isMainIndex() {
         List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
@@ -1012,56 +741,46 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public void setAllBadge(String count) {
         String[] array = count.split("_");
 
-        //  客服留言未讀
-        if(array.length > 0){
-            EOrderApplication.messageBadgeCount = array[0];
-            appToolbar.setMessageBadgeCount(Integer.parseInt(array[0]));
-        }else{
-            appToolbar.setMessageBadgeCount(0);
-        }
+        if (array.length >= 1) {
+            EOrderApplication.messageBadgeCount = array[1];
+            int msgCount = Integer.parseInt(array[1]);
 
-        // 訊息夾未讀
-        if (array.length > 1) {
-            EOrderApplication.mailBadgeCount = array[1];
-            appToolbar.setMailBadgeCount(Integer.parseInt(array[1]));
-            if(isMainIndex()){
-                setMainIndexMailUnreadVisibility(true);
+            // Toolbar badge
+            if (msgCount > 0) {
+                tvMessageBadge.setText(String.valueOf(msgCount));
+                tvMessageBadge.setVisibility(View.VISIBLE);
+            } else {
+                tvMessageBadge.setVisibility(View.GONE);
             }
-        }else{
-            appToolbar.setMailBadgeCount(0);
         }
 
-        // 購物車商品數量
+        // 3. 購物車商品數量
         if (array.length >= 4) {
             EOrderApplication.cartTicketBadgeCount = array[2].equals("") ? "0" : array[2];
             EOrderApplication.cartBadgeCount = array[3].equals("") ? "0" : array[3];
+            int iCartQuantity = Integer.parseInt(EOrderApplication.cartTicketBadgeCount)
+                    + Integer.parseInt(EOrderApplication.cartBadgeCount);
 
-            int iCartQuantity = Integer.parseInt(EOrderApplication.cartTicketBadgeCount) + Integer.parseInt(EOrderApplication.cartBadgeCount);
-
-            if (iCartQuantity == 0) {
-                tvBadgeShoppingCart.setVisibility(View.GONE);
+            BadgeDrawable cartBadge = bottomNavigationView.getOrCreateBadge(R.id.item_cart);
+            if (iCartQuantity > 0) {
+                cartBadge.setVisible(true);
+                cartBadge.setNumber(iCartQuantity);
             } else {
-                tvBadgeShoppingCart.setVisibility(View.VISIBLE);
-                tvBadgeShoppingCart.setText(iCartQuantity + "");
+                cartBadge.setVisible(false);
             }
         }
-        // 購物車沒東西時未讀數量會收到空字串
-        else {
-            //tvShoppingCart.setVisibility(View.GONE);
-            tvBadgeShoppingCart.setVisibility(View.GONE);
-        }
 
-        //  提貨卷數量
         if (array.length >= 5) {
-            EOrderApplication.memberTicketBadgeCount = array[4];
-            if (array[4].equals("0")) {
-                tvBadgeMemberTicket.setVisibility(View.GONE);
+            EOrderApplication.memberTicketBadgeCount = array[4].equals("") ? "0" : array[4];
+            int eggCount = Integer.parseInt(EOrderApplication.memberTicketBadgeCount);
+
+            BadgeDrawable eggBadge = bottomNavigationView.getOrCreateBadge(R.id.item_egg);
+            if (eggCount > 0) {
+                eggBadge.setVisible(true);
+                eggBadge.setNumber(eggCount);
             } else {
-                tvBadgeMemberTicket.setVisibility(View.VISIBLE);
-                tvBadgeMemberTicket.setText(Integer.parseInt(array[4]) > 99 ? "99+" : array[4]);
+                eggBadge.setVisible(false);
             }
-        } else {
-            tvBadgeMemberTicket.setVisibility(View.GONE);
         }
     }
 
@@ -1395,23 +1114,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         } else {
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                // 首頁才顯示回上一頁
-                if (isMainIndex()) {
-                    new AlertDialog.Builder(this).setTitle(null).setMessage(R.string.close_hint)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                System.exit(0);
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
-
-                } else {
                     // 其他就顯示首頁
                     GetMainIndexFragment();
                     //changeTabFragment(MainIndexFragment.getInstance());
-                }
+
             } else {
                 // 點推播通知進來的
                 if (getSupportFragmentManager().getBackStackEntryCount() == 1
@@ -1422,18 +1128,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     //changeTabFragment(MainIndexFragment.getInstance());
                 } else {
                     Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
-
-                    if(currentFragment instanceof MainIndexFragment){
-                        new AlertDialog.Builder(this).setTitle(null).setMessage(R.string.close_hint)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        System.exit(0);
-                                    }
-                                })
-                                .setNegativeButton(android.R.string.no, null)
-                                .show();
-                    }else if(currentFragment instanceof ProductDetailDescFragment){     //  商品詳細
+                    Log.d("BackPress", "CurrentFragment: " + currentFragment);
+                    if(currentFragment instanceof ProductDetailDescFragment){     //  商品詳細
                         super.onBackPressed();
                     }else if(currentFragment instanceof ProductDetailFragment){         //  商品內頁
                         addFragment(ProductFragment.getInstance());
@@ -1443,7 +1139,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                             currentFragment instanceof MemberCenterFragment ||
                             currentFragment instanceof ProductMainTypeFragment ||
                             currentFragment instanceof DonateFragment ||
-                            currentFragment instanceof MachineFragment){
+                            currentFragment instanceof MachineFragment ||
+                            currentFragment instanceof ShoppingCartFragment ||
+                            currentFragment instanceof MessageFragment
+                    ){
                         GetMainIndexFragment();
                         //changeTabFragment(MainIndexFragment.getInstance());
                     }else if(currentFragment instanceof MachineMapFragment){
@@ -1476,14 +1175,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
     }
 
-    public void GetMainIndexFragment(){
-        changeNavigationColor(R.id.home);
+    public void GetMainIndexFragment() {
+        changeNavigationColor(R.id.item_home); // ✅ 改成 BottomNavigationView 的 id
         MainIndexFragment fragment = new MainIndexFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, fragment);
         transaction.commit();
-        addFragment(MainIndexFragment.getInstance());
     }
+
 
     public void goMemberCard() {
         mainPresenter.checkLoginForMemberCard();
@@ -1506,14 +1205,19 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
     }
 
-    public void setMainIndexMailUnreadVisibility(boolean isVisible) {
-        if (isVisible && (!EOrderApplication.mailBadgeCount.equals("") && !EOrderApplication.mailBadgeCount.equals("0"))) {
-            tvMessageUnread.setText(EOrderApplication.mailBadgeCount);
-            tvMessageUnread.setVisibility(View.VISIBLE);
+    public void setMailBadgeCount(String count) {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+        if(bottomNavigationView == null) return;
+
+        if(count != null && !count.equals("") && !count.equals("0")) {
+            BadgeDrawable badge = bottomNavigationView.getOrCreateBadge(R.id.item_home);
+            badge.setVisible(true);
+            badge.setNumber(Integer.parseInt(count));
         } else {
-            tvMessageUnread.setVisibility(View.GONE);
+            bottomNavigationView.removeBadge(R.id.item_home);
         }
     }
+
     public void goNewsDetail(String news_id) {
         mainPresenter.goNewsDetail(news_id);
     }
@@ -1539,7 +1243,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         runOnUiThread(new Runnable() {
             public void run() {
                 if (isETicket.equals("Y")) {
-                    changeNavigationColor(R.id.shop); // 買提貨券
+                    changeNavigationColor(R.id.item_shop); // 買提貨券
                 } else {
                     //changeNavigationColor(R.id.order); //我要點餐
                 }

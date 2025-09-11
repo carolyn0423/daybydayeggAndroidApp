@@ -65,7 +65,7 @@ public class WelcomeFragment extends BaseFragment implements WelcomeContract.Vie
         ((MainActivity) getActivity()).setMailButtonVisibility(true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(false);
-        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
+        //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         tvTitleHint = view.findViewById(R.id.tv_title_hint);
@@ -139,7 +139,7 @@ public class WelcomeFragment extends BaseFragment implements WelcomeContract.Vie
         if(sSourceActive.equals("PRODUCT")){
            // ((MainActivity) getActivity()).changeNavigationColor(R.id.order);
         }else{
-            ((MainActivity) getActivity()).changeNavigationColor(R.id.shop);
+            ((MainActivity) getActivity()).changeNavigationColor(R.id.item_shop);
         }
 
         if(welcomePresenter.getUserInfo()){

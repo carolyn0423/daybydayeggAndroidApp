@@ -100,7 +100,7 @@ public class ProductMerchantFragment extends BaseFragment implements ProductMerc
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
+        //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         edit_keyword = view.findViewById(R.id.edit_keyword);

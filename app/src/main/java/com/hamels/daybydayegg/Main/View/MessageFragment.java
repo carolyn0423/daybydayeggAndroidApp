@@ -77,7 +77,7 @@ public class MessageFragment extends BaseFragment {
                     ((MainActivity) getActivity()).setBackButtonVisibility(view.canGoBack());
                     ((MainActivity) getActivity()).setTopBarVisibility(false);
                     ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-                    ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
+                    //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
                 }
             }
         });

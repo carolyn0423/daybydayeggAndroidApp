@@ -87,7 +87,7 @@ public class WebViewFragment extends BaseFragment {
         setSortButtonVisibility(false);
         setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
-        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
+        //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         webView.setWebChromeClient(new WebChromeClient() {

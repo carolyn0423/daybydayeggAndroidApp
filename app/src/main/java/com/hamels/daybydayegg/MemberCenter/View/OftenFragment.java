@@ -70,7 +70,7 @@ public class OftenFragment extends BaseFragment implements OftenContract.View {
 
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
+        //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         //  清除API 暫存, 重新取得URL
         ApiRepository.repository = null;

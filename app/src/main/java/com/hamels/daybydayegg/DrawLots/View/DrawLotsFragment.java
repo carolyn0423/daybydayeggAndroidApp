@@ -53,7 +53,7 @@ public class DrawLotsFragment extends BaseFragment implements DrawLotsContract.V
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(true);
-        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
+        //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         recyclerView = view.findViewById(R.id.dwawlots_recycler_view);
         constraintLayoutEmpty = view.findViewById(R.id.layout_empty);

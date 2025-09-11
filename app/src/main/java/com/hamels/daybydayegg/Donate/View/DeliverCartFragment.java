@@ -64,7 +64,7 @@ public class DeliverCartFragment extends BaseFragment {
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         setAppToolbarVisibility(true);
         ((MainActivity) getActivity()).bindWebView(webView);
-        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
+        //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
 
         repositoryManager = getRepositoryManager(getContext());

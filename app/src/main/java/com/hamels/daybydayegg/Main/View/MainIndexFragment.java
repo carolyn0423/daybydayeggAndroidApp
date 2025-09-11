@@ -110,7 +110,7 @@ public class MainIndexFragment extends BaseFragment implements MainIndexContract
         ((MainActivity) getActivity()).setSortButtonVisibility(false);
         ((MainActivity) getActivity()).setTopBarVisibility(true);
         ((MainActivity) getActivity()).setAppToolbarVisibility(false);
-        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(true);
+        //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         ((MainActivity) getActivity()).setCartBadgeVisibility(true);
         mXBanner = view.findViewById(R.id.xbanner);

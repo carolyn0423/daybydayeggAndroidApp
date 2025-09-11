@@ -5,6 +5,8 @@ android {
     compileSdkVersion 36
     flavorDimensions "version"
     namespace "com.hamels.daybydayegg"
+    ndkVersion "29.0.13846066"
+
     productFlavors {
         prod {
             dimension "version"
@@ -92,7 +94,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
     // gif support
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.29'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     // bottom navigation view

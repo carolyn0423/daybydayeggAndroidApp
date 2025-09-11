@@ -87,7 +87,7 @@ public class LocationFragment extends BaseFragment implements LocationListContra
 
         ((MainActivity) getActivity()).setTopBarVisibility(false);
         ((MainActivity) getActivity()).setAppToolbarVisibility(false);
-        ((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
+        //((MainActivity) getActivity()).setMainIndexMailUnreadVisibility(false);
 
         noLocationGroup = view.findViewById(R.id.no_location_group);
 

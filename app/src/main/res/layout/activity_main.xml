@@ -7,6 +7,7 @@
     android:background="@color/white"
     tools:context=".Main.View.MainActivity">
 
+    <!-- Toolbar -->
     <com.hamels.daybydayegg.Widget.AppToolbar
         android:visibility="gone"
         android:id="@+id/toolbar"
@@ -17,11 +18,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <!-- Content Frame -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/layout_bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -29,7 +31,9 @@
         <FrameLayout
             android:id="@+id/frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="88dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/const_background"
@@ -74,326 +78,167 @@
                 android:id="@+id/ll_item_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="4">
 
+                <!-- 會員編碼 -->
                 <LinearLayout
                     android:id="@+id/qrcode"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:padding="10sp"
-                    android:onClick="member"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:onClick="member">
 
                     <ImageView
-                        android:layout_width="24sp"
-                        android:layout_height="24sp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         app:srcCompat="@drawable/icon_barcode" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="會員編碼"
-                        android:textSize="14dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:textColor="@color/white" />
+                        android:text="會員編碼"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
-
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/white" />
 
+                <!-- 我的訊息 -->
                 <LinearLayout
                     android:id="@+id/message"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:padding="10sp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp"
                     android:onClick="message"
-                    android:gravity="center">
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="false"
+                        android:clipToPadding="false">
 
-                    <ImageView
-                        android:layout_width="24sp"
-                        android:layout_height="24sp"
-                        app:layout_constraintStart_toEndOf="@+id/imageView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icon_message" />
+                        <ImageView
+                            android:id="@+id/ivMessage"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:srcCompat="@drawable/icon_message" />
+                        <TextView
+                            android:id="@+id/tvMessageBadge"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="end|top"
+                            android:translationX="12dp"
+                            android:translationY="-6dp"
+                            android:background="@drawable/bg_badge_circle"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                    </FrameLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="我的訊息"
-                        android:textSize="14dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:textColor="@color/white" />
+                        android:text="我的訊息"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
                 </LinearLayout>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/white" />
 
+                <!-- 何處領 -->
                 <LinearLayout
                     android:id="@+id/machine"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:padding="10sp"
-                    android:onClick="lottery"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:onClick="lottery">
 
                     <ImageView
-                        android:layout_width="24sp"
-                        android:layout_height="24sp"
-                        app:layout_constraintStart_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         app:srcCompat="@drawable/icon_store" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="何處領"
-                        android:textSize="14dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:textColor="@color/white" />
+                        android:text="何處領"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
-
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/white" />
 
+                <!-- 會員中心 -->
                 <LinearLayout
                     android:id="@+id/member"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
-                    android:padding="10sp"
-                    android:onClick="donate"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:onClick="donate">
 
                     <ImageView
-                        android:layout_width="24sp"
-                        android:layout_height="24sp"
-                        app:layout_constraintStart_toEndOf="@+id/imageView"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         app:srcCompat="@drawable/member" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="會員中心"
-                        android:textSize="14dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:textColor="@color/white" />
+                        android:text="會員中心"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
+
 
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    -->
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/layout_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bar"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="bottom"
-            app:fabCradleMargin="8dp"
-            app:fabCradleRoundedCornerRadius="8dp"
-            app:fabCradleVerticalOffset="0dp">
-
-            <LinearLayout
-                android:id="@+id/tab_bar"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@color/greyLine"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/ll_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="2dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/home"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:gravity="center">
-                        <ImageView
-                            android:id="@+id/img_home"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            android:duplicateParentState="true"
-                            android:src="@drawable/home_fill" />
-                        <TextView
-                            android:id="@+id/txt_home"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tab_main"
-                            android:textSize="14dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:textColor="@color/colorYunlinhn" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/egg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/img_egg"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:duplicateParentState="true"
-                            android:src="@drawable/egg3_line" />
-
-                        <TextView
-                            android:id="@+id/txt_egg"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="領好蛋"
-                            android:textSize="14dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:textColor="@color/colorYunlinhn" />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/shop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/img_shop"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            app:layout_constraintStart_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:duplicateParentState="true"
-                            android:src="@drawable/ticket_line" />
-
-                        <TextView
-                            android:id="@+id/txt_shop"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="買好蛋"
-                            android:textSize="14dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:textColor="@color/colorYunlinhn" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/shop2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/img_shop2"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            app:layout_constraintStart_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:duplicateParentState="true"
-                            android:src="@drawable/bag_line" />
-
-                        <TextView
-                            android:id="@+id/txt_shop2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="福利站"
-                            android:textSize="14dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:textColor="@color/colorYunlinhn" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/shopping_cart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/img_shopping_cart"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            app:layout_constraintStart_toEndOf="@+id/imageView"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:duplicateParentState="true"
-                            android:src="@drawable/cart_line" />
-
-                        <TextView
-                            android:id="@+id/txt_shopping_cart"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="購物車"
-                            android:textSize="14dp"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:textColor="@color/colorYunlinhn" />
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.bottomappbar.BottomAppBar>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.hamels.daybydayegg.Utils.CustomBottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:background="@color/greyLine"
         app:itemIconTint="@color/colorYunlinhn"
         app:itemTextColor="@color/colorYunlinhn"
@@ -403,85 +248,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_navigation" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="8dp">
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/tv_message_unread"
-            android:layout_width="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_height="20dp"
-            android:background="@drawable/icon_circle_orange"
-            android:backgroundTint="@color/redHint"
-            android:fontFamily="@font/rcb"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="12dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.8"
-            app:layout_constraintStart_toEndOf="@+id/guideline02"
-            app:layout_constraintVertical_bias="0.19999999" />
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/tv_shopping_cart_num"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginBottom="57dp"
-            android:background="@drawable/icon_circle_orange"
-            android:backgroundTint="@color/redHint"
-            android:fontFamily="@font/rcb"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.8"
-            app:layout_constraintStart_toEndOf="@+id/guideline01"
-            app:layout_constraintVertical_bias="0.19999999" />
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/tv_ticket_num"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginBottom="57dp"
-            android:background="@drawable/icon_circle_orange"
-            android:backgroundTint="@color/redHint"
-            android:fontFamily="@font/rcb"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.8"
-            app:layout_constraintStart_toEndOf="@+id/guideline03"
-            app:layout_constraintVertical_bias="0.19999999" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.93" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.39" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.35" />
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:elevation="8dp">-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
